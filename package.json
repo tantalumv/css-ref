@@ -1,0 +1,29 @@
+{
+  "name": "css-ref",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "bun build src/main.ts --outfile=dist/bundle.js --target=browser --watch --sourcemap=external & esbuild src/styles/index.css --bundle --outfile=dist/bundle.css --watch --sourcemap",
+    "build": "bun build src/main.ts --outfile=dist/bundle.js --target=browser --minify && esbuild src/styles/index.css --bundle --outfile=dist/bundle.css --minify",
+    "serve": "bunx serve .",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "bunx playwright test",
+    "test:e2e:ui": "bunx playwright test --ui",
+    "lint": "bunx oxlint src/",
+    "lint:fix": "bunx oxlint src/ --fix",
+    "typecheck": "bunx tsc --noEmit"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "esbuild": "^0.27.3",
+    "happy-dom": "^20.8.3",
+    "oxlint": "^1.51.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  },
+  "dependencies": {
+    "gridjs": "^6.2.0"
+  }
+}

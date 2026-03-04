@@ -1,0 +1,158 @@
+/* ═══════════════════════════════════════════════════════════════
+   Grid.js Table Styles - Matches current theme
+   ═══════════════════════════════════════════════════════════════ */
+
+#table-view {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+#table-container {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+#table-container .gridjs-container {
+  padding: 0;
+}
+
+#table-container .gridjs-wrapper {
+  overflow-x: auto;
+}
+
+#table-container .gridjs-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#table-container .gridjs-th {
+  background: var(--muted) !important;
+  color: var(--foreground) !important;
+  font-weight: 600;
+  padding: 8px 4px !important;
+  border-bottom: 1px solid var(--border);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+#table-container .gridjs-td {
+  padding: 0 !important;
+  border-bottom: 1px solid var(--border) !important;
+  color: var(--foreground);
+  vertical-align: middle;
+}
+
+#table-container .gridjs-tr {
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+#table-container .gridjs-tr:hover {
+  background: var(--muted) !important;
+}
+
+#table-container .gridjs-tr.hover {
+  background: var(--muted);
+}
+
+#table-container .gridjs-tbody tr:last-child .gridjs-td {
+  border-bottom: none !important;
+}
+
+#table-container .gridjs-pagination {
+  background: var(--muted);
+  border-top: 1px solid var(--border);
+}
+
+#table-container .gridjs-pagination .gridjs-pages {
+  gap: var(--space-xs);
+}
+
+#table-container .gridjs-pagination button {
+  background: var(--card);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-xs) var(--space-s);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+#table-container .gridjs-pagination button:hover {
+  background: var(--accent);
+  border-color: var(--primary);
+}
+
+#table-container .gridjs-pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#table-container .gridjs-pagination .gridjs-pages button.gridjs-currentPage {
+  background: var(--primary);
+  color: var(--primary-foreground);
+  border-color: var(--primary);
+}
+
+#table-container .gridjs-sort {
+  color: var(--muted-foreground);
+  font-family: 'remixicon' !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#table-container .gridjs-sort.gridjs-sort-asc::after {
+  content: "\ea73";
+  font-family: 'remixicon' !important;
+  margin-left: 4px;
+}
+
+#table-container .gridjs-sort.gridjs-sort-desc::after {
+  content: "\ea75";
+  font-family: 'remixicon' !important;
+  margin-left: 4px;
+}
+
+/* Browser icons in table */
+#table-container .browser-icon {
+  display: inline-block;
+  width: 20px;
+  height: 14px;
+  margin-right: 2px;
+  vertical-align: middle;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#table-container .browser-icon.unsupported {
+  opacity: 0.3;
+}
+
+/* Responsive: Hide Description on small screens */
+@media (max-width: 600px) {
+  #table-container .gridjs-th:nth-child(3),
+  #table-container .gridjs-td:nth-child(3) {
+    display: none;
+  }
+}
+
+/* Infinite scroll sentinel */
+#table-sentinel {
+  padding: var(--space-m);
+  text-align: center;
+  color: var(--text-2);
+  font-size: var(--step--1);
+}
+
+#table-sentinel.hidden {
+  display: none;
+}
+
+/* Table preview hover effect */
+#table-container .table-preview:hover .table-desc {
+  opacity: 1 !important;
+}

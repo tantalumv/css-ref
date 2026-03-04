@@ -1,0 +1,21 @@
+/* ═══════════════════════════════════════════════════════════════
+   CSS Ref - Utilities
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--muted);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: var(--radius-round);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}

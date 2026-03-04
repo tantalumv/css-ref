@@ -1,0 +1,180 @@
+/* ═══════════════════════════════════════════════════════════════
+   CSS Ref - Base Styles
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Keyframes ── */
+@keyframes demo-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes demo-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-22px); }
+}
+
+@keyframes demo-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.35); }
+}
+
+@keyframes demo-slide {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(48px); }
+}
+
+@keyframes demo-fade {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.08; }
+}
+
+@keyframes demo-color {
+  0% { background: #6366f1; }
+  33% { background: #ec4899; }
+  66% { background: #f97316; }
+  100% { background: #6366f1; }
+}
+
+@keyframes demo-width {
+  0%, 100% { width: 28px; }
+  50% { width: 90px; }
+}
+
+@keyframes demo-path {
+  0% { offset-distance: 0%; }
+  100% { offset-distance: 100%; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: translateY(6px) scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(18px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes meshMove {
+  0%, 100% {
+    background:
+      radial-gradient(at 40% 20%, hsla(260, 80%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, hsla(190, 80%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, hsla(340, 80%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 80% 50%, hsla(260, 80%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, hsla(280, 80%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 80% 100%, hsla(200, 80%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 0% 0%, hsla(310, 80%, 50%, 0.15) 0px, transparent 50%);
+  }
+  25% {
+    background:
+      radial-gradient(at 60% 30%, hsla(280, 80%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 60% 10%, hsla(210, 80%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 10% 60%, hsla(320, 80%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 70% 40%, hsla(280, 80%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 10% 90%, hsla(300, 80%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 70% 90%, hsla(220, 80%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 10% 10%, hsla(330, 80%, 50%, 0.15) 0px, transparent 50%);
+  }
+  50% {
+    background:
+      radial-gradient(at 30% 40%, hsla(240, 80%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 90% 20%, hsla(170, 80%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 20% 40%, hsla(360, 80%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 90% 60%, hsla(240, 80%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 20% 80%, hsla(260, 80%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 90% 80%, hsla(180, 80%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 20% 20%, hsla(290, 80%, 50%, 0.15) 0px, transparent 50%);
+  }
+  75% {
+    background:
+      radial-gradient(at 50% 30%, hsla(270, 80%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 70% 10%, hsla(200, 80%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 0% 60%, hsla(350, 80%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 80% 50%, hsla(270, 80%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 0% 90%, hsla(290, 80%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 80% 90%, hsla(210, 80%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 0% 0%, hsla(320, 80%, 50%, 0.15) 0px, transparent 50%);
+  }
+}
+
+/* ── Property Demo Animations ── */
+@keyframes hue-spin {
+  to { --hue: 360; }
+}
+
+@property --hue {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+.t-demo {
+  transition: transform 0.4s var(--ease-spring-3), background 0.4s;
+  animation: demo-pulse 2s ease-in-out infinite;
+}
+
+.op-dot {
+  width: 14px;
+  height: 14px;
+  background: var(--yellow-5);
+  border-radius: var(--radius-round);
+  offset-path: path("M 10,40 C 40,5 100,5 130,40 S 220,75 150,40");
+  animation: demo-path 2s linear infinite;
+}
+
+.prop-demo {
+  animation: hue-spin 3s linear infinite;
+  background: hsl(var(--hue) 80% 60%);
+}
+
+/* ── Base ── */
+html {
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  color: var(--foreground);
+  background: var(--background);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100svh;
+  overflow-x: hidden;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Mesh Gradient Background ── */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background:
+    radial-gradient(at 40% 20%, hsla(260, 80%, 50%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, hsla(190, 80%, 50%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, hsla(340, 80%, 50%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 80% 50%, hsla(260, 80%, 50%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(280, 80%, 50%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 80% 100%, hsla(200, 80%, 50%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 0% 0%, hsla(310, 80%, 50%, 0.15) 0px, transparent 50%);
+  animation: meshMove 20s ease-in-out infinite;
+}
+
+/* Light mode mesh gradient is more subtle */
+html:not(.dark) body::before {
+  opacity: 0.5;
+}

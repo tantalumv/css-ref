@@ -1,0 +1,294 @@
+/* ═══════════════════════════════════════════════════════════════
+   CSS Ref - Header Styles
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Header ── */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: color-mix(in oklch, var(--background) 90%, transparent);
+  backdrop-filter: blur(12px) saturate(1.5);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-xs) var(--space-m);
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+  flex-wrap: wrap;
+}
+
+/* ── Brand ── */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.brand h1 {
+  font-size: var(--step-2);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.brand-tag {
+  font-size: var(--step--2);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: var(--primary-foreground);
+  padding: 2px var(--space-xs);
+  border-radius: var(--radius-round);
+}
+
+/* ── Search ── */
+.search-combo {
+  flex: 1;
+  min-width: 200px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-combo input {
+  width: 100%;
+  padding: var(--space-xs) var(--space-s);
+  padding-right: 3rem;
+  font-size: var(--step--1);
+  font-family: inherit;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-round);
+  background: var(--card);
+  color: var(--foreground);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+
+.search-combo input:focus {
+  border-color: var(--ring);
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--ring) 20%, transparent);
+}
+
+.search-combo input::placeholder {
+  color: var(--muted-foreground);
+}
+
+/* ── Filter Button ── */
+.filter-btn {
+  position: absolute;
+  right: 6px;
+  width: 30px;
+  height: 30px;
+  background: var(--muted);
+  border: none;
+  border-radius: var(--radius-round);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  color: var(--muted-foreground);
+}
+
+.filter-btn:hover {
+  background: var(--accent);
+}
+
+.filter-btn.has-active {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: var(--primary-foreground);
+}
+
+.filter-btn .active-dot {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+  border: 1.5px solid var(--card);
+  display: none;
+}
+
+.filter-btn.has-active .active-dot {
+  display: block;
+}
+
+/* ── Filter Popover ── */
+.filter-popover {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: min(360px, 92vw);
+  background: var(--popover);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-xl);
+  padding: var(--space-s);
+  z-index: 200;
+}
+
+.pop-section-label {
+  font-size: var(--step--2);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  margin-bottom: var(--space-xs);
+}
+
+.pop-divider {
+  height: 1px;
+  background: var(--border);
+  margin: var(--space-xs) 0;
+}
+
+.chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.chip {
+  padding: 3px var(--space-xs);
+  font-size: var(--step--2);
+  font-weight: 700;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-round);
+  cursor: pointer;
+  transition: all 0.15s var(--ease-out-1);
+  background: var(--muted);
+  color: var(--muted-foreground);
+  white-space: nowrap;
+  font-family: inherit;
+  line-height: 1.4;
+}
+
+.chip:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+  background: var(--accent);
+}
+
+.chip.active {
+  background: var(--cc, var(--primary));
+  color: var(--primary-foreground);
+  border-color: transparent;
+}
+
+.pop-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--space-xs);
+}
+
+.clear-btn {
+  font-family: inherit;
+  font-size: var(--step--2);
+  font-weight: 700;
+  color: var(--primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.clear-btn:hover {
+  text-decoration: underline;
+}
+
+/* ── View Toggle ── */
+.view-toggle {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.view-btn {
+  width: 32px;
+  height: 32px;
+  background: var(--muted);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted-foreground);
+  transition: all 0.15s;
+}
+
+.view-btn:hover {
+  background: var(--accent);
+  color: var(--foreground);
+}
+
+.view-btn.active {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+/* ── Theme Toggle ── */
+.theme-toggle {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-round);
+  border: 1px solid var(--border);
+  background: var(--card);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--foreground);
+  transition: all 0.2s;
+  margin-left: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-toggle:hover {
+  background: var(--accent);
+  border-color: var(--ring);
+}
+
+.theme-toggle .sun-icon,
+.theme-toggle .moon-icon {
+  position: absolute;
+  transition: transform 0.3s var(--ease-spring-3), opacity 0.3s;
+}
+
+/* Dark mode: show moon, hide sun */
+.dark .theme-toggle .sun-icon {
+  transform: rotate(90deg) scale(0);
+  opacity: 0;
+}
+
+.dark .theme-toggle .moon-icon {
+  transform: rotate(0) scale(1);
+  opacity: 1;
+}
+
+/* Light mode: show sun, hide moon */
+html:not(.dark) .theme-toggle .sun-icon {
+  transform: rotate(0) scale(1);
+  opacity: 1;
+}
+
+html:not(.dark) .theme-toggle .moon-icon {
+  transform: rotate(-90deg) scale(0);
+  opacity: 0;
+}
+
+/* ── Count ── */
+#count {
+  font-size: var(--step--2);
+  color: var(--muted-foreground);
+  flex-shrink: 0;
+  white-space: nowrap;
+}

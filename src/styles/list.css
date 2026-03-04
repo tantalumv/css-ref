@@ -1,0 +1,67 @@
+/* ═══════════════════════════════════════════════════════════════
+   CSS Ref - List View Styles
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── List Row ── */
+.list-row {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-xs) var(--space-s);
+  display: grid;
+  grid-template-columns: 180px 1fr auto auto;
+  align-items: center;
+  gap: var(--space-s);
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s;
+  --ca: var(--primary);
+}
+
+.list-row:hover {
+  background: var(--accent);
+  box-shadow: var(--shadow-sm);
+}
+
+.list-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  min-width: 0;
+}
+
+.list-name {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  font-weight: 700;
+  color: var(--ca);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.list-desc {
+  font-size: var(--step--2);
+  color: var(--muted-foreground);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .list-row {
+    grid-template-columns: 1fr auto;
+  }
+  .list-desc,
+  .list-row .browsers {
+    display: none;
+  }
+}
+
+/* ── Empty State ── */
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: var(--space-2xl);
+  color: var(--muted-foreground);
+  font-size: var(--step-2);
+}

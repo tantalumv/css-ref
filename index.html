@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Ref</title>
+  <link rel="stylesheet" href="https://unpkg.com/open-props"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css"/>
+  <link rel="stylesheet" href="dist/bundle.css">
+</head>
+<body
+  data-signals="{query: '', activeCats: [], activeInterops: [], viewMode: 'grid', popoverOpen: false, theme: 'dark'}"
+>
+
+<header>
+  <div class="brand" id="brandBtn" data-on:click="showList()"><h1>CSS Ref</h1><span class="brand-tag">2025</span></div>
+  <div class="search-combo">
+    <input type="search" id="search" data-bind:query data-on:input__debounce.150ms="renderGrid($query, $activeCats, $activeInterops, $viewMode)" placeholder="Search properties… e.g. grid, animation, color" autocomplete="off" spellcheck="false">
+    <button class="filter-btn" id="filterBtn" title="Filters"
+      data-on:click__stop="$popoverOpen = !$popoverOpen"
+      data-class:has-active="hasFilters($activeCats, $activeInterops)"
+    >
+      <i class="ri-filter-3-line"></i>
+      <span class="active-dot" data-show="hasFilters($activeCats, $activeInterops)"></span>
+    </button>
+    <div class="filter-popover" id="filterPopover"
+      data-class:open="$popoverOpen"
+      data-on:click__outside="$popoverOpen = false"
+    >
+      <div class="pop-section-label">Category</div>
+      <div class="chip-group" id="catChips"
+        data-on:click="evt.target.dataset.cat && ($activeCats = toggleInArray($activeCats, evt.target.dataset.cat))"
+      ></div>
+      <div class="pop-divider"></div>
+      <div class="pop-section-label">Interop Status</div>
+      <div class="chip-group" id="interopChips"
+        data-on:click="evt.target.dataset.status && ($activeInterops = toggleInArray($activeInterops, evt.target.dataset.status))"
+      ></div>
+      <div class="pop-footer">
+        <button class="clear-btn" id="clearFilters"
+          data-on:click="$activeCats = []; $activeInterops = []; $query = ''; document.getElementById('search').value = ''"
+        >Clear all</button>
+      </div>
+    </div>
+  </div>
+  <div class="view-toggle">
+    <button class="view-btn" id="btnGrid" title="Grid view"
+      data-on:click="$viewMode = 'grid'"
+      data-class:active="$viewMode === 'grid'"
+    >
+      <i class="ri-layout-grid-line"></i>
+    </button>
+    <button class="view-btn" id="btnTable" title="Table view"
+      data-on:click="$viewMode = 'table'"
+      data-class:active="$viewMode === 'table'"
+    >
+      <i class="ri-table-line"></i>
+    </button>
+  </div>
+  <span id="count"></span>
+  
+  <!-- Theme Toggle -->
+  <button 
+    class="theme-toggle"
+    data-on:click="$theme = $theme === 'dark' ? 'light' : 'dark'; document.documentElement.classList.toggle('dark', $theme === 'dark')"
+    title="Toggle theme"
+    aria-label="Toggle dark/light mode"
+  >
+    <i class="ri-sun-line sun-icon"></i>
+    <i class="ri-moon-line moon-icon"></i>
+  </button>
+</header>
+
+<!-- Reactive rendering: data-effect re-runs whenever signals change -->
+<div id="grid-view"
+  data-effect="renderChips($activeCats, $activeInterops); renderGrid(filtered($query, $activeCats, $activeInterops)); $viewMode === 'table' && initGrid(filtered($query, $activeCats, $activeInterops)); updateFilterBtn($activeCats, $activeInterops)"
+  data-show="$viewMode === 'grid'"
+><main><div id="grid" class="is-grid"></div></main></div>
+
+<div id="table-view" data-show="$viewMode === 'table'"
+  data-effect="initGrid(filtered($query, $activeCats, $activeInterops))"
+>
+  <div id="table-container"></div>
+  <div id="table-sentinel" data-on-intersect="loadMoreTableRows()" style="padding: 20px; text-align: center; color: var(--muted-foreground);">Loading more...</div>
+</div>
+
+<div id="detail-view" style="display:none"><div class="detail-wrap"><button class="back-btn" id="backBtn" data-on:click="showList()"><i class="ri-arrow-left-line"></i> All properties</button><div id="detail-content"></div></div></div>
+
+<!-- Escape key handler -->
+<div data-on:keydown__window="evt.key === 'Escape' && ($popoverOpen = false)" style="display:none"></div>
+
+<script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@1.0.0-RC.8/bundles/datastar.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gridjs@6.2.0/dist/gridjs.production.min.js"></script>
+<script src="dist/bundle.js"></script>
+<script>
+  // Set initial dark mode class based on theme signal
+  document.documentElement.classList.add('dark');
+</script>
+</body>
+</html>

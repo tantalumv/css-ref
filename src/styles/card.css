@@ -1,0 +1,336 @@
+/* ═══════════════════════════════════════════════════════════════
+   CSS Ref - Card Styles
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Main Layout ── */
+main {
+  padding: var(--space-l);
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+}
+
+/* ── Grid View ── */
+#grid.is-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: var(--space-s);
+}
+
+#grid.is-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ── Card ── */
+.card {
+  background: color-mix(in oklch, var(--card) 80%, transparent);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: transform 0.2s var(--ease-spring-3), box-shadow 0.2s var(--ease-out-1);
+  position: relative;
+  overflow: hidden;
+  --ca: var(--primary);
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  background: var(--card);
+}
+
+/* Demo Stage - Square aspect ratio */
+.demo-stage {
+  aspect-ratio: 1;
+  overflow: visible;
+  position: relative;
+  background: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-size: var(--step--2);
+  user-select: none;
+}
+
+.demo-stage > div:first-child {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.demo-stage * {
+  box-sizing: border-box;
+}
+
+/* Bottom section that slides up on hover */
+.card-bottom {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s var(--ease-spring-3);
+}
+
+/* Meta moves up independently */
+.card:hover .card-meta {
+  transform: translateY(-12px);
+}
+
+/* Tag + name row - always visible */
+.card-meta {
+  display: flex;
+  align-items: center;
+  padding: var(--space-s) var(--space-s) var(--space-xs);
+  background: var(--card);
+  border-top: 1px solid var(--border);
+  min-height: 44px;
+  transition: transform 0.35s var(--ease-spring-3);
+  overflow: hidden;
+}
+
+/* Category badge - notch effect on preview border */
+.demo-stage .cat-badge {
+  font-size: var(--step--2);
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-round);
+  white-space: nowrap;
+  color: var(--primary-foreground);
+  background: var(--ca);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Name row - full width with scroll animation */
+.card-name-wrap {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+}
+
+.card-name {
+  font-family: var(--font-sans);
+  font-size: var(--step-1);
+  font-weight: 800;
+  color: var(--card-foreground);
+  line-height: 1.2;
+  margin: 0;
+  white-space: nowrap;
+  display: inline-flex;
+  gap: 2ch;
+}
+
+.card-name .name-text {
+  display: inline-block;
+}
+
+/* Hide the duplicate text by default (used for seamless loop) */
+.card-name .name-text:nth-child(2) {
+  display: none;
+}
+
+/* Scroll animation for overflowing names */
+.card-name.overflows {
+  animation: scroll-x 8s linear infinite;
+}
+
+.card-name.overflows .name-text:nth-child(2) {
+  display: inline-block;
+}
+
+.card-name.overflows:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Support bar - hidden below by default, slides in on hover */
+.card-support {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+  background: var(--card);
+  border-top: 1px solid var(--border);
+  padding: 0 var(--space-s);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xs);
+  transform: translateY(100%);
+  transition: transform 0.35s var(--ease-spring-3);
+}
+
+.card:hover .card-support {
+  transform: translateY(0);
+}
+
+/* Compact availability badge in card */
+.card-support .availability-badge {
+  font-size: calc(var(--step--2) * 0.9);
+  gap: 4px;
+}
+
+/* ── Browser Badges ── */
+.browser-badges {
+  display: flex;
+  gap: var(--space-2xs);
+}
+
+.browser-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-round);
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.browser-icon.chrome {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='m0 0H512V512H0' fill='%23fff'/%3E%3Ccircle cx='256' cy='256' r='192' fill='%23fcc11d'/%3E%3Cpath d='m94 153a192 192 90 00162 295l82-142' fill='%23289b48'/%3E%3Cpath d='m89.72 160a192 192 90 01332.56 0H256l-82 146' fill='%23e0392c'/%3E%3Ccircle cx='256' cy='256' r='86' fill='%231a73e8' stroke='%23fff' stroke-width='20'/%3E%3C/svg%3E");
+}
+
+.browser-icon.firefox {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='m0 0H512V512H0' fill='%23fff'/%3E%3ClinearGradient id='a' x1='.7' x2='.3' y2='.8'%3E%3Cstop offset='.3' stop-color='%23fd5'/%3E%3Cstop offset='.6' stop-color='%23f85'/%3E%3Cstop offset='1' stop-color='%23d06'/%3E%3C/linearGradient%3E%3CradialGradient id='b' cx='.4' cy='.7'%3E%3Cstop offset='.4' stop-color='%2374d'/%3E%3Cstop offset='1' stop-color='%23a2d'/%3E%3C/radialGradient%3E%3ClinearGradient id='c' x1='.8' y1='.2' x2='.4' y2='.8'%3E%3Cstop offset='.2' stop-color='%23fd5'/%3E%3Cstop offset='1' stop-color='%23f33'/%3E%3C/linearGradient%3E%3Cg transform='scale(4)'%3E%3Cpath d='M64 53S56 27 80 14c6 12 23 28 26 37 0-6-5-15-5-15A51 48 0 1114 68S38 35 47 33c-2 7 1 16 1 16' fill='url(%23a)'/%3E%3Ccircle cx='64' cy='67' r='26' fill='url(%23b)'/%3E%3Cpath d='M21 45l43 12c-6 11-16 3-23 14a22 22 0 1034-20s33 3 17 42H28m36 25h1' fill='url(%23a)'/%3E%3Cpath d='M35 43c16 0 12 7 29 14-18 6-23-9-38 0 5 9 12 8 12 8 1 43 72 29 67-17A50 46.6 47 0117 81c-9-18-1-40 16-51' fill='url(%23c)'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.browser-icon.safari {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='m0 0H512V512H0' fill='%23fff'/%3E%3CradialGradient id='a'%3E%3Cstop stop-color='%230bd' offset='0'/%3E%3Cstop offset='1' stop-color='%2317d'/%3E%3C/radialGradient%3E%3Cg transform='matrix(4 0 0 4 256 256)'%3E%3Cg stroke='%23eee' fill='none'%3E%3Ccircle r='52.5' fill='url(%23a)' stroke-width='5'/%3E%3Ccircle r='45' stroke-dasharray='1.25 8.175' stroke-dashoffset='.5' stroke-width='5.5'/%3E%3Ccircle r='42.5' stroke-dasharray='1.25 7.65' stroke-dashoffset='5' stroke-width='10'/%3E%3C/g%3E%3Cpath d='M-35 33-6-6 6 6' fill='%23eee'/%3E%3Cpath d='M35-34-6-6 6 6' fill='%23f55'/%3E%3Cpath opacity='.3' d='M-35 33l7-5-3 5L6 6l28-35-4 2 4-6'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.browser-icon.edge {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='m0 0H512V512H0' fill='%23fff'/%3E%3CradialGradient id='a'%3E%3Cstop offset='.8' stop-color='%23159'/%3E%3Cstop offset='1' stop-color='%23148'/%3E%3C/radialGradient%3E%3CradialGradient id='b' cy='.7' r='.7'%3E%3Cstop offset='.8' stop-color='%2318d'/%3E%3Cstop offset='1' stop-color='%2307a'/%3E%3C/radialGradient%3E%3CradialGradient id='c' cx='.1' cy='.2' r='1'%3E%3Cstop offset='.4' stop-color='%233ce'/%3E%3Cstop offset='1' stop-color='%233c5'/%3E%3C/radialGradient%3E%3CradialGradient id='d' cx='.9'%3E%3Cstop offset='0' stop-color='%236e7'/%3E%3Cstop offset='1' stop-color='%236e7' stop-opacity='0'/%3E%3C/radialGradient%3E%3Cpath d='m233 214s-25 12-25 42a133 112 0 00202 94 6 6 0 019 7C316 514 90 454 187 237' fill='url(%23a)'/%3E%3Cpath d='m300 153H94a192 192 0 00220 286 116 120.3-2 01-74-228 48 49 0 0164 41' fill='url(%23b)'/%3E%3Cpath d='M64 253c4-110 186-138 233-31 26 70-34 65 3 88 71 30 159-7 147-102C400 3 75 16 64 253' fill='url(%23c)'/%3E%3Cpath d='m242 58c251 14 262 290 86 248' fill='url(%23d)'/%3E%3C/svg%3E");
+}
+
+.browser-icon.unsupported {
+  opacity: 0.3;
+  filter: grayscale(100%);
+}
+
+/* ── Availability Badge ── */
+.availability-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--step--2);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  color: var(--muted-foreground);
+}
+
+.availability-badge::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-round);
+  background: var(--status-color, var(--muted-foreground));
+}
+
+.availability-badge.wide { --status-color: var(--chart-1); }
+.availability-badge.b2024 { --status-color: var(--chart-2); }
+.availability-badge.b2023 { --status-color: var(--chart-3); }
+.availability-badge.b2022 { --status-color: var(--chart-4); }
+.availability-badge.ltd { --status-color: var(--chart-5); }
+.availability-badge.exp { --status-color: var(--destructive); }
+
+/* ── Legacy Browser Support (List View) ── */
+.browsers {
+  display: flex;
+  gap: 4px;
+}
+
+.browser {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.b-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.b-icon.y {
+  background: color-mix(in oklch, var(--chart-1) 20%, transparent);
+  color: var(--chart-1);
+}
+
+.b-icon.n {
+  background: color-mix(in oklch, var(--destructive) 20%, transparent);
+  color: var(--destructive);
+}
+
+.b-icon.p {
+  background: color-mix(in oklch, var(--chart-3) 20%, transparent);
+  color: var(--chart-3);
+}
+
+.b-lbl {
+  font-size: var(--step--2);
+  color: var(--muted-foreground);
+}
+
+/* ── Interop Badge ── */
+.interop {
+  font-size: var(--step--2);
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: var(--radius-round);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.interop.wide {
+  background: color-mix(in oklch, var(--chart-1) 20%, transparent);
+  color: var(--chart-1);
+}
+
+.interop.b2024 {
+  background: color-mix(in oklch, var(--chart-2) 20%, transparent);
+  color: var(--chart-2);
+}
+
+.interop.b2023 {
+  background: color-mix(in oklch, var(--chart-3) 20%, transparent);
+  color: var(--chart-3);
+}
+
+.interop.b2022 {
+  background: color-mix(in oklch, var(--chart-4) 20%, transparent);
+  color: var(--chart-4);
+}
+
+.interop.ltd {
+  background: color-mix(in oklch, var(--chart-5) 20%, transparent);
+  color: var(--chart-5);
+}
+
+.interop.exp {
+  background: color-mix(in oklch, var(--destructive) 20%, transparent);
+  color: var(--destructive);
+}
