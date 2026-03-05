@@ -7,6 +7,7 @@
   width: 100%;
   border-collapse: collapse;
   font-size: var(--step--1);
+  background: var(--card);
 }
 
 .list-table th {
@@ -29,8 +30,13 @@
 
 .list-table td {
   color: var(--foreground);
+  background: var(--card);
   padding: 0;
   border-bottom: 1px solid var(--border);
+}
+
+.list-table tr {
+  background: var(--card);
 }
 
 .list-table tr:hover {
@@ -43,18 +49,21 @@
   font-size: var(--step--1);
   padding: var(--space-s) var(--space-xs);
   width: 120px;
+  color: var(--foreground);
 }
 
 .prop-category {
   font-size: 13px;
   font-weight: 600;
-  color: var(--primary);
+  color: var(--primary) !important;
   padding: var(--space-s) var(--space-xs);
   width: 100px;
+  background: var(--card) !important;
 }
 
 .prop-preview {
   width: 320px;
+  background: var(--card) !important;
 }
 
 .preview-box {
@@ -93,6 +102,8 @@
   padding: var(--space-s) var(--space-xs);
   text-align: center;
   width: 120px;
+  background: var(--card) !important;
+  color: var(--foreground);
 }
 
 .support-icons {
