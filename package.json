@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "bun build src/main.ts --outfile=dist/bundle.js --target=browser --watch --sourcemap=external & esbuild src/styles/index.css --bundle --outfile=dist/bundle.css --watch --sourcemap",
     "build": "bun build src/main.ts --outfile=dist/bundle.js --target=browser --minify && esbuild src/styles/index.css --bundle --outfile=dist/bundle.css --minify",
-    "serve": "bunx serve .",
+    "serve": "bunx serve . -p 2005",
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
@@ -13,6 +13,10 @@
     "test:e2e:ui": "bunx playwright test --ui",
     "lint": "bunx oxlint src/",
     "lint:fix": "bunx oxlint src/ --fix",
+    "lint:datastar": "bunx oxlint --config .oxlintrc.json '**/*.html' src/",
+    "lint:datastar:fix": "bunx oxlint --config .oxlintrc.json '**/*.html' src/ --fix",
+    "manifest:generate": "bun scripts/generate-manifest.ts",
+    "manifest:check": "bun scripts/generate-manifest.ts --check",
     "typecheck": "bunx tsc --noEmit"
   },
   "devDependencies": {

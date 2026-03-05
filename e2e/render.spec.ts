@@ -10,7 +10,7 @@ test('CSS Ref renders cards', async ({ page }) => {
   page.on('pageerror', err => errors.push(err.message));
   
   // Serve the app
-  await page.goto('http://localhost:3000');
+  await page.goto('http://localhost:2005');
   
   // Wait a bit for JS to run
   await page.waitForTimeout(1000);

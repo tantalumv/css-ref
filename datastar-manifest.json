@@ -1,0 +1,138 @@
+{
+  "$schema": "./schemas/datastar-manifest.schema.json",
+  "version": "1.0.0",
+  "description": "Datastar window exports manifest for css-ref project",
+  "generated": "2026-03-04",
+  "sources": [
+    "src/main.ts"
+  ],
+  "exports": {
+    "data": {
+      "P": {
+        "type": "value",
+        "description": "All CSS properties data"
+      },
+      "CATS": {
+        "type": "value",
+        "description": "Available categories"
+      },
+      "INTEROPS": {
+        "type": "value",
+        "description": "Interop status keys"
+      },
+      "CC": {
+        "type": "value",
+        "description": "Category colors map"
+      },
+      "IL": {
+        "type": "value",
+        "description": "Interop labels map"
+      },
+      "IC": {
+        "type": "value",
+        "description": "Interop colors map"
+      }
+    },
+    "utilities": {
+      "bIcon": {
+        "type": "function",
+        "description": "Generate browser icon HTML",
+        "signature": "() => void"
+      }
+    },
+    "filters": {
+      "filtered": {
+        "type": "value",
+        "description": "Filter properties by query, categories, and interop status"
+      }
+    },
+    "helpers": {
+      "toggleInArray": {
+        "type": "function",
+        "description": "Toggle item in array (returns new array)",
+        "signature": "(arr: string[], item: string) => void"
+      }
+    },
+    "misc": {
+      "renderBrowserSupport": {
+        "type": "value",
+        "description": "renderBrowserSupport export"
+      }
+    },
+    "ui": {
+      "renderGrid": {
+        "type": "function",
+        "description": "Render grid view with property cards",
+        "signature": "(items: CSSProperty[], selectedProp: CSSProperty | null) => void"
+      }
+    },
+    "table": {
+      "initGrid": {
+        "type": "value",
+        "description": "Initialize Grid.js table view"
+      },
+      "loadMoreTableRows": {
+        "type": "function",
+        "description": "Load next batch of table rows (infinite scroll)",
+        "signature": "() => void"
+      },
+      "checkSentinelVisible": {
+        "type": "value",
+        "description": "Check if sentinel is visible and load more if needed"
+      },
+      "startTablePolling": {
+        "type": "function",
+        "description": "Start manual polling for infinite scroll",
+        "signature": "() => void"
+      },
+      "stopTablePolling": {
+        "type": "value",
+        "description": "Stop manual polling for infinite scroll"
+      }
+    }
+  },
+  "signals": {
+    "query": {
+      "type": "string",
+      "default": "",
+      "description": "Search query"
+    },
+    "activeCats": {
+      "type": "string[]",
+      "default": [],
+      "description": "Active category filters"
+    },
+    "activeInterops": {
+      "type": "string[]",
+      "default": [],
+      "description": "Active interop filters"
+    },
+    "viewMode": {
+      "type": "'grid' | 'table'",
+      "default": "'grid'",
+      "description": "Current view mode"
+    },
+    "popoverOpen": {
+      "type": "boolean",
+      "default": false,
+      "description": "Filter popover state"
+    },
+    "theme": {
+      "type": "'dark' | 'light'",
+      "default": "'dark'",
+      "description": "Current theme"
+    }
+  },
+  "allowedDatastarAttributes": [
+    "data-signals",
+    "data-bind:*",
+    "data-on:*",
+    "data-on:*__*",
+    "data-show",
+    "data-class:*",
+    "data-text",
+    "data-effect",
+    "data-init",
+    "data-computed"
+  ]
+}

@@ -32,8 +32,10 @@ jobs:
       - name: Build
         run: bun run build
 
-      - name: Copy index.html to dist
-        run: cp index.html dist/
+      - name: Copy index.html to dist and fix paths
+        run: |
+          cp index.html dist/
+          sed -i 's|dist/bundle|./bundle|g' dist/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

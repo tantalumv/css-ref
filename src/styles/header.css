@@ -292,3 +292,33 @@ html:not(.dark) .theme-toggle .moon-icon {
   flex-shrink: 0;
   white-space: nowrap;
 }
+
+/* ── SVG Icons ── */
+.icon {
+  width: 1.2em;
+  height: 1.2em;
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.filter-btn .icon {
+  width: 18px;
+  height: 18px;
+}
+
+.view-btn .icon {
+  width: 18px;
+  height: 18px;
+}
+
+.theme-toggle .icon {
+  width: 20px;
+  height: 20px;
+}
+
+.back-btn .icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 0.25em;
+}

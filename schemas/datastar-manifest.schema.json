@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://css-ref.dev/schemas/datastar-manifest.schema.json",
+  "title": "Datastar Manifest",
+  "description": "Schema for Datastar window exports manifest",
+  "type": "object",
+  "required": ["version", "description", "generated", "sources", "exports", "signals", "allowedDatastarAttributes"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Reference to this schema"
+    },
+    "version": {
+      "type": "string",
+      "description": "Manifest version",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description of the manifest"
+    },
+    "generated": {
+      "type": "string",
+      "description": "Date of generation (YYYY-MM-DD)",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "sources": {
+      "type": "array",
+      "description": "Source files that were scanned",
+      "items": {
+        "type": "string"
+      }
+    },
+    "exports": {
+      "type": "object",
+      "description": "Window exports organized by category",
+      "additionalProperties": {
+        "type": "object",
+        "description": "Category of exports",
+        "additionalProperties": {
+          "type": "object",
+          "required": ["type", "description"],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["function", "value", "array", "object"],
+              "description": "Type of the export"
+            },
+            "signature": {
+              "type": "string",
+              "description": "Function signature (for functions)"
+            },
+            "description": {
+              "type": "string",
+              "description": "Human-readable description"
+            }
+          }
+        }
+      }
+    },
+    "signals": {
+      "type": "object",
+      "description": "Datastar signals defined in the application",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["type", "default", "description"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "TypeScript type of the signal"
+          },
+          "default": {
+            "description": "Default value of the signal"
+          },
+          "description": {
+            "type": "string",
+            "description": "Human-readable description"
+          }
+        }
+      }
+    },
+    "allowedDatastarAttributes": {
+      "type": "array",
+      "description": "List of allowed Datastar attribute patterns",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

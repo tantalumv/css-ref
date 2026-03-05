@@ -1,0 +1,72 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/main/npm/oxlint/configuration_schema.json",
+  "plugins": ["import", "typescript", "unicorn"],
+  "env": {
+    "browser": true,
+    "es2022": true
+  },
+  "globals": {
+    "datastar": "readonly",
+    "gridjs": "readonly"
+  },
+  "rules": {
+    "eqeqeq": ["error", "always", { "null": "ignore" }],
+    "no-console": "off",
+    "no-debugger": "error",
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }],
+    "prefer-const": "error"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.html"],
+      "rules": {
+        "ds/valid-attributes": "error",
+        "ds/no-unknown-directives": "error",
+        "ds/signal-root-exists": "error",
+        "ds/signals-json-valid": "error",
+        "ds/signal-prefix": "warn",
+        "ds/no-lexical-references": "error",
+        "ds/window-exposure": "error",
+        "ds/no-document-or-import": "error",
+        "ds/expression-length": ["warn", { "max": 160 }],
+        "ds/no-side-effects-in-data-text": "warn",
+        "ds/data-effect-size": ["warn", { "max": 300 }],
+        "ds/event-escape-unique": "warn",
+        "ds/click-outside-target": "error",
+        "ds/bubbling-threshold": ["info", { "threshold": 5 }],
+        "ds/forbidden-attrs-in-expr": "warn",
+        "ds/no-inline-html-injections": "warn",
+        "ds/interop-constants-exposed": "error",
+        "ds/test-selectors": "warn"
+      }
+    },
+    {
+      "files": ["src/**/*.ts"],
+      "rules": {
+        "ds/window-exports-required": "error"
+      }
+    }
+  ],
+  "settings": {
+    "datastar": {
+      "signalNames": [
+        "query",
+        "activeCats",
+        "activeInterops",
+        "viewMode",
+        "popoverOpen",
+        "theme"
+      ],
+      "maxExpressionLength": 160,
+      "bubblingThreshold": 5,
+      "manifestPath": "./datastar-manifest.json"
+    }
+  },
+  "ignorePatterns": [
+    "dist/**",
+    "node_modules/**",
+    "playwright-report/**",
+    "test-results/**",
+    "coverage/**"
+  ]
+}

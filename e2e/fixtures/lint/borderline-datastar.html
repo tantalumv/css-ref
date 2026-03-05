@@ -1,0 +1,98 @@
+<!--
+  BORDERLINE EXAMPLE: Edge Cases for Datastar Lint Rules
+  
+  These patterns may be acceptable depending on configuration:
+  
+  1. Short expressions that are borderline on length
+  2. Multiple signal references in one expression
+  3. Ternary operators with signal conditions
+  4. Event handler with multiple statements (borderline violation)
+  5. Using window.* explicitly vs implicitly
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Borderline Datastar Examples</title>
+</head>
+<body
+  data-signals="{ query: '', activeCats: [], activeInterops: [], viewMode: 'grid', popoverOpen: false, isLoading: false }"
+>
+
+  <!-- BORDERLINE: Expression approaching max length (160 chars) -->
+  <!-- This is acceptable but close to the limit -->
+  <div data-effect="renderGrid(filtered($query, $activeCats, $activeInterops), $viewMode)">
+  </div>
+
+  <!-- BORDERLINE: Multiple statements in handler (should prefer extraction) -->
+  <button data-on:click="$popoverOpen = false; $query = ''; renderGrid(filtered('', $activeCats))">
+    Clear & Close
+  </button>
+
+  <!-- BORDERLINE: Complex ternary with signals -->
+  <span data-text="$viewMode === 'grid' ? ($query ? `${$activeCats.length} filters` : 'All items') : 'Table view'">
+  </span>
+
+  <!-- BORDERLINE: Using window.* explicitly vs implicitly -->
+  <!-- Both work, but explicit window.* is clearer for linting -->
+  <div data-effect="window.renderGrid(window.filtered($query, $activeCats))"></div>
+  <div data-effect="renderGrid(filtered($query, $activeCats))"></div>
+
+  <!-- BORDERLINE: Multiple event modifiers -->
+  <button data-on:click__stop__prevent="handleClick()">Click</button>
+
+  <!-- BORDERLINE: debounce with custom timing -->
+  <input data-on:input__debounce.300ms="$query = evt.target.value">
+
+  <!-- BORDERLINE: Computed-like expression in data-show -->
+  <div data-show="$activeCats.length > 0 && $viewMode === 'grid' && !$isLoading">
+    Conditional content
+  </div>
+
+  <!-- GOOD: Extracted helper for complex logic -->
+  <button data-on:click="handleClearAndRefresh()">
+    Clear Filters
+  </button>
+
+  <!-- GOOD: Parent-level event delegation -->
+  <div class="chip-group" data-on:click="handleChipClick(evt)">
+    <button class="chip" data-cat="Layout">Layout</button>
+    <button class="chip" data-cat="Color">Color</button>
+    <button class="chip" data-cat="Grid">Grid</button>
+    <button class="chip" data-cat="Flex">Flex</button>
+    <button class="chip" data-cat="Anim">Animation</button>
+    <button class="chip" data-cat="Type">Typography</button>
+  </div>
+
+  <!-- GOOD: Proper click-outside on container -->
+  <div 
+    class="modal"
+    data-show="$popoverOpen"
+    data-on:click__outside="$popoverOpen = false"
+  >
+    <div class="modal-content">
+      <h2>Modal Title</h2>
+      <button data-on:click="$popoverOpen = false">Close</button>
+    </div>
+  </div>
+
+  <script>
+    // These window helpers make the above expressions valid
+    window.handleClearAndRefresh = () => {
+      popoverOpen = false;
+      query = '';
+      renderGrid(filtered('', activeCats));
+    };
+
+    window.handleChipClick = (evt) => {
+      const cat = evt.target.dataset.cat;
+      if (cat) {
+        activeCats = toggleInArray(activeCats, cat);
+      }
+    };
+  </script>
+
+  <script src="dist/bundle.js"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@1.0.0-RC.8/bundles/datastar.js"></script>
+</body>
+</html>

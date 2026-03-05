@@ -12,7 +12,7 @@ bun run build
 bun run serve
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:2005](http://localhost:2005).
 
 ## Features
 
@@ -75,7 +75,7 @@ The current hybrid gives us the best of both: Datastar's declarative reactivity 
 |---------|-------------|
 | `bun run build` | Production build (bun bundler + esbuild for CSS) |
 | `bun run dev` | Watch mode with sourcemaps |
-| `bun run serve` | Serve on localhost:3000 |
+| `bun run serve` | Serve on localhost:2005 |
 | `bun test` | Unit tests (vitest, watch) |
 | `bun run test:run` | Unit tests (single run) |
 | `bun run test:e2e` | E2E tests (Playwright) |

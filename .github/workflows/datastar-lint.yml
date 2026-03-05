@@ -1,0 +1,68 @@
+name: Datastar Lint
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.html'
+      - 'src/**.ts'
+      - '.oxlintrc.json'
+      - 'datastar-manifest.json'
+  pull_request:
+    branches: [main]
+    paths:
+      - '**.html'
+      - 'src/**.ts'
+      - '.oxlintrc.json'
+      - 'datastar-manifest.json'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Check datastar-manifest.json is up to date
+        run: bun manifest:check
+
+      - name: Lint Datastar HTML and TypeScript
+        run: bun lint:datastar
+
+      - name: Type check
+        run: bun typecheck
+
+  test-fixtures:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Valid fixture should pass
+        run: |
+          bunx oxlint --config .oxlintrc.json e2e/fixtures/lint/valid-datastar.html
+
+      - name: Invalid fixture should fail (test the linter works)
+        run: |
+          # This should fail - if it passes, our lint rules aren't working
+          if bunx oxlint --config .oxlintrc.json e2e/fixtures/lint/invalid-datastar.html; then
+            echo "ERROR: Invalid fixture passed linting - rules may not be configured correctly"
+            exit 1
+          else
+            echo "✓ Invalid fixture correctly failed linting"
+          fi
+        shell: bash
