@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="dist/bundle.css">
 </head>
 <body
-  data-signals="{query: '', activeCats: [], activeInterops: [], viewMode: 'grid', catPopoverOpen: false, interopPopoverOpen: false, theme: 'dark', selectedProp: null, tableDisplayedCount: 0, tableTotalCount: 0, tableLoading: false}"
+  data-signals="{query: '', activeCats: [], activeInterops: [], viewMode: 'grid', theme: 'dark', selectedProp: null, tableDisplayedCount: 0, tableTotalCount: 0, tableLoading: false}"
 >
 
 <!-- Inline SVG Icons (6 icons = ~2KB instead of 190KB font) -->
@@ -26,69 +26,114 @@
 <header data-show="!$selectedProp">
   <div class="brand" data-on:click="$selectedProp = null"><h1>CSS Ref</h1></div>
   
-  <!-- Search with Category Dropdown -->
+  <!-- Search -->
   <div class="search-combo">
     <input type="search" id="search" data-bind:query placeholder="Search properties… e.g. grid, animation, color" autocomplete="off" spellcheck="false">
-    <button class="filter-btn" id="filterBtn" title="Category"
-      data-on:click__stop="$catPopoverOpen = $interopPopoverOpen ? false : !$catPopoverOpen; $interopPopoverOpen = false"
-      data-class:has-active="$activeCats.length"
-    >
-      <svg class="icon" aria-hidden="true"><use href="#icon-filter"/></svg>
-      <span class="active-dot" data-show="$activeCats.length"></span>
-    </button>
-    <div class="filter-popover" id="catPopover"
-      data-class:open="$catPopoverOpen"
-      data-on:click__outside="$catPopoverOpen = false"
-    >
-      <div class="pop-section-label">Category</div>
-      <div class="chip-group" id="catChips"
-        data-on:click="evt.target.dataset.cat && ($activeCats = toggleInArray($activeCats, evt.target.dataset.cat))"
-      >
-        <button class="chip" data-cat="Layout" data-class:active="$activeCats.includes('Layout')">Layout</button>
-        <button class="chip" data-cat="Flexbox" data-class:active="$activeCats.includes('Flexbox')">Flexbox</button>
-        <button class="chip" data-cat="Grid" data-class:active="$activeCats.includes('Grid')">Grid</button>
-        <button class="chip" data-cat="Typography" data-class:active="$activeCats.includes('Typography')">Typography</button>
-        <button class="chip" data-cat="Color" data-class:active="$activeCats.includes('Color')">Color</button>
-        <button class="chip" data-cat="Sizing" data-class:active="$activeCats.includes('Sizing')">Sizing</button>
-        <button class="chip" data-cat="Visual" data-class:active="$activeCats.includes('Visual')">Visual</button>
-        <button class="chip" data-cat="Animation" data-class:active="$activeCats.includes('Animation')">Animation</button>
-        <button class="chip" data-cat="Transform" data-class:active="$activeCats.includes('Transform')">Transform</button>
-        <button class="chip" data-cat="Spacing" data-class:active="$activeCats.includes('Spacing')">Spacing</button>
-        <button class="chip" data-cat="Interactivity" data-class:active="$activeCats.includes('Interactivity')">Interactivity</button>
-        <button class="chip" data-cat="CSS Variables" data-class:active="$activeCats.includes('CSS Variables')">CSS Variables</button>
-        <button class="chip" data-cat="Queries" data-class:active="$activeCats.includes('Queries')">Queries</button>
+  </div>
+
+  <!-- Category Select -->
+  <div class="select" data-show="!$selectedProp">
+    <div class="selected" data-default="Category">
+      <svg class="arrow" aria-hidden="true"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
+    </div>
+    <div class="options">
+      <div data-cat="">
+        <input type="radio" name="category" id="cat-all" checked data-on:change="$activeCats = []">
+        <label class="option" for="cat-all" data-txt="All"></label>
+      </div>
+      <div data-cat="Layout">
+        <input type="radio" name="category" id="cat-Layout" data-on:change="$activeCats = ['Layout']">
+        <label class="option" for="cat-Layout" data-txt="Layout"></label>
+      </div>
+      <div data-cat="Flexbox">
+        <input type="radio" name="category" id="cat-Flexbox" data-on:change="$activeCats = ['Flexbox']">
+        <label class="option" for="cat-Flexbox" data-txt="Flexbox"></label>
+      </div>
+      <div data-cat="Grid">
+        <input type="radio" name="category" id="cat-Grid" data-on:change="$activeCats = ['Grid']">
+        <label class="option" for="cat-Grid" data-txt="Grid"></label>
+      </div>
+      <div data-cat="Typography">
+        <input type="radio" name="category" id="cat-Typography" data-on:change="$activeCats = ['Typography']">
+        <label class="option" for="cat-Typography" data-txt="Typography"></label>
+      </div>
+      <div data-cat="Color">
+        <input type="radio" name="category" id="cat-Color" data-on:change="$activeCats = ['Color']">
+        <label class="option" for="cat-Color" data-txt="Color"></label>
+      </div>
+      <div data-cat="Sizing">
+        <input type="radio" name="category" id="cat-Sizing" data-on:change="$activeCats = ['Sizing']">
+        <label class="option" for="cat-Sizing" data-txt="Sizing"></label>
+      </div>
+      <div data-cat="Visual">
+        <input type="radio" name="category" id="cat-Visual" data-on:change="$activeCats = ['Visual']">
+        <label class="option" for="cat-Visual" data-txt="Visual"></label>
+      </div>
+      <div data-cat="Animation">
+        <input type="radio" name="category" id="cat-Animation" data-on:change="$activeCats = ['Animation']">
+        <label class="option" for="cat-Animation" data-txt="Animation"></label>
+      </div>
+      <div data-cat="Transform">
+        <input type="radio" name="category" id="cat-Transform" data-on:change="$activeCats = ['Transform']">
+        <label class="option" for="cat-Transform" data-txt="Transform"></label>
+      </div>
+      <div data-cat="Spacing">
+        <input type="radio" name="category" id="cat-Spacing" data-on:change="$activeCats = ['Spacing']">
+        <label class="option" for="cat-Spacing" data-txt="Spacing"></label>
+      </div>
+      <div data-cat="Interactivity">
+        <input type="radio" name="category" id="cat-Interactivity" data-on:change="$activeCats = ['Interactivity']">
+        <label class="option" for="cat-Interactivity" data-txt="Interactivity"></label>
+      </div>
+      <div data-cat="CSS Variables">
+        <input type="radio" name="category" id="cat-CSS-Variables" data-on:change="$activeCats = ['CSS Variables']">
+        <label class="option" for="cat-CSS-Variables" data-txt="CSS Variables"></label>
+      </div>
+      <div data-cat="Queries">
+        <input type="radio" name="category" id="cat-Queries" data-on:change="$activeCats = ['Queries']">
+        <label class="option" for="cat-Queries" data-txt="Queries"></label>
       </div>
     </div>
   </div>
 
-  <!-- Interop Dropdown -->
-  <div class="dropdown-combo">
-    <button class="filter-btn interop-btn" id="interopBtn" title="Interop Status"
-      data-on:click__stop="$interopPopoverOpen = $catPopoverOpen ? false : !$interopPopoverOpen; $catPopoverOpen = false"
-      data-class:has-active="$activeInterops.length"
-    >
-      <span class="interop-label">Interop</span>
-      <span class="active-dot" data-show="$activeInterops.length"></span>
-    </button>
-    <div class="filter-popover" id="interopPopover"
-      data-class:open="$interopPopoverOpen"
-      data-on:click__outside="$interopPopoverOpen = false"
-    >
-      <div class="pop-section-label">Interop Status</div>
-      <div class="chip-group" id="interopChips"
-        data-on:click="evt.target.dataset.status && ($activeInterops = toggleInArray($activeInterops, evt.target.dataset.status))"
-      >
-        <button class="chip" data-status="wide" data-class:active="$activeInterops.includes('wide')">Widely Available</button>
-        <button class="chip" data-status="b2024" data-class:active="$activeInterops.includes('b2024')">Baseline 2024</button>
-        <button class="chip" data-status="b2023" data-class:active="$activeInterops.includes('b2023')">Baseline 2023</button>
-        <button class="chip" data-status="b2022" data-class:active="$activeInterops.includes('b2022')">Baseline 2022</button>
-        <button class="chip" data-status="ltd" data-class:active="$activeInterops.includes('ltd')">Limited</button>
-        <button class="chip" data-status="exp" data-class:active="$activeInterops.includes('exp')">Experimental</button>
+  <!-- Interop Select -->
+  <div class="select" data-show="!$selectedProp">
+    <div class="selected" data-default="Interop">
+      <svg class="arrow" aria-hidden="true"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
+    </div>
+    <div class="options">
+      <div data-status="">
+        <input type="radio" name="interop" id="interop-all" checked data-on:change="$activeInterops = []">
+        <label class="option" for="interop-all" data-txt="All"></label>
+      </div>
+      <div data-status="wide">
+        <input type="radio" name="interop" id="interop-wide" data-on:change="$activeInterops = ['wide']">
+        <label class="option" for="interop-wide" data-txt="Widely Available"></label>
+      </div>
+      <div data-status="b2024">
+        <input type="radio" name="interop" id="interop-b2024" data-on:change="$activeInterops = ['b2024']">
+        <label class="option" for="interop-b2024" data-txt="Baseline 2024"></label>
+      </div>
+      <div data-status="b2023">
+        <input type="radio" name="interop" id="interop-b2023" data-on:change="$activeInterops = ['b2023']">
+        <label class="option" for="interop-b2023" data-txt="Baseline 2023"></label>
+      </div>
+      <div data-status="b2022">
+        <input type="radio" name="interop" id="interop-b2022" data-on:change="$activeInterops = ['b2022']">
+        <label class="option" for="interop-b2022" data-txt="Baseline 2022"></label>
+      </div>
+      <div data-status="ltd">
+        <input type="radio" name="interop" id="interop-ltd" data-on:change="$activeInterops = ['ltd']">
+        <label class="option" for="interop-ltd" data-txt="Limited"></label>
+      </div>
+      <div data-status="exp">
+        <input type="radio" name="interop" id="interop-exp" data-on:change="$activeInterops = ['exp']">
+        <label class="option" for="interop-exp" data-txt="Experimental"></label>
       </div>
     </div>
   </div>
 
-  <!-- View Mode Toggle (2x bigger) -->
+  <!-- View Mode Toggle -->
   <label class="view-switch big" title="Toggle view mode">
     <input class="cb" type="checkbox" 
       data-bind="$viewMode" 
@@ -187,7 +232,7 @@
 </div>
 
 <!-- Escape key handler -->
-<div data-on:keydown__window="evt.key === 'Escape' && ($catPopoverOpen = false, $interopPopoverOpen = false, $selectedProp = null)" style="display:none"></div>
+<div data-on:keydown__window="evt.key === 'Escape' && ($selectedProp = null)" style="display:none"></div>
 
 <script src="dist/bundle.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>

@@ -381,6 +381,129 @@ header {
   letter-spacing: 0.05em;
 }
 
+/* ── CSS Select Dropdown ── */
+.select {
+  width: clamp(100px, 15vw, 140px);
+  cursor: pointer;
+  position: relative;
+  transition: 300ms;
+  color: var(--foreground);
+  flex-shrink: 0;
+}
+
+.select .selected {
+  background: var(--muted);
+  padding: 6px 10px;
+  margin-bottom: 3px;
+  border-radius: 4px;
+  position: relative;
+  z-index: 10;
+  font-size: var(--step--2);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--border);
+}
+
+.select .selected::before {
+  content: attr(data-default);
+}
+
+.select .arrow {
+  width: 20px;
+  height: 14px;
+  transform: rotate(-90deg);
+  fill: var(--muted-foreground);
+  transition: 300ms;
+}
+
+.select .options {
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  padding: 4px;
+  background: var(--popover);
+  position: absolute;
+  top: -100px;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transition: 300ms;
+  z-index: 100;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.select:hover > .options {
+  opacity: 1;
+  top: 0;
+}
+
+.select:hover > .selected .arrow {
+  transform: rotate(0deg);
+}
+
+.select .options > div {
+  display: none;
+}
+
+.select .options input[type="radio"] {
+  display: none;
+}
+
+.select .options label {
+  display: block;
+  padding: 6px 8px;
+  border-radius: 3px;
+  font-size: var(--step--2);
+  font-weight: 600;
+  transition: 300ms;
+}
+
+.select .options label::before {
+  content: attr(data-txt);
+}
+
+.select .options label:hover {
+  background: var(--accent);
+}
+
+.select .options input[type="radio"]:checked + label {
+  display: block;
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.select .options > div:has(input:checked) {
+  display: block;
+}
+
+/* Category select states */
+.select:has(#cat-Layout:checked) .selected::before { content: "Layout"; }
+.select:has(#cat-Flexbox:checked) .selected::before { content: "Flexbox"; }
+.select:has(#cat-Grid:checked) .selected::before { content: "Grid"; }
+.select:has(#cat-Typography:checked) .selected::before { content: "Typography"; }
+.select:has(#cat-Color:checked) .selected::before { content: "Color"; }
+.select:has(#cat-Sizing:checked) .selected::before { content: "Sizing"; }
+.select:has(#cat-Visual:checked) .selected::before { content: "Visual"; }
+.select:has(#cat-Animation:checked) .selected::before { content: "Animation"; }
+.select:has(#cat-Transform:checked) .selected::before { content: "Transform"; }
+.select:has(#cat-Spacing:checked) .selected::before { content: "Spacing"; }
+.select:has(#cat-Interactivity:checked) .selected::before { content: "Interactivity"; }
+.select:has(#cat-CSS-Variables:checked) .selected::before { content: "CSS Variables"; }
+.select:has(#cat-Queries:checked) .selected::before { content: "Queries"; }
+
+/* Interop select states */
+.select:has(#interop-wide:checked) .selected::before { content: "Widely Available"; }
+.select:has(#interop-b2024:checked) .selected::before { content: "Baseline 2024"; }
+.select:has(#interop-b2023:checked) .selected::before { content: "Baseline 2023"; }
+.select:has(#interop-b2022:checked) .selected::before { content: "Baseline 2022"; }
+.select:has(#interop-ltd:checked) .selected::before { content: "Limited"; }
+.select:has(#interop-exp:checked) .selected::before { content: "Experimental"; }
+
 /* ── Dropdown Combo ── */
 .dropdown-combo {
   position: relative;

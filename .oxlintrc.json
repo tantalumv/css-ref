@@ -54,8 +54,6 @@
         "activeCats",
         "activeInterops",
         "viewMode",
-        "catPopoverOpen",
-        "interopPopoverOpen",
         "theme"
       ],
       "maxExpressionLength": 160,
