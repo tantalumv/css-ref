@@ -361,6 +361,44 @@ header {
   color: var(--primary);
 }
 
+/* ── Big Switch (2x) ── */
+.view-switch.big {
+  width: 10em;
+  height: 5em;
+}
+
+.view-switch.big .view-toggle-3d {
+  font-size: 18px;
+}
+
+.view-switch.big .view-toggle-3d > .left {
+  font-size: 16px;
+  letter-spacing: 0.05em;
+}
+
+.view-switch.big .view-toggle-3d > .right {
+  font-size: 16px;
+  letter-spacing: 0.05em;
+}
+
+/* ── Dropdown Combo ── */
+.dropdown-combo {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.filter-btn.interop-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.interop-label {
+  font-size: var(--step--2);
+  font-weight: 700;
+}
+
 /* ── Theme Toggle ── */
 .theme-toggle {
   width: 36px;

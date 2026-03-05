@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="dist/bundle.css">
 </head>
 <body
-  data-signals="{query: '', activeCats: [], activeInterops: [], viewMode: 'grid', popoverOpen: false, theme: 'dark', selectedProp: null, tableDisplayedCount: 0, tableTotalCount: 0, tableLoading: false}"
+  data-signals="{query: '', activeCats: [], activeInterops: [], viewMode: 'grid', catPopoverOpen: false, interopPopoverOpen: false, theme: 'dark', selectedProp: null, tableDisplayedCount: 0, tableTotalCount: 0, tableLoading: false}"
 >
 
 <!-- Inline SVG Icons (6 icons = ~2KB instead of 190KB font) -->
@@ -25,18 +25,20 @@
 
 <header data-show="!$selectedProp">
   <div class="brand" data-on:click="$selectedProp = null"><h1>CSS Ref</h1></div>
+  
+  <!-- Search with Category Dropdown -->
   <div class="search-combo">
     <input type="search" id="search" data-bind:query placeholder="Search properties… e.g. grid, animation, color" autocomplete="off" spellcheck="false">
-    <button class="filter-btn" id="filterBtn" title="Filters"
-      data-on:click__stop="$popoverOpen = !$popoverOpen"
-      data-class:has-active="$activeCats.length || $activeInterops.length"
+    <button class="filter-btn" id="filterBtn" title="Category"
+      data-on:click__stop="$catPopoverOpen = !$catPopoverOpen"
+      data-class:has-active="$activeCats.length"
     >
       <svg class="icon" aria-hidden="true"><use href="#icon-filter"/></svg>
-      <span class="active-dot" data-show="$activeCats.length || $activeInterops.length"></span>
+      <span class="active-dot" data-show="$activeCats.length"></span>
     </button>
-    <div class="filter-popover" id="filterPopover"
-      data-class:open="$popoverOpen"
-      data-on:click__outside="$popoverOpen = false"
+    <div class="filter-popover" id="catPopover"
+      data-class:open="$catPopoverOpen"
+      data-on:click__outside="$catPopoverOpen = false"
     >
       <div class="pop-section-label">Category</div>
       <div class="chip-group" id="catChips"
@@ -56,7 +58,22 @@
         <button class="chip" data-cat="CSS Variables" data-class:active="$activeCats.includes('CSS Variables')">CSS Variables</button>
         <button class="chip" data-cat="Queries" data-class:active="$activeCats.includes('Queries')">Queries</button>
       </div>
-      <div class="pop-divider"></div>
+  </div>
+    </div>
+
+  <!-- Interop Dropdown -->
+  <div class="dropdown-combo">
+    <button class="filter-btn interop-btn" id="interopBtn" title="Interop Status"
+      data-on:click__stop="$interopPopoverOpen = !$interopPopoverOpen"
+      data-class:has-active="$activeInterops.length"
+    >
+      <span class="interop-label">Interop</span>
+      <span class="active-dot" data-show="$activeInterops.length"></span>
+    </button>
+    <div class="filter-popover" id="interopPopover"
+      data-class:open="$interopPopoverOpen"
+      data-on:click__outside="$interopPopoverOpen = false"
+    >
       <div class="pop-section-label">Interop Status</div>
       <div class="chip-group" id="interopChips"
         data-on:click="evt.target.dataset.status && ($activeInterops = toggleInArray($activeInterops, evt.target.dataset.status))"
@@ -68,14 +85,11 @@
         <button class="chip" data-status="ltd" data-class:active="$activeInterops.includes('ltd')">Limited</button>
         <button class="chip" data-status="exp" data-class:active="$activeInterops.includes('exp')">Experimental</button>
       </div>
-      <div class="pop-footer">
-        <button class="clear-btn" id="clearFilters"
-          data-on:click="$activeCats = []; $activeInterops = []; $query = ''"
-        >Clear all</button>
-      </div>
     </div>
   </div>
-  <label class="view-switch" title="Toggle view mode">
+
+  <!-- View Mode Toggle (2x bigger) -->
+  <label class="view-switch big" title="Toggle view mode">
     <input class="cb" type="checkbox" 
       data-bind="$viewMode" 
       data-on:change="$viewMode = $viewMode === 'grid' ? 'table' : 'grid'"
@@ -86,16 +100,19 @@
       <span class="right">Table</span>
     </span>
   </label>
-  <!-- Theme Toggle -->
-  <button 
-    class="theme-toggle"
-    data-on:click="$theme = $theme === 'dark' ? 'light' : 'dark'; document.documentElement.classList.toggle('dark', $theme === 'dark')"
-    title="Toggle theme"
-    aria-label="Toggle dark/light mode"
-  >
-    <svg class="icon sun-icon" aria-hidden="true"><use href="#icon-sun"/></svg>
-    <svg class="icon moon-icon" aria-hidden="true"><use href="#icon-moon"/></svg>
-  </button>
+
+  <!-- Theme Toggle (3D switch, 2x bigger) -->
+  <label class="view-switch big" title="Toggle theme">
+    <input class="cb" type="checkbox" 
+      data-bind="$theme"
+      data-on:change="$theme = $theme === 'dark' ? 'light' : 'dark'; document.documentElement.classList.toggle('dark', $theme === 'dark')"
+      data-attr:checked="$theme === 'light'"
+    />
+    <span class="view-toggle-3d">
+      <span class="left">Dark</span>
+      <span class="right">Light</span>
+    </span>
+  </label>
 </header>
 
 <!-- Grid View - Declarative rendering with data-effect -->
@@ -170,7 +187,7 @@
 </div>
 
 <!-- Escape key handler -->
-<div data-on:keydown__window="evt.key === 'Escape' && ($popoverOpen = false, $selectedProp = null)" style="display:none"></div>
+<div data-on:keydown__window="evt.key === 'Escape' && ($catPopoverOpen = false, $interopPopoverOpen = false, $selectedProp = null)" style="display:none"></div>
 
 <script src="dist/bundle.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>

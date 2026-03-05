@@ -5,7 +5,8 @@ export let activeCats = new Set<string>();
 export let activeInterops = new Set<InteropStatus>();
 export let q = '';
 export let viewMode: ViewMode = 'grid';
-export let popoverOpen = false;
+export let catPopoverOpen = false;
+export let interopPopoverOpen = false;
 
 // State setters for testing
 export function setQuery(newQ: string): void {
@@ -16,8 +17,12 @@ export function setViewMode(mode: ViewMode): void {
   viewMode = mode;
 }
 
-export function setPopoverOpen(open: boolean): void {
-  popoverOpen = open;
+export function setCatPopoverOpen(open: boolean): void {
+  catPopoverOpen = open;
+}
+
+export function setInteropPopoverOpen(open: boolean): void {
+  interopPopoverOpen = open;
 }
 
 export function resetFilters(): void {
