@@ -33,7 +33,7 @@
         "ds/data-effect-size": ["warn", { "max": 300 }],
         "ds/event-escape-unique": "warn",
         "ds/click-outside-target": "error",
-        "ds/bubbling-threshold": ["info", { "threshold": 5 }],
+        "ds/bubbling-threshold": ["warn", { "threshold": 5 }],
         "ds/forbidden-attrs-in-expr": "warn",
         "ds/no-inline-html-injections": "warn",
         "ds/interop-constants-exposed": "error",

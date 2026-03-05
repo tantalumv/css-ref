@@ -2,7 +2,7 @@
   "$schema": "./schemas/datastar-manifest.schema.json",
   "version": "1.0.0",
   "description": "Datastar window exports manifest for css-ref project",
-  "generated": "2026-03-04",
+  "generated": "2026-03-05",
   "sources": [
     "src/main.ts"
   ],
@@ -57,6 +57,19 @@
       "renderBrowserSupport": {
         "type": "value",
         "description": "renderBrowserSupport export"
+      },
+      "initListTable": {
+        "type": "value",
+        "description": "initListTable export"
+      },
+      "tableRowCount": {
+        "type": "function",
+        "description": "tableRowCount export",
+        "signature": "() => void"
+      },
+      "tableTotalCount": {
+        "type": "value",
+        "description": "tableTotalCount export"
       }
     },
     "ui": {
@@ -67,27 +80,10 @@
       }
     },
     "table": {
-      "initGrid": {
-        "type": "value",
-        "description": "Initialize Grid.js table view"
-      },
       "loadMoreTableRows": {
         "type": "function",
         "description": "Load next batch of table rows (infinite scroll)",
         "signature": "() => void"
-      },
-      "checkSentinelVisible": {
-        "type": "value",
-        "description": "Check if sentinel is visible and load more if needed"
-      },
-      "startTablePolling": {
-        "type": "function",
-        "description": "Start manual polling for infinite scroll",
-        "signature": "() => void"
-      },
-      "stopTablePolling": {
-        "type": "value",
-        "description": "Stop manual polling for infinite scroll"
       }
     }
   },

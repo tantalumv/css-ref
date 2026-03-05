@@ -6,116 +6,6 @@
   <title>CSS Ref</title>
   <link rel="stylesheet" href="https://unpkg.com/open-props"/>
   <link rel="stylesheet" href="dist/bundle.css">
-  <style>
-    /* List.js Table Styles */
-    .list-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 14px;
-    }
-    .list-table th {
-      background: var(--muted);
-      color: var(--foreground);
-      font-weight: 600;
-      text-transform: uppercase;
-      font-size: 11px;
-      letter-spacing: 0.05em;
-      padding: 12px 8px;
-      text-align: left;
-      cursor: pointer;
-      user-select: none;
-    }
-    .list-table th.sort:hover {
-      background: var(--muted-foreground);
-    }
-    .list-table td {
-      color: var(--foreground);
-      padding: 0;
-      border-bottom: 1px solid var(--muted);
-    }
-    .list-table tr:hover {
-      background: var(--muted);
-    }
-    .prop-name {
-      font-family: var(--font-mono);
-      font-weight: 700;
-      font-size: 14px;
-      padding: 12px 8px;
-      width: 120px;
-    }
-    .prop-category {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--primary);
-      padding: 12px 8px;
-      width: 100px;
-    }
-    .prop-preview {
-      width: 320px;
-    }
-    .preview-box {
-      position: relative;
-      width: 100%;
-      height: 120px;
-      overflow: hidden;
-      background: var(--muted);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .preview-desc {
-      position: absolute;
-      inset: 0;
-      background: var(--card);
-      color: var(--foreground);
-      padding: 12px;
-      font-size: 13px;
-      line-height: 1.5;
-      opacity: 0;
-      transition: opacity 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      pointer-events: none;
-    }
-    .preview-box:hover .preview-desc {
-      opacity: 1;
-    }
-    .prop-support {
-      padding: 12px 8px;
-      text-align: center;
-      width: 120px;
-    }
-    .support-icons {
-      display: flex;
-      gap: 3px;
-      justify-content: center;
-      transform: scale(0.9);
-      margin-bottom: 6px;
-    }
-    .support-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--muted-foreground);
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
-    }
-    .table-row {
-      cursor: pointer;
-      transition: background 0.15s;
-    }
-    .table-row:hover {
-      background: var(--muted);
-    }
-    /* Sorting indicators */
-    .list-table th.asc::after {
-      content: ' ▲';
-    }
-    .list-table th.desc::after {
-      content: ' ▼';
-    }
-  </style>
 </head>
 <body
   data-signals="{query: '', activeCats: [], activeInterops: [], viewMode: 'grid', popoverOpen: false, theme: 'dark', selectedProp: null, tableDisplayedCount: 0, tableTotalCount: 0, tableLoading: false}"
@@ -134,7 +24,7 @@
 </svg>
 
 <header data-show="!$selectedProp">
-  <div class="brand" data-on:click="$selectedProp = null"><h1>CSS Ref</h1><span class="brand-tag">2025</span></div>
+  <div class="brand" data-on:click="$selectedProp = null"><h1>CSS Ref</h1></div>
   <div class="search-combo">
     <input type="search" id="search" data-bind:query placeholder="Search properties… e.g. grid, animation, color" autocomplete="off" spellcheck="false">
     <button class="filter-btn" id="filterBtn" title="Filters"
@@ -152,31 +42,31 @@
       <div class="chip-group" id="catChips"
         data-on:click="evt.target.dataset.cat && ($activeCats = toggleInArray($activeCats, evt.target.dataset.cat))"
       >
-        <button class="chip" data-cat="Layout" data-class:active="$activeCats.includes('Layout')" style="--cc: #8b5cf6">Layout</button>
-        <button class="chip" data-cat="Flexbox" data-class:active="$activeCats.includes('Flexbox')" style="--cc: #06b6d4">Flexbox</button>
-        <button class="chip" data-cat="Grid" data-class:active="$activeCats.includes('Grid')" style="--cc: #ec4899">Grid</button>
-        <button class="chip" data-cat="Typography" data-class:active="$activeCats.includes('Typography')" style="--cc: #f59e0b">Typography</button>
-        <button class="chip" data-cat="Color" data-class:active="$activeCats.includes('Color')" style="--cc: #10b981">Color</button>
-        <button class="chip" data-cat="Sizing" data-class:active="$activeCats.includes('Sizing')" style="--cc: #6366f1">Sizing</button>
-        <button class="chip" data-cat="Visual" data-class:active="$activeCats.includes('Visual')" style="--cc: #14b8a6">Visual</button>
-        <button class="chip" data-cat="Animation" data-class:active="$activeCats.includes('Animation')" style="--cc: #f97316">Animation</button>
-        <button class="chip" data-cat="Transform" data-class:active="$activeCats.includes('Transform')" style="--cc: #84cc16">Transform</button>
-        <button class="chip" data-cat="Spacing" data-class:active="$activeCats.includes('Spacing')" style="--cc: #0ea5e9">Spacing</button>
-        <button class="chip" data-cat="Interactivity" data-class:active="$activeCats.includes('Interactivity')" style="--cc: #d946ef">Interactivity</button>
-        <button class="chip" data-cat="CSS Variables" data-class:active="$activeCats.includes('CSS Variables')" style="--cc: #64748b">CSS Variables</button>
-        <button class="chip" data-cat="Queries" data-class:active="$activeCats.includes('Queries')" style="--cc: #a855f7">Queries</button>
+        <button class="chip" data-cat="Layout" data-class:active="$activeCats.includes('Layout')">Layout</button>
+        <button class="chip" data-cat="Flexbox" data-class:active="$activeCats.includes('Flexbox')">Flexbox</button>
+        <button class="chip" data-cat="Grid" data-class:active="$activeCats.includes('Grid')">Grid</button>
+        <button class="chip" data-cat="Typography" data-class:active="$activeCats.includes('Typography')">Typography</button>
+        <button class="chip" data-cat="Color" data-class:active="$activeCats.includes('Color')">Color</button>
+        <button class="chip" data-cat="Sizing" data-class:active="$activeCats.includes('Sizing')">Sizing</button>
+        <button class="chip" data-cat="Visual" data-class:active="$activeCats.includes('Visual')">Visual</button>
+        <button class="chip" data-cat="Animation" data-class:active="$activeCats.includes('Animation')">Animation</button>
+        <button class="chip" data-cat="Transform" data-class:active="$activeCats.includes('Transform')">Transform</button>
+        <button class="chip" data-cat="Spacing" data-class:active="$activeCats.includes('Spacing')">Spacing</button>
+        <button class="chip" data-cat="Interactivity" data-class:active="$activeCats.includes('Interactivity')">Interactivity</button>
+        <button class="chip" data-cat="CSS Variables" data-class:active="$activeCats.includes('CSS Variables')">CSS Variables</button>
+        <button class="chip" data-cat="Queries" data-class:active="$activeCats.includes('Queries')">Queries</button>
       </div>
       <div class="pop-divider"></div>
       <div class="pop-section-label">Interop Status</div>
       <div class="chip-group" id="interopChips"
         data-on:click="evt.target.dataset.status && ($activeInterops = toggleInArray($activeInterops, evt.target.dataset.status))"
       >
-        <button class="chip" data-status="wide" data-class:active="$activeInterops.includes('wide')" style="--cc: #22c55e">Widely Available</button>
-        <button class="chip" data-status="b2024" data-class:active="$activeInterops.includes('b2024')" style="--cc: #3b82f6">Baseline 2024</button>
-        <button class="chip" data-status="b2023" data-class:active="$activeInterops.includes('b2023')" style="--cc: #6366f1">Baseline 2023</button>
-        <button class="chip" data-status="b2022" data-class:active="$activeInterops.includes('b2022')" style="--cc: #8b5cf6">Baseline 2022</button>
-        <button class="chip" data-status="ltd" data-class:active="$activeInterops.includes('ltd')" style="--cc: #f59e0b">Limited</button>
-        <button class="chip" data-status="exp" data-class:active="$activeInterops.includes('exp')" style="--cc: #ef4444">Experimental</button>
+        <button class="chip" data-status="wide" data-class:active="$activeInterops.includes('wide')">Widely Available</button>
+        <button class="chip" data-status="b2024" data-class:active="$activeInterops.includes('b2024')">Baseline 2024</button>
+        <button class="chip" data-status="b2023" data-class:active="$activeInterops.includes('b2023')">Baseline 2023</button>
+        <button class="chip" data-status="b2022" data-class:active="$activeInterops.includes('b2022')">Baseline 2022</button>
+        <button class="chip" data-status="ltd" data-class:active="$activeInterops.includes('ltd')">Limited</button>
+        <button class="chip" data-status="exp" data-class:active="$activeInterops.includes('exp')">Experimental</button>
       </div>
       <div class="pop-footer">
         <button class="clear-btn" id="clearFilters"
@@ -185,20 +75,17 @@
       </div>
     </div>
   </div>
-  <div class="view-toggle">
-    <button class="view-btn" id="btnGrid" title="Grid view"
-      data-on:click="$viewMode = 'grid'"
-      data-class:active="$viewMode === 'grid'"
-    >
-      <svg class="icon" aria-hidden="true"><use href="#icon-grid"/></svg>
-    </button>
-    <button class="view-btn" id="btnTable" title="Table view"
-      data-on:click="$viewMode = 'table'"
-      data-class:active="$viewMode === 'table'"
-    >
-      <svg class="icon" aria-hidden="true"><use href="#icon-table"/></svg>
-    </button>
-  </div>
+  <label class="view-switch" title="Toggle view mode">
+    <input class="cb" type="checkbox" 
+      data-bind="$viewMode" 
+      data-on:change="$viewMode = $viewMode === 'grid' ? 'table' : 'grid'"
+      data-attr:checked="$viewMode === 'table'"
+    />
+    <span class="view-toggle-3d">
+      <span class="left">Grid</span>
+      <span class="right">Table</span>
+    </span>
+  </label>
   <!-- Theme Toggle -->
   <button 
     class="theme-toggle"

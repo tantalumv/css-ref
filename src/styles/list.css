@@ -2,6 +2,154 @@
    CSS Ref - List View Styles
    ═══════════════════════════════════════════════════════════════ */
 
+/* ── List.js Table Styles ── */
+.list-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--step--1);
+}
+
+.list-table th {
+  background: var(--muted);
+  color: var(--foreground);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: var(--step--2);
+  letter-spacing: 0.05em;
+  padding: var(--space-s) var(--space-xs);
+  text-align: left;
+  cursor: pointer;
+  user-select: none;
+  border-bottom: 2px solid var(--border);
+}
+
+.list-table th.sort:hover {
+  background: var(--accent);
+}
+
+.list-table td {
+  color: var(--foreground);
+  padding: 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.list-table tr:hover {
+  background: var(--muted);
+}
+
+.prop-name {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: var(--step--1);
+  padding: var(--space-s) var(--space-xs);
+  width: 120px;
+}
+
+.prop-category {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  padding: var(--space-s) var(--space-xs);
+  width: 100px;
+}
+
+.prop-preview {
+  width: 320px;
+}
+
+.preview-box {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+  background: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-desc {
+  position: absolute;
+  inset: 0;
+  background: var(--card);
+  color: var(--foreground);
+  padding: var(--space-s);
+  font-size: var(--step--2);
+  line-height: 1.5;
+  opacity: 0;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+}
+
+.preview-box:hover .preview-desc {
+  opacity: 1;
+}
+
+.prop-support {
+  padding: var(--space-s) var(--space-xs);
+  text-align: center;
+  width: 120px;
+}
+
+.support-icons {
+  display: flex;
+  gap: 3px;
+  justify-content: center;
+  transform: scale(0.9);
+  margin-bottom: 6px;
+}
+
+.support-label {
+  font-size: var(--step--2);
+  font-weight: 600;
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.table-row {
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.table-row:hover {
+  background: var(--muted);
+}
+
+.list-table th.asc::after {
+  content: ' ▲';
+}
+
+.list-table th.desc::after {
+  content: ' ▼';
+}
+
+/* ── Chip Color Classes ── */
+.chip[data-cat="Layout"] { --cc: #8b5cf6; }
+.chip[data-cat="Flexbox"] { --cc: #06b6d4; }
+.chip[data-cat="Grid"] { --cc: #ec4899; }
+.chip[data-cat="Typography"] { --cc: #f59e0b; }
+.chip[data-cat="Color"] { --cc: #10b981; }
+.chip[data-cat="Sizing"] { --cc: #6366f1; }
+.chip[data-cat="Visual"] { --cc: #14b8a6; }
+.chip[data-cat="Animation"] { --cc: #f97316; }
+.chip[data-cat="Transform"] { --cc: #84cc16; }
+.chip[data-cat="Spacing"] { --cc: #0ea5e9; }
+.chip[data-cat="Interactivity"] { --cc: #d946ef; }
+.chip[data-cat="CSS Variables"] { --cc: #64748b; }
+.chip[data-cat="Queries"] { --cc: #a855f7; }
+
+.chip[data-status="wide"] { --cc: #22c55e; }
+.chip[data-status="b2024"] { --cc: #3b82f6; }
+.chip[data-status="b2023"] { --cc: #6366f1; }
+.chip[data-status="b2022"] { --cc: #8b5cf6; }
+.chip[data-status="ltd"] { --cc: #f59e0b; }
+.chip[data-status="exp"] { --cc: #ef4444; }
+
 /* ── List Row ── */
 .list-row {
   background: var(--card);

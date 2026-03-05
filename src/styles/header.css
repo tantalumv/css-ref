@@ -37,41 +37,68 @@ header {
   background-clip: text;
 }
 
-.brand-tag {
-  font-size: var(--step--2);
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: var(--primary-foreground);
-  padding: 2px var(--space-xs);
-  border-radius: var(--radius-round);
-}
-
-/* ── Search ── */
+  /* ── Search ── */
 .search-combo {
   flex: 1;
   min-width: 200px;
   position: relative;
   display: flex;
   align-items: center;
+  padding: 6px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--muted) 0%, var(--muted) 100%);
+  box-shadow: 
+    -2px -2px 0 0 var(--card),
+    -2px 2px 0 0 var(--card),
+    2px -2px 0 0 var(--card),
+    2px 2px 0 0 var(--card),
+    0 2px 0 0 var(--card);
+}
+
+.search-combo::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(0deg, var(--muted) 0%, var(--card) 100%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.search-combo::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  background: linear-gradient(0deg, color-mix(in oklch, var(--primary) 30%, var(--muted)) 0%, var(--card) 100%);
+  box-shadow: color-mix(in oklch, var(--primary) 40%, transparent) 3px 3px 5px 0px;
+  z-index: -2;
+  pointer-events: none;
+}
+
+.dark .search-combo::after {
+  background: linear-gradient(0deg, color-mix(in oklch, var(--primary) 40%, var(--muted)) 0%, var(--card) 100%);
+  box-shadow: color-mix(in oklch, var(--primary) 50%, transparent) 3px 3px 5px 0px;
 }
 
 .search-combo input {
   width: 100%;
-  padding: var(--space-xs) var(--space-s);
-  padding-right: 3.5rem;
+  height: 32px;
+  padding: 0 var(--space-s);
+  padding-right: 3rem;
   font-size: var(--step--1);
   font-family: inherit;
-  border: 1px solid var(--input);
-  border-radius: var(--radius-round);
-  background: var(--card);
+  border: none;
+  border-radius: 5px;
+  background: linear-gradient(135deg, var(--muted) 0%, var(--muted) 100%);
   color: var(--foreground);
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: all 0.2s;
   outline: none;
+  box-sizing: border-box;
 }
 
 .search-combo input:focus {
-  border-color: var(--ring);
-  box-shadow: 0 0 0 3px color-mix(in oklch, var(--ring) 20%, transparent);
+  background: linear-gradient(135deg, var(--card) 0%, var(--muted) 100%);
 }
 
 .search-combo input::placeholder {
@@ -81,27 +108,38 @@ header {
 /* ── Filter Button ── */
 .filter-btn {
   position: absolute;
-  right: 4px;
-  width: 36px;
-  height: 36px;
-  background: var(--muted);
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
   border: none;
-  border-radius: var(--radius-round);
+  border-radius: 5px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.15s;
-  color: var(--muted-foreground);
+  transition: all 0.15s;
+  color: var(--primary-foreground);
+  box-shadow: 
+    inset -1px -1px 0 0 rgba(255,255,255,0.2),
+    inset 1px 1px 0 0 rgba(0,0,0,0.1);
 }
 
 .filter-btn:hover {
-  background: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 
+    inset -1px -1px 0 0 rgba(255,255,255,0.2),
+    inset 1px 1px 0 0 rgba(0,0,0,0.1),
+    0 2px 4px color-mix(in oklch, var(--primary) 40%, transparent);
+}
+
+.filter-btn:active {
+  transform: translateY(0);
+  box-shadow: inset 1px 1px 2px rgba(0,0,0,0.2);
 }
 
 .filter-btn.has-active {
   background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: var(--primary-foreground);
 }
 
 .filter-btn .active-dot {
@@ -111,8 +149,8 @@ header {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--primary);
-  border: 1.5px solid var(--card);
+  background: var(--primary-foreground);
+  border: 1.5px solid var(--primary);
   display: none;
 }
 
@@ -161,7 +199,7 @@ header {
   font-size: var(--step--2);
   font-weight: 700;
   border: 1px solid var(--border);
-  border-radius: var(--radius-round);
+  border-radius: 4px;
   cursor: pointer;
   transition: all 0.15s var(--ease-out-1);
   background: var(--muted);
@@ -203,35 +241,124 @@ header {
   text-decoration: underline;
 }
 
-/* ── View Toggle ── */
-.view-toggle {
-  display: flex;
-  gap: 4px;
+/* ── View Toggle Switch ── */
+.view-switch {
+  font-size: 11px;
+  position: relative;
+  display: inline-block;
+  width: 5em;
+  height: 2.5em;
+  user-select: none;
   flex-shrink: 0;
 }
 
-.view-btn {
-  width: 36px;
-  height: 36px;
-  background: var(--muted);
-  border: none;
-  border-radius: var(--radius-md);
+.view-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.view-toggle-3d {
+  position: absolute;
   cursor: pointer;
+  width: 100%;
+  height: 100%;
+  background-color: var(--muted);
+  border-radius: 0.3em;
+  transition: 0.4s;
+  text-transform: uppercase;
+  font-weight: 700;
+  overflow: hidden;
+  box-shadow: -0.2em 0 0 0 var(--muted), -0.2em 0.2em 0 0 var(--muted),
+    0.2em 0 0 0 var(--muted), 0.2em 0.2em 0 0 var(--muted), 0 0.2em 0 0 var(--muted);
+}
+
+.view-toggle-3d > .left {
+  position: absolute;
   display: flex;
+  width: 50%;
+  height: 88%;
+  background-color: var(--card);
+  color: var(--foreground);
+  left: 0;
+  bottom: 0;
   align-items: center;
   justify-content: center;
+  transform-origin: right;
+  transform: rotateX(10deg);
+  transform-style: preserve-3d;
+  transition: all 150ms;
+  font-size: 9px;
+  letter-spacing: 0.02em;
+}
+
+.view-toggle-3d > .left::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: var(--border);
+  transform-origin: center left;
+  transform: rotateY(90deg);
+}
+
+.view-toggle-3d > .left::after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: var(--muted-foreground);
+  transform-origin: center bottom;
+  transform: rotateX(90deg);
+}
+
+.view-toggle-3d > .right {
+  position: absolute;
+  display: flex;
+  width: 50%;
+  height: 88%;
+  background-color: var(--card);
   color: var(--muted-foreground);
-  transition: all 0.15s;
+  right: 1px;
+  bottom: 0;
+  align-items: center;
+  justify-content: center;
+  transform-origin: left;
+  transform: rotateX(10deg) rotateY(-45deg);
+  transform-style: preserve-3d;
+  transition: all 150ms;
+  font-size: 9px;
+  letter-spacing: 0.02em;
 }
 
-.view-btn:hover {
-  background: var(--accent);
-  color: var(--foreground);
+.view-toggle-3d > .right::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: var(--border);
+  transform-origin: center right;
+  transform: rotateY(-90deg);
 }
 
-.view-btn.active {
-  background: var(--primary);
-  color: var(--primary-foreground);
+.view-toggle-3d > .right::after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: var(--muted-foreground);
+  transform-origin: center bottom;
+  transform: rotateX(90deg);
+}
+
+.view-switch input:checked + .view-toggle-3d > .left {
+  transform: rotateX(10deg) rotateY(45deg);
+  color: var(--muted-foreground);
+}
+
+.view-switch input:checked + .view-toggle-3d > .right {
+  transform: rotateX(10deg) rotateY(0deg);
+  color: var(--primary);
 }
 
 /* ── Theme Toggle ── */
