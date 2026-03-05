@@ -361,23 +361,23 @@ header {
   color: var(--primary);
 }
 
-/* ── Big Switch (2x) ── */
+/* ── Big Switch (2x, reduced 25%) ── */
 .view-switch.big {
-  width: 10em;
-  height: 5em;
+  width: 7.5em;
+  height: 3.75em;
 }
 
 .view-switch.big .view-toggle-3d {
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .view-switch.big .view-toggle-3d > .left {
-  font-size: 16px;
+  font-size: 12px;
   letter-spacing: 0.05em;
 }
 
 .view-switch.big .view-toggle-3d > .right {
-  font-size: 16px;
+  font-size: 12px;
   letter-spacing: 0.05em;
 }
 

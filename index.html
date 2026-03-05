@@ -30,7 +30,7 @@
   <div class="search-combo">
     <input type="search" id="search" data-bind:query placeholder="Search properties… e.g. grid, animation, color" autocomplete="off" spellcheck="false">
     <button class="filter-btn" id="filterBtn" title="Category"
-      data-on:click__stop="$catPopoverOpen = !$catPopoverOpen"
+      data-on:click__stop="$catPopoverOpen = $interopPopoverOpen ? false : !$catPopoverOpen; $interopPopoverOpen = false"
       data-class:has-active="$activeCats.length"
     >
       <svg class="icon" aria-hidden="true"><use href="#icon-filter"/></svg>
@@ -58,13 +58,13 @@
         <button class="chip" data-cat="CSS Variables" data-class:active="$activeCats.includes('CSS Variables')">CSS Variables</button>
         <button class="chip" data-cat="Queries" data-class:active="$activeCats.includes('Queries')">Queries</button>
       </div>
-  </div>
     </div>
+  </div>
 
   <!-- Interop Dropdown -->
   <div class="dropdown-combo">
     <button class="filter-btn interop-btn" id="interopBtn" title="Interop Status"
-      data-on:click__stop="$interopPopoverOpen = !$interopPopoverOpen"
+      data-on:click__stop="$interopPopoverOpen = $catPopoverOpen ? false : !$interopPopoverOpen; $catPopoverOpen = false"
       data-class:has-active="$activeInterops.length"
     >
       <span class="interop-label">Interop</span>

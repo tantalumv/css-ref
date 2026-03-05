@@ -1,5 +1,6 @@
 @import "https://unpkg.com/open-props";
 @import "https://unpkg.com/open-props/normalize.min.css";
+@import "https://cdn.jsdelivr.net/npm/@utopia/clamp@1.1.1/dist/clamp.css";
 
 /* ═══════════════════════════════════════════════════════════════
    CSS Ref - Variables (Theme + Utopia Fluid)
@@ -89,7 +90,7 @@
 
 /* ═══════════════════════════════════════════════════════════════
    Utopia Fluid Layout System
-   Generated from: https://utopia.fyi/
+   Generated from: https://utopia.fyi/clamp/calculator?a=360,1240
    
    Type Scale: 360px @ 18px/1.2 → 1240px @ 20px/1.25
    Space Scale: 360px → 1240px
@@ -98,14 +99,17 @@
 
 /* ── Fluid Type Scale ── */
 :root {
-  --step--2: clamp(0.7813rem, 0.7736rem + 0.0341vw, 0.8rem);
-  --step--1: clamp(0.9375rem, 0.9119rem + 0.1136vw, 1rem);
-  --step-0: clamp(1.125rem, 1.0739rem + 0.2273vw, 1.25rem);
-  --step-1: clamp(1.35rem, 1.2631rem + 0.3864vw, 1.5625rem);
-  --step-2: clamp(1.62rem, 1.4837rem + 0.6057vw, 1.9531rem);
-  --step-3: clamp(1.944rem, 1.7405rem + 0.9044vw, 2.4414rem);
-  --step-4: clamp(2.3328rem, 2.0387rem + 1.3072vw, 3.0518rem);
-  --step-5: clamp(2.7994rem, 2.384rem + 1.8461vw, 3.8147rem);
+  --step--3: clamp(0.6944rem, 0.6912rem + 0.0145vw, 0.7059rem);
+  --step--2: clamp(0.8333rem, 0.815rem + 0.0812vw, 0.8824rem);
+  --step--1: clamp(1rem, 0.9569rem + 0.1914vw, 1.1029rem);
+  --step-0: clamp(1.2rem, 1.1212rem + 0.3502vw, 1.3785rem);
+  --step-1: clamp(1.44rem, 1.3139rem + 0.5603vw, 1.7231rem);
+  --step-2: clamp(1.728rem, 1.5407rem + 0.8319vw, 2.1538rem);
+  --step-3: clamp(2.0736rem, 1.8097rem + 1.1711vw, 2.6923rem);
+  --step-4: clamp(2.4883rem, 2.1267rem + 1.6052vw, 3.3654rem);
+  --step-5: clamp(2.986rem, 2.4997rem + 2.1572vw, 4.2067rem);
+  --step-6: clamp(3.5832rem, 2.9373rem + 2.8649vw, 5.2577rem);
+  --step-7: clamp(4.2998rem, 3.4504rem + 3.7715vw, 6.5714rem);
 }
 
 /* ── Fluid Space Scale ── */
