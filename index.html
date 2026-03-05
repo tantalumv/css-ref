@@ -66,8 +66,8 @@
     .preview-desc {
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.9);
-      color: #fff;
+      background: var(--card);
+      color: var(--foreground);
       padding: 12px;
       font-size: 13px;
       line-height: 1.5;
@@ -199,8 +199,6 @@
       <svg class="icon" aria-hidden="true"><use href="#icon-table"/></svg>
     </button>
   </div>
-  <span id="count" data-text="filtered($query, $activeCats, $activeInterops).length + ' / ' + filtered($query, $activeCats, $activeInterops).length"></span>
-  
   <!-- Theme Toggle -->
   <button 
     class="theme-toggle"

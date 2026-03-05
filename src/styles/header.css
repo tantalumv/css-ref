@@ -58,7 +58,7 @@ header {
 .search-combo input {
   width: 100%;
   padding: var(--space-xs) var(--space-s);
-  padding-right: 3rem;
+  padding-right: 3.5rem;
   font-size: var(--step--1);
   font-family: inherit;
   border: 1px solid var(--input);
@@ -81,9 +81,9 @@ header {
 /* ── Filter Button ── */
 .filter-btn {
   position: absolute;
-  right: 6px;
-  width: 30px;
-  height: 30px;
+  right: 4px;
+  width: 36px;
+  height: 36px;
   background: var(--muted);
   border: none;
   border-radius: var(--radius-round);
@@ -211,8 +211,8 @@ header {
 }
 
 .view-btn {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   background: var(--muted);
   border: none;
   border-radius: var(--radius-md);
@@ -261,6 +261,8 @@ header {
 .theme-toggle .moon-icon {
   position: absolute;
   transition: transform 0.3s var(--ease-spring-3), opacity 0.3s;
+  width: 20px;
+  height: 20px;
 }
 
 /* Dark mode: show moon, hide sun */
@@ -283,14 +285,6 @@ html:not(.dark) .theme-toggle .sun-icon {
 html:not(.dark) .theme-toggle .moon-icon {
   transform: rotate(-90deg) scale(0);
   opacity: 0;
-}
-
-/* ── Count ── */
-#count {
-  font-size: var(--step--2);
-  color: var(--muted-foreground);
-  flex-shrink: 0;
-  white-space: nowrap;
 }
 
 /* ── SVG Icons ── */

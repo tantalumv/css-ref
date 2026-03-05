@@ -194,8 +194,8 @@ function attachRowClickListeners(tbody: Element, data: CSSProperty[]) {
 
 // Initialize or reinitialize the table when filtered data changes
 (window as any).initListTable = function (data: CSSProperty[]) {
-  const tbody = document.querySelector('#table-container .list');
-  if (!tbody) return;
+  const table = document.querySelector('#table-container');
+  if (!table) return;
 
   const dataKey = JSON.stringify(data.map(p => p.n));
 
@@ -215,20 +215,32 @@ function attachRowClickListeners(tbody: Element, data: CSSProperty[]) {
 
   // Destroy existing List.js instance
   if (listInstance) {
+    listInstance.destroy?.();
     listInstance = null;
   }
 
-  // Render initial batch
+  // Get tbody and render initial batch
+  const tbody = table.querySelector('.list');
+  if (!tbody) return;
+
   const initialData = data.slice(0, TABLE_BATCH_SIZE);
   tableDisplayedCount = initialData.length;
 
   const html = initialData.map((p, idx) => renderRowHTML(p, idx)).join('');
   tbody.innerHTML = html;
 
-  // Initialize List.js after DOM is populated so it can read the existing rows
-  // We skip this for now since we're managing the table manually
-  // and List.js can cause issues with dynamic row insertion
-  listInstance = null;
+  // Initialize List.js for sorting
+  const options = {
+    valueNames: [
+      'prop-name',
+      'prop-category',
+      { data: ['idx'] }
+    ],
+    listClass: 'list',
+    sortClass: 'sort'
+  };
+
+  listInstance = new (window as any).List('table-container', options);
 
   // Add click listeners
   attachRowClickListeners(tbody, tableFullData);
@@ -237,7 +249,6 @@ function attachRowClickListeners(tbody: Element, data: CSSProperty[]) {
   updateSentinelVisibility();
 
   // Trigger initial load if sentinel is already visible (for large viewports)
-  // Use a longer delay to avoid loading when user switches views
   tableInitTimeout = window.setTimeout(() => {
     const sentinel = document.getElementById('table-sentinel');
     if (sentinel) {
