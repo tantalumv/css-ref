@@ -36,6 +36,7 @@ jobs:
         run: |
           cp index.html dist/
           sed -i 's|dist/bundle|./bundle|g' dist/index.html
+          cp -r src/icons dist/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
