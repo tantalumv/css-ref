@@ -11,7 +11,8 @@
 #detail-view {
   display: block;
   min-height: 100svh;
-  background: var(--background);
+  background: color-mix(in oklch, var(--background) 85%, transparent);
+  backdrop-filter: blur(12px) saturate(1.5);
 }
 
 #detail-view[data-show="false"] {
@@ -29,7 +30,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-xs);
-  font-size: var(--step--1);
+  font-size: var(--r-step-0);
   font-weight: 700;
   color: var(--foreground);
   background: var(--muted);
@@ -54,7 +55,7 @@
 
 .detail-name {
   font-family: var(--font-mono);
-  font-size: var(--step-4);
+  font-size: var(--r-step-2);
   font-weight: 900;
   line-height: 1.1;
   margin-bottom: var(--space-xs);
@@ -82,7 +83,7 @@
   justify-content: center;
   background: var(--muted);
   font-family: var(--font-sans);
-  font-size: var(--step--2);
+  font-size: var(--r-step--2);
   overflow: hidden;
   user-select: none;
 }
@@ -93,7 +94,7 @@
 
 .detail-demo-label {
   padding: var(--space-xs) var(--space-s);
-  font-size: var(--step--2);
+  font-size: var(--r-step--2);
   color: var(--muted-foreground);
   border-top: 1px solid var(--border);
   font-family: var(--font-mono);
@@ -105,7 +106,7 @@
 }
 
 .detail-lbl {
-  font-size: var(--step--2);
+  font-size: var(--r-step--2);
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -114,14 +115,14 @@
 }
 
 .detail-desc {
-  font-size: var(--step-0);
+  font-size: var(--r-step-0);
   color: var(--foreground);
   line-height: 1.7;
 }
 
 .syntax-block {
   font-family: var(--font-mono);
-  font-size: var(--step--1);
+  font-size: var(--r-step-0);
   background: var(--muted);
   color: var(--foreground);
   padding: var(--space-m);
@@ -167,12 +168,12 @@
 }
 
 .detail-b-name {
-  font-size: var(--step--2);
+  font-size: var(--r-step--2);
   color: var(--muted-foreground);
 }
 
 .detail-b-status {
-  font-size: var(--step--2);
+  font-size: var(--r-step--2);
   font-weight: 700;
 }
 
@@ -192,7 +193,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-3xs);
-  font-size: var(--step--1);
+  font-size: var(--r-step-0);
   font-weight: 700;
   color: var(--primary);
   text-decoration: none;
@@ -235,7 +236,7 @@
 /* ── Copy Button ── */
 .copy-btn {
   font-family: var(--font-sans);
-  font-size: var(--step--2);
+  font-size: var(--r-step--2);
   font-weight: 700;
   padding: var(--space-2xs) var(--space-xs);
   border-radius: 4px;

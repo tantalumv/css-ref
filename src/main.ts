@@ -3,9 +3,12 @@
 // This file only exposes data and utility functions on window
 
 import { CC, IL, IC } from "./constants";
-import { P, CATS, INTEROPS } from "./data";
+import { P, CATS, INTEROPS, CATEGORIES } from "./data";
 import { bIcon } from "./utils";
 import type { CSSProperty, BrowserSupport } from "./types";
+import type { CategoryMeta } from "./data/categories";
+
+const CATEGORIES_TYPED = CATEGORIES as Record<string, CategoryMeta>;
 
 // ── Expose static data on window ──
 (window as any).P = P;
@@ -15,6 +18,7 @@ import type { CSSProperty, BrowserSupport } from "./types";
 (window as any).IL = IL;
 (window as any).IC = IC;
 (window as any).bIcon = bIcon;
+(window as any).CATEGORIES = CATEGORIES;
 
 // ── Filter logic ──
 (window as any).filtered = function (
@@ -85,6 +89,15 @@ const propMap = new Map<string, CSSProperty>(P.map((p) => [p.n, p]));
   }
 
   const color = CC[p.c] || "#6366f1";
+
+  const valueExplanations = (p as any).v ? (p as any).v.map((v: any) => `
+  <div class="value-explanation">
+    <code class="value-code">${v.value}</code>
+    <span class="value-label">${v.label}</span>
+    <p class="value-desc">${v.description}</p>
+  </div>
+`).join("") : "";
+
   view.innerHTML = `
     <div class="detail-wrap">
       <button class="back-btn" onclick="location.hash=''">
@@ -106,6 +119,12 @@ const propMap = new Map<string, CSSProperty>(P.map((p) => [p.n, p]));
         <div class="detail-lbl">Description</div>
         <p class="detail-desc">${p.d}</p>
       </div>
+      ${valueExplanations ? `
+      <div class="detail-section">
+        <div class="detail-lbl">Values</div>
+        <div class="values-grid">${valueExplanations}</div>
+      </div>
+      ` : ""}
       <div class="detail-section">
         <div class="detail-lbl">Syntax</div>
         <pre class="syntax-block">${p.x}<button class="copy-btn" onclick="navigator.clipboard.writeText('${p.x.replace(/'/g, "\\'")}').then(()=>{this.innerHTML='<i class=\\'ri-check-line\\'></i>';setTimeout(()=>this.innerHTML='<i class=\\'ri-clipboard-line\\'></i>',1500)})" style="position:absolute;top:8px;right:8px;padding:6px 10px;font-size:14px;background:${color};color:#fff;border:none;border-radius:4px;cursor:pointer"><i class="ri-clipboard-line"></i></button></pre>
@@ -139,6 +158,80 @@ const propMap = new Map<string, CSSProperty>(P.map((p) => [p.n, p]));
       })()}
     </div>
   `;
+};
+
+// ── Collection Page Rendering ──
+(window as any).renderCollectionPage = function(collectionSlug: string) {
+  const view = document.getElementById("collection-view");
+  if (!view) return;
+  
+  const category = Object.values(CATEGORIES_TYPED).find((c: CategoryMeta) => c.slug === collectionSlug);
+  if (!category) {
+    view.innerHTML = '<div class="empty">Collection not found</div>';
+    return;
+  }
+  
+  const props = P.filter(p => p.c === category.id);
+  const color = category.color;
+  
+  view.innerHTML = `
+    <div class="collection-page">
+      <button class="back-btn" onclick="location.hash=''">
+        <svg class="icon" aria-hidden="true"><use href="#icon-arrow-left"/></svg>
+        All properties
+      </button>
+      
+      <div class="category-hero" style="--cat-color: ${color}">
+        <div class="category-icon-wrap">
+          <i class="${category.icon}"></i>
+        </div>
+        <div class="category-info">
+          <h1 class="category-title">${category.name}</h1>
+          <p class="category-desc">${category.description}</p>
+        </div>
+      </div>
+      
+      <div class="category-intro">
+        <p>${category.intro}</p>
+      </div>
+      
+      <div class="category-concepts">
+        <h3>Key Concepts</h3>
+        <ul class="concepts-list">
+          ${category.concepts.map((c: string) => `<li>${c}</li>`).join("")}
+        </ul>
+      </div>
+      
+      <div class="category-properties">
+        <h3>Properties in ${category.name}</h3>
+        <div class="category-props-grid">
+          ${props.map((p: CSSProperty) => `
+            <div class="category-prop-card" onclick="location.hash='${encodeURIComponent(p.n)}'" style="cursor:pointer;border-color:${color}">
+              <div class="prop-name" style="color:${color}">${p.n}</div>
+              <div class="prop-desc">${p.d}</div>
+            </div>
+          `).join("")}
+        </div>
+      </div>
+      
+      ${category.related.length ? `
+      <div class="category-related">
+        <h3>Related Categories</h3>
+        <div class="related-cats">
+          ${category.related.map((r: string) => {
+            const rel = CATEGORIES_TYPED[r];
+            return rel ? `<button class="related-cat-btn" onclick="location.hash='!${rel.slug}'" style="border-color:${rel.color};color:${rel.color}"><i class="${rel.icon}"></i> ${rel.name}</button>` : "";
+          }).join("")}
+        </div>
+      </div>
+      ` : ""}
+    </div>
+  `;
+};
+
+// Get properties for a specific category
+(window as any).getCategoryProps = function(categoryId: string): CSSProperty[] {
+  return P.filter(p => p.c === categoryId);
 };
 
 // ── Grid Rendering ──

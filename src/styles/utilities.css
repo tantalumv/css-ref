@@ -23,17 +23,17 @@
 /* ── Property Counter ── */
 .property-counter {
   position: fixed;
-  bottom: var(--space-m);
-  right: var(--space-m);
+  bottom: var(--space-s);
+  right: var(--space-s);
   background: color-mix(in oklch, var(--card) 95%, transparent);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-xs) var(--space-s);
-  font-size: var(--step--1);
-  font-weight: 700;
+  border-radius: var(--radius-md);
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 600;
   color: var(--foreground);
   z-index: 100;
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-md);
   backdrop-filter: blur(8px);
   transition: all 0.3s var(--ease-out-1);
 }

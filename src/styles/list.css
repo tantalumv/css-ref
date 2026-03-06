@@ -6,8 +6,8 @@
 .list-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: var(--step--1);
-  background: var(--card);
+  font-size: var(--r-step-0);
+  background: transparent;
   border: 0;
 }
 
@@ -16,7 +16,7 @@
   color: var(--foreground);
   font-weight: 600;
   text-transform: uppercase;
-  font-size: var(--step--2);
+  font-size: var(--r-step--2);
   letter-spacing: 0.05em;
   padding: var(--space-s) var(--space-xs);
   text-align: center;
@@ -31,13 +31,13 @@
 
 .list-table td {
   color: var(--foreground);
-  background: var(--card);
+  background: transparent;
   padding: 0;
   border-bottom: 1px solid var(--border);
 }
 
 .list-table tr {
-  background: var(--card);
+  background: transparent;
 }
 
 .list-table tr:hover {
@@ -47,7 +47,7 @@
 .prop-name {
   font-family: var(--font-mono);
   font-weight: 700;
-  font-size: var(--step--1);
+  font-size: var(--r-step-0);
   padding: var(--space-s) var(--space-xs);
   width: clamp(6.5rem, 12vw, 8rem);
   color: var(--foreground);
@@ -67,17 +67,17 @@
 }
 
 .prop-category {
-  font-size: clamp(0.72rem, 1.1vw, 0.84rem);
+  font-size: var(--r-step--2);
   font-weight: 600;
   color: var(--primary) !important;
   padding: var(--space-s) var(--space-xs);
   width: clamp(5.5rem, 10vw, 7rem);
-  background: var(--card) !important;
+  background: transparent !important;
 }
 
 .prop-preview {
   width: clamp(14rem, 32vw, 22rem);
-  background: var(--card) !important;
+  background: transparent !important;
 }
 
 .preview-box {
@@ -85,7 +85,7 @@
   width: 100%;
   height: clamp(5.8rem, 13vw, 7.6rem);
   overflow: hidden;
-  background: var(--muted);
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -94,10 +94,10 @@
 .preview-desc {
   position: absolute;
   inset: 0;
-  background: var(--card);
+  background: transparent;
   color: var(--foreground);
   padding: var(--space-s);
-  font-size: var(--step--2);
+  font-size: var(--r-step--2);
   line-height: 1.5;
   opacity: 0;
   transition: opacity 0.2s;
@@ -110,13 +110,14 @@
 
 .preview-box:hover .preview-desc {
   opacity: 1;
+  background: var(--card);
 }
 
 .prop-support {
   padding: var(--space-s) var(--space-xs);
   text-align: center;
   width: clamp(6.5rem, 12vw, 8rem);
-  background: var(--card) !important;
+  background: transparent !important;
   color: var(--foreground);
 }
 
@@ -153,7 +154,7 @@
 }
 
 .support-label {
-  font-size: var(--step--2);
+  font-size: var(--r-step--2);
   font-weight: 600;
   color: var(--muted-foreground);
   text-transform: uppercase;
@@ -239,7 +240,7 @@
 
 /* ── List Row ── */
 .list-row {
-  background: var(--card);
+  background: transparent;
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: var(--space-xs) var(--space-s);
@@ -268,7 +269,7 @@
 
 .list-name {
   font-family: var(--font-mono);
-  font-size: var(--step--1);
+  font-size: var(--r-step-0);
   font-weight: 700;
   color: var(--ca);
   white-space: nowrap;
@@ -277,7 +278,7 @@
 }
 
 .list-desc {
-  font-size: var(--step--2);
+  font-size: var(--r-step--2);
   color: var(--muted-foreground);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -300,5 +301,5 @@
   text-align: center;
   padding: var(--space-2xl);
   color: var(--muted-foreground);
-  font-size: var(--step-2);
+  font-size: var(--r-step-1);
 }

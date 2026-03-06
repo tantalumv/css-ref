@@ -1,6 +1,5 @@
 @import "https://unpkg.com/open-props";
 @import "https://unpkg.com/open-props/normalize.min.css";
-@import "https://cdn.jsdelivr.net/npm/@utopia/clamp@1.1.1/dist/clamp.css";
 
 /* ═══════════════════════════════════════════════════════════════
    CSS Ref - Variables (Theme + Utopia Fluid)
@@ -41,7 +40,7 @@
   /* Typography */
   --font-sans: "Varela Round", system-ui, -apple-system, sans-serif;
   --font-serif: serif;
-  --font-mono: JetBrains Mono, ui-monospace, monospace;
+  --font-mono: "Varela Round", ui-monospace, monospace;
 
   /* Radius */
   --radius: 0.2rem;
@@ -151,6 +150,15 @@
   --step-5: clamp(2.986rem, 2.4997rem + 2.1572vw, 4.2067rem);
   --step-6: clamp(3.5832rem, 2.9373rem + 2.8649vw, 5.2577rem);
   --step-7: clamp(4.2998rem, 3.4504rem + 3.7715vw, 6.5714rem);
+}
+
+/* Reduced type scale for main content */
+:root {
+  --r-step--2: clamp(0.7rem, 0.65rem + 0.22vw, 0.78rem);
+  --r-step--1: clamp(0.85rem, 0.78rem + 0.31vw, 0.95rem);
+  --r-step-0: clamp(1rem, 0.92rem + 0.35vw, 1.15rem);
+  --r-step-1: clamp(1.15rem, 1.05rem + 0.45vw, 1.35rem);
+  --r-step-2: clamp(1.35rem, 1.2rem + 0.65vw, 1.6rem);
 }
 
 /* ── Fluid Space Scale ── */

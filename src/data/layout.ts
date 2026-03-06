@@ -10,6 +10,16 @@ export const layout: CSSProperty[] = [
     x: "display: block | inline | flex | grid | none | contents | flow-root",
     m: "display",
     demo: `<div style="padding:10px 14px;display:flex;flex-direction:column;gap:7px;width:100%"><div style="display:flex;gap:6px"><div style="background:#6366f1;color:#fff;width:100%;padding:5px 10px;border-radius:4px;font-size:10px;font-weight:700">display: block — full width</div></div><div style="display:flex;gap:6px"><span style="background:#8b5cf6;color:#fff;padding:5px 10px;border-radius:4px;font-size:10px;font-weight:700">inline</span><span style="background:#a78bfa;color:#fff;padding:5px 10px;border-radius:4px;font-size:10px;font-weight:700">inline</span><span style="background:#c4b5fd;color:#fff;padding:5px 10px;border-radius:4px;font-size:10px;font-weight:700">inline</span></div></div>`,
+    v: [
+      { value: "block", label: "Block", description: "Elements take full width available. Stack vertically one after another. Default for <div>, <p>, <h1>." },
+      { value: "inline", label: "Inline", description: "Elements flow within text. Only take as much width as their content. Cannot have width/height. Default for <span>, <a>." },
+      { value: "inline-block", label: "Inline Block", description: "Flows like inline but can have width/height. Great for nav items that need sizing but flow in text." },
+      { value: "flex", label: "Flex", description: "Creates a flex container. Enables flexible layouts with align-items, justify-content. Children become flex items." },
+      { value: "grid", label: "Grid", description: "Creates a grid container. Enables two-dimensional layouts with rows and columns. Children become grid items." },
+      { value: "none", label: "None", description: "Element is completely removed from the layout. Not rendered at all. Takes no space." },
+      { value: "contents", label: "Contents", description: "The element itself is skipped. Its children become direct children of the parent. Useful for flattening structure." },
+      { value: "flow-root", label: "Flow Root", description: "Creates a new block formatting context. Like a mini-root that contains floats. Useful for clearing floats." }
+    ],
   },
 
   {
@@ -21,6 +31,13 @@ export const layout: CSSProperty[] = [
     x: "position: static | relative | absolute | fixed | sticky",
     m: "position",
     demo: `<div style="position:relative;width:160px;height:70px;background:#e0e7ff;border-radius:6px;border:2px dashed #6366f1"><div style="position:absolute;top:8px;left:8px;background:#6366f1;color:#fff;padding:4px 8px;border-radius:4px;font-size:10px;font-weight:700">absolute</div><div style="position:absolute;bottom:8px;right:8px;background:#8b5cf6;color:#fff;padding:4px 8px;border-radius:4px;font-size:10px;font-weight:700">absolute</div></div>`,
+    v: [
+      { value: "static", label: "Static", description: "Default position. Element follows normal document flow. top, bottom, left, right, z-index have no effect." },
+      { value: "relative", label: "Relative", description: "Element stays in normal flow but can be offset with top, right, bottom, left. Creates a positioning context for children." },
+      { value: "absolute", label: "Absolute", description: "Element is removed from normal flow. Positions relative to nearest positioned ancestor. No space reserved for it." },
+      { value: "fixed", label: "Fixed", description: "Element is removed from normal flow. Positions relative to the viewport. Stays in place when scrolling." },
+      { value: "sticky", label: "Sticky", description: "Hybrid between relative and fixed. Acts relative until it hits a threshold, then fixed. Great for sticky headers." }
+    ],
   },
 
   {
@@ -32,6 +49,11 @@ export const layout: CSSProperty[] = [
     x: "z-index: auto | 10 | -1",
     m: "z-index",
     demo: `<div style="position:relative;width:160px;height:72px"><div style="position:absolute;left:0;top:10px;width:80px;height:55px;background:#6366f1;border-radius:6px;display:flex;align-items:flex-start;padding:6px;z-index:1"><span style="color:#fff;font-size:10px;font-weight:700">z-index: 1</span></div><div style="position:absolute;left:40px;top:4px;width:80px;height:55px;background:#ec4899;border-radius:6px;display:flex;align-items:flex-start;padding:6px;z-index:2"><span style="color:#fff;font-size:10px;font-weight:700">z-index: 2</span></div><div style="position:absolute;left:80px;top:0;width:80px;height:55px;background:#f97316;border-radius:6px;display:flex;align-items:flex-start;padding:6px;z-index:3"><span style="color:#fff;font-size:10px;font-weight:700">z-index: 3</span></div></div>`,
+    v: [
+      { value: "auto", label: "Auto", description: "Stack order determined by DOM order. Elements later in HTML appear on top. Default value." },
+      { value: "number", label: "Number (e.g., 1, 10, 100)", description: "Higher values appear on top. Works only on positioned elements (not static). Can use negative values." },
+      { value: "negative", label: "Negative (e.g., -1)", description: "Elements appear behind their parent's content. Useful for layering backgrounds behind elements." }
+    ],
   },
 
   {
@@ -43,6 +65,13 @@ export const layout: CSSProperty[] = [
     x: "overflow: visible | hidden | scroll | auto | clip",
     m: "overflow",
     demo: `<div style="display:flex;gap:12px;align-items:center"><div style="width:80px;height:60px;background:#e0e7ff;border:2px solid #6366f1;border-radius:6px;overflow:hidden;padding:6px"><p style="font-size:9px;font-weight:700;color:#6366f1;white-space:nowrap">overflow: hidden clips text that goes beyond the boundary here</p></div><div style="width:80px;height:60px;background:#f5f3ff;border:2px solid #8b5cf6;border-radius:6px;overflow:visible;padding:6px"><p style="font-size:9px;font-weight:700;color:#8b5cf6;white-space:nowrap">overflow: visible — text spills out</p></div></div>`,
+    v: [
+      { value: "visible", label: "Visible", description: "Content that overflows is visible outside the box. May overlap other elements. Default behavior." },
+      { value: "hidden", label: "Hidden", description: "Overflowing content is clipped and hidden. No scrollbar appears. Content is inaccessible." },
+      { value: "scroll", label: "Scroll", description: "Content can be scrolled. Scrollbars appear even if there's no overflow. Provides consistent layout." },
+      { value: "auto", label: "Auto", description: "Scrollbars appear only when needed. Best for most cases. Content is accessible when it overflows." },
+      { value: "clip", label: "Clip", description: "Like hidden but removes entire element from tree. No accessibility tree. Content completely inaccessible." }
+    ],
   },
 
   {

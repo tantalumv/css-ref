@@ -206,7 +206,7 @@ html {
 body {
   min-height: 100svh;
   overflow-x: hidden;
-  background: var(--background);
+  background: transparent;
   color: var(--foreground);
 }
 
@@ -218,7 +218,8 @@ body {
   padding: 0;
 }
 
-/* ── Mesh Gradient Background ── */
+/* ── Mesh Gradient Background (disabled - using animated-bg instead) ── */
+/* 
 body::before {
   content: "";
   position: fixed;
@@ -238,7 +239,7 @@ body::before {
   animation: meshMove 20s ease-in-out infinite;
 }
 
-/* Light mode mesh gradient is more subtle */
 html:not(.dark) body::before {
   opacity: 0.5;
 }
+*/

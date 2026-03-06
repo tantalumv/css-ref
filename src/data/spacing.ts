@@ -10,6 +10,17 @@ export const spacing: CSSProperty[] = [
     x: "margin: auto | 1rem 2rem | 0 auto",
     m: "margin",
     demo: `<div style="padding:6px;background:#f7fee7;border:2px dashed #84cc16;border-radius:6px;width:190px"><div style="background:#84cc16;color:#fff;padding:6px;border-radius:3px;margin:10px 16px;font-size:10px;font-weight:700;text-align:center">margin: 10px 16px</div></div>`,
+    v: [
+      { value: "0", label: "Zero (0)", description: "Removes all margin. No space is added outside the element's border." },
+      { value: "px/em/rem", label: "Fixed Values (e.g., 10px, 1rem)", description: "Adds a specific amount of space. em is relative to the element's font-size, rem is relative to root font-size." },
+      { value: "%", label: "Percentage (e.g., 10%)", description: "Percentage is calculated based on the width of the containing block. Useful for responsive spacing." },
+      { value: "auto", label: "Auto", description: "Browser calculates the margin. With horizontal centering, use margin: 0 auto to center a sized element." },
+      { value: "negative", label: "Negative (e.g., -10px)", description: "Negative margins pull the element closer to adjacent elements. Can cause overlapping." },
+      { value: "shorthand-1", label: "One Value (e.g., margin: 10px)", description: "Sets the same margin for all four sides." },
+      { value: "shorthand-2", label: "Two Values (e.g., margin: 10px 20px)", description: "First value is top/bottom, second is right/left. Think of it as pairs: vertical, horizontal." },
+      { value: "shorthand-3", label: "Three Values", description: "Top, right/left, bottom. Right and left share the same value." },
+      { value: "shorthand-4", label: "Four Values", description: "Top, right, bottom, left. Goes clockwise starting from top. Remember: TRouBLe mnemonic." }
+    ],
   },
 
   {
@@ -21,6 +32,15 @@ export const spacing: CSSProperty[] = [
     x: "padding: 1rem | 0.5rem 1rem 1.5rem",
     m: "padding",
     demo: `<div style="background:#f7fee7;border:3px solid #84cc16;border-radius:6px;padding:16px;width:180px;display:flex;align-items:center;justify-content:center"><div style="background:#84cc16;color:#fff;padding:6px 12px;border-radius:3px;font-size:10px;font-weight:700">content</div></div>`,
+    v: [
+      { value: "0", label: "Zero (0)", description: "Removes all padding. No space is added inside the element's border." },
+      { value: "px/em/rem", label: "Fixed Values (e.g., 10px, 1rem)", description: "Adds space inside the element. Pushes content inward from the border edge." },
+      { value: "%", label: "Percentage (e.g., 10%)", description: "Percentage is calculated based on the width of the element itself (not parent). Great for aspect ratios." },
+      { value: "shorthand-1", label: "One Value", description: "Sets the same padding for all four sides." },
+      { value: "shorthand-2", label: "Two Values", description: "First value is top/bottom, second is right/left." },
+      { value: "shorthand-3", label: "Three Values", description: "Top, right/left, bottom. Right and left share the value." },
+      { value: "shorthand-4", label: "Four Values", description: "Top, right, bottom, left. Goes clockwise from top." }
+    ],
   },
 
   {
