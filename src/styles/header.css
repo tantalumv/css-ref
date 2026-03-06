@@ -17,7 +17,7 @@ header {
   padding: var(--space-xs) var(--space-m);
   display: flex;
   align-items: center;
-  gap: var(--space-xs);
+  gap: var(--space-m);
   flex-wrap: wrap;
 }
 
@@ -602,7 +602,7 @@ header {
   top: 0;
   right: 0;
   bottom: 0;
-  width: min(300px, 85vw);
+  width: min(150px, 42.5vw);
   background: var(--background);
   border-left: 1px solid var(--border);
   z-index: 200;
@@ -620,7 +620,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--space-m);
+  padding: var(--space-xs);
   border-bottom: 1px solid var(--border);
 }
 
@@ -649,18 +649,21 @@ header {
 }
 
 .sidebar-content {
-  padding: var(--space-m);
+  padding: var(--space-m) var(--space-xs);
   display: flex;
   flex-direction: column;
-  gap: var(--space-l);
+  gap: var(--space-m);
   flex: 1;
   overflow-y: auto;
+  align-items: flex-start;
 }
 
 .sidebar-section {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
+  flex-direction: row;
+  gap: var(--space-m);
+  align-items: center;
+  align-self: flex-start;
 }
 
 .sidebar-label {
@@ -669,6 +672,8 @@ header {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--muted-foreground);
+  width: 6em;
+  flex-shrink: 0;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -742,7 +747,7 @@ header {
 }
 
 .command-palette-header {
-  padding: var(--space-m);
+  padding: var(--space-xs);
   border-bottom: 1px solid var(--border);
 }
 
@@ -779,13 +784,13 @@ header {
 }
 
 .command-palette-header {
-  padding: var(--space-m);
+  padding: var(--space-xs);
   border-bottom: 1px solid var(--border);
   overflow: visible !important;
 }
 
 .command-palette-filters {
-  padding: var(--space-m);
+  padding: var(--space-xs);
   display: flex;
   flex-direction: column;
   gap: var(--space-s);
@@ -826,7 +831,8 @@ header {
 .filter-row {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-xs);
+  gap: var(--space-m);
+  align-items: flex-start;
 }
 
 .filter-row .search-dropdown {
@@ -846,6 +852,7 @@ header {
   header {
     flex-wrap: nowrap;
     justify-content: space-between;
+    gap: var(--space-xs);
   }
 
   .desktop-only,
@@ -975,7 +982,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--space-m);
+  padding: var(--space-xs);
   border-bottom: 1px solid var(--border);
 }
 
@@ -1004,18 +1011,21 @@ header {
 }
 
 .sidebar-content {
-  padding: var(--space-m);
+  padding: var(--space-m) var(--space-xs);
   display: flex;
   flex-direction: column;
-  gap: var(--space-l);
+  gap: var(--space-m);
   flex: 1;
   overflow-y: auto;
+  align-items: flex-start;
 }
 
 .sidebar-section {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
+  flex-direction: row;
+  gap: var(--space-m);
+  align-items: center;
+  align-self: flex-start;
 }
 
 .sidebar-label {
