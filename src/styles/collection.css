@@ -2,6 +2,14 @@
    CSS Ref - Collection Page Styles
    ═══════════════════════════════════════════════════════════════ */
 
+/* ── Collection View Container ── */
+#collection-view {
+  display: block;
+  min-height: 100svh;
+  background: color-mix(in oklch, var(--background) 85%, transparent);
+  backdrop-filter: blur(12px) saturate(1.5);
+}
+
 /* ── Collection Navigation ── */
 .collection-dropdown {
   position: relative;

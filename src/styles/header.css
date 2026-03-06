@@ -603,8 +603,8 @@ header > .search-dropdown .search-option {
   border-radius: 8px 0 0 8px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-right: none;
-  background-color: rgba(0, 0, 0, 0.16);
-  color: rgba(255, 255, 255, 0.7);
+  background-color: var(--muted);
+  color: var(--search-select-text);
   font-size: clamp(10px, 0.9vw, 12px);
   font-weight: 700;
   cursor: pointer;
@@ -612,7 +612,7 @@ header > .search-dropdown .search-option {
   align-items: center;
   justify-content: center;
   white-space: nowrap;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 1px 0px inset, rgba(255, 255, 255, 0.17) 0px 1px 1px 0px;
+  box-shadow: inset 0px 2px 1px 0px rgba(0, 0, 0, 0.15);
   transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
   transition-duration: 300ms;
   transition-property: color, background-color, box-shadow;
@@ -620,9 +620,9 @@ header > .search-dropdown .search-option {
 }
 
 .search-filter-prefix .search-dropdown-trigger:hover {
-  background-color: #2c2c2c;
-  color: white;
-  box-shadow: rgba(0, 0, 0, 0.23) 0px -4px 1px 0px inset, rgba(255, 255, 255, 0.17) 0px -1px 1px 0px, rgba(0, 0, 0, 0.17) 0px 2px 4px 1px;
+  background-color: var(--accent);
+  color: var(--foreground);
+  box-shadow: 0px -4px 1px 0px inset rgba(0, 0, 0, 0.23), 0px 2px 4px 1px rgba(0, 0, 0, 0.17);
 }
 
 .search-filter-prefix .search-dropdown-trigger[aria-expanded="true"] {
@@ -680,15 +680,15 @@ header > .search-dropdown .search-option {
   cursor: pointer;
   user-select: none;
   padding: 2px 8px;
-  background-color: rgba(0, 0, 0, 0.16);
-  color: rgba(255, 255, 255, 0.7);
+  background-color: var(--muted);
+  color: var(--search-select-text);
   transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
   transition-duration: 300ms;
   transition-property: color, background-color, box-shadow, border-radius;
   display: flex;
   height: 32px;
   align-items: center;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 1px 0px inset, rgba(255, 255, 255, 0.17) 0px 1px 1px 0px;
+  box-shadow: inset 0px 2px 1px 0px rgba(0, 0, 0, 0.15);
   outline: none;
   justify-content: center;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -712,9 +712,9 @@ header > .search-dropdown .search-option {
 }
 
 .search-selects > .search-dropdown .search-dropdown-trigger:hover {
-  background-color: #2c2c2c;
-  color: white;
-  box-shadow: rgba(0, 0, 0, 0.23) 0px -4px 1px 0px inset, rgba(255, 255, 255, 0.17) 0px -1px 1px 0px, rgba(0, 0, 0, 0.17) 0px 2px 4px 1px;
+  background-color: var(--accent);
+  color: var(--foreground);
+  box-shadow: 0px -4px 1px 0px inset rgba(0, 0, 0, 0.23), 0px 2px 4px 1px rgba(0, 0, 0, 0.17);
 }
 
 .search-selects > .search-dropdown .search-dropdown-trigger[aria-expanded="true"] {
@@ -786,8 +786,8 @@ header > .search-dropdown .search-option {
 }
 
 .search-selects > .search-dropdown .search-option.active {
-  background-color: #2d6737;
-  color: white;
+  background-color: var(--accent);
+  color: var(--foreground);
 }
 
 .sr-only {
@@ -1081,8 +1081,8 @@ header > .search-dropdown .search-option {
   width: 32px;
   height: 32px;
   border: none;
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
+  background: var(--muted);
+  color: var(--foreground);
   cursor: pointer;
   border-radius: var(--radius-md);
   transition: background 0.15s;
@@ -1090,7 +1090,7 @@ header > .search-dropdown .search-option {
 }
 
 .command-palette > .command-palette-close:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--accent);
 }
 
 .command-palette-header {
