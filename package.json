@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "bun build src/main.ts --outfile=dist/bundle.js --target=browser --watch --sourcemap=external & esbuild src/styles/index.css --bundle --outfile=dist/bundle.css --watch --sourcemap",
     "build": "bun build src/main.ts --outfile=dist/bundle.js --target=browser --minify && esbuild src/styles/index.css --bundle --outfile=dist/bundle.css --minify",
-    "serve": "bunx serve . -p 2005",
+    "serve": "bun run build && bunx serve . -p 2005",
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
@@ -17,7 +17,10 @@
     "lint:datastar:fix": "bunx oxlint --config .oxlintrc.json '**/*.html' src/ --fix",
     "manifest:generate": "bun scripts/generate-manifest.ts",
     "manifest:check": "bun scripts/generate-manifest.ts --check",
-    "typecheck": "bunx tsc --noEmit"
+    "typecheck": "bunx oxlint src/ --type-aware --config .oxlintrc.typecheck.json && bunx tsc --noEmit"
+  },
+  "dependencies": {
+    "remixicon": "^4.9.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.58.2",
@@ -26,8 +29,5 @@
     "oxlint": "^1.51.0",
     "typescript": "^5.9.3",
     "vitest": "^4.0.18"
-  },
-  "dependencies": {
-    "gridjs": "^6.2.0"
   }
 }

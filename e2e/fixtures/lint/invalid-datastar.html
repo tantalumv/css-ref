@@ -16,76 +16,70 @@
   10. ds/bubbling-threshold: Repeated identical handlers
   11. ds/data-effect-size: Large inline data-effect
 -->
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Invalid Datastar Example - DO NOT COPY</title>
-</head>
-<!-- ERROR: Missing data-signals on body or root container -->
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Invalid Datastar Example - DO NOT COPY</title>
+  </head>
+  <!-- ERROR: Missing data-signals on body or root container -->
+  <body>
+    <!-- ERROR: Unknown directive data-model -->
+    <input data-model="query" placeholder="Search..." />
 
-  <!-- ERROR: Unknown directive data-model -->
-  <input data-model="query" placeholder="Search...">
+    <!-- ERROR: Unknown directive data-if -->
+    <div data-if="viewMode === 'grid'">Grid Content</div>
 
-  <!-- ERROR: Unknown directive data-if -->
-  <div data-if="viewMode === 'grid'">
-    Grid Content
-  </div>
+    <!-- ERROR: Unknown directive data-loop -->
+    <ul data-loop="cat in CATS">
+      <li data-text="cat"></li>
+    </ul>
 
-  <!-- ERROR: Unknown directive data-loop -->
-  <ul data-loop="cat in CATS">
-    <li data-text="cat"></li>
-  </ul>
+    <!-- ERROR: No $ prefix on signals -->
+    <button data-on:click="viewMode = 'table'">Table</button>
+    <button data-class:active="viewMode === 'grid'">Grid</button>
 
-  <!-- ERROR: No $ prefix on signals -->
-  <button data-on:click="viewMode = 'table'">Table</button>
-  <button data-class:active="viewMode === 'grid'">Grid</button>
+    <!-- ERROR: Using local variable 'cat' instead of evt.target.dataset.cat -->
+    <button class="chip" data-on:click="toggleCat(cat)">Layout</button>
 
-  <!-- ERROR: Using local variable 'cat' instead of evt.target.dataset.cat -->
-  <button 
-    class="chip"
-    data-on:click="toggleCat(cat)"
-  >Layout</button>
+    <!-- ERROR: Using document inside expression -->
+    <div data-effect="document.querySelector('#grid').innerHTML = ''"></div>
 
-  <!-- ERROR: Using document inside expression -->
-  <div data-effect="document.querySelector('#grid').innerHTML = ''"></div>
+    <!-- ERROR: Long expression exceeding max length -->
+    <div
+      data-effect="const items = filtered($query, $activeCats); const sorted = items.sort((a,b) => a.name.localeCompare(b.name)); renderGrid(sorted); updateFilterBtn($activeCats); console.log('rendered')"
+    ></div>
 
-  <!-- ERROR: Long expression exceeding max length -->
-  <div data-effect="const items = filtered($query, $activeCats); const sorted = items.sort((a,b) => a.name.localeCompare(b.name)); renderGrid(sorted); updateFilterBtn($activeCats); console.log('rendered')">
-  </div>
+    <!-- ERROR: Side effect in data-text -->
+    <span data-text="($query = '', 'Cleared')">Clear</span>
 
-  <!-- ERROR: Side effect in data-text -->
-  <span data-text="($query = '', 'Cleared')">Clear</span>
+    <!-- ERROR: Using function not exposed to window -->
+    <div data-effect="privateHelper()"></div>
 
-  <!-- ERROR: Using function not exposed to window -->
-  <div data-effect="privateHelper()"></div>
+    <!-- ERROR: data-on:click__outside on child instead of popover container -->
+    <div class="filter-popover">
+      <button data-on:click__outside="$popoverOpen = false">Close</button>
+    </div>
 
-  <!-- ERROR: data-on:click__outside on child instead of popover container -->
-  <div class="filter-popover">
-    <button data-on:click__outside="$popoverOpen = false">Close</button>
-  </div>
+    <!-- ERROR: Multiple escape handlers (only one should exist) -->
+    <div data-on:keydown__window="evt.key === 'Escape' && handleEscape1()"></div>
+    <div data-on:keydown__window="evt.key === 'Escape' && handleEscape2()"></div>
 
-  <!-- ERROR: Multiple escape handlers (only one should exist) -->
-  <div data-on:keydown__window="evt.key === 'Escape' && handleEscape1()"></div>
-  <div data-on:keydown__window="evt.key === 'Escape' && handleEscape2()"></div>
+    <!-- ERROR: Repeated identical handlers (>5 triggers bubbling threshold warning) -->
+    <button data-on:click="toggleCat('Layout')">Layout</button>
+    <button data-on:click="toggleCat('Color')">Color</button>
+    <button data-on:click="toggleCat('Typography')">Typography</button>
+    <button data-on:click="toggleCat('Animation')">Animation</button>
+    <button data-on:click="toggleCat('Grid')">Grid</button>
+    <button data-on:click="toggleCat('Flexbox')">Flexbox</button>
 
-  <!-- ERROR: Repeated identical handlers (>5 triggers bubbling threshold warning) -->
-  <button data-on:click="toggleCat('Layout')">Layout</button>
-  <button data-on:click="toggleCat('Color')">Color</button>
-  <button data-on:click="toggleCat('Typography')">Typography</button>
-  <button data-on:click="toggleCat('Animation')">Animation</button>
-  <button data-on:click="toggleCat('Grid')">Grid</button>
-  <button data-on:click="toggleCat('Flexbox')">Flexbox</button>
+    <!-- ERROR: Using fetch directly in data-init -->
+    <div data-init="fetch('/api/data').then(r => r.json()).then(d => $data = d)"></div>
 
-  <!-- ERROR: Using fetch directly in data-init -->
-  <div data-init="fetch('/api/data').then(r => r.json()).then(d => $data = d)"></div>
+    <!-- ERROR: innerHTML injection without sanitization -->
+    <div data-effect="this.innerHTML = $userInput"></div>
 
-  <!-- ERROR: innerHTML injection without sanitization -->
-  <div data-effect="this.innerHTML = $userInput"></div>
-
-  <!-- ERROR: Invalid JSON in data-signals (when added) -->
-  <!-- data-signals="{ activeCats: , query: '' }" -->
-
-</body>
+    <!-- ERROR: Invalid JSON in data-signals (when added) -->
+    <!-- data-signals="{ activeCats: , query: '' }" -->
+  </body>
 </html>

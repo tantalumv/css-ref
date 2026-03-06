@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "Datastar window exports manifest for css-ref project",
   "generated": "2026-03-05",
-  "sources": [
-    "src/main.ts"
-  ],
+  "sources": ["src/main.ts"],
   "exports": {
     "data": {
       "P": {

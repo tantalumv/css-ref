@@ -12,14 +12,46 @@ main {
 /* ── Grid View ── */
 #grid.is-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
-  gap: var(--space-s);
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-2xs);
+}
+
+/* Responsive breakpoints for grid columns */
+@media (max-width: 900px) {
+  #grid.is-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  #grid.is-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 360px) {
+  #grid.is-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Responsive breakpoints for grid columns */
+@media (max-width: 480px) {
+  #grid.is-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 360px) {
+  #grid.is-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 #grid.is-list {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--space-2xs);
 }
 
 /* ── Card ── */
@@ -28,7 +60,9 @@ main {
   border-radius: var(--radius-lg);
   border: 1px solid var(--border);
   cursor: pointer;
-  transition: transform 0.2s var(--ease-spring-3), box-shadow 0.2s var(--ease-out-1);
+  transition:
+    transform 0.2s var(--ease-spring-3),
+    box-shadow 0.2s var(--ease-out-1);
   position: relative;
   overflow: hidden;
   --ca: var(--primary);
@@ -42,9 +76,9 @@ main {
   background: var(--card);
 }
 
-/* Demo Stage - Square aspect ratio */
+/* Demo Stage - Fixed height for consistent sizing */
 .demo-stage {
-  aspect-ratio: 1;
+  height: clamp(140px, 16vw, 155px);
   overflow: visible;
   position: relative;
   background: var(--muted);
@@ -79,31 +113,41 @@ main {
 
 /* Meta moves up independently */
 .card:hover .card-meta {
-  transform: translateY(-12px);
+  transform: translateY(-24px);
 }
 
 /* Tag + name row - always visible */
 .card-meta {
   display: flex;
   align-items: center;
-  padding: var(--space-s) var(--space-s) var(--space-xs);
+  padding: var(--space-xs) var(--space-xs) var(--space-2xs);
   background: var(--card);
   border-top: 1px solid var(--border);
-  min-height: 44px;
+  min-height: clamp(1.8rem, 3.5vw, 2.2rem);
   transition: transform 0.35s var(--ease-spring-3);
   overflow: hidden;
 }
 
 /* Category badge - notch effect on preview border */
 .demo-stage .cat-badge {
-  font-size: var(--step--2);
+  position: absolute;
+  bottom: 0;
+  left: var(--space-xs);
+  z-index: 10;
+  transform: translateY(48%);
+  font-size: calc(var(--step--2) * 0.9);
   font-weight: 700;
-  padding: 4px 10px;
-  border-radius: var(--radius-round);
+  padding: clamp(0.15rem, 0.5vw, 0.25rem) clamp(0.35rem, 0.9vw, 0.5rem);
+  border-radius: clamp(0.2rem, 0.7vw, 0.35rem);
   white-space: nowrap;
   color: var(--primary-foreground);
   background: var(--ca);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.35s var(--ease-spring-3);
+}
+
+.card:hover .demo-stage .cat-badge {
+  transform: translateY(calc(48% - 24px));
 }
 
 /* Name row - full width with scroll animation */
@@ -117,7 +161,7 @@ main {
 
 .card-name {
   font-family: var(--font-sans);
-  font-size: var(--step-1);
+  font-size: var(--step--1);
   font-weight: 800;
   color: var(--card-foreground);
   line-height: 1.2;
@@ -164,7 +208,7 @@ main {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 28px;
+  height: clamp(1.3rem, 2.5vw, 1.6rem);
   background: var(--card);
   border-top: 1px solid var(--border);
   padding: 0 var(--space-s);
@@ -183,7 +227,7 @@ main {
 /* Compact availability badge in card */
 .card-support .availability-badge {
   font-size: calc(var(--step--2) * 0.9);
-  gap: 4px;
+  gap: clamp(0.16rem, 0.6vw, 0.3rem);
 }
 
 /* ── Browser Badges ── */
@@ -193,8 +237,8 @@ main {
 }
 
 .browser-icon {
-  width: 18px;
-  height: 18px;
+  width: clamp(0.7rem, 1.4vw, 0.9rem);
+  height: clamp(0.7rem, 1.4vw, 0.9rem);
   border-radius: var(--radius-round);
   background-size: cover;
   background-position: center;
@@ -226,7 +270,7 @@ main {
 .availability-badge {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--space-2xs);
   font-size: var(--step--2);
   font-weight: 700;
   text-transform: uppercase;
@@ -236,41 +280,53 @@ main {
 }
 
 .availability-badge::before {
-  content: '';
-  width: 8px;
-  height: 8px;
+  content: "";
+  width: clamp(0.35rem, 0.9vw, 0.5rem);
+  height: clamp(0.35rem, 0.9vw, 0.5rem);
   border-radius: var(--radius-round);
   background: var(--status-color, var(--muted-foreground));
 }
 
-.availability-badge.wide { --status-color: var(--chart-1); }
-.availability-badge.b2024 { --status-color: var(--chart-2); }
-.availability-badge.b2023 { --status-color: var(--chart-3); }
-.availability-badge.b2022 { --status-color: var(--chart-4); }
-.availability-badge.ltd { --status-color: var(--chart-5); }
-.availability-badge.exp { --status-color: var(--destructive); }
+.availability-badge.wide {
+  --status-color: var(--chart-1);
+}
+.availability-badge.b2024 {
+  --status-color: var(--chart-2);
+}
+.availability-badge.b2023 {
+  --status-color: var(--chart-3);
+}
+.availability-badge.b2022 {
+  --status-color: var(--chart-4);
+}
+.availability-badge.ltd {
+  --status-color: var(--chart-5);
+}
+.availability-badge.exp {
+  --status-color: var(--destructive);
+}
 
 /* ── Legacy Browser Support (List View) ── */
 .browsers {
   display: flex;
-  gap: 4px;
+  gap: var(--space-3xs);
 }
 
 .browser {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
+  gap: clamp(0.08rem, 0.4vw, 0.16rem);
 }
 
 .b-icon {
-  width: 22px;
-  height: 22px;
+  width: clamp(1.1rem, 2.3vw, 1.4rem);
+  height: clamp(1.1rem, 2.3vw, 1.4rem);
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
+  font-size: clamp(0.58rem, 1vw, 0.66rem);
   font-weight: 800;
 }
 
@@ -296,9 +352,9 @@ main {
 
 /* ── Interop Badge ── */
 .interop {
-  font-size: var(--step--2);
+  font-size: 9px;
   font-weight: 800;
-  padding: 3px 8px;
+  padding: clamp(0.1rem, 0.35vw, 0.15rem) clamp(0.25rem, 0.8vw, 0.35rem);
   border-radius: var(--radius-round);
   text-transform: uppercase;
   letter-spacing: 0.04em;

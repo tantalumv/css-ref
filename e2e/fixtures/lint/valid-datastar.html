@@ -7,83 +7,79 @@
   - Window-exposed functions only
   - Valid attribute usage
 -->
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Valid Datastar Example</title>
-</head>
-<body
-  data-signals="{ query: '', activeCats: [], viewMode: 'grid', popoverOpen: false }"
->
-  <!-- Search input with data-bind -->
-  <input 
-    type="search" 
-    data-bind:query 
-    data-on:input__debounce.150ms="renderGrid($query, $activeCats)"
-    placeholder="Search..."
-  >
+  <head>
+    <meta charset="UTF-8" />
+    <title>Valid Datastar Example</title>
+  </head>
+  <body data-signals="{ query: '', activeCats: [], viewMode: 'grid', popoverOpen: false }">
+    <!-- Search input with data-bind -->
+    <input
+      type="search"
+      data-bind:query
+      data-on:input__debounce.150ms="renderGrid($query, $activeCats)"
+      placeholder="Search..."
+    />
 
-  <!-- View toggle buttons -->
-  <div class="view-toggle">
-    <button 
-      data-on:click="$viewMode = 'grid'"
-      data-class:active="$viewMode === 'grid'"
-    >
-      Grid
-    </button>
-    <button 
-      data-on:click="$viewMode = 'table'"
-      data-class:active="$viewMode === 'table'"
-    >
-      Table
-    </button>
-  </div>
-
-  <!-- Grid view -->
-  <div id="grid-view"
-    data-effect="renderGrid(filtered($query, $activeCats))"
-    data-show="$viewMode === 'grid'"
-  ></div>
-
-  <!-- Filter button with popover -->
-  <button 
-    id="filterBtn"
-    data-on:click__stop="$popoverOpen = !$popoverOpen"
-    data-class:has-active="hasFilters($activeCats)"
-  >
-    Filters
-  </button>
-
-  <!-- Popover container with click-outside -->
-  <div 
-    class="filter-popover"
-    data-class:open="$popoverOpen"
-    data-on:click__outside="$popoverOpen = false"
-  >
-    <!-- Chips container with event delegation -->
-    <div 
-      class="chip-group"
-      data-on:click="evt.target.dataset.cat && ($activeCats = toggleInArray($activeCats, evt.target.dataset.cat))"
-    >
-      <button class="chip" data-cat="Layout">Layout</button>
-      <button class="chip" data-cat="Color">Color</button>
+    <!-- View toggle buttons -->
+    <div class="view-toggle">
+      <button data-on:click="$viewMode = 'grid'" data-class:active="$viewMode === 'grid'">
+        Grid
+      </button>
+      <button data-on:click="$viewMode = 'table'" data-class:active="$viewMode === 'table'">
+        Table
+      </button>
     </div>
-  </div>
 
-  <!-- Single global escape handler -->
-  <div 
-    data-on:keydown__window="evt.key === 'Escape' && ($popoverOpen = false)" 
-    style="display:none"
-  ></div>
+    <!-- Grid view -->
+    <div
+      id="grid-view"
+      data-effect="renderGrid(filtered($query, $activeCats))"
+      data-show="$viewMode === 'grid'"
+    ></div>
 
-  <!-- Pure text computation -->
-  <span data-text="$query ? `Searching: ${$query}` : 'All properties'"></span>
+    <!-- Filter button with popover -->
+    <button
+      id="filterBtn"
+      data-on:click__stop="$popoverOpen = !$popoverOpen"
+      data-class:has-active="hasFilters($activeCats)"
+    >
+      Filters
+    </button>
 
-  <!-- Using window-exposed data -->
-  <div data-effect="renderChips($activeCats)"></div>
+    <!-- Popover container with click-outside -->
+    <div
+      class="filter-popover"
+      data-class:open="$popoverOpen"
+      data-on:click__outside="$popoverOpen = false"
+    >
+      <!-- Chips container with event delegation -->
+      <div
+        class="chip-group"
+        data-on:click="evt.target.dataset.cat && ($activeCats = toggleInArray($activeCats, evt.target.dataset.cat))"
+      >
+        <button class="chip" data-cat="Layout">Layout</button>
+        <button class="chip" data-cat="Color">Color</button>
+      </div>
+    </div>
 
-  <script src="dist/bundle.js"></script>
-  <script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@1.0.0-RC.8/bundles/datastar.js"></script>
-</body>
+    <!-- Single global escape handler -->
+    <div
+      data-on:keydown__window="evt.key === 'Escape' && ($popoverOpen = false)"
+      style="display: none"
+    ></div>
+
+    <!-- Pure text computation -->
+    <span data-text="$query ? `Searching: ${$query}` : 'All properties'"></span>
+
+    <!-- Using window-exposed data -->
+    <div data-effect="renderChips($activeCats)"></div>
+
+    <script src="dist/bundle.js"></script>
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/gh/starfederation/datastar@1.0.0-RC.8/bundles/datastar.js"
+    ></script>
+  </body>
 </html>

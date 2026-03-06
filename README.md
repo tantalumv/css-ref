@@ -71,13 +71,13 @@ The current hybrid gives us the best of both: Datastar's declarative reactivity 
 
 ## Scripts
 
-| Command | Description |
-|---------|-------------|
-| `bun run build` | Production build (bun bundler + esbuild for CSS) |
-| `bun run dev` | Watch mode with sourcemaps |
-| `bun run serve` | Serve on localhost:2005 |
-| `bun test` | Unit tests (vitest, watch) |
-| `bun run test:run` | Unit tests (single run) |
-| `bun run test:e2e` | E2E tests (Playwright) |
-| `bun run typecheck` | TypeScript type check |
-| `bun run lint` | Lint with oxlint |
+| Command             | Description                                      |
+| ------------------- | ------------------------------------------------ |
+| `bun run build`     | Production build (bun bundler + esbuild for CSS) |
+| `bun run dev`       | Watch mode with sourcemaps                       |
+| `bun run serve`     | Serve on localhost:2005                          |
+| `bun test`          | Unit tests (vitest, watch)                       |
+| `bun run test:run`  | Unit tests (single run)                          |
+| `bun run test:e2e`  | E2E tests (Playwright)                           |
+| `bun run typecheck` | TypeScript type check                            |
+| `bun run lint`      | Lint with oxlint                                 |

@@ -4,63 +4,121 @@
 
 /* ── Keyframes ── */
 @keyframes demo-spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes demo-bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-22px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-22px);
+  }
 }
 
 @keyframes demo-pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.35); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.35);
+  }
 }
 
 @keyframes demo-slide {
-  0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(48px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(48px);
+  }
 }
 
 @keyframes demo-fade {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.08; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.08;
+  }
 }
 
 @keyframes demo-color {
-  0% { background: #6366f1; }
-  33% { background: #ec4899; }
-  66% { background: #f97316; }
-  100% { background: #6366f1; }
+  0% {
+    background: #6366f1;
+  }
+  33% {
+    background: #ec4899;
+  }
+  66% {
+    background: #f97316;
+  }
+  100% {
+    background: #6366f1;
+  }
 }
 
 @keyframes demo-width {
-  0%, 100% { width: 28px; }
-  50% { width: 90px; }
+  0%,
+  100% {
+    width: 28px;
+  }
+  50% {
+    width: 90px;
+  }
 }
 
 @keyframes demo-path {
-  0% { offset-distance: 0%; }
-  100% { offset-distance: 100%; }
+  0% {
+    offset-distance: 0%;
+  }
+  100% {
+    offset-distance: 100%;
+  }
 }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: none; }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @keyframes popIn {
-  from { opacity: 0; transform: translateY(6px) scale(0.97); }
-  to { opacity: 1; transform: none; }
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @keyframes slideIn {
-  from { opacity: 0; transform: translateX(18px); }
-  to { opacity: 1; transform: none; }
+  from {
+    opacity: 0;
+    transform: translateX(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @keyframes meshMove {
-  0%, 100% {
+  0%,
+  100% {
     background:
       radial-gradient(at 40% 20%, hsla(260, 80%, 50%, 0.15) 0px, transparent 50%),
       radial-gradient(at 80% 0%, hsla(190, 80%, 50%, 0.15) 0px, transparent 50%),
@@ -104,7 +162,9 @@
 
 /* ── Property Demo Animations ── */
 @keyframes hue-spin {
-  to { --hue: 360; }
+  to {
+    --hue: 360;
+  }
 }
 
 @property --hue {
@@ -114,7 +174,9 @@
 }
 
 .t-demo {
-  transition: transform 0.4s var(--ease-spring-3), background 0.4s;
+  transition:
+    transform 0.4s var(--ease-spring-3),
+    background 0.4s;
   animation: demo-pulse 2s ease-in-out infinite;
 }
 
@@ -148,7 +210,9 @@ body {
   color: var(--foreground);
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -156,7 +220,7 @@ body {
 
 /* ── Mesh Gradient Background ── */
 body::before {
-  content: '';
+  content: "";
   position: fixed;
   top: 0;
   left: 0;

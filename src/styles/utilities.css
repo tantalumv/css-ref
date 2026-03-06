@@ -19,3 +19,26 @@
 ::-webkit-scrollbar-thumb:hover {
   background: var(--muted-foreground);
 }
+
+/* ── Property Counter ── */
+.property-counter {
+  position: fixed;
+  bottom: var(--space-m);
+  right: var(--space-m);
+  background: color-mix(in oklch, var(--card) 95%, transparent);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xs) var(--space-s);
+  font-size: var(--step--1);
+  font-weight: 700;
+  color: var(--foreground);
+  z-index: 100;
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s var(--ease-out-1);
+}
+
+.property-counter:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+}

@@ -32,23 +32,24 @@
   --ring: #d87943;
 
   /* Chart colors */
-  --chart-1: #5f8787;
+  --chart-1: #22c55e;
   --chart-2: #e78a53;
   --chart-3: #fbcb97;
   --chart-4: #888888;
   --chart-5: #999999;
 
   /* Typography */
-  --font-sans: Geist Mono, ui-monospace, system-ui, sans-serif;
+  --font-sans: "Varela Round", system-ui, -apple-system, sans-serif;
   --font-serif: serif;
   --font-mono: JetBrains Mono, ui-monospace, monospace;
 
   /* Radius */
-  --radius: 0.75rem;
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius: 0.2rem;
+  --radius-sm: 0.15rem;
+  --radius-md: 0.2rem;
+  --radius-lg: 0.28rem;
+  --radius-xl: 0.36rem;
+  --radius-round: 9999px;
 
   /* Shadows */
   --shadow-2xs: 0px 1px 4px 0px hsl(0 0% 0% / 0.03);
@@ -63,6 +64,26 @@
   /* Spacing */
   --spacing: 0.25rem;
   --tracking-normal: 0rem;
+
+  /* Search UI (light theme) */
+  --search-bg: color-mix(in oklch, var(--card) 94%, #d9e8ff 6%);
+  --search-border: color-mix(in oklch, var(--border) 72%, #90b8ff 28%);
+  --search-inset: color-mix(in oklch, #93c5fd 45%, transparent);
+  --search-placeholder: color-mix(in oklch, var(--muted-foreground) 88%, #475569 12%);
+  --search-input-mask-end: var(--search-bg);
+  --search-select-text: color-mix(in oklch, var(--foreground) 88%, #1f2937 12%);
+  --search-select-border: color-mix(in oklch, var(--border) 70%, var(--primary) 30%);
+  --search-select-grad-a: color-mix(in oklch, var(--muted) 78%, var(--primary) 22%);
+  --search-select-grad-b: color-mix(in oklch, var(--muted) 74%, var(--secondary) 26%);
+  --search-select-focus: color-mix(in oklch, var(--primary) 58%, var(--secondary) 42%);
+  --search-arrow: color-mix(in oklch, var(--foreground) 78%, #334155 22%);
+  --search-hotspot: color-mix(in oklch, var(--primary) 52%, #ec4899 48%);
+  --search-anim-soft-a: color-mix(in oklch, var(--secondary) 58%, #8b5cf6 42%);
+  --search-anim-soft-b: color-mix(in oklch, var(--primary) 58%, #ec4899 42%);
+  --search-anim-core-a: color-mix(in oklch, var(--secondary) 75%, #3b82f6 25%);
+  --search-anim-core-b: color-mix(in oklch, var(--primary) 75%, #d946ef 25%);
+  --search-anim-deep-a: color-mix(in oklch, #111827 78%, var(--secondary) 22%);
+  --search-anim-deep-b: color-mix(in oklch, #111827 78%, var(--primary) 22%);
 }
 
 /* ── Dark Theme ── */
@@ -86,6 +107,26 @@
   --border: #222222;
   --input: #222222;
   --ring: #e78a53;
+
+  /* Search UI (dark theme) */
+  --search-bg: #020205;
+  --search-border: #23203a;
+  --search-inset: rgba(133, 129, 255, 0.2);
+  --search-placeholder: #a9a1b8;
+  --search-input-mask-end: #020205;
+  --search-select-text: color-mix(in oklch, #e2e8f0 94%, var(--foreground) 6%);
+  --search-select-border: color-mix(in oklch, var(--primary) 42%, #475569 58%);
+  --search-select-grad-a: color-mix(in oklch, var(--muted) 78%, var(--primary) 22%);
+  --search-select-grad-b: color-mix(in oklch, #1f2937 68%, var(--secondary) 32%);
+  --search-select-focus: color-mix(in oklch, var(--primary) 52%, var(--secondary) 48%);
+  --search-arrow: color-mix(in oklch, #cbd5e1 72%, var(--foreground) 28%);
+  --search-hotspot: #d537bc;
+  --search-anim-soft-a: color-mix(in oklch, var(--secondary) 60%, #6366f1 40%);
+  --search-anim-soft-b: color-mix(in oklch, var(--primary) 60%, #ec4899 40%);
+  --search-anim-core-a: color-mix(in oklch, var(--secondary) 78%, #4338ca 22%);
+  --search-anim-core-b: color-mix(in oklch, var(--primary) 78%, #be185d 22%);
+  --search-anim-deep-a: color-mix(in oklch, #05070c 80%, var(--secondary) 20%);
+  --search-anim-deep-b: color-mix(in oklch, #05070c 80%, var(--primary) 20%);
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -141,7 +182,7 @@
 
 /* ── Fluid Grid System ── */
 :root {
-  --grid-max-width: 77.50rem;
+  --grid-max-width: 77.5rem;
   --grid-gutter: var(--space-s-l);
   --grid-columns: 12;
 }

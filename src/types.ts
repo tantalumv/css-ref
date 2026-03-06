@@ -16,5 +16,5 @@ export interface CSSProperty {
   demo: string;
 }
 
-export type InteropStatus = 'wide' | 'b2024' | 'b2023' | 'b2022' | 'ltd' | 'exp';
-export type ViewMode = 'grid' | 'list';
+export type InteropStatus = "wide" | "b2024" | "b2023" | "b2022" | "ltd" | "exp";
+export type ViewMode = "grid" | "list";

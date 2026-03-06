@@ -5,9 +5,11 @@ This directory contains HTML fixtures for testing Datastar lint rules.
 ## Files
 
 ### `valid-datastar.html`
+
 **Purpose**: Demonstrates correct Datastar patterns that should pass all lint rules.
 
 **Key patterns shown**:
+
 - Proper `data-signals` initialization on body
 - Correct `$` prefix for all signal references
 - Window-exposed functions only (`renderGrid`, `filtered`, etc.)
@@ -18,30 +20,33 @@ This directory contains HTML fixtures for testing Datastar lint rules.
 - Pure computations in `data-text`
 
 ### `invalid-datastar.html`
+
 **Purpose**: Demonstrates INCORRECT patterns that should fail specific lint rules.
 
 **Violations by rule**:
 
-| Rule | Violation Example |
-|------|-------------------|
-| `ds/no-unknown-directives` | `data-model`, `data-if`, `data-loop` |
-| `ds/no-lexical-references` | `toggleCat(cat)` where `cat` is undefined |
-| `ds/signal-prefix` | `viewMode` instead of `$viewMode` |
-| `ds/no-document-or-import` | `document.querySelector(...)` in expression |
-| `ds/expression-length` | Expression > 160 characters |
-| `ds/no-side-effects-in-data-text` | `($query = '', 'Cleared')` |
-| `ds/window-exposure` | `privateHelper()` not on window |
-| `ds/click-outside-target` | `data-on:click__outside` on child button |
-| `ds/event-escape-unique` | Multiple `data-on:keydown__window` handlers |
-| `ds/bubbling-threshold` | 6+ identical `toggleCat('...')` handlers |
-| `ds/forbidden-attrs-in-expr` | `fetch()` in `data-init` |
-| `ds/no-inline-html-injections` | `innerHTML = $userInput` |
-| `ds/signals-json-valid` | Invalid JSON in `data-signals` (commented) |
+| Rule                              | Violation Example                           |
+| --------------------------------- | ------------------------------------------- |
+| `ds/no-unknown-directives`        | `data-model`, `data-if`, `data-loop`        |
+| `ds/no-lexical-references`        | `toggleCat(cat)` where `cat` is undefined   |
+| `ds/signal-prefix`                | `viewMode` instead of `$viewMode`           |
+| `ds/no-document-or-import`        | `document.querySelector(...)` in expression |
+| `ds/expression-length`            | Expression > 160 characters                 |
+| `ds/no-side-effects-in-data-text` | `($query = '', 'Cleared')`                  |
+| `ds/window-exposure`              | `privateHelper()` not on window             |
+| `ds/click-outside-target`         | `data-on:click__outside` on child button    |
+| `ds/event-escape-unique`          | Multiple `data-on:keydown__window` handlers |
+| `ds/bubbling-threshold`           | 6+ identical `toggleCat('...')` handlers    |
+| `ds/forbidden-attrs-in-expr`      | `fetch()` in `data-init`                    |
+| `ds/no-inline-html-injections`    | `innerHTML = $userInput`                    |
+| `ds/signals-json-valid`           | Invalid JSON in `data-signals` (commented)  |
 
 ### `borderline-datastar.html`
+
 **Purpose**: Shows edge cases that may trigger warnings depending on configuration.
 
 **Borderline patterns**:
+
 - Expressions approaching max length (160 chars)
 - Multiple statements in event handlers
 - Complex ternary operators

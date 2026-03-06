@@ -6,8 +6,7 @@
     "es2022": true
   },
   "globals": {
-    "datastar": "readonly",
-    "gridjs": "readonly"
+    "datastar": "readonly"
   },
   "rules": {
     "eqeqeq": ["error", "always", { "null": "ignore" }],
@@ -49,13 +48,7 @@
   ],
   "settings": {
     "datastar": {
-      "signalNames": [
-        "query",
-        "activeCats",
-        "activeInterops",
-        "viewMode",
-        "theme"
-      ],
+      "signalNames": ["query", "activeCats", "activeInterops", "viewMode", "theme"],
       "maxExpressionLength": 160,
       "bubblingThreshold": 5,
       "manifestPath": "./datastar-manifest.json"

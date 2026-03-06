@@ -1,10 +1,10 @@
-import type { InteropStatus, ViewMode } from './types';
+import type { InteropStatus, ViewMode } from "./types";
 
 // Application state
-export let activeCats = new Set<string>();
-export let activeInterops = new Set<InteropStatus>();
-export let q = '';
-export let viewMode: ViewMode = 'grid';
+export const activeCats = new Set<string>();
+export const activeInterops = new Set<InteropStatus>();
+export let q = "";
+export let viewMode: ViewMode = "grid";
 export let catPopoverOpen = false;
 export let interopPopoverOpen = false;
 
@@ -28,7 +28,7 @@ export function setInteropPopoverOpen(open: boolean): void {
 export function resetFilters(): void {
   activeCats.clear();
   activeInterops.clear();
-  q = '';
+  q = "";
 }
 
 // Category chips toggle

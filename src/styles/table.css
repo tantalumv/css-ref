@@ -3,7 +3,7 @@
    ═══════════════════════════════════════════════════════════════ */
 
 #table-view {
-  max-width: 1400px;
+  max-width: min(100%, var(--grid-max-width));
   margin: 0 auto;
 }
 
@@ -30,9 +30,9 @@
   background: var(--muted) !important;
   color: var(--foreground) !important;
   font-weight: 600;
-  padding: 8px 4px !important;
+  padding: clamp(0.34rem, 1vw, 0.5rem) clamp(0.2rem, 0.7vw, 0.35rem) !important;
   border-bottom: 1px solid var(--border);
-  font-size: 11px;
+  font-size: var(--step--2);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -99,7 +99,7 @@
 #table-container .gridjs-sort {
   color: var(--muted-foreground);
   position: relative;
-  padding-right: 16px;
+  padding-right: clamp(0.75rem, 1.9vw, 1rem);
 }
 
 #table-container .gridjs-sort::after {
@@ -129,9 +129,9 @@
 /* Browser icons in table */
 #table-container .browser-icon {
   display: inline-block;
-  width: 20px;
-  height: 14px;
-  margin-right: 2px;
+  width: clamp(0.92rem, 1.8vw, 1.25rem);
+  height: clamp(0.65rem, 1.3vw, 0.88rem);
+  margin-right: clamp(0.08rem, 0.25vw, 0.14rem);
   vertical-align: middle;
   background-size: contain;
   background-repeat: no-repeat;
@@ -156,7 +156,7 @@
   text-align: center;
   color: var(--muted-foreground);
   font-size: var(--step--1);
-  min-height: 60px;
+  min-height: clamp(2.7rem, 5vw, 3.75rem);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -167,19 +167,21 @@
 }
 
 #table-sentinel.loading::after {
-  content: '';
+  content: "";
   display: inline-block;
-  width: 16px;
-  height: 16px;
+  width: clamp(0.8rem, 1.5vw, 1rem);
+  height: clamp(0.8rem, 1.5vw, 1rem);
   border: 2px solid var(--muted-foreground);
   border-top-color: transparent;
   border-radius: 50%;
-  margin-left: 8px;
+  margin-left: clamp(0.3rem, 1vw, 0.5rem);
   animation: spin 0.8s linear infinite;
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Table preview hover effect */

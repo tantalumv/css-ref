@@ -1,244 +1,778 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CSS Ref</title>
-  <link rel="stylesheet" href="https://unpkg.com/open-props"/>
-  <link rel="stylesheet" href="dist/bundle.css">
-</head>
-<body
-  data-signals="{query: '', activeCats: [], activeInterops: [], viewMode: 'grid', theme: 'dark', selectedProp: null, tableDisplayedCount: 0, tableTotalCount: 0, tableLoading: false}"
->
-
-<!-- Inline SVG Icons (6 icons = ~2KB instead of 190KB font) -->
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-  <defs>
-    <symbol id="icon-filter" viewBox="0 0 24 24"><path fill="currentColor" d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/></symbol>
-    <symbol id="icon-grid" viewBox="0 0 24 24"><path fill="currentColor" d="M3 3h8v8H3V3zm0 10h8v8H3v-8zM13 3h8v8h-8V3zm0 10h8v8h-8v-8z"/></symbol>
-    <symbol id="icon-table" viewBox="0 0 24 24"><path fill="currentColor" d="M3 3h18v18H3V3zm2 2v5h5V5H5zm7 0v5h5V5h-5zm-7 7v5h5v-5H5zm7 0v5h5v-5h-5z"/></symbol>
-    <symbol id="icon-sun" viewBox="0 0 24 24"><path fill="currentColor" d="M12 1v2a9 9 0 1 0 0 18v2A11 11 0 1 1 12 1zm0 4a7 7 0 1 1 0 14 7 7 0 0 1 0-14zm0 2a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM11 1h2v4h-2V1zm0 18h2v4h-2v-4zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.122zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-4v-2h4zM5 11v2H1v-2h4z"/></symbol>
-    <symbol id="icon-moon" viewBox="0 0 24 24"><path fill="currentColor" d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"/></symbol>
-    <symbol id="icon-arrow-left" viewBox="0 0 24 24"><path fill="currentColor" d="M7.828 11H20v2H7.828l5.364 5.364-1.414 1.414L4 12l7.778-7.778 1.414 1.414L7.828 11z"/></symbol>
-  </defs>
-</svg>
-
-<header data-show="!$selectedProp">
-  <div class="brand" data-on:click="$selectedProp = null"><h1>CSS Ref</h1></div>
-  
-  <!-- Search -->
-  <div class="search-combo">
-    <input type="search" id="search" data-bind:query placeholder="Search properties… e.g. grid, animation, color" autocomplete="off" spellcheck="false">
-  </div>
-
-  <!-- Category Select -->
-  <div class="select" data-show="!$selectedProp">
-    <div class="selected" data-default="Category">
-      <svg class="arrow" aria-hidden="true"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
-    </div>
-    <div class="options">
-      <div data-cat="">
-        <input type="radio" name="category" id="cat-all" checked data-on:change="$activeCats = []">
-        <label class="option" for="cat-all" data-txt="All"></label>
-      </div>
-      <div data-cat="Layout">
-        <input type="radio" name="category" id="cat-Layout" data-on:change="$activeCats = ['Layout']">
-        <label class="option" for="cat-Layout" data-txt="Layout"></label>
-      </div>
-      <div data-cat="Flexbox">
-        <input type="radio" name="category" id="cat-Flexbox" data-on:change="$activeCats = ['Flexbox']">
-        <label class="option" for="cat-Flexbox" data-txt="Flexbox"></label>
-      </div>
-      <div data-cat="Grid">
-        <input type="radio" name="category" id="cat-Grid" data-on:change="$activeCats = ['Grid']">
-        <label class="option" for="cat-Grid" data-txt="Grid"></label>
-      </div>
-      <div data-cat="Typography">
-        <input type="radio" name="category" id="cat-Typography" data-on:change="$activeCats = ['Typography']">
-        <label class="option" for="cat-Typography" data-txt="Typography"></label>
-      </div>
-      <div data-cat="Color">
-        <input type="radio" name="category" id="cat-Color" data-on:change="$activeCats = ['Color']">
-        <label class="option" for="cat-Color" data-txt="Color"></label>
-      </div>
-      <div data-cat="Sizing">
-        <input type="radio" name="category" id="cat-Sizing" data-on:change="$activeCats = ['Sizing']">
-        <label class="option" for="cat-Sizing" data-txt="Sizing"></label>
-      </div>
-      <div data-cat="Visual">
-        <input type="radio" name="category" id="cat-Visual" data-on:change="$activeCats = ['Visual']">
-        <label class="option" for="cat-Visual" data-txt="Visual"></label>
-      </div>
-      <div data-cat="Animation">
-        <input type="radio" name="category" id="cat-Animation" data-on:change="$activeCats = ['Animation']">
-        <label class="option" for="cat-Animation" data-txt="Animation"></label>
-      </div>
-      <div data-cat="Transform">
-        <input type="radio" name="category" id="cat-Transform" data-on:change="$activeCats = ['Transform']">
-        <label class="option" for="cat-Transform" data-txt="Transform"></label>
-      </div>
-      <div data-cat="Spacing">
-        <input type="radio" name="category" id="cat-Spacing" data-on:change="$activeCats = ['Spacing']">
-        <label class="option" for="cat-Spacing" data-txt="Spacing"></label>
-      </div>
-      <div data-cat="Interactivity">
-        <input type="radio" name="category" id="cat-Interactivity" data-on:change="$activeCats = ['Interactivity']">
-        <label class="option" for="cat-Interactivity" data-txt="Interactivity"></label>
-      </div>
-      <div data-cat="CSS Variables">
-        <input type="radio" name="category" id="cat-CSS-Variables" data-on:change="$activeCats = ['CSS Variables']">
-        <label class="option" for="cat-CSS-Variables" data-txt="CSS Variables"></label>
-      </div>
-      <div data-cat="Queries">
-        <input type="radio" name="category" id="cat-Queries" data-on:change="$activeCats = ['Queries']">
-        <label class="option" for="cat-Queries" data-txt="Queries"></label>
-      </div>
-    </div>
-  </div>
-
-  <!-- Interop Select -->
-  <div class="select" data-show="!$selectedProp">
-    <div class="selected" data-default="Interop">
-      <svg class="arrow" aria-hidden="true"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
-    </div>
-    <div class="options">
-      <div data-status="">
-        <input type="radio" name="interop" id="interop-all" checked data-on:change="$activeInterops = []">
-        <label class="option" for="interop-all" data-txt="All"></label>
-      </div>
-      <div data-status="wide">
-        <input type="radio" name="interop" id="interop-wide" data-on:change="$activeInterops = ['wide']">
-        <label class="option" for="interop-wide" data-txt="Widely Available"></label>
-      </div>
-      <div data-status="b2024">
-        <input type="radio" name="interop" id="interop-b2024" data-on:change="$activeInterops = ['b2024']">
-        <label class="option" for="interop-b2024" data-txt="Baseline 2024"></label>
-      </div>
-      <div data-status="b2023">
-        <input type="radio" name="interop" id="interop-b2023" data-on:change="$activeInterops = ['b2023']">
-        <label class="option" for="interop-b2023" data-txt="Baseline 2023"></label>
-      </div>
-      <div data-status="b2022">
-        <input type="radio" name="interop" id="interop-b2022" data-on:change="$activeInterops = ['b2022']">
-        <label class="option" for="interop-b2022" data-txt="Baseline 2022"></label>
-      </div>
-      <div data-status="ltd">
-        <input type="radio" name="interop" id="interop-ltd" data-on:change="$activeInterops = ['ltd']">
-        <label class="option" for="interop-ltd" data-txt="Limited"></label>
-      </div>
-      <div data-status="exp">
-        <input type="radio" name="interop" id="interop-exp" data-on:change="$activeInterops = ['exp']">
-        <label class="option" for="interop-exp" data-txt="Experimental"></label>
-      </div>
-    </div>
-  </div>
-
-  <!-- View Mode Toggle -->
-  <label class="view-switch big" title="Toggle view mode">
-    <input class="cb" type="checkbox" 
-      data-bind="$viewMode" 
-      data-on:change="$viewMode = $viewMode === 'grid' ? 'table' : 'grid'"
-      data-attr:checked="$viewMode === 'table'"
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Ref</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap"
+      rel="stylesheet"
     />
-    <span class="view-toggle-3d">
-      <span class="left">Grid</span>
-      <span class="right">Table</span>
-    </span>
-  </label>
+    <link rel="stylesheet" href="https://unpkg.com/open-props" />
+    <link rel="stylesheet" href="https://unpkg.com/remixicon@4.9.1/fonts/remixicon.css" />
+    <link rel="stylesheet" href="dist/bundle.css" />
+  </head>
+  <body
+    data-signals="{query: '', activeCats: [], activeInterops: [], activeBrowsers: [], catOpen: false, interopOpen: false, browserOpen: false, searchOpen: false, sidebarOpen: false, searchCatOpen: false, searchInteropOpen: false, searchBrowserOpen: false, viewMode: 'grid', theme: 'dark', selectedProp: '', tableDisplayedCount: 0, tableTotalCount: 0, tableLoading: false, filteredCount: 0, totalCount: 0}"
+    data-on:keydown__window="evt.key === 'Escape' && (($catOpen = false), ($interopOpen = false), ($browserOpen = false))"
+  >
+    <!-- Inline SVG Icons (6 icons = ~2KB instead of 190KB font) -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+      <defs>
+        <symbol id="icon-filter" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z" />
+        </symbol>
+        <symbol id="icon-grid" viewBox="0 0 24 24">
+          <path
+            fill="currentColor"
+            d="M3 3h8v8H3V3zm0 10h8v8H3v-8zM13 3h8v8h-8V3zm0 10h8v8h-8v-8z"
+          />
+        </symbol>
+        <symbol id="icon-table" viewBox="0 0 24 24">
+          <path
+            fill="currentColor"
+            d="M3 3h18v18H3V3zm2 2v5h5V5H5zm7 0v5h5V5h-5zm-7 7v5h5v-5H5zm7 0v5h5v-5h-5z"
+          />
+        </symbol>
+        <symbol id="icon-sun" viewBox="0 0 24 24">
+          <path
+            fill="currentColor"
+            d="M12 1v2a9 9 0 1 0 0 18v2A11 11 0 1 1 12 1zm0 4a7 7 0 1 1 0 14 7 7 0 0 1 0-14zm0 2a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM11 1h2v4h-2V1zm0 18h2v4h-2v-4zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.122zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-4v-2h4zM5 11v2H1v-2h4z"
+          />
+        </symbol>
+        <symbol id="icon-moon" viewBox="0 0 24 24">
+          <path
+            fill="currentColor"
+            d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"
+          />
+        </symbol>
+        <symbol id="icon-arrow-left" viewBox="0 0 24 24">
+          <path
+            fill="currentColor"
+            d="M7.828 11H20v2H7.828l5.364 5.364-1.414 1.414L4 12l7.778-7.778 1.414 1.414L7.828 11z"
+          />
+        </symbol>
+      </defs>
+    </svg>
 
-  <!-- Theme Toggle (3D switch, 2x bigger) -->
-  <label class="view-switch big" title="Toggle theme">
-    <input class="cb" type="checkbox" 
-      data-bind="$theme"
-      data-on:change="$theme = $theme === 'dark' ? 'light' : 'dark'; document.documentElement.classList.toggle('dark', $theme === 'dark')"
-      data-attr:checked="$theme === 'light'"
-    />
-    <span class="view-toggle-3d">
-      <span class="left">Dark</span>
-      <span class="right">Light</span>
-    </span>
-  </label>
-</header>
+    <header data-show="$selectedProp === ''">
+      <div class="brand" data-on:click="location.hash = ''">
+        <img class="brand-logo" src="/src/icons/cssref-logo.svg" alt="CSS Ref" />
+      </div>
 
-<!-- Grid View - Declarative rendering with data-effect -->
-<div id="grid-view" data-show="$viewMode === 'grid' && !$selectedProp">
-  <main>
-    <div id="grid" class="is-grid" data-effect="renderGrid(filtered($query, $activeCats, $activeInterops), $selectedProp)"></div>
-  </main>
-</div>
+      <!-- Desktop: Full Search -->
+      <div class="search-shell desktop-search">
+        <div class="search-main">
+          <input
+            type="search"
+            id="search-desktop"
+            class="search-input"
+            data-bind:query
+            placeholder="Search..."
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <div class="search-selects">
+            <button
+              type="button"
+              class="clear-filters-btn"
+              data-show="$activeCats.length || $activeInterops.length"
+              data-on:click="$activeCats = []; $activeInterops = []; $activeBrowsers = []"
+              title="Clear all filters"
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                <path
+                  d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                />
+              </svg>
+            </button>
+            <div class="search-dropdown" data-on:click__outside="$catOpen = false">
+              <button
+                type="button"
+                class="search-dropdown-trigger"
+                data-on:click="$interopOpen = false; $browserOpen = false; $catOpen = !$catOpen"
+                data-attr:aria-expanded="$catOpen ? 'true' : 'false'"
+                aria-haspopup="listbox"
+              >
+                <span data-text="$activeCats.length ? $activeCats[0] : 'category'"></span>
+              </button>
+              <ul class="search-dropdown-menu" data-show="$catOpen" role="listbox">
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeCats.length === 0"
+                    data-on:click="$activeCats = []; $catOpen = false"
+                  >
+                    All
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeCats.includes('Layout')"
+                    data-on:click="$activeCats = ['Layout']; $catOpen = false"
+                  >
+                    Layout
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeCats.includes('Flexbox')"
+                    data-on:click="$activeCats = ['Flexbox']; $catOpen = false"
+                  >
+                    Flexbox
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeCats.includes('Grid')"
+                    data-on:click="$activeCats = ['Grid']; $catOpen = false"
+                  >
+                    Grid
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeCats.includes('Typography')"
+                    data-on:click="$activeCats = ['Typography']; $catOpen = false"
+                  >
+                    Typography
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeCats.includes('Color')"
+                    data-on:click="$activeCats = ['Color']; $catOpen = false"
+                  >
+                    Color
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeCats.includes('Sizing')"
+                    data-on:click="$activeCats = ['Sizing']; $catOpen = false"
+                  >
+                    Sizing
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeCats.includes('Visual')"
+                    data-on:click="$activeCats = ['Visual']; $catOpen = false"
+                  >
+                    Visual
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeCats.includes('Animation')"
+                    data-on:click="$activeCats = ['Animation']; $catOpen = false"
+                  >
+                    Animation
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeCats.includes('Transform')"
+                    data-on:click="$activeCats = ['Transform']; $catOpen = false"
+                  >
+                    Transform
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeCats.includes('Spacing')"
+                    data-on:click="$activeCats = ['Spacing']; $catOpen = false"
+                  >
+                    Spacing
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeCats.includes('Interactivity')"
+                    data-on:click="$activeCats = ['Interactivity']; $catOpen = false"
+                  >
+                    Interactivity
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeCats.includes('CSS Variables')"
+                    data-on:click="$activeCats = ['CSS Variables']; $catOpen = false"
+                  >
+                    CSS Variables
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeCats.includes('Queries')"
+                    data-on:click="$activeCats = ['Queries']; $catOpen = false"
+                  >
+                    Queries
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeCats.includes('Selectors')"
+                    data-on:click="$activeCats = ['Selectors']; $catOpen = false"
+                  >
+                    Selectors
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeCats.includes('UI Components')"
+                    data-on:click="$activeCats = ['UI Components']; $catOpen = false"
+                  >
+                    UI Components
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeCats.includes('Tables')"
+                    data-on:click="$activeCats = ['Tables']; $catOpen = false"
+                  >
+                    Tables
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeCats.includes('Lists')"
+                    data-on:click="$activeCats = ['Lists']; $catOpen = false"
+                  >
+                    Lists
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeCats.includes('Breaks')"
+                    data-on:click="$activeCats = ['Breaks']; $catOpen = false"
+                  >
+                    Breaks
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeCats.includes('Misc')"
+                    data-on:click="$activeCats = ['Misc']; $catOpen = false"
+                  >
+                    Misc
+                  </button>
+                </li>
+              </ul>
+            </div>
 
-<!-- Table View - Using List.js -->
-<div id="table-view" data-show="$viewMode === 'table' && !$selectedProp"
-  data-effect="$viewMode; initListTable(filtered($query, $activeCats, $activeInterops))"
->
-  <div id="table-container">
-    <table class="list-table">
-      <thead>
-        <tr>
-          <th class="sort" data-sort="prop-name">Property</th>
-          <th class="sort" data-sort="prop-category">Category</th>
-          <th class="sort" data-sort="prop-preview">Preview</th>
-          <th class="sort" data-sort="prop-support">Support</th>
-        </tr>
-      </thead>
-      <tbody class="list">
-        <!-- Rows rendered by data-effect -->
-      </tbody>
-    </table>
-  </div>
-  <div id="table-sentinel" data-on-intersect__half="loadMoreTableRows()">Loading more...</div>
-</div>
+            <div class="search-dropdown" data-on:click__outside="$interopOpen = false">
+              <button
+                type="button"
+                class="search-dropdown-trigger"
+                data-on:click="$catOpen = false; $browserOpen = false; $interopOpen = !$interopOpen"
+                data-attr:aria-expanded="$interopOpen ? 'true' : 'false'"
+                aria-haspopup="listbox"
+              >
+                <span
+                  data-text="$activeInterops.length === 0 ? 'interop' : ($activeInterops[0] === 'wide' ? 'available' : ($activeInterops[0] === 'b2024' ? 'baseline 2024' : ($activeInterops[0] === 'b2023' ? 'baseline 2023' : ($activeInterops[0] === 'b2022' ? 'baseline 2022' : ($activeInterops[0] === 'ltd' ? 'limited' : 'experimental')))))"
+                ></span>
+              </button>
+              <ul class="search-dropdown-menu" data-show="$interopOpen" role="listbox">
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeInterops.length === 0"
+                    data-on:click="$activeInterops = []; $interopOpen = false"
+                  >
+                    All
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeInterops.includes('wide')"
+                    data-on:click="$activeInterops = ['wide']; $interopOpen = false"
+                  >
+                    Available
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeInterops.includes('b2024')"
+                    data-on:click="$activeInterops = ['b2024']; $interopOpen = false"
+                  >
+                    Baseline 2024
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeInterops.includes('b2023')"
+                    data-on:click="$activeInterops = ['b2023']; $interopOpen = false"
+                  >
+                    Baseline 2023
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeInterops.includes('b2022')"
+                    data-on:click="$activeInterops = ['b2022']; $interopOpen = false"
+                  >
+                    Baseline 2022
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeInterops.includes('ltd')"
+                    data-on:click="$activeInterops = ['ltd']; $interopOpen = false"
+                  >
+                    Limited
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeInterops.includes('exp')"
+                    data-on:click="$activeInterops = ['exp']; $interopOpen = false"
+                  >
+                    Experimental
+                  </button>
+                </li>
+              </ul>
+            </div>
 
-<!-- Detail View - Declarative with signals -->
-<div id="detail-view" data-show="$selectedProp" data-class:open="$selectedProp">
-  <div class="detail-wrap">
-    <button class="back-btn" data-on:click="$selectedProp = null">
-      <svg class="icon" aria-hidden="true"><use href="#icon-arrow-left"/></svg>
-      All properties
-    </button>
-    
-    <div class="detail-hero" data-show="$selectedProp">
-      <div class="detail-name" data-text="$selectedProp ? $selectedProp.n : ''" data-style:color="$selectedProp ? CC[$selectedProp.c] || '#6366f1' : '#6366f1'"></div>
-      <div class="detail-badges">
-        <span class="cat-badge" data-text="$selectedProp ? $selectedProp.c : ''" data-style:background="$selectedProp ? CC[$selectedProp.c] || '#6366f1' : '#6366f1'"></span>
-        <span class="availability-badge" data-text="$selectedProp ? IL[$selectedProp.i] : ''" data-class:="$selectedProp ? $selectedProp.i : ''"></span>
+            <div class="search-dropdown" data-on:click__outside="$browserOpen = false">
+              <button
+                type="button"
+                class="search-dropdown-trigger"
+                data-on:click="$catOpen = false; $interopOpen = false; $browserOpen = !$browserOpen"
+                data-attr:aria-expanded="$browserOpen ? 'true' : 'false'"
+                aria-haspopup="listbox"
+              >
+                <span
+                  data-text="$activeBrowsers.length ? ($activeBrowsers[0] === 'ch' ? 'Chrome' : $activeBrowsers[0] === 'ff' ? 'Firefox' : $activeBrowsers[0] === 'sf' ? 'Safari' : 'Edge') : 'browser'"
+                ></span>
+              </button>
+              <ul class="search-dropdown-menu" data-show="$browserOpen" role="listbox">
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeBrowsers.length === 0"
+                    data-on:click="$activeBrowsers = []; $browserOpen = false"
+                  >
+                    All
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeBrowsers.includes('ch')"
+                    data-on:click="$activeBrowsers = ['ch']; $browserOpen = false"
+                  >
+                    Chrome
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeBrowsers.includes('ff')"
+                    data-on:click="$activeBrowsers = ['ff']; $browserOpen = false"
+                  >
+                    Firefox
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeBrowsers.includes('sf')"
+                    data-on:click="$activeBrowsers = ['sf']; $browserOpen = false"
+                  >
+                    Safari
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="search-option"
+                    data-class:active="$activeBrowsers.includes('ed')"
+                    data-on:click="$activeBrowsers = ['ed']; $browserOpen = false"
+                  >
+                    Edge
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="search-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M11 2C15.968 2 20 6.032 20 11C20 15.968 15.968 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2ZM11 18C14.8675 18 18 14.8675 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18ZM19.4853 18.0711L22.3137 20.8995L20.8995 22.3137L18.0711 19.4853L19.4853 18.0711Z"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Desktop Toggles Container -->
+      <div class="header-toggles">
+        <!-- Desktop View Toggle -->
+        <label class="view-switch big desktop-only" title="Toggle view mode">
+          <input
+            class="cb"
+            type="checkbox"
+            data-bind="$viewMode"
+            data-on:change="$viewMode = $viewMode === 'grid' ? 'table' : 'grid'"
+            data-attr:checked="$viewMode === 'table'"
+          />
+          <span class="view-toggle-3d">
+            <span class="left">Grid</span>
+            <span class="right">Table</span>
+          </span>
+        </label>
+
+        <!-- Desktop Theme Toggle -->
+        <label class="view-switch big desktop-only" title="Toggle theme">
+          <input
+            class="cb"
+            type="checkbox"
+            data-bind:$theme
+            data-on:change="$theme = $theme === 'dark' ? 'light' : 'dark'; document.documentElement.classList.toggle('dark', $theme === 'dark')"
+            data-attr:checked="$theme === 'light'"
+          />
+          <span class="view-toggle-3d">
+            <span class="left">Dark</span>
+            <span class="right">Light</span>
+          </span>
+        </label>
+      </div>
+
+      <!-- Mobile: Search Icon -->
+      <button
+        type="button"
+        class="mobile-search-btn"
+        data-on:click="$sidebarOpen = false; $searchOpen = true"
+        aria-label="Open search"
+      >
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M11 2C15.968 2 20 6.032 20 11C20 15.968 15.968 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2ZM11 18C14.8675 18 18 14.8675 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18ZM19.4853 18.0711L22.3137 20.8995L20.8995 22.3137L18.0711 19.4853L19.4853 18.0711Z"
+          />
+        </svg>
+      </button>
+
+      <!-- Hamburger Menu Toggle -->
+      <button type="button" class="hamburger" data-class:is-open="$sidebarOpen === true" data-on:click="$searchOpen = false; $sidebarOpen = !$sidebarOpen">
+        <input
+          type="checkbox"
+          data-attr:checked="$sidebarOpen === true"
+        />
+        <svg viewBox="0 0 32 32">
+          <path
+            class="line line-top-bottom"
+            d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"
+          ></path>
+          <path class="line" d="M7 16 27 16"></path>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Mobile Sidebar (Right side) -->
+    <div class="sidebar-overlay" data-class:open="$sidebarOpen" data-on:click="$sidebarOpen = false"></div>
+    <aside class="sidebar" data-class:open="$sidebarOpen">
+      <div class="sidebar-header">
+        <span class="sidebar-title">Menu</span>
+        <button type="button" class="sidebar-close" data-on:click="$sidebarOpen = false" aria-label="Close menu">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="sidebar-content">
+        <!-- View Mode Toggle -->
+        <div class="sidebar-section">
+          <span class="sidebar-label">View Mode</span>
+          <label class="view-switch big" title="Toggle view mode">
+            <input
+              class="cb"
+              type="checkbox"
+              data-bind="$viewMode"
+              data-on:change="$viewMode = $viewMode === 'grid' ? 'table' : 'grid'"
+              data-attr:checked="$viewMode === 'table'"
+            />
+            <span class="view-toggle-3d">
+              <span class="left">Grid</span>
+              <span class="right">Table</span>
+            </span>
+          </label>
+        </div>
+
+        <!-- Theme Toggle -->
+        <div class="sidebar-section">
+          <span class="sidebar-label">Theme</span>
+          <label class="view-switch big" title="Toggle theme">
+            <input
+              class="cb"
+              type="checkbox"
+              data-bind:$theme
+              data-on:change="$theme = $theme === 'dark' ? 'light' : 'dark'; document.documentElement.classList.toggle('dark', $theme === 'dark')"
+              data-attr:checked="$theme === 'light'"
+            />
+            <span class="view-toggle-3d">
+              <span class="left">Dark</span>
+              <span class="right">Light</span>
+            </span>
+          </label>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Command Palette Modal (Mobile Search) -->
+    <div class="command-palette-overlay" data-class:open="$searchOpen" data-on:click="$searchOpen = false"></div>
+    <div class="command-palette" data-class:open="$searchOpen" data-on:keydown__window="evt.key === 'Escape' && ($searchOpen = false)">
+      <!-- Window-style close button at top right -->
+      <button type="button" class="command-palette-close" data-on:click="$searchOpen = false" aria-label="Close">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+        </svg>
+      </button>
+      <div class="command-palette-header">
+        <div class="command-palette-search">
+          <svg class="search-icon-lg" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M11 2C15.968 2 20 6.032 20 11C20 15.968 15.968 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2ZM11 18C14.8675 18 18 14.8675 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18ZM19.4853 18.0711L22.3137 20.8995L20.8995 22.3137L18.0711 19.4853L19.4853 18.0711Z"
+            />
+          </svg>
+          <input
+            type="search"
+            id="search-mobile"
+            class="command-palette-input"
+            data-bind:query
+            placeholder="Search properties..."
+            autocomplete="off"
+            spellcheck="false"
+            data-on-mount="setTimeout(()=>document.getElementById('search-mobile').focus(), 100)"
+          />
+        </div>
+      </div>
+      <div class="command-palette-filters">
+        <button
+          type="button"
+          class="clear-filters-btn"
+          data-show="$activeCats.length || $activeInterops.length || $activeBrowsers.length"
+          data-on:click="$activeCats = []; $activeInterops = []; $activeBrowsers = []"
+          title="Clear all filters"
+        >
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+          </svg>
+          Clear filters
+        </button>
+        <div class="filter-row">
+          <div class="search-dropdown" data-on:click__outside="$searchCatOpen = false">
+            <button
+              type="button"
+              class="search-dropdown-trigger"
+              data-on:click="$searchInteropOpen = false; $searchBrowserOpen = false; $searchCatOpen = !$searchCatOpen"
+              data-attr:aria-expanded="$searchCatOpen ? 'true' : 'false'"
+              aria-haspopup="listbox"
+            >
+              <span data-text="$activeCats.length ? $activeCats[0] : 'category'"></span>
+            </button>
+            <ul class="search-dropdown-menu" data-show="$searchCatOpen" role="listbox">
+              <li><button type="button" class="search-option" data-class:active="$activeCats.length === 0" data-on:click="$activeCats = []; $searchCatOpen = false">All</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeCats.includes('Layout')" data-on:click="$activeCats = ['Layout']; $searchCatOpen = false">Layout</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeCats.includes('Flexbox')" data-on:click="$activeCats = ['Flexbox']; $searchCatOpen = false">Flexbox</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeCats.includes('Grid')" data-on:click="$activeCats = ['Grid']; $searchCatOpen = false">Grid</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeCats.includes('Typography')" data-on:click="$activeCats = ['Typography']; $searchCatOpen = false">Typography</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeCats.includes('Color')" data-on:click="$activeCats = ['Color']; $searchCatOpen = false">Color</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeCats.includes('Sizing')" data-on:click="$activeCats = ['Sizing']; $searchCatOpen = false">Sizing</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeCats.includes('Visual')" data-on:click="$activeCats = ['Visual']; $searchCatOpen = false">Visual</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeCats.includes('Animation')" data-on:click="$activeCats = ['Animation']; $searchCatOpen = false">Animation</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeCats.includes('Transform')" data-on:click="$activeCats = ['Transform']; $searchCatOpen = false">Transform</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeCats.includes('Spacing')" data-on:click="$activeCats = ['Spacing']; $searchCatOpen = false">Spacing</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeCats.includes('Interactivity')" data-on:click="$activeCats = ['Interactivity']; $searchCatOpen = false">Interactivity</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeCats.includes('CSS Variables')" data-on:click="$activeCats = ['CSS Variables']; $searchCatOpen = false">CSS Variables</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeCats.includes('Queries')" data-on:click="$activeCats = ['Queries']; $searchCatOpen = false">Queries</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeCats.includes('Selectors')" data-on:click="$activeCats = ['Selectors']; $searchCatOpen = false">Selectors</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeCats.includes('UI Components')" data-on:click="$activeCats = ['UI Components']; $searchCatOpen = false">UI Components</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeCats.includes('Tables')" data-on:click="$activeCats = ['Tables']; $searchCatOpen = false">Tables</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeCats.includes('Lists')" data-on:click="$activeCats = ['Lists']; $searchCatOpen = false">Lists</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeCats.includes('Breaks')" data-on:click="$activeCats = ['Breaks']; $searchCatOpen = false">Breaks</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeCats.includes('Misc')" data-on:click="$activeCats = ['Misc']; $searchCatOpen = false">Misc</button></li>
+            </ul>
+          </div>
+
+          <div class="search-dropdown" data-on:click__outside="$searchInteropOpen = false">
+            <button
+              type="button"
+              class="search-dropdown-trigger"
+              data-on:click="$searchCatOpen = false; $searchBrowserOpen = false; $searchInteropOpen = !$searchInteropOpen"
+              data-attr:aria-expanded="$searchInteropOpen ? 'true' : 'false'"
+              aria-haspopup="listbox"
+            >
+              <span data-text="$activeInterops.length === 0 ? 'interop' : ($activeInterops[0] === 'wide' ? 'available' : ($activeInterops[0] === 'b2024' ? 'baseline 2024' : ($activeInterops[0] === 'b2023' ? 'baseline 2023' : ($activeInterops[0] === 'b2022' ? 'baseline 2022' : ($activeInterops[0] === 'ltd' ? 'limited' : 'experimental')))))"
+              ></span>
+            </button>
+            <ul class="search-dropdown-menu" data-show="$searchInteropOpen" role="listbox">
+              <li><button type="button" class="search-option" data-class:active="$activeInterops.length === 0" data-on:click="$activeInterops = []; $searchInteropOpen = false">All</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeInterops.includes('wide')" data-on:click="$activeInterops = ['wide']; $searchInteropOpen = false">Available</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeInterops.includes('b2024')" data-on:click="$activeInterops = ['b2024']; $searchInteropOpen = false">Baseline 2024</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeInterops.includes('b2023')" data-on:click="$activeInterops = ['b2023']; $searchInteropOpen = false">Baseline 2023</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeInterops.includes('b2022')" data-on:click="$activeInterops = ['b2022']; $searchInteropOpen = false">Baseline 2022</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeInterops.includes('ltd')" data-on:click="$activeInterops = ['ltd']; $searchInteropOpen = false">Limited</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeInterops.includes('exp')" data-on:click="$activeInterops = ['exp']; $searchInteropOpen = false">Experimental</button></li>
+            </ul>
+          </div>
+
+          <div class="search-dropdown" data-on:click__outside="$searchBrowserOpen = false">
+            <button
+              type="button"
+              class="search-dropdown-trigger"
+              data-on:click="$searchCatOpen = false; $searchInteropOpen = false; $searchBrowserOpen = !$searchBrowserOpen"
+              data-attr:aria-expanded="$searchBrowserOpen ? 'true' : 'false'"
+              aria-haspopup="listbox"
+            >
+              <span data-text="$activeBrowsers.length ? ($activeBrowsers[0] === 'ch' ? 'Chrome' : $activeBrowsers[0] === 'ff' ? 'Firefox' : $activeBrowsers[0] === 'sf' ? 'Safari' : 'Edge') : 'browser'"
+              ></span>
+            </button>
+            <ul class="search-dropdown-menu" data-show="$searchBrowserOpen" role="listbox">
+              <li><button type="button" class="search-option" data-class:active="$activeBrowsers.length === 0" data-on:click="$activeBrowsers = []; $searchBrowserOpen = false">All</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeBrowsers.includes('ch')" data-on:click="$activeBrowsers = ['ch']; $searchBrowserOpen = false">Chrome</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeBrowsers.includes('ff')" data-on:click="$activeBrowsers = ['ff']; $searchBrowserOpen = false">Firefox</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeBrowsers.includes('sf')" data-on:click="$activeBrowsers = ['sf']; $searchBrowserOpen = false">Safari</button></li>
+              <li><button type="button" class="search-option" data-class:active="$activeBrowsers.includes('ed')" data-on:click="$activeBrowsers = ['ed']; $searchBrowserOpen = false">Edge</button></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-    
-    <div class="detail-demo-box" data-show="$selectedProp">
-      <div class="detail-demo-stage" data-html="$selectedProp ? $selectedProp.demo : ''"></div>
-      <div class="detail-demo-label" data-text="$selectedProp && $selectedProp.x ? $selectedProp.x.split('\n')[0] : ''"></div>
+
+    <!-- Grid View - Declarative rendering with data-effect -->
+    <div id="grid-view" data-show="$viewMode === 'grid' && $selectedProp === ''">
+      <main>
+        <div
+          id="grid"
+          class="is-grid"
+          data-effect="renderGrid(filtered($query, $activeCats, $activeInterops, $activeBrowsers), $selectedProp)"
+        ></div>
+      </main>
     </div>
 
-    <div class="detail-section" data-show="$selectedProp">
-      <div class="detail-lbl">Description</div>
-      <p class="detail-desc" data-text="$selectedProp ? $selectedProp.d : ''"></p>
+    <!-- Table View - Using List.js -->
+    <div
+      id="table-view"
+      data-show="$viewMode === 'table' && $selectedProp === ''"
+      data-effect="$viewMode; initListTable(filtered($query, $activeCats, $activeInterops, $activeBrowsers))"
+    >
+      <div id="table-container">
+        <table class="list-table">
+          <thead>
+            <tr>
+              <th class="sort" data-sort="prop-name">Property</th>
+              <th class="sort" data-sort="prop-category">Category</th>
+              <th class="sort" data-sort="prop-preview">Preview</th>
+              <th class="sort" data-sort="prop-support-sort">Support</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <!-- Rows rendered by data-effect -->
+          </tbody>
+        </table>
+      </div>
+      <div id="table-sentinel" data-on-intersect__half="loadMoreTableRows()">Loading more...</div>
     </div>
 
-    <div class="detail-section" data-show="$selectedProp">
-      <div class="detail-lbl">Syntax</div>
-      <pre class="syntax-block" data-text="$selectedProp ? $selectedProp.x : ''"></pre>
-    </div>
+    <!-- Detail View - Rendered by JS -->
+    <div
+      id="detail-view"
+      data-show="$selectedProp !== ''"
+      data-class:open="$selectedProp !== ''"
+      data-effect="renderDetail($selectedProp); $selectedProp"
+    ></div>
 
-    <div class="detail-section" data-show="$selectedProp">
-      <div class="detail-lbl">Browser Support</div>
-      <div class="detail-browsers" data-html="$selectedProp ? renderBrowserSupport($selectedProp.s) : ''"></div>
-    </div>
+    <!-- Hash routing: sync hash ↔ signal -->
+    <div
+      data-on:hashchange__window="$selectedProp = decodeURIComponent(location.hash.slice(1))"
+      style="display: none"
+    ></div>
+    <div
+      data-init="$selectedProp = decodeURIComponent(location.hash.slice(1) || '')"
+      style="display: none"
+    ></div>
 
-    <a class="mdn-link" data-show="$selectedProp" data-attr:href="$selectedProp ? 'https://developer.mozilla.org/en-US/docs/Web/CSS/' + $selectedProp.m : ''" target="_blank" rel="noopener">
-      View on MDN →
-    </a>
-  </div>
-</div>
+    <!-- Escape key handler -->
+    <div
+      data-on:keydown__window="evt.key === 'Escape' && (location.hash = '')"
+      style="display: none"
+    ></div>
 
-<!-- Escape key handler -->
-<div data-on:keydown__window="evt.key === 'Escape' && ($selectedProp = null)" style="display:none"></div>
+    <!-- Property Counter (Sticky Bottom Right) -->
+    <div
+      class="property-counter"
+      data-effect="$filteredCount = filtered($query, $activeCats, $activeInterops, $activeBrowsers).length; $totalCount = P.length"
+      data-text="$filteredCount + ' / ' + $totalCount + ' properties'"
+    ></div>
 
-<script src="dist/bundle.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
-<script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@1.0.0-RC.8/bundles/datastar.js"></script>
-<script>
-  document.documentElement.classList.add('dark');
-</script>
-</body>
+    <script src="dist/bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/gh/starfederation/datastar@1.0.0-RC.8/bundles/datastar.js"
+    ></script>
+    <script>
+      document.documentElement.classList.add("dark");
+    </script>
+  </body>
 </html>

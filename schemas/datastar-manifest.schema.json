@@ -4,7 +4,15 @@
   "title": "Datastar Manifest",
   "description": "Schema for Datastar window exports manifest",
   "type": "object",
-  "required": ["version", "description", "generated", "sources", "exports", "signals", "allowedDatastarAttributes"],
+  "required": [
+    "version",
+    "description",
+    "generated",
+    "sources",
+    "exports",
+    "signals",
+    "allowedDatastarAttributes"
+  ],
   "properties": {
     "$schema": {
       "type": "string",
