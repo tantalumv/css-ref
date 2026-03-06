@@ -29,17 +29,17 @@
   border-color: var(--primary);
 }
 
-.collection-dropdown-trigger::after {
+.collection-dropdown-trigger::before {
   content: "";
-  width: 0.5rem;
-  height: 0.5rem;
+  width: 0.35rem;
+  height: 0.35rem;
   border-right: 2px solid var(--muted-foreground);
   border-bottom: 2px solid var(--muted-foreground);
   transform: translateY(-25%) rotate(45deg);
   transition: transform 0.2s ease;
 }
 
-.collection-dropdown-trigger[aria-expanded="true"]::after {
+.collection-dropdown-trigger[aria-expanded="true"]::before {
   transform: translateY(25%) rotate(-135deg);
 }
 
