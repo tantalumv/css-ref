@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="CSS Ref - A comprehensive reference for CSS properties, selectors, and values with browser support information." />
     <title>CSS Ref</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -194,6 +195,7 @@
             class="search-input"
             data-bind:query
             placeholder="Search..."
+            aria-label="Search CSS properties"
             autocomplete="off"
             spellcheck="false"
           />
@@ -660,6 +662,50 @@
             </span>
           </label>
         </div>
+
+        <!-- Collections Dropdown -->
+        <div class="sidebar-section sidebar-collections-section">
+          <div class="search-dropdown sidebar-collections-dropdown" onclick="const menu = this.querySelector('.search-dropdown-menu'); if (event.target.closest('.search-dropdown-menu')) return; if (menu && menu.style.display !== 'none') { menu.style.display = 'none'; this.querySelector('.sidebar-dropdown-trigger').setAttribute('aria-expanded', 'false'); }">
+            <button type="button" class="sidebar-dropdown-trigger"
+              onclick="event.stopPropagation(); const menu = this.nextElementSibling; menu.style.display = menu.style.display === 'none' || !menu.style.display ? 'block' : 'none'; this.setAttribute('aria-expanded', menu.style.display !== 'none'); return false;"
+              data-attr:aria-expanded="false"
+              aria-haspopup="listbox">
+              <span>Collections</span>
+            </button>
+            <ul class="search-dropdown-menu" style="display: none;" role="listbox">
+              <li>
+                <button type="button" class="search-option" onclick="location.hash='!flexbox'; this.closest('.search-dropdown-menu').style.display = 'none'; this.closest('.search-dropdown-menu').previousElementSibling.setAttribute('aria-expanded', 'false');">
+                  <i class="ri-layout-row-line"></i> Flexbox
+                </button>
+              </li>
+              <li>
+                <button type="button" class="search-option" onclick="location.hash='!grid'; this.closest('.search-dropdown-menu').style.display = 'none'; this.closest('.search-dropdown-menu').previousElementSibling.setAttribute('aria-expanded', 'false');">
+                  <i class="ri-layout-column-line"></i> Grid
+                </button>
+              </li>
+              <li>
+                <button type="button" class="search-option" onclick="location.hash='!typography'; this.closest('.search-dropdown-menu').style.display = 'none'; this.closest('.search-dropdown-menu').previousElementSibling.setAttribute('aria-expanded', 'false');">
+                  <i class="ri-font-size"></i> Typography
+                </button>
+              </li>
+              <li>
+                <button type="button" class="search-option" onclick="location.hash='!animation'; this.closest('.search-dropdown-menu').style.display = 'none'; this.closest('.search-dropdown-menu').previousElementSibling.setAttribute('aria-expanded', 'false');">
+                  <i class="ri-movie-line"></i> Animation
+                </button>
+              </li>
+              <li>
+                <button type="button" class="search-option" onclick="location.hash='!color'; this.closest('.search-dropdown-menu').style.display = 'none'; this.closest('.search-dropdown-menu').previousElementSibling.setAttribute('aria-expanded', 'false');">
+                  <i class="ri-palette-line"></i> Color
+                </button>
+              </li>
+              <li>
+                <button type="button" class="search-option" onclick="location.hash='!layout'; this.closest('.search-dropdown-menu').style.display = 'none'; this.closest('.search-dropdown-menu').previousElementSibling.setAttribute('aria-expanded', 'false');">
+                  <i class="ri-layout-grid-line"></i> Layout
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </aside>
 
@@ -685,6 +731,7 @@
             class="command-palette-input"
             data-bind:query
             placeholder="Search properties..."
+            aria-label="Search CSS properties"
             autocomplete="off"
             spellcheck="false"
             data-on-mount="setTimeout(()=>document.getElementById('search-mobile').focus(), 100)"
@@ -692,17 +739,6 @@
         </div>
         <div class="command-palette-filters">
           <div class="search-selects">
-            <button
-              type="button"
-              class="clear-filters-btn"
-              data-show="$activeCats.length || $activeInterops.length || $activeBrowsers.length"
-              data-on:click="$activeCats = []; $activeInterops = []; $activeBrowsers = []"
-              title="Clear all filters"
-            >
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
-                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-              </svg>
-            </button>
             <div class="search-dropdown" data-on:click__outside="$searchCatOpen = false">
               <button
                 type="button"
@@ -778,6 +814,20 @@
                 <li><button type="button" class="search-option" data-class:active="$activeBrowsers.includes('ed')" data-on:click="$activeBrowsers = ['ed']; $searchBrowserOpen = false">Edge</button></li>
               </ul>
             </div>
+          </div>
+          <div class="clear-filters-wrapper">
+            <button
+              type="button"
+              class="clear-filters-btn"
+              data-show="$activeCats.length || $activeInterops.length || $activeBrowsers.length"
+              data-on:click="$activeCats = []; $activeInterops = []; $activeBrowsers = []"
+              title="Clear all filters"
+            >
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+              </svg>
+              <span>clear filter</span>
+            </button>
           </div>
         </div>
       </div>

@@ -260,6 +260,115 @@ test.describe("Mobile Functionality", () => {
   });
 });
 
+// Sidebar dropdown tests
+test.describe("Sidebar Collections Dropdown", () => {
+  test.use({ viewport: { width: 375, height: 667 } });
+
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/");
+    await page.waitForSelector(".card", { timeout: 5000 });
+  });
+
+  test("sidebar collections dropdown opens when trigger is clicked", async ({ page }) => {
+    // Open sidebar first
+    await page.locator(".hamburger").click();
+    await expect(page.locator(".sidebar")).toHaveClass(/open/);
+
+    // Find the sidebar collections dropdown
+    const sidebarDropdown = page.locator(".sidebar-collections-dropdown");
+    const trigger = sidebarDropdown.locator(".sidebar-dropdown-trigger");
+    const menu = sidebarDropdown.locator(".search-dropdown-menu");
+
+    // Initially menu should not be visible
+    await expect(menu).not.toBeVisible();
+
+    // Click trigger to open
+    await trigger.click();
+
+    // Verify menu is visible
+    await expect(menu, "Sidebar collections dropdown should be visible after clicking trigger").toBeVisible();
+  });
+
+  test("sidebar collections dropdown closes when clicking outside", async ({ page }) => {
+    // Open sidebar and dropdown
+    await page.locator(".hamburger").click();
+    const sidebarDropdown = page.locator(".sidebar-collections-dropdown");
+    const trigger = sidebarDropdown.locator(".sidebar-dropdown-trigger");
+    const menu = sidebarDropdown.locator(".search-dropdown-menu");
+
+    await trigger.click();
+    await expect(menu).toBeVisible();
+
+    // Click outside (on the sidebar overlay)
+    await page.locator(".sidebar-overlay").click();
+
+    // Verify dropdown is closed
+    await expect(menu, "Sidebar collections dropdown should close when clicking outside").not.toBeVisible();
+  });
+
+  test("can select option from sidebar collections dropdown", async ({ page }) => {
+    // Open sidebar and dropdown
+    await page.locator(".hamburger").click();
+    const sidebarDropdown = page.locator(".sidebar-collections-dropdown");
+    const trigger = sidebarDropdown.locator(".sidebar-dropdown-trigger");
+    const menu = sidebarDropdown.locator(".search-dropdown-menu");
+
+    await trigger.click();
+    await expect(menu).toBeVisible();
+
+    // Select Flexbox option
+    const flexboxOption = menu.locator('button.search-option:has-text("Flexbox")');
+    await flexboxOption.click();
+
+    // Verify dropdown closes after selection
+    await expect(menu, "Sidebar collections dropdown should close after selection").not.toBeVisible();
+
+    // Verify URL hash changed
+    await expect(page).toHaveURL(/#!flexbox/);
+  });
+
+  test("sidebar collections dropdown has correct aria-expanded", async ({ page }) => {
+    // Open sidebar
+    await page.locator(".hamburger").click();
+
+    const sidebarDropdown = page.locator(".sidebar-collections-dropdown");
+    const trigger = sidebarDropdown.locator(".sidebar-dropdown-trigger");
+
+    // Initially aria-expanded should be false
+    await expect(trigger).toHaveAttribute("aria-expanded", "false");
+
+    // Click to open
+    await trigger.click();
+
+    // Verify aria-expanded is true
+    await expect(trigger, "aria-expanded should be true when dropdown is open").toHaveAttribute("aria-expanded", "true");
+
+    // Click again to close
+    await trigger.click();
+
+    // Verify aria-expanded is false
+    await expect(trigger, "aria-expanded should be false when dropdown is closed").toHaveAttribute("aria-expanded", "false");
+  });
+
+  test("all collection options are available in sidebar dropdown", async ({ page }) => {
+    // Open sidebar and dropdown
+    await page.locator(".hamburger").click();
+    const sidebarDropdown = page.locator(".sidebar-collections-dropdown");
+    const trigger = sidebarDropdown.locator(".sidebar-dropdown-trigger");
+    const menu = sidebarDropdown.locator(".search-dropdown-menu");
+
+    await trigger.click();
+    await expect(menu).toBeVisible();
+
+    // Verify all collection options exist
+    const expectedOptions = ["Flexbox", "Grid", "Typography", "Animation", "Color", "Layout"];
+    for (const option of expectedOptions) {
+      const optionButton = menu.locator(`button.search-option:has-text("${option}")`);
+      await expect(optionButton, `Option "${option}" should exist in sidebar dropdown`).toBeVisible();
+    }
+  });
+});
+
 // Console error monitoring test
 test.describe("Error Monitoring", () => {
   test("no console errors when interacting with dropdowns", async ({ page }) => {
