@@ -1,6 +1,12 @@
 # CSS Ref
 
-A visual browser of CSS properties with filtering, search, and detail views.
+[![Bun](https://img.shields.io/badge/Bun-%23000000.svg?style=flat&logo=bun&logoColor=white)](https://bun.sh)
+[![TypeScript](https://img.shields.io/badge/TypeScript-%23007ACC.svg?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Datastar](https://img.shields.io/badge/datastar-%23FF4F00.svg?style=flat&logo=data-star.dev&logoColor=white)](https://data-star.dev)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Playwright](https://img.shields.io/badge/Playwright-2EAD33.svg?style=flat&logo=playwright&logoColor=white)](https://playwright.dev)
+
+A visual browser for CSS properties with live demos, filtering, and browser support information.
 
 Built with [Datastar](https://data-star.dev/) + TypeScript as a static site — no backend required.
 
@@ -16,89 +22,87 @@ Open [http://localhost:2005](http://localhost:2005).
 
 ## Features
 
-- **Grid / List / Table view** toggle
-- **Search** by property name, description, or category (debounced 150ms)
-- **Category chips** — filter by 19 CSS categories
-- **Interop chips** — filter by browser support status (Available, Baseline 2024/2023/2022, Limited, Experimental)
-- **Browser filter** — filter by specific browser (Chrome, Firefox, Safari, Edge)
-- **Theme toggle** — dark/light mode
-- **Table view** — sortable by property name, category, or browser support
-- **Infinite scroll** — loads 30 properties at a time in table view
-- **Detail view** — syntax, live demo, browser support, MDN link
-- **Related properties** — shows up to 4 related properties in detail view
-- **Copy syntax** — one-click copy button for property syntax
-- **Hash routing** — URL reflects selected property
-- **Property counter** — sticky counter showing filtered/total count
-- **Escape key** closes popover / returns to list
-- **Click outside** closes filter popover
-- **Mobile sidebar** — hamburger menu with view/theme toggles
-- **Command palette** — mobile search with all filters
+### View Modes
+- **Grid View** — Visual card grid with live CSS demos, color-coded by category
+- **Table View** — Sortable with infinite scroll (30 properties at a time)
+- **Detail View** — Full property page with syntax, description, browser support matrix, and MDN links
+
+### Filtering & Search
+- **Search** — Real-time search across property names, descriptions (debounced 150ms)
+- **Category Filter** — 19 CSS categories (Layout, Flexbox, Grid, Typography, Color, etc.)
+- **Browser Filter** — Chrome, Firefox, Safari, Edge
+- **Collections** — Quick links to Flexbox, Grid, Typography, Animation, Color, Layout
+
+### Browser Support
+- **Interop Status** — Filter by browser support level:
+  - **Available** — Widely supported
+  - **Baseline 2024/2023/2022** — Modern cross-browser standard
+  - **Limited** — Partial support or caveats
+  - **Experimental** — Cutting-edge, limited support
+- **Browser Icons** — Chrome, Firefox, Safari, Edge support for each property
+
+### UX Features
+- **Dark/Light Theme** — Toggle between themes
+- **Copy to Clipboard** — One-click copy for property syntax
+- **Related Properties** — Shows up to 4 related properties in detail view
+- **Hash Routing** — Shareable URLs for any property
+- **Property Counter** — Sticky counter showing filtered/total count
+- **Keyboard Navigation** — Escape to close detail view or popovers
+
+### Mobile
+- **Responsive Design** — Works on all screen sizes
+- **Sidebar Menu** — Hamburger menu with view/theme toggles
+- **Command Palette** — Mobile search with all filters
+
+## CSS Categories (19)
+
+| | | | | |
+|---|---|---|---|---|
+| Layout | Flexbox | Grid | Typography | Color |
+| Sizing | Visual | Animation | Transform | Spacing |
+| Interactivity | CSS Variables | Queries | Selectors | UI Components |
+| Tables | Lists | Breaks | Misc | |
+
+## Tech Stack
+
+- **Datastar** — Reactive UI framework (CDN)
+- **TypeScript** — Client-side rendering and data
+- **List.js** — Table sorting and search (CDN)
+- **Open Props** — CSS custom properties (CDN)
+- **RemixIcon** — Icons (CDN)
 
 ## Architecture
 
 ```
 index.html          Datastar attributes (signals, events, effects)
-src/main.ts         Exposes data & functions on window for Datastar
+src/main.ts         Exposes data & functions on window
 src/data/           240 CSS property definitions across 19 categories
 src/constants.ts    Category colors, interop labels/colors
-src/utils.ts        bIcon() browser support helper
+src/utils.ts        Browser support helper
 src/types.ts        TypeScript interfaces
-src/styles/         CSS modules (base, card, table, animations, etc.)
-src/state.ts        State module (unit tests)
-src/filters.ts      Filter logic (unit tests)
+src/styles/         CSS modules
 ```
 
-### External Dependencies
+## Why Hybrid Datastar?
 
-- **Datastar** — reactive UI framework (via CDN)
-- **List.js** — table sorting and search (via CDN)
-- **Open Props** — CSS custom properties (via CDN)
-- **RemixIcon** — icons (via CDN)
+Datastar's ideal architecture is backend-driven with SSE streaming. This project uses a hybrid approach because:
 
-### Datastar handles
-
-- **Reactive state** — `data-signals` on `<body>` defines `query`, `activeCats`, `activeInterops`, `activeBrowsers`, `viewMode`, `theme`, `selectedProp`, `catOpen`, `interopOpen`, `browserOpen`, `sidebarOpen`, `searchOpen`, `searchCatOpen`, `searchInteropOpen`, `searchBrowserOpen`
-- **Event handling** — `data-on:click`, `data-on:input__debounce`, `data-on:keydown__window`, `data-on:click__outside`, `data-on:hashchange__window`, `data-on:intersect__half`
-- **Dynamic classes** — `data-class:active`, `data-class:open`, `data-class:has-active`, `data-class:is-open`
-- **Conditional visibility** — `data-show` for the filter active dot and view modes
-- **Reactive rendering** — `data-effect` triggers `renderGrid()`, `renderChips()`, `initListTable()` whenever signals change
-- **Two-way binding** — `data-bind:query`, `data-bind:$viewMode`, `data-bind:$theme` on inputs
-- **Hash routing** — `data-on:hashchange__window` syncs URL hash to `selectedProp` signal
-
-### TypeScript bundle handles
-
-- **Static data** — 240 CSS properties, category/interop metadata
-- **DOM rendering** — `renderGrid()`, `renderChips()`, `renderDetail()` build HTML imperatively
-- **Filter logic** — `filtered()` computes the visible property list
-- **Table view** — `initListTable()`, `loadMoreTableRows()` for infinite scroll
-- **Related properties** — `findRelatedProps()` finds related properties by category
-- **Browser support** — `renderBrowserSupport()` renders browser icons
-
-All functions and data are exposed on `window` so Datastar expressions can call them directly.
-
-## Why not full Datastar with SSE?
-
-Datastar's ideal architecture is **backend-driven**: a server streams HTML fragments via SSE (Server-Sent Events) using `@get()` / `@post()` actions, and Datastar patches them into the DOM. This eliminates client-side rendering entirely.
-
-We don't use that approach here because:
-
-1. **No client-side iteration** — Datastar has no `data-for` or `data-each` directive. Rendering a list of 240 property cards requires looping, which can only happen in JavaScript or on a server.
-
-2. **Static site goal** — CSS Ref is a single `index.html` that can be served from any static host (GitHub Pages, Netlify, S3). Adding SSE would require a persistent backend server (Go, Node, Python, etc.), adding deployment complexity for what is essentially a reference page.
-
-3. **All data is static** — The 240 CSS properties never change at runtime. There's no database, no user-generated content, no reason for a server round-trip. Filtering, sorting, and rendering happen instantly in the browser.
-
-The current hybrid gives us the best of both: Datastar's declarative reactivity for state and events, and a small TypeScript bundle for data and rendering — all deployable as a static site.
+1. **No `data-for` directive** — Datastar lacks list rendering, requiring JavaScript loops
+2. **Static site goal** — Single `index.html` deployable anywhere
+3. **All data is static** — No database, instant filtering in the browser
 
 ## Scripts
 
 | Command             | Description                                      |
 | ------------------- | ------------------------------------------------ |
-| `bun run build`     | Production build (bun bundler + esbuild for CSS) |
+| `bun run build`     | Production build                                 |
 | `bun run dev`       | Watch mode with sourcemaps                       |
 | `bun run serve`     | Serve on localhost:2005                          |
-| `bun test`          | Unit tests (vitest, watch)                       |
-| `bun run test:run`  | Unit tests (single run)                          |
-| `bun run test:e2e`  | E2E tests (Playwright)                           |
+| `bun test`          | Unit tests (vitest)                              |
+| `bun test:e2e`      | E2E tests (Playwright)                           |
 | `bun run typecheck` | TypeScript type check                            |
 | `bun run lint`      | Lint with oxlint                                 |
+
+## License
+
+MIT License — see [LICENSE](LICENSE) file.
