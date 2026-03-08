@@ -20,7 +20,9 @@ test.describe("Detail View", () => {
     await expect(page.locator(".detail-hero")).toBeVisible();
     await expect(page.locator(".detail-name")).toHaveText(propertyName?.trim() || "");
     await expect(page.locator(".detail-demo-stage")).toBeVisible();
-    await expect(page.locator(".detail-section")).toHaveCount(3); // Description, Syntax, Browser Support
+    const sections = page.locator(".detail-section");
+    const sectionCount = await sections.count();
+    expect(sectionCount).toBeGreaterThanOrEqual(3); // At least 3 sections: Description, Syntax, Browser Support (Values and Related may be present)
     await expect(page.locator(".back-btn")).toBeVisible();
     await expect(page.locator(".mdn-link")).toBeVisible();
 
@@ -156,22 +158,22 @@ test.describe("Detail View", () => {
     await expect(page.locator(".detail-demo-stage")).toBeVisible();
     await expect(page.locator(".detail-demo-label")).toBeVisible();
 
-    // Description section
-    await expect(page.locator(".detail-section").nth(0).locator(".detail-lbl")).toHaveText(
-      "Description",
-    );
+    // Get all section labels - sections may be in different order depending on property data
+    const sectionLabels = page.locator(".detail-section .detail-lbl");
+    const labelTexts = await sectionLabels.allTextContents();
+    
+    // Verify expected sections exist (may have additional sections like Values, Related Properties)
+    expect(labelTexts).toContain("Description");
+    expect(labelTexts).toContain("Syntax");
+    expect(labelTexts).toContain("Browser Support");
+    
+    // Check Description section content
     await expect(page.locator(".detail-desc")).toBeVisible();
-
-    // Syntax section
-    await expect(page.locator(".detail-section").nth(1).locator(".detail-lbl")).toHaveText(
-      "Syntax",
-    );
+    
+    // Check Syntax section content  
     await expect(page.locator(".syntax-block")).toBeVisible();
-
-    // Browser Support section
-    await expect(page.locator(".detail-section").nth(2).locator(".detail-lbl")).toHaveText(
-      "Browser Support",
-    );
+    
+    // Check Browser Support section content
     await expect(page.locator(".detail-browsers")).toBeVisible();
     await expect(page.locator(".detail-b")).toHaveCount(4); // Chrome, Firefox, Safari, Edge
 

@@ -7,6 +7,8 @@ export async function switchToTable(page: Page): Promise<void> {
   if (await tableView.isVisible()) return;
   const viewToggleLabel = page.locator('label.view-switch[title="Toggle view mode"]').first();
   await viewToggleLabel.click();
+  // Wait for DataStar to update the DOM
+  await page.waitForTimeout(100);
   await expect(tableView).toBeVisible();
 }
 
@@ -15,6 +17,8 @@ export async function switchToGrid(page: Page): Promise<void> {
   if (await gridView.isVisible()) return;
   const viewToggleLabel = page.locator('label.view-switch[title="Toggle view mode"]').first();
   await viewToggleLabel.click();
+  // Wait for DataStar to update the DOM
+  await page.waitForTimeout(100);
   await expect(gridView).toBeVisible();
 }
 
@@ -49,7 +53,7 @@ export async function getTableDisplayed(page: Page): Promise<number> {
 }
 
 export async function applyCategoryFilter(page: Page, category: string): Promise<void> {
-  const { menu } = await openDropdown(page, 0);
+  const { menu } = await openDropdown(page, 1);
   await menu.locator(`button.search-option:has-text("${category}")`).click();
   await page.waitForTimeout(500);
 }
