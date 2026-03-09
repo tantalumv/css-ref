@@ -114,7 +114,9 @@ header {
   color: var(--foreground);
   padding-inline: 36px clamp(14.8rem, 30vw, 19.2rem);
   font-size: clamp(14px, 1.6vw, 18px);
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 1px 0px inset, rgba(255, 255, 255, 0.17) 0px 1px 1px 0px;
+  box-shadow:
+    rgba(0, 0, 0, 0.15) 0px 2px 1px 0px inset,
+    rgba(255, 255, 255, 0.17) 0px 1px 1px 0px;
 }
 
 .search-input::placeholder {
@@ -622,7 +624,9 @@ header > .search-dropdown .search-option {
 .search-filter-prefix .search-dropdown-trigger:hover {
   background-color: var(--accent);
   color: var(--foreground);
-  box-shadow: 0px -4px 1px 0px inset rgba(0, 0, 0, 0.23), 0px 2px 4px 1px rgba(0, 0, 0, 0.17);
+  box-shadow:
+    0px -4px 1px 0px inset rgba(0, 0, 0, 0.23),
+    0px 2px 4px 1px rgba(0, 0, 0, 0.17);
 }
 
 .search-filter-prefix .search-dropdown-trigger[aria-expanded="true"] {
@@ -714,7 +718,9 @@ header > .search-dropdown .search-option {
 .search-selects > .search-dropdown .search-dropdown-trigger:hover {
   background-color: var(--accent);
   color: var(--foreground);
-  box-shadow: 0px -4px 1px 0px inset rgba(0, 0, 0, 0.23), 0px 2px 4px 1px rgba(0, 0, 0, 0.17);
+  box-shadow:
+    0px -4px 1px 0px inset rgba(0, 0, 0, 0.23),
+    0px 2px 4px 1px rgba(0, 0, 0, 0.17);
 }
 
 .search-selects > .search-dropdown .search-dropdown-trigger[aria-expanded="true"] {
@@ -833,7 +839,9 @@ header > .search-dropdown .search-option {
   text-transform: uppercase;
   font-weight: 700;
   overflow: hidden;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 1px 0px inset, rgba(255, 255, 255, 0.17) 0px 1px 1px 0px;
+  box-shadow:
+    rgba(0, 0, 0, 0.15) 0px 2px 1px 0px inset,
+    rgba(255, 255, 255, 0.17) 0px 1px 1px 0px;
 }
 
 .view-toggle-3d > .left {
@@ -932,7 +940,9 @@ header > .search-dropdown .search-option {
   z-index: 150;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
+  transition:
+    opacity 0.3s,
+    visibility 0.3s;
   cursor: pointer;
 }
 
@@ -1034,7 +1044,9 @@ header > .search-dropdown .search-option {
   z-index: 250;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.2s, visibility 0.2s;
+  transition:
+    opacity 0.2s,
+    visibility 0.2s;
 }
 
 .command-palette-overlay.open {
@@ -1056,7 +1068,10 @@ header > .search-dropdown .search-option {
   z-index: 300;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.2s, visibility 0.2s, transform 0.2s var(--ease-out-1);
+  transition:
+    opacity 0.2s,
+    visibility 0.2s,
+    transform 0.2s var(--ease-out-1);
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -1171,7 +1186,9 @@ header > .search-dropdown .search-option {
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
-  transition: border-color 0.2s ease, background 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
 }
 
 .command-palette .search-dropdown:first-child .search-dropdown-trigger {
@@ -1325,8 +1342,9 @@ header > .search-dropdown .search-option {
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 2.5;
-  transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
-              stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+    stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hamburger .line-top-bottom {
@@ -1370,7 +1388,6 @@ header > .search-dropdown .search-option {
   }
 }
 
-
 .sidebar-overlay {
   position: fixed;
   inset: 0;
@@ -1378,7 +1395,9 @@ header > .search-dropdown .search-option {
   z-index: 150;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
+  transition:
+    opacity 0.3s,
+    visibility 0.3s;
 }
 
 .sidebar-overlay.open {
@@ -1487,7 +1506,9 @@ header > .search-dropdown .search-option {
 .sidebar-dropdown-trigger:hover {
   background-color: var(--accent);
   color: var(--foreground);
-  box-shadow: 0px -4px 1px 0px inset rgba(0, 0, 0, 0.23), 0px 2px 4px 1px rgba(0, 0, 0, 0.17);
+  box-shadow:
+    0px -4px 1px 0px inset rgba(0, 0, 0, 0.23),
+    0px 2px 4px 1px rgba(0, 0, 0, 0.17);
 }
 
 .sidebar-dropdown-trigger[aria-expanded="true"] {
@@ -1538,4 +1559,3 @@ header > .search-dropdown .search-option {
   overflow-y: auto;
   z-index: 1000;
 }
-

@@ -36,13 +36,16 @@ test.describe("Dropdown and Popover Functionality", () => {
     const menu = dropdown.locator(".search-dropdown-menu");
 
     // Press Escape key to close dropdown
-    await page.keyboard.press('Escape');
-    
+    await page.keyboard.press("Escape");
+
     // Wait for DataStar to update the DOM
     await page.waitForTimeout(300);
 
     // Verify menu is hidden
-    await expect(menu, `${name} dropdown menu should be hidden after pressing Escape`).not.toBeVisible();
+    await expect(
+      menu,
+      `${name} dropdown menu should be hidden after pressing Escape`,
+    ).not.toBeVisible();
   }
 
   test("category dropdown opens and closes correctly", async ({ page }) => {
@@ -68,7 +71,10 @@ test.describe("Dropdown and Popover Functionality", () => {
     const interopDropdown = await openDropdown(page, 1, "Interop");
 
     // Verify category is now closed
-    await expect(categoryDropdown.menu, "Category dropdown should be closed when Interop opens").not.toBeVisible();
+    await expect(
+      categoryDropdown.menu,
+      "Category dropdown should be closed when Interop opens",
+    ).not.toBeVisible();
 
     // Verify interop is open
     await expect(interopDropdown.menu, "Interop dropdown should be visible").toBeVisible();
@@ -77,7 +83,10 @@ test.describe("Dropdown and Popover Functionality", () => {
     const browserDropdown = await openDropdown(page, 2, "Browser");
 
     // Verify interop is now closed
-    await expect(interopDropdown.menu, "Interop dropdown should be closed when Browser opens").not.toBeVisible();
+    await expect(
+      interopDropdown.menu,
+      "Interop dropdown should be closed when Browser opens",
+    ).not.toBeVisible();
 
     // Verify browser is open
     await expect(browserDropdown.menu, "Browser dropdown should be visible").toBeVisible();
@@ -89,7 +98,7 @@ test.describe("Dropdown and Popover Functionality", () => {
     // Select "Layout" option
     const layoutOption = menu.locator('button.search-option:has-text("Layout")');
     await layoutOption.click();
-    
+
     // Wait for DataStar to update the DOM
     await page.waitForTimeout(300);
 
@@ -107,7 +116,7 @@ test.describe("Dropdown and Popover Functionality", () => {
     // Select "Available" option
     const availableOption = menu.locator('button.search-option:has-text("Available")');
     await availableOption.click();
-    
+
     // Wait for DataStar to update the DOM
     await page.waitForTimeout(300);
 
@@ -125,7 +134,7 @@ test.describe("Dropdown and Popover Functionality", () => {
     // Select "Chrome" option
     const chromeOption = menu.locator('button.search-option:has-text("Chrome")');
     await chromeOption.click();
-    
+
     // Wait for DataStar to update the DOM
     await page.waitForTimeout(300);
 
@@ -144,7 +153,7 @@ test.describe("Dropdown and Popover Functionality", () => {
     await expect(trigger).toHaveAttribute("aria-expanded", "true");
 
     // Press Escape to close
-    await page.keyboard.press('Escape');
+    await page.keyboard.press("Escape");
 
     // Wait for DataStar to update the DOM
     await page.waitForTimeout(300);
@@ -193,7 +202,10 @@ test.describe("Mobile Functionality", () => {
     await searchBtn.click();
 
     // Verify command palette is open
-    await expect(palette, "Command palette should be visible after clicking search button").toBeVisible();
+    await expect(
+      palette,
+      "Command palette should be visible after clicking search button",
+    ).toBeVisible();
     await expect(overlay, "Command palette overlay should be visible").toBeVisible();
   });
 
@@ -209,7 +221,9 @@ test.describe("Mobile Functionality", () => {
     await hamburger.click();
 
     // Verify sidebar is open
-    await expect(sidebar, "Sidebar should have 'open' class after clicking hamburger").toHaveClass(/open/);
+    await expect(sidebar, "Sidebar should have 'open' class after clicking hamburger").toHaveClass(
+      /open/,
+    );
     await expect(overlay, "Sidebar overlay should have 'open' class").toHaveClass(/open/);
   });
 
@@ -260,7 +274,10 @@ test.describe("Mobile Functionality", () => {
     await page.locator(".command-palette-close").click();
 
     // Verify palette is closed
-    await expect(palette, "Command palette should close after clicking close button").not.toBeVisible();
+    await expect(
+      palette,
+      "Command palette should close after clicking close button",
+    ).not.toBeVisible();
   });
 
   test("close button closes mobile sidebar", async ({ page }) => {
@@ -273,7 +290,9 @@ test.describe("Mobile Functionality", () => {
     await page.locator(".sidebar-close").click();
 
     // Verify sidebar is closed
-    await expect(sidebar, "Sidebar should close after clicking close button").not.toHaveClass(/open/);
+    await expect(sidebar, "Sidebar should close after clicking close button").not.toHaveClass(
+      /open/,
+    );
   });
 });
 
@@ -303,7 +322,10 @@ test.describe("Sidebar Collections Dropdown", () => {
     await trigger.click();
 
     // Verify menu is visible
-    await expect(menu, "Sidebar collections dropdown should be visible after clicking trigger").toBeVisible();
+    await expect(
+      menu,
+      "Sidebar collections dropdown should be visible after clicking trigger",
+    ).toBeVisible();
   });
 
   test("sidebar collections dropdown closes when clicking outside", async ({ page }) => {
@@ -320,7 +342,10 @@ test.describe("Sidebar Collections Dropdown", () => {
     await page.locator("main").click({ force: true });
 
     // Verify dropdown is closed
-    await expect(menu, "Sidebar collections dropdown should close when clicking outside").not.toBeVisible();
+    await expect(
+      menu,
+      "Sidebar collections dropdown should close when clicking outside",
+    ).not.toBeVisible();
   });
 
   test("can select option from sidebar collections dropdown", async ({ page }) => {
@@ -338,7 +363,10 @@ test.describe("Sidebar Collections Dropdown", () => {
     await flexboxOption.click();
 
     // Verify dropdown closes after selection
-    await expect(menu, "Sidebar collections dropdown should close after selection").not.toBeVisible();
+    await expect(
+      menu,
+      "Sidebar collections dropdown should close after selection",
+    ).not.toBeVisible();
 
     // Verify URL hash changed
     await expect(page).toHaveURL(/#!flexbox/);
@@ -358,13 +386,19 @@ test.describe("Sidebar Collections Dropdown", () => {
     await trigger.click();
 
     // Verify aria-expanded is true
-    await expect(trigger, "aria-expanded should be true when dropdown is open").toHaveAttribute("aria-expanded", "true");
+    await expect(trigger, "aria-expanded should be true when dropdown is open").toHaveAttribute(
+      "aria-expanded",
+      "true",
+    );
 
     // Click again to close
     await trigger.click();
 
     // Verify aria-expanded is false
-    await expect(trigger, "aria-expanded should be false when dropdown is closed").toHaveAttribute("aria-expanded", "false");
+    await expect(trigger, "aria-expanded should be false when dropdown is closed").toHaveAttribute(
+      "aria-expanded",
+      "false",
+    );
   });
 
   test("all collection options are available in sidebar dropdown", async ({ page }) => {
@@ -381,7 +415,10 @@ test.describe("Sidebar Collections Dropdown", () => {
     const expectedOptions = ["Flexbox", "Grid", "Typography", "Animation", "Color", "Layout"];
     for (const option of expectedOptions) {
       const optionButton = menu.locator(`button.search-option:has-text("${option}")`);
-      await expect(optionButton, `Option "${option}" should exist in sidebar dropdown`).toBeVisible();
+      await expect(
+        optionButton,
+        `Option "${option}" should exist in sidebar dropdown`,
+      ).toBeVisible();
     }
   });
 });
@@ -420,15 +457,16 @@ test.describe("Error Monitoring", () => {
       await page.waitForTimeout(300);
 
       // Close by pressing Escape
-      await page.keyboard.press('Escape');
+      await page.keyboard.press("Escape");
       await page.waitForTimeout(300);
     }
 
     // Filter out sourcemap warnings and Datastar "effect expression evaluated" messages
-    const filteredErrors = consoleErrors.filter(err => 
-      !err.includes("sourcemap") && 
-      !err.includes("[datastar]") &&
-      !err.includes("effect expression evaluated")
+    const filteredErrors = consoleErrors.filter(
+      (err) =>
+        !err.includes("sourcemap") &&
+        !err.includes("[datastar]") &&
+        !err.includes("effect expression evaluated"),
     );
 
     if (filteredErrors.length > 0) {
@@ -436,6 +474,8 @@ test.describe("Error Monitoring", () => {
       console.log("All console errors:", consoleErrors);
     }
 
-    expect(filteredErrors, `Unexpected console errors: ${filteredErrors.join(", ")}`).toHaveLength(0);
+    expect(filteredErrors, `Unexpected console errors: ${filteredErrors.join(", ")}`).toHaveLength(
+      0,
+    );
   });
 });

@@ -3,12 +3,14 @@
 // This file only exposes data and utility functions on window
 
 import { CC, IL, IC } from "./constants";
-import { P, CATS, INTEROPS, CATEGORIES } from "./data";
+import { P, CATS, INTEROPS, CATEGORIES, COLLECTIONS, COLLECTIONS_LIST } from "./data";
 import { bIcon } from "./utils";
-import type { CSSProperty, BrowserSupport } from "./types";
+import type { CSSProperty, CSSValue, BrowserSupport } from "./types";
 import type { CategoryMeta } from "./data/categories";
+import type { CollectionMeta } from "./data/collections";
 
 const CATEGORIES_TYPED = CATEGORIES as Record<string, CategoryMeta>;
+const COLLECTIONS_TYPED = COLLECTIONS as Record<string, CollectionMeta>;
 
 // ── Expose static data on window ──
 (window as any).P = P;
@@ -19,6 +21,8 @@ const CATEGORIES_TYPED = CATEGORIES as Record<string, CategoryMeta>;
 (window as any).IC = IC;
 (window as any).bIcon = bIcon;
 (window as any).CATEGORIES = CATEGORIES;
+(window as any).COLLECTIONS = COLLECTIONS;
+(window as any).COLLECTIONS_LIST = COLLECTIONS_LIST;
 
 // ── Filter logic ──
 (window as any).filtered = function (
@@ -90,13 +94,19 @@ const propMap = new Map<string, CSSProperty>(P.map((p) => [p.n, p]));
 
   const color = CC[p.c] || "#6366f1";
 
-  const valueExplanations = (p as any).v ? (p as any).v.map((v: any) => `
+  const valueExplanations = (p as any).v
+    ? (p as any).v
+        .map(
+          (v: any) => `
   <div class="value-explanation">
     <code class="value-code">${v.value}</code>
     <span class="value-label">${v.label}</span>
     <p class="value-desc">${v.description}</p>
   </div>
-`).join("") : "";
+`,
+        )
+        .join("")
+    : "";
 
   view.innerHTML = `
     <div class="detail-wrap">
@@ -119,12 +129,16 @@ const propMap = new Map<string, CSSProperty>(P.map((p) => [p.n, p]));
         <div class="detail-lbl">Description</div>
         <p class="detail-desc">${p.d}</p>
       </div>
-      ${valueExplanations ? `
+      ${
+        valueExplanations
+          ? `
       <div class="detail-section">
         <div class="detail-lbl">Values</div>
         <div class="values-grid">${valueExplanations}</div>
       </div>
-      ` : ""}
+      `
+          : ""
+      }
       <div class="detail-section">
         <div class="detail-lbl">Syntax</div>
         <pre class="syntax-block">${p.x}<button class="copy-btn" onclick="navigator.clipboard.writeText('${p.x.replace(/'/g, "\\'")}').then(()=>{this.innerHTML='<i class=\\'ri-check-line\\'></i>';setTimeout(()=>this.innerHTML='<i class=\\'ri-clipboard-line\\'></i>',1500)})" style="position:absolute;top:8px;right:8px;padding:6px 10px;font-size:14px;background:${color};color:#fff;border:none;border-radius:4px;cursor:pointer"><i class="ri-clipboard-line"></i></button></pre>
@@ -133,9 +147,12 @@ const propMap = new Map<string, CSSProperty>(P.map((p) => [p.n, p]));
         <div class="detail-lbl">Browser Support</div>
         <div class="detail-browsers">${(window as any).renderBrowserSupport(p.s)}</div>
       </div>
-      <a class="mdn-link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/${p.m}" target="_blank" rel="noopener">
-        View on MDN →
-      </a>
+      <div class="detail-links">
+        ${p.caniuse ? `<a class="caniuse-link" href="https://caniuse.com/${p.caniuse}" target="_blank" rel="noopener">Can I Use →</a>` : ""}
+        <a class="mdn-link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/${p.m}" target="_blank" rel="noopener">
+          View on MDN →
+        </a>
+      </div>
       ${(() => {
         const related = (window as any).findRelatedProps(p, 4);
         if (related.length === 0) return "";
@@ -160,78 +177,320 @@ const propMap = new Map<string, CSSProperty>(P.map((p) => [p.n, p]));
   `;
 };
 
-// ── Collection Page Rendering ──
-(window as any).renderCollectionPage = function(collectionSlug: string) {
+// ── Collection Page Rendering (Curated 6 Collections with Pedagogical Content) ──
+(window as any).renderCollectionPage = function (collectionSlug: string) {
   const view = document.getElementById("collection-view");
   if (!view) return;
-  
-  const category = Object.values(CATEGORIES_TYPED).find((c: CategoryMeta) => c.slug === collectionSlug);
-  if (!category) {
-    view.innerHTML = '<div class="empty">Collection not found</div>';
+
+  // Guard: only process valid, non-empty slugs that exist in COLLECTIONS
+  if (!collectionSlug || typeof collectionSlug !== "string") {
+    view.innerHTML = "";
     return;
   }
-  
-  const props = P.filter(p => p.c === category.id);
-  const color = category.color;
-  
-  view.innerHTML = `
+
+  // Only look for curated collections - do NOT fall back to categories
+  const collection = Object.values(COLLECTIONS_TYPED).find(
+    (c: CollectionMeta) => c.slug === collectionSlug,
+  );
+
+  if (collection) {
+    // Render Collection page with pedagogical content
+    view.innerHTML = renderCollectionPageHTML(collection);
+    
+    // Initialize Datastar on the newly injected interactive demo content
+    if (typeof (window as any).Datastar !== 'undefined') {
+      (window as any).Datastar.connect();
+    }
+    return;
+  }
+
+  // No matching curated collection found - clear the view
+  view.innerHTML = "";
+};
+
+// ── Render Collection Page HTML (Pedagogical Content) ──
+function renderCollectionPageHTML(collection: CollectionMeta): string {
+  // Get all CSS properties that belong to this collection's category
+  const relatedProps = P.filter((p: CSSProperty) => p.c === collection.id);
+
+  return `
     <div class="collection-page">
       <button class="back-btn" onclick="location.hash=''">
         <svg class="icon" aria-hidden="true"><use href="#icon-arrow-left"/></svg>
         All properties
       </button>
       
-      <div class="category-hero" style="--cat-color: ${color}">
-        <div class="category-icon-wrap">
-          <i class="${category.icon}"></i>
+      <!-- Section 1: Overview -->
+      <section class="section-overview">
+        <div class="category-hero" style="--cat-color: ${collection.color}">
+          <div class="category-icon-wrap">
+            <i class="${collection.icon}"></i>
+          </div>
+          <div class="category-info">
+            <h1 class="category-title">${collection.name}</h1>
+            <p class="category-desc">${collection.description}</p>
+          </div>
         </div>
-        <div class="category-info">
-          <h1 class="category-title">${category.name}</h1>
-          <p class="category-desc">${category.description}</p>
+        
+        <div class="overview-content">
+          <div class="category-intro">
+            <p>${collection.intro}</p>
+          </div>
+          
+          ${
+            collection.difficulty || collection.estimatedTime || collection.prerequisites
+              ? `
+          <div class="collection-meta">
+            ${collection.difficulty ? `<span class="difficulty-badge difficulty-${collection.difficulty}">${collection.difficulty}</span>` : ""}
+            ${collection.estimatedTime ? `<span class="estimated-time"><svg class="icon" aria-hidden="true"><use href="#icon-clock"/></svg> ${collection.estimatedTime}</span>` : ""}
+          </div>
+          ${
+            collection.prerequisites && collection.prerequisites.length > 0
+              ? `
+          <div class="prerequisites-section">
+            <h4>Prerequisites</h4>
+            <ul class="prerequisites-list">
+              ${collection.prerequisites.map((prereq: string) => `<li>${prereq}</li>`).join("")}
+            </ul>
+          </div>
+          `
+              : ""
+          }
+          `
+              : ""
+          }
         </div>
-      </div>
+      </section>
       
-      <div class="category-intro">
-        <p>${category.intro}</p>
-      </div>
-      
-      <div class="category-concepts">
-        <h3>Key Concepts</h3>
-        <ul class="concepts-list">
-          ${category.concepts.map((c: string) => `<li>${c}</li>`).join("")}
-        </ul>
-      </div>
-      
-      <div class="category-properties">
-        <h3>Properties in ${category.name}</h3>
-        <div class="category-props-grid">
-          ${props.map((p: CSSProperty) => `
-            <div class="category-prop-card" onclick="location.hash='${encodeURIComponent(p.n)}'" style="cursor:pointer;border-color:${color}">
-              <div class="prop-name" style="color:${color}">${p.n}</div>
-              <div class="prop-desc">${p.d}</div>
-            </div>
-          `).join("")}
+      <!-- Section 2: Learning Goals -->
+      ${
+        (collection.learningObjectives && collection.learningObjectives.length > 0) ||
+        (collection.concepts && collection.concepts.length > 0)
+          ? `
+      <section class="section-learning-goals">
+        ${
+          collection.learningObjectives && collection.learningObjectives.length > 0
+            ? `
+        <div class="learning-objectives">
+          <h3>Learning Objectives</h3>
+          <ul class="learning-objectives-list">
+            ${collection.learningObjectives.map((obj: string) => `<li>${obj}</li>`).join("")}
+          </ul>
         </div>
-      </div>
-      
-      ${category.related.length ? `
-      <div class="category-related">
-        <h3>Related Categories</h3>
-        <div class="related-cats">
-          ${category.related.map((r: string) => {
-            const rel = CATEGORIES_TYPED[r];
-            return rel ? `<button class="related-cat-btn" onclick="location.hash='!${rel.slug}'" style="border-color:${rel.color};color:${rel.color}"><i class="${rel.icon}"></i> ${rel.name}</button>` : "";
-          }).join("")}
+        `
+            : ""
+        }
+        ${
+          collection.concepts && collection.concepts.length > 0
+            ? `
+        <div class="category-concepts">
+          <h3>Key Concepts</h3>
+          <ul class="concepts-list">
+            ${collection.concepts.map((c: string) => `<li>${c}</li>`).join("")}
+          </ul>
         </div>
-      </div>
-      ` : ""}
+        `
+            : ""
+        }
+      </section>
+      `
+          : ""
+      }
+      
+      <!-- Section 3: Practical Guide -->
+      <section class="section-practical-guide">
+        ${
+          collection.useCases && collection.useCases.length > 0
+            ? `
+        <div class="collection-use-cases">
+          <h3>Use Cases</h3>
+          <ul class="use-cases-list">
+            ${collection.useCases.map((uc: string) => `<li>${uc}</li>`).join("")}
+          </ul>
+        </div>
+        `
+            : ""
+        }
+        ${
+          collection.whenToUse && collection.whenToUse.length > 0
+            ? `
+        <div class="when-to-use">
+          <h3>When to Use</h3>
+          <ul class="when-to-use-list">
+            ${collection.whenToUse.map((scenario: string) => `<li>${scenario}</li>`).join("")}
+          </ul>
+        </div>
+        `
+            : ""
+        }
+      </section>
+      
+      <!-- Section 4: Examples -->
+      <section class="section-examples">
+        <div class="collection-examples">
+          <h3>Examples</h3>
+          <div class="examples-grid">
+            ${collection.examples
+              .map(
+                (ex: CollectionExample) => `
+              <div class="example-card">
+                <h4>${ex.title}</h4>
+                <p>${ex.description}</p>
+                <pre class="example-code"><code>${escapeHTML(ex.code)}</code></pre>
+              </div>
+            `,
+              )
+              .join("")}
+          </div>
+        </div>
+        
+        ${
+          collection.interactiveDemo
+            ? `
+        <div class="interactive-demo-section">
+          <h3>Interactive Demo</h3>
+          <p class="interactive-demo-hint">Click the buttons below to see ${collection.name} in action!</p>
+          <div class="interactive-demo-container">
+            ${collection.interactiveDemo}
+          </div>
+        </div>
+        `
+            : ""
+        }
+      </section>
+      
+      <!-- Section 5: Common Mistakes -->
+      ${
+        collection.commonMistakes && collection.commonMistakes.length > 0
+          ? `
+      <section class="section-common-mistakes">
+        <div class="common-mistakes">
+          <h3>Common Mistakes to Avoid</h3>
+          <ul class="mistakes-list">
+            ${collection.commonMistakes.map((mistake: string) => `<li>${mistake}</li>`).join("")}
+          </ul>
+        </div>
+      </section>
+      `
+          : ""
+      }
+      
+      <!-- Section 6: Properties Reference -->
+      <section class="section-properties-reference">
+        <div class="collection-properties">
+          <h3>Properties in ${collection.name}</h3>
+          <div class="properties-list">
+            ${relatedProps.map((p: CSSProperty) => renderPropertySection(p, collection.color)).join("")}
+          </div>
+        </div>
+        
+        <div class="related-props">
+          <h3>Quick Reference (${relatedProps.length} properties)</h3>
+          <div class="related-grid">
+            ${relatedProps
+              .map(
+                (p: CSSProperty) => `
+              <div class="related-card" onclick="location.hash='${encodeURIComponent(p.n)}'" style="cursor:pointer">
+                <div class="related-prop-name">${p.n}</div>
+                <div class="related-prop-desc">${p.d}</div>
+              </div>
+            `,
+              )
+              .join("")}
+          </div>
+        </div>
+      </section>
     </div>
   `;
-};
+}
+
+// Render a single property section for collection page
+function renderPropertySection(p: CSSProperty, categoryColor: string): string {
+  const color = CC[p.c] || categoryColor;
+  const anchorId = p.n.replace(/\./g, "-");
+
+  const valuesHTML = p.v
+    ? p.v
+        .map(
+          (v: CSSValue) => `
+    <div class="property-value-item">
+      <code class="property-value-code">${v.value}</code>
+      <span class="property-value-label">${v.label}</span>
+      <p class="property-value-desc">${v.description}</p>
+      ${v.demo ? `<div class="property-value-demo">${v.demo}</div>` : ""}
+    </div>
+  `,
+        )
+        .join("")
+    : "";
+
+  return `
+    <div class="property-section" id="${anchorId}">
+      <div class="property-header">
+        <h4 class="property-name">
+          <a href="#${anchorId}" class="property-anchor">#</a>
+          ${p.n}
+        </h4>
+        <a class="property-mdn-link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/${p.m}" target="_blank" rel="noopener">MDN</a>
+      </div>
+      
+      <p class="property-description">${p.d}</p>
+      
+      ${
+        p.default
+          ? `
+      <div class="property-default">
+        <span class="property-default-label">Default:</span>
+        <code class="property-default-value">${p.default}</code>
+      </div>
+      `
+          : ""
+      }
+      
+      <div class="property-demo-box">
+        <div class="property-demo-stage">${p.demo}</div>
+      </div>
+      
+      ${
+        valuesHTML
+          ? `
+      <div class="property-values">
+        <h5 class="property-values-title">Values</h5>
+        <div class="property-values-grid">
+          ${valuesHTML}
+        </div>
+      </div>
+      `
+          : ""
+      }
+      
+      <div class="property-syntax">
+        <code>${p.x}</code>
+      </div>
+    </div>
+  `;
+}
+
+// Helper function to escape HTML
+function escapeHTML(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+interface CollectionExample {
+  title: string;
+  description: string;
+  code: string;
+  result?: string;
+}
 
 // Get properties for a specific category
-(window as any).getCategoryProps = function(categoryId: string): CSSProperty[] {
-  return P.filter(p => p.c === categoryId);
+(window as any).getCategoryProps = function (categoryId: string): CSSProperty[] {
+  return P.filter((p) => p.c === categoryId);
 };
 
 // ── Grid Rendering ──

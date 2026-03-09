@@ -161,18 +161,18 @@ test.describe("Detail View", () => {
     // Get all section labels - sections may be in different order depending on property data
     const sectionLabels = page.locator(".detail-section .detail-lbl");
     const labelTexts = await sectionLabels.allTextContents();
-    
+
     // Verify expected sections exist (may have additional sections like Values, Related Properties)
     expect(labelTexts).toContain("Description");
     expect(labelTexts).toContain("Syntax");
     expect(labelTexts).toContain("Browser Support");
-    
+
     // Check Description section content
     await expect(page.locator(".detail-desc")).toBeVisible();
-    
-    // Check Syntax section content  
+
+    // Check Syntax section content
     await expect(page.locator(".syntax-block")).toBeVisible();
-    
+
     // Check Browser Support section content
     await expect(page.locator(".detail-browsers")).toBeVisible();
     await expect(page.locator(".detail-b")).toHaveCount(4); // Chrome, Firefox, Safari, Edge

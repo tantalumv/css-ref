@@ -9,6 +9,7 @@ export const visual: CSSProperty[] = [
     i: "wide",
     x: "border-radius: 8px | 50% | 1rem 2rem / 0.5rem 1rem",
     m: "border-radius",
+    default: "0",
     demo: `<div style="display:flex;gap:8px;align-items:center;padding:10px">${[
       ["0px", "0px"],
       ["4px", "4px"],
@@ -30,6 +31,7 @@ export const visual: CSSProperty[] = [
     i: "wide",
     x: "box-shadow: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -2px rgba(0,0,0,.06)",
     m: "box-shadow",
+    default: "none",
     demo: `<div style="display:flex;gap:14px;padding:16px 10px;align-items:center">${[
       [`0 1px 3px rgba(0,0,0,.12)`, `sm`],
       [`0 4px 12px rgba(0,0,0,.15)`, `md`],

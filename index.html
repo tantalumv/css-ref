@@ -4,6 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="CSS Ref - A comprehensive reference for CSS properties, selectors, and values with browser support information." />
+    <meta name="keywords" content="CSS, CSS3, CSS reference, CSS properties, CSS selectors, web development, frontend" />
+    <meta name="author" content="CSS Ref" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://tantalumv.github.io/css-ref/" />
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://tantalumv.github.io/css-ref/" />
+    <meta property="og:title" content="CSS Ref - CSS Properties Reference" />
+    <meta property="og:description" content="A comprehensive reference for CSS properties, selectors, and values with browser support information." />
+    <meta property="og:site_name" content="CSS Ref" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CSS Ref - CSS Properties Reference" />
+    <meta name="twitter:description" content="A comprehensive reference for CSS properties, selectors, and values with browser support information." />
+
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com https://unpkg.com; img-src 'self' data:;" />
     <link rel="icon" type="image/svg+xml" href="/cssref-favicon.svg?v=2" />
     <title>CSS Ref</title>
@@ -59,6 +76,9 @@
             d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"
           />
         </symbol>
+        <symbol id="icon-clock" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/>
+        </symbol>
         <symbol id="icon-arrow-left" viewBox="0 0 24 24">
           <path
             fill="currentColor"
@@ -67,8 +87,7 @@
         </symbol>
       </defs>
     </svg>
-
-    <header data-show="$selectedProp === ''">
+    <header
       <!-- Mobile: Search Icon (must be first to avoid parent display:none issues) -->
       <button
         type="button"
@@ -98,7 +117,7 @@
         </svg>
       </button>
 
-      <div class="brand" data-on:click="location.hash = ''">
+      <div class="brand" data-on:click="location.hash = ''"><h1 class="visually-hidden">CSS Ref - CSS Properties Reference</h1>
         <svg class="brand-logo" viewBox="0 0 480 211" xmlns="http://www.w3.org/2000/svg">
           <g>
             <path d="M437.529,119.589l0,50.88c0,1.56 -1.24,2.644 -2.766,2.418l-103.42,-15.265c-1.527,-0.225 -2.766,-1.675 -2.766,-3.235l0,-50.88c0,-1.56 1.24,-2.644 2.766,-2.418l103.42,15.265c1.527,0.225 2.766,1.675 2.766,3.235Z" fill="#212b48" fill-rule="evenodd" clip-rule="evenodd"/>
@@ -869,7 +888,7 @@
 
     <!-- Grid View - Declarative rendering with data-effect -->
     <div id="grid-view" data-show="$viewMode === 'grid' && $selectedProp === '' && $activeCollection === ''">
-      <main>
+      <main id="main-content">
         <div
           id="grid"
           class="is-grid"
@@ -919,11 +938,11 @@
 
     <!-- Hash routing: sync hash ↔ signal -->
     <div
-      data-on:hashchange__window="$selectedProp = decodeURIComponent(location.hash.slice(1))"
+      data-on:hashchange__window="!location.hash.startsWith('#!') && ($selectedProp = decodeURIComponent(location.hash.slice(1)))"
       style="display: none"
     ></div>
     <div
-      data-init="$selectedProp = decodeURIComponent(location.hash.slice(1) || '')"
+      data-init="!location.hash.startsWith('#!') && ($selectedProp = decodeURIComponent(location.hash.slice(1) || ''))"
       style="display: none"
     ></div>
 

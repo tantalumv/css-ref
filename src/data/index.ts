@@ -1,5 +1,6 @@
 import type { CSSProperty, InteropStatus } from "../types";
 import type { CategoryMeta } from "./categories";
+import type { CollectionMeta } from "./collections";
 import { layout } from "./layout";
 import { flexbox } from "./flexbox";
 import { grid } from "./grid";
@@ -26,6 +27,7 @@ import { typographyExtra } from "./typography-extra";
 import { tablesExtra } from "./tables-extra";
 import { interactivityExtra } from "./interactivity-extra";
 import { CATEGORIES } from "./categories";
+import { COLLECTIONS, COLLECTIONS_LIST } from "./collections";
 
 export const P: CSSProperty[] = [
   ...layout,
@@ -58,3 +60,4 @@ export const P: CSSProperty[] = [
 export const CATS = [...new Set(P.map((p) => p.c))];
 export const INTEROPS: InteropStatus[] = ["wide", "b2024", "b2023", "b2022", "ltd", "exp"];
 export { CATEGORIES, type CategoryMeta } from "./categories";
+export { COLLECTIONS, COLLECTIONS_LIST, type CollectionMeta } from "./collections";

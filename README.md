@@ -23,17 +23,20 @@ Open [http://localhost:2005](http://localhost:2005).
 ## Features
 
 ### View Modes
+
 - **Grid View** — Visual card grid with live CSS demos, color-coded by category
 - **Table View** — Sortable with infinite scroll (30 properties at a time)
 - **Detail View** — Full property page with syntax, description, browser support matrix, and MDN links
 
 ### Filtering & Search
+
 - **Search** — Real-time search across property names, descriptions (debounced 150ms)
 - **Category Filter** — 19 CSS categories (Layout, Flexbox, Grid, Typography, Color, etc.)
 - **Browser Filter** — Chrome, Firefox, Safari, Edge
 - **Collections** — Quick links to Flexbox, Grid, Typography, Animation, Color, Layout
 
 ### Browser Support
+
 - **Interop Status** — Filter by browser support level:
   - **Available** — Widely supported
   - **Baseline 2024/2023/2022** — Modern cross-browser standard
@@ -42,6 +45,7 @@ Open [http://localhost:2005](http://localhost:2005).
 - **Browser Icons** — Chrome, Firefox, Safari, Edge support for each property
 
 ### UX Features
+
 - **Dark/Light Theme** — Toggle between themes
 - **Copy to Clipboard** — One-click copy for property syntax
 - **Related Properties** — Shows up to 4 related properties in detail view
@@ -50,18 +54,19 @@ Open [http://localhost:2005](http://localhost:2005).
 - **Keyboard Navigation** — Escape to close detail view or popovers
 
 ### Mobile
+
 - **Responsive Design** — Works on all screen sizes
 - **Sidebar Menu** — Hamburger menu with view/theme toggles
 - **Command Palette** — Mobile search with all filters
 
 ## CSS Categories (19)
 
-| | | | | |
-|---|---|---|---|---|
-| Layout | Flexbox | Grid | Typography | Color |
-| Sizing | Visual | Animation | Transform | Spacing |
-| Interactivity | CSS Variables | Queries | Selectors | UI Components |
-| Tables | Lists | Breaks | Misc | |
+|               |               |           |            |               |
+| ------------- | ------------- | --------- | ---------- | ------------- |
+| Layout        | Flexbox       | Grid      | Typography | Color         |
+| Sizing        | Visual        | Animation | Transform  | Spacing       |
+| Interactivity | CSS Variables | Queries   | Selectors  | UI Components |
+| Tables        | Lists         | Breaks    | Misc       |               |
 
 ## Tech Stack
 
@@ -93,15 +98,15 @@ Datastar's ideal architecture is backend-driven with SSE streaming. This project
 
 ## Scripts
 
-| Command             | Description                                      |
-| ------------------- | ------------------------------------------------ |
-| `bun run build`     | Production build                                 |
-| `bun run dev`       | Watch mode with sourcemaps                       |
-| `bun run serve`     | Serve on localhost:2005                          |
-| `bun test`          | Unit tests (vitest)                              |
-| `bun test:e2e`      | E2E tests (Playwright)                           |
-| `bun run typecheck` | TypeScript type check                            |
-| `bun run lint`      | Lint with oxlint                                 |
+| Command             | Description                |
+| ------------------- | -------------------------- |
+| `bun run build`     | Production build           |
+| `bun run dev`       | Watch mode with sourcemaps |
+| `bun run serve`     | Serve on localhost:2005    |
+| `bun test`          | Unit tests (vitest)        |
+| `bun test:e2e`      | E2E tests (Playwright)     |
+| `bun run typecheck` | TypeScript type check      |
+| `bun run lint`      | Lint with oxlint           |
 
 ## License
 

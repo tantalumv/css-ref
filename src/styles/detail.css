@@ -211,6 +211,35 @@
   color: var(--primary-foreground);
 }
 
+.detail-links {
+  display: flex;
+  gap: var(--space-s);
+  margin-top: var(--space-m);
+  flex-wrap: wrap;
+}
+
+.caniuse-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3xs);
+  font-size: var(--r-step-0);
+  font-weight: 700;
+  color: var(--chart-2);
+  text-decoration: none;
+  padding: var(--space-2xs) var(--space-xs);
+  border: 1px solid var(--chart-2);
+  border-radius: 4px !important;
+  height: clamp(1.75rem, 3.2vw, 2.05rem);
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+
+.caniuse-link:hover {
+  background: var(--chart-2);
+  color: #fff;
+}
+
 /* ── Related Properties ── */
 .related-props {
   margin-top: var(--space-l);

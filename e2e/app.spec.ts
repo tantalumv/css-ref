@@ -1,9 +1,5 @@
 import { test, expect } from "@playwright/test";
-import {
-  waitForCards,
-  openDropdown,
-  switchToTable,
-} from "./helpers";
+import { waitForCards, openDropdown, switchToTable } from "./helpers";
 
 test.describe("CSS Ref App", () => {
   test("homepage has title and search", async ({ page }) => {

@@ -22,6 +22,8 @@ export interface CSSProperty {
   m: string;
   demo: string;
   v?: CSSValue[];
+  caniuse?: string;
+  default?: string;
 }
 
 export type InteropStatus = "wide" | "b2024" | "b2023" | "b2022" | "ltd" | "exp";
