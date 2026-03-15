@@ -47,6 +47,52 @@ This project supports both **Bun** (recommended for speed) and **Node.js** (for 
 - GitHub Pages automatically serves compressed versions
 - Users download **81% less data**
 
+See [docs/BUN_NODE_SETUP.md](docs/BUN_NODE_SETUP.md) for complete setup details.
+See [docs/BUILD_COMPRESSION.md](docs/BUILD_COMPRESSION.md) for compression details.
+
+---
+
+## Verification
+
+### Check Local Build
+
+```bash
+# Build the project
+npm run build
+
+# Check file sizes
+ls -lh dist/
+```
+
+### Verify GitHub Pages Deployment
+
+After pushing to `main`, GitHub Pages will deploy automatically. To verify:
+
+```bash
+# Wait 30-60 seconds for propagation, then run:
+./scripts/verify-deployment.sh
+
+# Or manually check with curl:
+curl -I -H "Accept-Encoding: br" https://tantalumv.github.io/css-ref/
+```
+
+**Expected headers:**
+```
+content-encoding: br          # Brotli compression
+x-served-by: cache-XXX-XXX    # Fastly CDN
+server: GitHub.com            # GitHub Pages
+```
+
+### GitHub Actions Verification
+
+A verification workflow automatically runs after each deployment:
+- Checks Brotli/gzip compression
+- Verifies Fastly CDN headers
+- Confirms icon optimization working
+- Generates deployment report
+
+View status: https://github.com/tantalumv/css-ref/actions
+
 ## Features
 
 ### View Modes
@@ -106,7 +152,7 @@ This project supports both **Bun** (recommended for speed) and **Node.js** (for 
 - **fuzzysort** — Fast fuzzy search with typo tolerance
 - **List.js** — Table sorting and search (CDN)
 - **Open Props** — CSS custom properties (CDN)
-- **RemixIcon** — Icons (CDN)
+- **RemixIcon** — Icons (SVG sprite, 23 icons inline)
 
 ## Architecture
 

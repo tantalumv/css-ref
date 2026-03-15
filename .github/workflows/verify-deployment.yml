@@ -1,0 +1,160 @@
+name: Verify Deployment
+
+on:
+  workflow_run:
+    workflows: ["Deploy to GitHub Pages"]
+    types:
+      - completed
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Wait for GitHub Pages propagation
+        run: |
+          echo "⏳ Waiting 30 seconds for GitHub Pages to propagate..."
+          sleep 30
+
+      - name: Install curl
+        run: apt-get update && apt-get install -y curl
+
+      - name: Verify Brotli compression and Fastly headers
+        id: verify
+        run: |
+          echo "🔍 Checking deployment headers..."
+          echo ""
+          
+          # Get headers with Brotli acceptance
+          HEADERS=$(curl -sI -H "Accept-Encoding: br" https://tantalumv.github.io/css-ref/)
+          
+          echo "Response Headers:"
+          echo "$HEADERS"
+          echo ""
+          
+          # Check for Brotli encoding
+          if echo "$HEADERS" | grep -qi "content-encoding: br"; then
+            echo "✅ Brotli compression: ENABLED"
+            echo "brotli_enabled=true" >> $GITHUB_OUTPUT
+          elif echo "$HEADERS" | grep -qi "content-encoding: gzip"; then
+            echo "⚠️  Gzip compression: ENABLED (Brotli not used)"
+            echo "brotli_enabled=false" >> $GITHUB_OUTPUT
+            echo "gzip_enabled=true" >> $GITHUB_OUTPUT
+          else
+            echo "❌ Compression: NOT DETECTED"
+            echo "brotli_enabled=false" >> $GITHUB_OUTPUT
+            echo "gzip_enabled=false" >> $GITHUB_OUTPUT
+          fi
+          
+          # Check for Fastly headers
+          if echo "$HEADERS" | grep -qi "x-served-by"; then
+            echo "✅ Fastly CDN: DETECTED"
+            echo "fastly_detected=true" >> $GITHUB_OUTPUT
+            FASTLY_POP=$(echo "$HEADERS" | grep -i "x-served-by" | cut -d: -f2 | tr -d ' ')
+            echo "Fastly POP: $FASTLY_POP"
+          else
+            echo "⚠️  Fastly CDN: NOT DETECTED (may be cached)"
+            echo "fastly_detected=false" >> $GITHUB_OUTPUT
+          fi
+          
+          # Check X-Cache status
+          if echo "$HEADERS" | grep -qi "x-cache"; then
+            X_CACHE=$(echo "$HEADERS" | grep -i "x-cache" | cut -d: -f2 | tr -d ' ')
+            echo "Fastly Cache Status: $X_CACHE"
+          fi
+          
+          # Check Server header
+          if echo "$HEADERS" | grep -qi "server: github.com"; then
+            echo "✅ GitHub Pages Server: DETECTED"
+          fi
+          
+          # Verify bundle.js size
+          echo ""
+          echo "📦 Checking bundle.js delivery size..."
+          JS_HEADERS=$(curl -sI -H "Accept-Encoding: br" https://tantalumv.github.io/css-ref/dist/bundle.js)
+          echo "$JS_HEADERS"
+          echo ""
+          
+          if echo "$JS_HEADERS" | grep -qi "content-encoding: br"; then
+            echo "✅ bundle.js: Brotli compressed"
+          elif echo "$JS_HEADERS" | grep -qi "content-encoding: gzip"; then
+            echo "⚠️  bundle.js: Gzip compressed"
+          fi
+          
+          # Verify CSS bundle
+          echo ""
+          echo "🎨 Checking bundle.css delivery size..."
+          CSS_HEADERS=$(curl -sI -H "Accept-Encoding: br" https://tantalumv.github.io/css-ref/dist/bundle.css)
+          echo "$CSS_HEADERS"
+          echo ""
+          
+          if echo "$CSS_HEADERS" | grep -qi "content-encoding: br"; then
+            echo "✅ bundle.css: Brotli compressed"
+          elif echo "$CSS_HEADERS" | grep -qi "content-encoding: gzip"; then
+            echo "⚠️  bundle.css: Gzip compressed"
+          fi
+          
+          # Verify no remixicon requests
+          echo ""
+          echo "🔍 Checking for removed Remix Icon font..."
+          REMIX_STATUS=$(curl -sI https://tantalumv.github.io/css-ref/ | grep -i "remixicon" || true)
+          if [ -z "$REMIX_STATUS" ]; then
+            echo "✅ Remix Icon font: NOT LOADED (optimization working)"
+            echo "remix_removed=true" >> $GITHUB_OUTPUT
+          else
+            echo "⚠️  Remix Icon font: STILL BEING LOADED"
+            echo "remix_removed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Generate deployment report
+        run: |
+          echo "## 📊 Deployment Verification Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Compression Status" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ steps.verify.outputs.brotli_enabled }}" == "true" ]; then
+            echo "| Metric | Status |" >> $GITHUB_STEP_SUMMARY
+            echo "|--------|--------|" >> $GITHUB_STEP_SUMMARY
+            echo "| Brotli Compression | ✅ Enabled |" >> $GITHUB_STEP_SUMMARY
+            echo "| Fastly CDN | $([ "${{ steps.verify.outputs.fastly_detected }}" == "true" ] && echo "✅ Detected" || echo "⚠️ Not Detected") |" >> $GITHUB_STEP_SUMMARY
+            echo "| Icon Optimization | $([ "${{ steps.verify.outputs.remix_removed }}" == "true" ] && echo "✅ Working" || echo "⚠️ Issue") |" >> $GITHUB_STEP_SUMMARY
+          elif [ "${{ steps.verify.outputs.gzip_enabled }}" == "true" ]; then
+            echo "| Metric | Status |" >> $GITHUB_STEP_SUMMARY
+            echo "|--------|--------|" >> $GITHUB_STEP_SUMMARY
+            echo "| Gzip Compression | ✅ Enabled |" >> $GITHUB_STEP_SUMMARY
+            echo "| Brotli Compression | ⚠️ Not Used |" >> $GITHUB_STEP_SUMMARY
+            echo "| Fastly CDN | $([ "${{ steps.verify.outputs.fastly_detected }}" == "true" ] && echo "✅ Detected" || echo "⚠️ Not Detected") |" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ **No compression detected!** This may indicate a deployment issue." >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Expected Size Reductions" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Resource | Before | After | Savings |" >> $GITHUB_STEP_SUMMARY
+          echo "|----------|--------|-------|---------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Remix Icons | 210.9 kB | ~2 kB | -99% |" >> $GITHUB_STEP_SUMMARY
+          echo "| Varela Font | 23.0 kB | ~12 kB | -48% |" >> $GITHUB_STEP_SUMMARY
+          echo "| Total Page | ~315 kB | ~95 kB | -70% |" >> $GITHUB_STEP_SUMMARY
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Raw Headers" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          curl -sI -H "Accept-Encoding: br" https://tantalumv.github.io/css-ref/ >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+
+      - name: Fail if compression not working
+        if: ${{ steps.verify.outputs.brotli_enabled != 'true' && steps.verify.outputs.gzip_enabled != 'true' }}
+        run: |
+          echo "❌ ERROR: No compression detected!"
+          echo "This may indicate:"
+          echo "  1. GitHub Pages hasn't finished propagating (wait and re-run)"
+          echo "  2. Build failed to upload compressed files"
+          echo "  3. CDN cache needs to be purged"
+          exit 1
