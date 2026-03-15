@@ -115,7 +115,7 @@ export function renderDetail(
       }
       <div class="detail-section">
         <div class="detail-lbl">Syntax</div>
-        <pre class="syntax-block">${p.x}<button class="copy-btn" onclick="navigator.clipboard.writeText('${p.x.replace(/'/g, "\\'")}').then(()=>{this.innerHTML='<i class=\\'ri-check-line\\'></i>';setTimeout(()=>this.innerHTML='<i class=\\'ri-clipboard-line\\'></i>',1500)})" style="position:absolute;top:8px;right:8px;padding:6px 10px;font-size:14px;background:${color};color:#fff;border:none;border-radius:4px;cursor:pointer"><i class="ri-clipboard-line"></i></button></pre>
+        <pre class="syntax-block">${p.x}<button class="copy-btn" onclick="navigator.clipboard.writeText('${p.x.replace(/'/g, "\\'")}').then(()=>{const btn=this;btn.innerHTML='<svg class="icon" aria-hidden="true"><use href="#ri-check-line"/></svg>';;setTimeout(()=>btn.innerHTML='<svg class="icon" aria-hidden="true"><use href="#ri-clipboard-line"/></svg>',1500)})" style="position:absolute;top:8px;right:8px;padding:6px 10px;font-size:14px;background:${color};color:#fff;border:none;border-radius:4px;cursor:pointer"><svg class="icon" aria-hidden="true"><use href="#ri-clipboard-line"/></svg></button></pre>
       </div>
       <div class="detail-section">
         <div class="detail-lbl">Browser Support</div>

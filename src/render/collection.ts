@@ -99,7 +99,7 @@ export function renderCollectionPageHTML(collection: CollectionMeta, allProps: C
       <section class="section-overview">
         <div class="category-hero" style="--cat-color: ${collection.color}">
           <div class="category-icon-wrap">
-            <i class="${collection.icon}"></i>
+            <svg class="icon" aria-hidden="true"><use href="#${collection.icon}"/></svg>
           </div>
           <div class="category-info">
             <h1 class="category-title">${collection.name}</h1>
