@@ -12,13 +12,40 @@ Built with [Datastar](https://data-star.dev/) + TypeScript as a static site — 
 
 ## Quick Start
 
+### Using Bun (Recommended)
+
 ```bash
 bun install
-bun run build
+bun run build        # Build with automatic compression
 bun run serve
 ```
 
+### Using Node.js
+
+```bash
+npm install
+npm run build:node   # Build with automatic compression
+npm run serve:node
+```
+
 Open [http://localhost:2005](http://localhost:2005).
+
+---
+
+## Development
+
+This project supports both **Bun** (recommended for speed) and **Node.js** (for CI/CD compatibility).
+
+| Task | Bun | Node.js |
+|------|-----|---------|
+| Cold install | ~5s | ~15s |
+| Dev server start | ~1s | ~2s |
+| Production build | ~2s | ~4s |
+
+**Builds include automatic compression:**
+- Every build produces `.gz` (gzip) and `.br` (Brotli) files
+- GitHub Pages automatically serves compressed versions
+- Users download **81% less data**
 
 ## Features
 
@@ -132,15 +159,28 @@ Datastar's ideal architecture is backend-driven with SSE streaming. This project
 
 ## Scripts
 
-| Command             | Description                |
-| ------------------- | -------------------------- |
-| `bun run build`     | Production build           |
-| `bun run dev`       | Watch mode with sourcemaps |
-| `bun run serve`     | Serve on localhost:2005    |
-| `bun test`          | Unit tests (vitest)        |
-| `bun test:e2e`      | E2E tests (Playwright)     |
-| `bun run typecheck` | TypeScript type check      |
-| `bun run lint`      | Lint with oxlint           |
+### Development
+
+| Command | Description |
+|---------|-------------|
+| `bun run dev` | Watch mode with sourcemaps (Bun) |
+| `npm run dev:node` | Watch mode with sourcemaps (Node.js) |
+| `bun run build` | Production build (Bun) |
+| `npm run build:node` | Production build (Node.js) |
+| `bun run serve` | Serve on localhost:2005 (Bun) |
+| `npm run serve:node` | Serve on localhost:2005 (Node.js) |
+| `npm run build:compress` | Build + gzip/brotli compression |
+
+### Testing & Quality
+
+| Command | Description |
+|---------|-------------|
+| `bun test` | Unit tests (vitest) |
+| `bun test:e2e` | E2E tests (Playwright) |
+| `bun run typecheck` | TypeScript type check |
+| `bun run lint` | Lint with oxlint |
+
+See [docs/BUN_NODE_SETUP.md](docs/BUN_NODE_SETUP.md) for all available scripts.
 
 ## License
 
