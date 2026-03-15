@@ -1,4 +1,4 @@
-import type { CSSProperty, InteropStatus } from "../types";
+import type { CSSProperty, CSSPropertyFull, InteropStatus, BrowserSupport, CSSValue } from "../types";
 import type { CategoryMeta } from "./categories";
 import type { CollectionMeta } from "./collections";
 import { layout } from "./layout";
@@ -29,33 +29,51 @@ import { interactivityExtra } from "./interactivity-extra";
 import { CATEGORIES } from "./categories";
 import { COLLECTIONS, COLLECTIONS_LIST } from "./collections";
 
+// Convert full keys to short keys for backward compatibility
+function toShortKeys(prop: CSSPropertyFull): CSSProperty {
+  return {
+    n: prop.name,
+    c: prop.category,
+    d: prop.description,
+    s: prop.support,
+    i: prop.interop,
+    x: prop.example,
+    m: prop.mdnPath,
+    demo: prop.demo,
+    v: prop.values,
+    caniuse: prop.caniuse,
+    default: prop.default,
+  };
+}
+
 // CSS_PROPERTIES - renamed from P to avoid minification conflicts
+// Apply toShortKeys conversion to convert full keys to short keys
 export const CSS_PROPERTIES: CSSProperty[] = [
-  ...layout,
-  ...flexbox,
-  ...grid,
-  ...typography,
-  ...color,
-  ...sizing,
-  ...visual,
-  ...animation,
-  ...transform,
-  ...spacing,
-  ...interactivity,
-  ...cssVariables,
-  ...queries,
-  ...selectors,
-  ...uiComponents,
-  ...tables,
-  ...lists,
-  ...misc,
-  ...breaks,
-  ...spacingSides,
-  ...transform3d,
-  ...visualBorders,
-  ...typographyExtra,
-  ...tablesExtra,
-  ...interactivityExtra,
+  ...layout.map(toShortKeys),
+  ...flexbox.map(toShortKeys),
+  ...grid.map(toShortKeys),
+  ...typography.map(toShortKeys),
+  ...color.map(toShortKeys),
+  ...sizing.map(toShortKeys),
+  ...visual.map(toShortKeys),
+  ...animation.map(toShortKeys),
+  ...transform.map(toShortKeys),
+  ...spacing.map(toShortKeys),
+  ...interactivity.map(toShortKeys),
+  ...cssVariables.map(toShortKeys),
+  ...queries.map(toShortKeys),
+  ...selectors.map(toShortKeys),
+  ...uiComponents.map(toShortKeys),
+  ...tables.map(toShortKeys),
+  ...lists.map(toShortKeys),
+  ...misc.map(toShortKeys),
+  ...breaks.map(toShortKeys),
+  ...spacingSides.map(toShortKeys),
+  ...transform3d.map(toShortKeys),
+  ...visualBorders.map(toShortKeys),
+  ...typographyExtra.map(toShortKeys),
+  ...tablesExtra.map(toShortKeys),
+  ...interactivityExtra.map(toShortKeys),
 ];
 
 // Backwards-compatible alias for tests

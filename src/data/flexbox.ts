@@ -1,30 +1,30 @@
-import type { CSSProperty } from "../types";
+import type { CSSPropertyFull } from "../types";
 
-export const flexbox: CSSProperty[] = [
+export const flexbox: CSSPropertyFull[] = [
   {
-    n: "flex",
-    c: "Flexbox",
-    d: "Shorthand for flex-grow, flex-shrink, and flex-basis — how items grow, shrink, and size.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "wide",
-    x: "flex: 1 | 0 1 auto | none | 2 1 300px",
-    m: "flex",
+    name: "flex",
+    category: "Flexbox",
+    description: "Shorthand for flex-grow, flex-shrink, and flex-basis — how items grow, shrink, and size.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "wide",
+    example: "flex: 1 | 0 1 auto | none | 2 1 300px",
+    mdnPath: "flex",
     caniuse: "flexbox",
     default: "0 1 auto",
     demo: `<div style="display:flex;gap:6px;padding:10px;width:100%"><div style="flex:1;background:#8b5cf6;color:#fff;padding:10px 4px;border-radius:5px;font-size:10px;font-weight:700;text-align:center">flex: 1</div><div style="flex:2;background:#6366f1;color:#fff;padding:10px 4px;border-radius:5px;font-size:10px;font-weight:700;text-align:center">flex: 2</div><div style="flex:1;background:#8b5cf6;color:#fff;padding:10px 4px;border-radius:5px;font-size:10px;font-weight:700;text-align:center">flex: 1</div></div>`,
   },
 
   {
-    n: "flex-direction",
-    c: "Flexbox",
-    d: "Sets the main axis direction of a flex container — row (horizontal) or column (vertical).",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "wide",
-    x: "flex-direction: row | row-reverse | column | column-reverse",
-    m: "flex-direction",
+    name: "flex-direction",
+    category: "Flexbox",
+    description: "Sets the main axis direction of a flex container — row (horizontal) or column (vertical).",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "wide",
+    example: "flex-direction: row | row-reverse | column | column-reverse",
+    mdnPath: "flex-direction",
     caniuse: "flexbox",
     default: "row",
-    v: [
+    values: [
       {
         value: "row",
         label: "Row",
@@ -52,16 +52,16 @@ export const flexbox: CSSProperty[] = [
   },
 
   {
-    n: "flex-wrap",
-    c: "Flexbox",
-    d: "Controls whether flex items wrap onto multiple lines when they overflow the container.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "wide",
-    x: "flex-wrap: nowrap | wrap | wrap-reverse",
-    m: "flex-wrap",
+    name: "flex-wrap",
+    category: "Flexbox",
+    description: "Controls whether flex items wrap onto multiple lines when they overflow the container.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "wide",
+    example: "flex-wrap: nowrap | wrap | wrap-reverse",
+    mdnPath: "flex-wrap",
     caniuse: "flexbox",
     default: "nowrap",
-    v: [
+    values: [
       {
         value: "nowrap",
         label: "No Wrap",
@@ -85,16 +85,16 @@ export const flexbox: CSSProperty[] = [
   },
 
   {
-    n: "justify-content",
-    c: "Flexbox",
-    d: "Aligns flex/grid items along the main axis with distribution control.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "wide",
-    x: "justify-content: flex-start | center | space-between | space-around | space-evenly",
-    m: "justify-content",
+    name: "justify-content",
+    category: "Flexbox",
+    description: "Aligns flex/grid items along the main axis with distribution control.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "wide",
+    example: "justify-content: flex-start | center | space-between | space-around | space-evenly",
+    mdnPath: "justify-content",
     caniuse: "flexbox",
     default: "flex-start",
-    v: [
+    values: [
       {
         value: "flex-start",
         label: "Flex Start",
@@ -135,16 +135,16 @@ export const flexbox: CSSProperty[] = [
   },
 
   {
-    n: "align-items",
-    c: "Flexbox",
-    d: "Aligns flex/grid items along the cross axis of their container.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "wide",
-    x: "align-items: stretch | flex-start | flex-end | center | baseline",
-    m: "align-items",
+    name: "align-items",
+    category: "Flexbox",
+    description: "Aligns flex/grid items along the cross axis of their container.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "wide",
+    example: "align-items: stretch | flex-start | flex-end | center | baseline",
+    mdnPath: "align-items",
     caniuse: "flexbox",
     default: "stretch",
-    v: [
+    values: [
       {
         value: "stretch",
         label: "Stretch",
@@ -179,15 +179,15 @@ export const flexbox: CSSProperty[] = [
   },
 
   {
-    n: "align-self",
-    c: "Flexbox",
-    d: "Overrides the container's align-items for a specific flex/grid item.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "wide",
-    x: "align-self: auto | stretch | flex-start | flex-end | center",
-    m: "align-self",
+    name: "align-self",
+    category: "Flexbox",
+    description: "Overrides the container's align-items for a specific flex/grid item.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "wide",
+    example: "align-self: auto | stretch | flex-start | flex-end | center",
+    mdnPath: "align-self",
     caniuse: "flexbox",
-    v: [
+    values: [
       {
         value: "auto",
         label: "Auto",
@@ -228,27 +228,27 @@ export const flexbox: CSSProperty[] = [
   },
 
   {
-    n: "gap",
-    c: "Flexbox",
-    d: "Sets the gap between flex and grid items — shorthand for row-gap and column-gap.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "wide",
-    x: "gap: 1rem | 0.5rem 1.5rem",
-    m: "gap",
+    name: "gap",
+    category: "Flexbox",
+    description: "Sets the gap between flex and grid items — shorthand for row-gap and column-gap.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "wide",
+    example: "gap: 1rem | 0.5rem 1.5rem",
+    mdnPath: "gap",
     caniuse: "flexbox",
     demo: `<div style="display:flex;gap:16px;align-items:center">${[1, 2, 3, 4].map(() => `<div style="background:#8b5cf6;width:28px;height:36px;border-radius:4px;position:relative"></div>`).join('<div style="width:1px;height:24px;background:#8b5cf6;opacity:.3;border:1px dashed #8b5cf6"></div>')}</div>`,
   },
 
   {
-    n: "order",
-    c: "Flexbox",
-    d: "Controls the visual order in which a flex/grid item appears inside its container.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "wide",
-    x: "order: 0 | -1 | 3",
-    m: "order",
+    name: "order",
+    category: "Flexbox",
+    description: "Controls the visual order in which a flex/grid item appears inside its container.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "wide",
+    example: "order: 0 | -1 | 3",
+    mdnPath: "order",
     caniuse: "flexbox",
-    v: [
+    values: [
       {
         value: "0",
         label: "Default (0)",
@@ -272,15 +272,15 @@ export const flexbox: CSSProperty[] = [
   },
 
   {
-    n: "flex-basis",
-    c: "Flexbox",
-    d: "Sets the initial main size of a flex item — the size before free space is distributed.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "wide",
-    x: "flex-basis: auto | 200px | 30%",
-    m: "flex-basis",
+    name: "flex-basis",
+    category: "Flexbox",
+    description: "Sets the initial main size of a flex item — the size before free space is distributed.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "wide",
+    example: "flex-basis: auto | 200px | 30%",
+    mdnPath: "flex-basis",
     caniuse: "flexbox",
-    v: [
+    values: [
       {
         value: "auto",
         label: "Auto",
@@ -304,15 +304,15 @@ export const flexbox: CSSProperty[] = [
   },
 
   {
-    n: "flex-grow",
-    c: "Flexbox",
-    d: "Controls how much a flex item grows relative to others when positive space is distributed.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "wide",
-    x: "flex-grow: 0 | 1 | 2",
-    m: "flex-grow",
+    name: "flex-grow",
+    category: "Flexbox",
+    description: "Controls how much a flex item grows relative to others when positive space is distributed.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "wide",
+    example: "flex-grow: 0 | 1 | 2",
+    mdnPath: "flex-grow",
     caniuse: "flexbox",
-    v: [
+    values: [
       {
         value: "0",
         label: "No Growth (0)",
@@ -336,15 +336,15 @@ export const flexbox: CSSProperty[] = [
   },
 
   {
-    n: "flex-shrink",
-    c: "Flexbox",
-    d: "Controls how much a flex item shrinks relative to others when negative space is distributed.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "wide",
-    x: "flex-shrink: 0 | 1 | 2",
-    m: "flex-shrink",
+    name: "flex-shrink",
+    category: "Flexbox",
+    description: "Controls how much a flex item shrinks relative to others when negative space is distributed.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "wide",
+    example: "flex-shrink: 0 | 1 | 2",
+    mdnPath: "flex-shrink",
     caniuse: "flexbox",
-    v: [
+    values: [
       {
         value: "1",
         label: "Shrink (1)",
@@ -368,25 +368,25 @@ export const flexbox: CSSProperty[] = [
   },
 
   {
-    n: "justify-items",
-    c: "Flexbox",
-    d: "Aligns items on the inline axis within their grid area — applies to grid containers.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "wide",
-    x: "justify-items: start | center | end | stretch",
-    m: "justify-items",
+    name: "justify-items",
+    category: "Flexbox",
+    description: "Aligns items on the inline axis within their grid area — applies to grid containers.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "wide",
+    example: "justify-items: start | center | end | stretch",
+    mdnPath: "justify-items",
     caniuse: "flexbox",
     demo: `<div style="display:grid;justify-items:center;grid-template-columns:repeat(3,1fr);gap:4px;padding:10px"><div style="width:24px;background:#7c3aed;height:18px;border-radius:3px"></div><div style="width:24px;background:#6366f1;height:18px;border-radius:3px"></div><div style="width:24px;background:#8b5cf6;height:18px;border-radius:3px"></div></div>`,
   },
 
   {
-    n: "justify-self",
-    c: "Flexbox",
-    d: "Aligns a single item on the inline axis within its grid area — overrides justify-items.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "wide",
-    x: "justify-self: auto | start | center | end",
-    m: "justify-self",
+    name: "justify-self",
+    category: "Flexbox",
+    description: "Aligns a single item on the inline axis within its grid area — overrides justify-items.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "wide",
+    example: "justify-self: auto | start | center | end",
+    mdnPath: "justify-self",
     caniuse: "flexbox",
     demo: `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:10px"><div style="justify-self:start;background:#7c3aed;color:#fff;padding:6px;border-radius:3px;font-size:8px">start</div><div style="justify-self:center;background:#6366f1;color:#fff;padding:6px;border-radius:3px;font-size:8px">center</div><div style="justify-self:end;background:#8b5cf6;color:#fff;padding:6px;border-radius:3px;font-size:8px">end</div></div>`,
   },

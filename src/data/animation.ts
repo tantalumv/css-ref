@@ -1,91 +1,91 @@
-import type { CSSProperty } from "../types";
+import type { CSSPropertyFull } from "../types";
 
-export const animation: CSSProperty[] = [
+export const animation: CSSPropertyFull[] = [
   {
-    n: "transition",
-    c: "Animation",
-    d: "Shorthand to animate changes between property values when an element changes state.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "wide",
-    x: "transition: color 0.2s ease, transform 0.3s ease-out 0.1s",
-    m: "transition",
+    name: "transition",
+    category: "Animation",
+    description: "Shorthand to animate changes between property values when an element changes state.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "wide",
+    example: "transition: color 0.2s ease, transform 0.3s ease-out 0.1s",
+    mdnPath: "transition",
     caniuse: "css-transitions",
     default: "all 0s ease 0s",
     demo: `<style>.t-demo{transition:transform .4s cubic-bezier(.5,1.25,.75,1.25),background .4s;animation:demo-pulse 2s ease-in-out infinite}</style><div style="padding:10px;text-align:center"><div class="t-demo" style="display:inline-block;background:#f59e0b;color:#fff;padding:10px 20px;border-radius:8px;font-size:11px;font-weight:700">Animating…</div><p style="font-size:9px;color:#888;font-weight:700;margin-top:6px">transition: transform .4s ease</p></div>`,
   },
 
   {
-    n: "animation",
-    c: "Animation",
-    d: "Shorthand for all animation sub-properties — references @keyframes by name.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "wide",
-    x: "animation: spin 1s linear infinite",
-    m: "animation",
+    name: "animation",
+    category: "Animation",
+    description: "Shorthand for all animation sub-properties — references @keyframes by name.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "wide",
+    example: "animation: spin 1s linear infinite",
+    mdnPath: "animation",
     caniuse: "css-animation",
     default: "none 0s ease 0s 1 normal none running",
     demo: `<div style="display:flex;gap:16px;align-items:center;padding:10px"><div style="width:36px;height:36px;background:linear-gradient(135deg,#f59e0b,#ec4899);border-radius:6px;animation:demo-spin 2s linear infinite"></div><div style="width:36px;height:36px;background:#f59e0b;border-radius:50%;animation:demo-bounce 1s ease-in-out infinite"></div><div style="width:36px;height:36px;background:linear-gradient(135deg,#6366f1,#f97316);border-radius:6px;animation:demo-color 3s linear infinite"></div></div>`,
   },
 
   {
-    n: "animation-timeline",
-    c: "Animation",
-    d: "Specifies the timeline controlling a CSS animation — enables scroll and view progress animations.",
-    s: { ch: 1, ff: 0, sf: 0, ed: 1 },
-    i: "ltd",
-    x: "animation-timeline: scroll() | view() | --my-timeline",
-    m: "animation-timeline",
+    name: "animation-timeline",
+    category: "Animation",
+    description: "Specifies the timeline controlling a CSS animation — enables scroll and view progress animations.",
+    support: { ch: 1, ff: 0, sf: 0, ed: 1 },
+    interop: "ltd",
+    example: "animation-timeline: scroll() | view() | --my-timeline",
+    mdnPath: "animation-timeline",
     caniuse: "css-animation",
     demo: `<div style="padding:10px;width:100%"><div style="background:#fef3c7;border-radius:5px;height:18px;width:100%;overflow:hidden;border:2px solid #f59e0b"><div style="height:100%;width:70%;background:linear-gradient(90deg,#f59e0b,#ec4899);border-radius:3px;animation:demo-width 3s ease-in-out infinite"></div></div><p style="font-size:9px;color:#888;font-weight:700;margin-top:6px">Scroll-driven progress bar</p></div>`,
   },
 
   {
-    n: "view-transition-name",
-    c: "Animation",
-    d: "Names an element for the View Transitions API, enabling cross-page morphing animations.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "b2024",
-    x: "view-transition-name: hero-image | none",
-    m: "view-transition-name",
+    name: "view-transition-name",
+    category: "Animation",
+    description: "Names an element for the View Transitions API, enabling cross-page morphing animations.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "b2024",
+    example: "view-transition-name: hero-image | none",
+    mdnPath: "view-transition-name",
     caniuse: "view-transitions",
     demo: `<div style="display:flex;align-items:center;gap:12px;padding:10px"><div style="width:40px;height:40px;background:linear-gradient(135deg,#f59e0b,#ec4899);border-radius:6px;animation:demo-pulse 2s ease infinite"></div><div style="font-size:18px">→</div><div style="width:60px;height:60px;background:linear-gradient(135deg,#f59e0b,#ec4899);border-radius:12px;animation:demo-pulse 2s ease infinite;animation-delay:.1s"></div><p style="font-size:9px;color:#888;font-weight:700">Morphing between pages</p></div>`,
   },
 
   {
-    n: "offset-path",
-    c: "Animation",
-    d: "Defines a path along which an element moves via CSS Motion Path.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "b2022",
-    x: 'offset-path: path("M 0,0 C 50,100 150,100 200,0")',
-    m: "offset-path",
+    name: "offset-path",
+    category: "Animation",
+    description: "Defines a path along which an element moves via CSS Motion Path.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "b2022",
+    example: 'offset-path: path("M 0,0 C 50,100 150,100 200,0")',
+    mdnPath: "offset-path",
     caniuse: "css-motion-paths",
     demo: `<style>.op-dot{width:14px;height:14px;background:#f59e0b;border-radius:50%;offset-path:path("M 10,40 C 40,5 100,5 130,40 S 220,75 150,40");animation:demo-path 2s linear infinite}</style><svg style="position:absolute;opacity:.2" width="200" height="72" viewBox="0 0 200 72"><path d="M 10,40 C 40,5 100,5 130,40 S 220,75 150,40" stroke="#f59e0b" fill="none" stroke-width="2" stroke-dasharray="4"/></svg><div class="op-dot"></div>`,
   },
 
   {
-    n: "will-change",
-    c: "Animation",
-    d: "Hints to the browser which properties will change, letting it optimise rendering ahead of time.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "wide",
-    x: "will-change: transform | opacity | auto",
-    m: "will-change",
+    name: "will-change",
+    category: "Animation",
+    description: "Hints to the browser which properties will change, letting it optimise rendering ahead of time.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "wide",
+    example: "will-change: transform | opacity | auto",
+    mdnPath: "will-change",
     caniuse: "will-change",
     demo: `<div style="display:flex;gap:10px;padding:10px;align-items:center"><div style="will-change:transform;background:#f59e0b;color:#fff;padding:10px 14px;border-radius:6px;font-size:10px;font-weight:700;animation:demo-bounce 1.5s ease-in-out infinite">promoted</div><div style="font-size:9px;color:#888;font-weight:700">GPU layer hint<br>via will-change</div></div>`,
   },
 
   {
-    n: "transition-duration",
-    c: "Animation",
-    d: "Sets how long a transition takes from start to end.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "wide",
-    x: "transition-duration: 150ms | 0.6s",
-    m: "transition-duration",
+    name: "transition-duration",
+    category: "Animation",
+    description: "Sets how long a transition takes from start to end.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "wide",
+    example: "transition-duration: 150ms | 0.6s",
+    mdnPath: "transition-duration",
     caniuse: "css-transitions",
     demo: `<style>.td-wrap{display:flex;gap:8px}.td-chip{padding:8px 10px;border-radius:6px;color:#fff;font-size:10px;font-weight:700;cursor:pointer}.td-fast{background:#6366f1;transition-property:transform;transition-duration:120ms}.td-slow{background:#ec4899;transition-property:transform;transition-duration:900ms}.td-chip:hover{transform:translateY(-4px)}</style><div class="td-wrap" style="padding:10px"><div class="td-chip td-fast">120ms</div><div class="td-chip td-slow">900ms</div></div>`,
-    v: [
+    values: [
       {
         value: "0s",
         label: "Zero (0s)",
@@ -107,16 +107,16 @@ export const animation: CSSProperty[] = [
   },
 
   {
-    n: "animation-duration",
-    c: "Animation",
-    d: "Sets the length of time one animation cycle takes.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "wide",
-    x: "animation-duration: 500ms | 2s",
-    m: "animation-duration",
+    name: "animation-duration",
+    category: "Animation",
+    description: "Sets the length of time one animation cycle takes.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "wide",
+    example: "animation-duration: 500ms | 2s",
+    mdnPath: "animation-duration",
     caniuse: "css-animation",
     demo: `<style>@keyframes ad-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}.ad{width:32px;height:32px;border-radius:6px;background:#f59e0b;animation-name:ad-pulse;animation-iteration-count:infinite}.ad-fast{animation-duration:.6s}.ad-slow{animation-duration:2s;background:#6366f1}</style><div style="display:flex;gap:14px;align-items:center;padding:10px"><div class="ad ad-fast"></div><div class="ad ad-slow"></div><p style="font-size:9px;color:#888;font-weight:700">fast vs slow duration</p></div>`,
-    v: [
+    values: [
       {
         value: "0s",
         label: "Zero (0s)",
@@ -138,26 +138,26 @@ export const animation: CSSProperty[] = [
   },
 
   {
-    n: "animation-composition",
-    c: "Animation",
-    d: "Controls how multiple animations on the same property combine — replace (default), add (sum values), or accumulate (combine transforms).",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "ltd",
-    x: "animation-composition: replace | add | accumulate",
-    m: "animation-composition",
+    name: "animation-composition",
+    category: "Animation",
+    description: "Controls how multiple animations on the same property combine — replace (default), add (sum values), or accumulate (combine transforms).",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "ltd",
+    example: "animation-composition: replace | add | accumulate",
+    mdnPath: "animation-composition",
     demo: `<div style="padding:10px"><div style="animation-name:demo-scale,demo-rotate;animation-duration:2s;animation-iteration-count:infinite;animation-composition:add;background:#6366f1;width:40px;height:40px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff">add</div></div>`,
   },
 
   {
-    n: "animation-delay",
-    c: "Animation",
-    d: "Sets the delay before an animation starts — can be negative to begin partway through.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "wide",
-    x: "animation-delay: 200ms | 1s",
-    m: "animation-delay",
+    name: "animation-delay",
+    category: "Animation",
+    description: "Sets the delay before an animation starts — can be negative to begin partway through.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "wide",
+    example: "animation-delay: 200ms | 1s",
+    mdnPath: "animation-delay",
     demo: `<div style="padding:10px"><div style="animation-name:demo-pulse;animation-duration:1.4s;animation-iteration-count:infinite;animation-delay:.5s;background:#eef2ff;border:2px solid #6366f1;border-radius:5px;padding:8px;font-size:9px;font-weight:700;color:#4338ca">animation-delay</div></div>`,
-    v: [
+    values: [
       {
         value: "0s",
         label: "No Delay (0s)",
@@ -179,15 +179,15 @@ export const animation: CSSProperty[] = [
   },
 
   {
-    n: "animation-direction",
-    c: "Animation",
-    d: "Controls whether the animation plays forwards, backwards, or alternates each cycle.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "wide",
-    x: "animation-direction: normal | reverse | alternate",
-    m: "animation-direction",
+    name: "animation-direction",
+    category: "Animation",
+    description: "Controls whether the animation plays forwards, backwards, or alternates each cycle.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "wide",
+    example: "animation-direction: normal | reverse | alternate",
+    mdnPath: "animation-direction",
     demo: `<div style="padding:10px"><div style="animation-name:demo-path;animation-duration:2s;animation-iteration-count:infinite;animation-direction:alternate;background:#eef2ff;border:2px solid #6366f1;border-radius:5px;padding:8px;font-size:9px;font-weight:700;color:#4338ca">animation-direction</div></div>`,
-    v: [
+    values: [
       {
         value: "normal",
         label: "Normal",
@@ -216,15 +216,15 @@ export const animation: CSSProperty[] = [
   },
 
   {
-    n: "animation-fill-mode",
-    c: "Animation",
-    d: "Controls how styles apply before/after animation — forwards keeps end state, backwards applies start state before delay.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "wide",
-    x: "animation-fill-mode: none | forwards | both",
-    m: "animation-fill-mode",
+    name: "animation-fill-mode",
+    category: "Animation",
+    description: "Controls how styles apply before/after animation — forwards keeps end state, backwards applies start state before delay.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "wide",
+    example: "animation-fill-mode: none | forwards | both",
+    mdnPath: "animation-fill-mode",
     demo: `<div style="padding:10px"><div style="animation-name:demo-width;animation-duration:1.2s;animation-fill-mode:forwards;background:#eef2ff;border:2px solid #6366f1;border-radius:5px;padding:8px;font-size:9px;font-weight:700;color:#4338ca">animation-fill-mode</div></div>`,
-    v: [
+    values: [
       {
         value: "none",
         label: "None",
@@ -253,15 +253,15 @@ export const animation: CSSProperty[] = [
   },
 
   {
-    n: "animation-iteration-count",
-    c: "Animation",
-    d: "Sets how many times the animation plays — number or infinite for endless loop.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "wide",
-    x: "animation-iteration-count: 1 | 2 | infinite",
-    m: "animation-iteration-count",
+    name: "animation-iteration-count",
+    category: "Animation",
+    description: "Sets how many times the animation plays — number or infinite for endless loop.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "wide",
+    example: "animation-iteration-count: 1 | 2 | infinite",
+    mdnPath: "animation-iteration-count",
     demo: `<div style="padding:10px"><div style="animation-name:demo-spin;animation-duration:1.2s;animation-iteration-count:3;background:#eef2ff;border:2px solid #6366f1;border-radius:5px;padding:8px;font-size:9px;font-weight:700;color:#4338ca">animation-iteration-count</div></div>`,
-    v: [
+    values: [
       {
         value: "1",
         label: "Once (1)",
@@ -283,15 +283,15 @@ export const animation: CSSProperty[] = [
   },
 
   {
-    n: "animation-name",
-    c: "Animation",
-    d: "Specifies which @keyframes rule to use for the animation.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "wide",
-    x: "animation-name: fade-in | slide-up",
-    m: "animation-name",
+    name: "animation-name",
+    category: "Animation",
+    description: "Specifies which @keyframes rule to use for the animation.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "wide",
+    example: "animation-name: fade-in | slide-up",
+    mdnPath: "animation-name",
     demo: `<div style="padding:10px"><div style="animation-name: demo-spin;animation-duration:1.5s;animation-iteration-count:infinite;display:inline-block;background:#eef2ff;border:2px solid #6366f1;border-radius:5px;padding:8px;font-size:9px;font-weight:700;color:#4338ca">animation-name</div></div>`,
-    v: [
+    values: [
       {
         value: "none",
         label: "None",
@@ -307,15 +307,15 @@ export const animation: CSSProperty[] = [
   },
 
   {
-    n: "animation-play-state",
-    c: "Animation",
-    d: "Controls whether the animation is running or paused — can be toggled to pause/resume.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "wide",
-    x: "animation-play-state: running | paused",
-    m: "animation-play-state",
+    name: "animation-play-state",
+    category: "Animation",
+    description: "Controls whether the animation is running or paused — can be toggled to pause/resume.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "wide",
+    example: "animation-play-state: running | paused",
+    mdnPath: "animation-play-state",
     demo: `<div style="padding:10px"><div style="animation-name:demo-bounce;animation-duration:1.2s;animation-iteration-count:infinite;animation-play-state:paused;background:#eef2ff;border:2px solid #6366f1;border-radius:5px;padding:8px;font-size:9px;font-weight:700;color:#4338ca">animation-play-state</div></div>`,
-    v: [
+    values: [
       {
         value: "running",
         label: "Running",
@@ -332,15 +332,15 @@ export const animation: CSSProperty[] = [
   },
 
   {
-    n: "animation-timing-function",
-    c: "Animation",
-    d: "Controls the speed curve of the animation — ease, linear, ease-in, ease-out, or custom cubic-bezier.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "wide",
-    x: "animation-timing-function: ease | linear | cubic-bezier(0.4,0,0.2,1)",
-    m: "animation-timing-function",
+    name: "animation-timing-function",
+    category: "Animation",
+    description: "Controls the speed curve of the animation — ease, linear, ease-in, ease-out, or custom cubic-bezier.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "wide",
+    example: "animation-timing-function: ease | linear | cubic-bezier(0.4,0,0.2,1)",
+    mdnPath: "animation-timing-function",
     demo: `<div style="padding:10px"><div style="animation-name:demo-bounce;animation-duration:1.4s;animation-iteration-count:infinite;animation-timing-function:linear;background:#eef2ff;border:2px solid #6366f1;border-radius:5px;padding:8px;font-size:9px;font-weight:700;color:#4338ca">animation-timing-function</div></div>`,
-    v: [
+    values: [
       {
         value: "ease",
         label: "Ease",
@@ -393,26 +393,26 @@ export const animation: CSSProperty[] = [
   },
 
   {
-    n: "transition-behavior",
-    c: "Animation",
-    d: "Allows transitions on discrete properties like display — use allow-discrete to enable display:none transitions.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "b2024",
-    x: "transition-behavior: normal | allow-discrete",
-    m: "transition-behavior",
+    name: "transition-behavior",
+    category: "Animation",
+    description: "Allows transitions on discrete properties like display — use allow-discrete to enable display:none transitions.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "b2024",
+    example: "transition-behavior: normal | allow-discrete",
+    mdnPath: "transition-behavior",
     demo: `<style>.tb-demo{transition:display .3s,height .3s;transition-behavior:allow-discrete;overflow:hidden;height:40px}.tb-demo.hidden{display:none;height:0}</style><div style="padding:10px"><div class="tb-demo" id="tbBox" style="background:#6366f1;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff"><span>display transition</span></div><button onclick="document.getElementById('tbBox').classList.toggle('hidden')" style="margin-top:6px;font-size:9px;padding:2px 8px;border-radius:3px;border:1px solid #6366f1;background:#fff;color:#6366f1;cursor:pointer">Toggle</button></div>`,
   },
 
   {
-    n: "transition-property",
-    c: "Animation",
-    d: "Specifies which CSS properties should transition when their values change.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "wide",
-    x: "transition-property: opacity | transform | all",
-    m: "transition-property",
+    name: "transition-property",
+    category: "Animation",
+    description: "Specifies which CSS properties should transition when their values change.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "wide",
+    example: "transition-property: opacity | transform | all",
+    mdnPath: "transition-property",
     demo: `<style>.tp-demo{transition-duration:.4s;padding:8px;background:#6366f1;color:#fff;border-radius:5px;font-size:9px;font-weight:700}.tp-demo:hover{transform:scale(1.1);opacity:.7}</style><div style="padding:10px"><div class="tp-demo" style="transition-property:transform">transform only</div><div class="tp-demo" style="transition-property:opacity;margin-top:6px">opacity only</div></div>`,
-    v: [
+    values: [
       {
         value: "all",
         label: "All",
@@ -434,15 +434,15 @@ export const animation: CSSProperty[] = [
   },
 
   {
-    n: "transition-timing-function",
-    c: "Animation",
-    d: "Controls the acceleration curve of the transition — defines how intermediate values are calculated.",
-    s: { ch: 1, ff: 1, sf: 1, ed: 1 },
-    i: "wide",
-    x: "transition-timing-function: ease-in-out | linear",
-    m: "transition-timing-function",
+    name: "transition-timing-function",
+    category: "Animation",
+    description: "Controls the acceleration curve of the transition — defines how intermediate values are calculated.",
+    support: { ch: 1, ff: 1, sf: 1, ed: 1 },
+    interop: "wide",
+    example: "transition-timing-function: ease-in-out | linear",
+    mdnPath: "transition-timing-function",
     demo: `<style>.ttf-box{transition:transform .6s;padding:6px 10px;background:#6366f1;color:#fff;border-radius:4px;font-size:9px;font-weight:700;margin-bottom:6px}.ttf-linear{transition-timing-function:linear}.ttf-ease{transition-timing-function:ease-in-out}</style><div style="padding:10px" onmouseenter="this.querySelectorAll('.ttf-box').forEach(b=>b.style.transform='translateX(80px)')" onmouseleave="this.querySelectorAll('.ttf-box').forEach(b=>b.style.transform='translateX(0)')"><div class="ttf-box ttf-linear">linear</div><div class="ttf-box ttf-ease">ease-in-out</div></div>`,
-    v: [
+    values: [
       {
         value: "ease",
         label: "Ease",

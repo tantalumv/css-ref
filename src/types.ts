@@ -15,6 +15,7 @@ export interface CSSValue {
   demo?: string;
 }
 
+// Short keys - used for runtime (backward compatible)
 export interface CSSProperty {
   n: string;
   c: string;
@@ -25,6 +26,21 @@ export interface CSSProperty {
   m: string;
   demo: string;
   v?: CSSValue[];
+  caniuse?: string;
+  default?: string;
+}
+
+// Full keys - used in data files (more readable)
+export interface CSSPropertyFull {
+  name: string;
+  category: string;
+  description: string;
+  support: BrowserSupport;
+  interop: InteropStatus;
+  example: string;
+  mdnPath: string;
+  demo: string;
+  values?: CSSValue[];
   caniuse?: string;
   default?: string;
 }

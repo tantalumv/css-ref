@@ -1,8 +1,6 @@
-@import "https://unpkg.com/open-props";
-@import "https://unpkg.com/open-props/normalize.min.css";
-
 /* ═══════════════════════════════════════════════════════════════
    CSS Ref - Variables (Theme + Utopia Fluid)
+   Note: Open Props is bundled in build - no CDN imports needed
    ═══════════════════════════════════════════════════════════════ */
 
 @custom-variant dark (&:is(.dark *));
