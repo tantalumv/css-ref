@@ -1005,7 +1005,7 @@
         <div
           id="grid"
           class="is-grid"
-          data-effect="renderGrid(filtered($query, $activeCats, $activeInterops, $activeBrowsers), $selectedProp)"
+          data-effect="$viewMode; renderGrid(filtered($query, $activeCats, $activeInterops, $activeBrowsers), $selectedProp)"
         ></div>
       </main>
     </div>
@@ -1101,7 +1101,7 @@
     <!-- ==============================
          SCRIPTS
          ============================== -->
-    <script src="dist/bundle.js"></script>
+    <script type="module" src="dist/bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js" defer></script>
     <script
       type="module"
