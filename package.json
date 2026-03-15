@@ -7,7 +7,7 @@
     "dev:css": "esbuild src/styles/index.css --bundle --outfile=dist/bundle.css --watch --sourcemap",
     "dev": "concurrently \"npm:dev:js\" \"npm:dev:css\"",
     "build": "bun build src/main.ts --outfile=dist/bundle.js --target=browser --minify && esbuild src/styles/index.css --bundle --outfile=dist/bundle.css --minify",
-    "build:node": "node --experimental-strip-types scripts/build.ts",
+    "build:node": "node scripts/build.js",
     "serve": "bun run build && bunx serve . -p 2005",
     "test": "vitest",
     "test:run": "vitest run",

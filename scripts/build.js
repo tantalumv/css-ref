@@ -1,8 +1,8 @@
 // Build script for Node.js environments (GitHub Actions)
+// Plain JavaScript - no TypeScript stripping needed
 import { execSync } from 'child_process';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import fs from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
