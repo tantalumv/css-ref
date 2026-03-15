@@ -47,9 +47,6 @@ This project supports both **Bun** (recommended for speed) and **Node.js** (for 
 - GitHub Pages automatically serves compressed versions
 - Users download **81% less data**
 
-See [docs/BUN_NODE_SETUP.md](docs/BUN_NODE_SETUP.md) for complete setup details.
-See [docs/BUILD_COMPRESSION.md](docs/BUILD_COMPRESSION.md) for compression details.
-
 ---
 
 ## Verification
@@ -225,8 +222,6 @@ Datastar's ideal architecture is backend-driven with SSE streaming. This project
 | `bun test:e2e` | E2E tests (Playwright) |
 | `bun run typecheck` | TypeScript type check |
 | `bun run lint` | Lint with oxlint |
-
-See [docs/BUN_NODE_SETUP.md](docs/BUN_NODE_SETUP.md) for all available scripts.
 
 ## License
 
