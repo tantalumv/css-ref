@@ -1,23 +1,10 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { CC, IL, IC } from "./constants";
 import { P, CATS, INTEROPS } from "./data";
-import { filtered, hasFilters } from "./filters";
+import { filterProperties, hasActiveFilters } from "./lib/filters";
 import { bIcon } from "./utils";
-import {
-  activeCats,
-  activeInterops,
-  q,
-  resetFilters,
-  setQuery,
-  toggleCat,
-  toggleInterop,
-} from "./state";
 
 describe("CSS Ref App", () => {
-  beforeEach(() => {
-    resetFilters();
-  });
-
   describe("Constants", () => {
     it("should have category colors defined", () => {
       expect(CC.Layout).toBe("#6366f1");
@@ -26,7 +13,7 @@ describe("CSS Ref App", () => {
     });
 
     it("should have interop labels defined", () => {
-      expect(IL.wide).toContain("Available");
+      expect(IL.wide).toBe("Available");
       expect(IL.b2024).toContain("Baseline 2024");
       expect(IL.exp).toContain("Experimental");
     });
@@ -65,76 +52,61 @@ describe("CSS Ref App", () => {
 
   describe("Filter Logic", () => {
     it("should return all items when no filters active", () => {
-      const result = filtered();
+      const result = filterProperties(P, "", [], []);
       expect(result.length).toBe(P.length);
     });
 
     it("should filter by category", () => {
-      toggleCat("Layout");
-      const result = filtered();
+      const result = filterProperties(P, "", ["Layout"], []);
       expect(result.every((p) => p.c === "Layout")).toBe(true);
       expect(result.length).toBeGreaterThan(0);
       expect(result.length).toBeLessThan(P.length);
     });
 
     it("should filter by multiple categories", () => {
-      toggleCat("Layout");
-      toggleCat("Flexbox");
-      const result = filtered();
+      const result = filterProperties(P, "", ["Layout", "Flexbox"], []);
       expect(result.every((p) => p.c === "Layout" || p.c === "Flexbox")).toBe(true);
     });
 
     it("should filter by interop status", () => {
-      toggleInterop("wide");
-      const result = filtered();
+      const result = filterProperties(P, "", [], ["wide"]);
       expect(result.every((p) => p.i === "wide")).toBe(true);
     });
 
     it("should filter by search query", () => {
-      setQuery("flex");
-      const result = filtered();
-      expect(
-        result.every(
-          (p) =>
-            p.n.toLowerCase().includes("flex") ||
-            p.d.toLowerCase().includes("flex") ||
-            p.c.toLowerCase().includes("flex"),
-        ),
-      ).toBe(true);
+      const result = filterProperties(P, "flex", [], []);
+      expect(result.length).toBeGreaterThan(0);
+      // Fuzzy search should find flex-related properties
+      expect(result.some(p => p.n.toLowerCase().includes("flex") || p.c === "Flexbox")).toBe(true);
     });
 
     it("should combine category and search filters", () => {
-      toggleCat("Layout");
-      setQuery("position");
-      const result = filtered();
+      const result = filterProperties(P, "position", ["Layout"], []);
       expect(result.every((p) => p.c === "Layout")).toBe(true);
-      expect(
-        result.every(
-          (p) => p.n.toLowerCase().includes("position") || p.d.toLowerCase().includes("position"),
-        ),
-      ).toBe(true);
+      expect(result.length).toBeGreaterThan(0);
     });
 
     it("should return empty array when no matches", () => {
-      setQuery("xyznonexistent");
-      const result = filtered();
+      const result = filterProperties(P, "xyznonexistent", [], []);
       expect(result).toEqual([]);
     });
   });
 
-  describe("hasFilters", () => {
+  describe("hasActiveFilters", () => {
     it("should return false when no filters active", () => {
-      expect(hasFilters()).toBe(false);
+      expect(hasActiveFilters()).toBe(false);
     });
 
     it("should return true when category filter active", () => {
-      toggleCat("Layout");
-      expect(hasFilters()).toBe(true);
+      expect(hasActiveFilters({ categories: ["Layout"] })).toBe(true);
     });
 
     it("should return true when interop filter active", () => {
-      toggleInterop("wide");
-      expect(hasFilters()).toBe(true);
+      expect(hasActiveFilters({ interops: ["wide"] })).toBe(true);
+    });
+
+    it("should return true when query filter active", () => {
+      expect(hasActiveFilters({ query: "test" })).toBe(true);
     });
   });
 
@@ -158,36 +130,6 @@ describe("CSS Ref App", () => {
       expect(result).toContain("p"); // class for partial
       expect(result).toContain("S"); // Safari abbr
       expect(result).toContain("Safari");
-    });
-  });
-
-  describe("State Management", () => {
-    it("should reset filters correctly", () => {
-      toggleCat("Layout");
-      toggleInterop("wide");
-      setQuery("test");
-
-      resetFilters();
-
-      expect(activeCats.size).toBe(0);
-      expect(activeInterops.size).toBe(0);
-      expect(q).toBe("");
-    });
-
-    it("should toggle categories correctly", () => {
-      toggleCat("Layout");
-      expect(activeCats.has("Layout")).toBe(true);
-
-      toggleCat("Layout");
-      expect(activeCats.has("Layout")).toBe(false);
-    });
-
-    it("should toggle interop statuses correctly", () => {
-      toggleInterop("wide");
-      expect(activeInterops.has("wide")).toBe(true);
-
-      toggleInterop("wide");
-      expect(activeInterops.has("wide")).toBe(false);
     });
   });
 });

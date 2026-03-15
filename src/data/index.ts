@@ -29,7 +29,8 @@ import { interactivityExtra } from "./interactivity-extra";
 import { CATEGORIES } from "./categories";
 import { COLLECTIONS, COLLECTIONS_LIST } from "./collections";
 
-export const P: CSSProperty[] = [
+// CSS_PROPERTIES - renamed from P to avoid minification conflicts
+export const CSS_PROPERTIES: CSSProperty[] = [
   ...layout,
   ...flexbox,
   ...grid,
@@ -57,7 +58,10 @@ export const P: CSSProperty[] = [
   ...interactivityExtra,
 ];
 
-export const CATS = [...new Set(P.map((p) => p.c))];
+// Backwards-compatible alias for tests
+export const P = CSS_PROPERTIES;
+
+export const CATS = [...new Set(CSS_PROPERTIES.map((p) => p.c))];
 export const INTEROPS: InteropStatus[] = ["wide", "b2024", "b2023", "b2022", "ltd", "exp"];
 export { CATEGORIES, type CategoryMeta } from "./categories";
 export { COLLECTIONS, COLLECTIONS_LIST, type CollectionMeta } from "./collections";

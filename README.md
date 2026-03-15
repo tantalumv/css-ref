@@ -30,7 +30,11 @@ Open [http://localhost:2005](http://localhost:2005).
 
 ### Filtering & Search
 
-- **Search** — Real-time search across property names, descriptions (debounced 150ms)
+- **Fuzzy Search** — Typo-tolerant search powered by [fuzzysort](https://github.com/farzher/fuzzysort)
+  - Matches property names, descriptions, and categories
+  - Handles partial queries (e.g., "displ" → "display")
+  - Case-insensitive matching
+  - Real-time results (debounced 150ms)
 - **Category Filter** — 19 CSS categories (Layout, Flexbox, Grid, Typography, Color, etc.)
 - **Browser Filter** — Chrome, Firefox, Safari, Edge
 - **Collections** — Quick links to Flexbox, Grid, Typography, Animation, Color, Layout
@@ -72,6 +76,7 @@ Open [http://localhost:2005](http://localhost:2005).
 
 - **Datastar** — Reactive UI framework (CDN)
 - **TypeScript** — Client-side rendering and data
+- **fuzzysort** — Fast fuzzy search with typo tolerance
 - **List.js** — Table sorting and search (CDN)
 - **Open Props** — CSS custom properties (CDN)
 - **RemixIcon** — Icons (CDN)
@@ -79,14 +84,43 @@ Open [http://localhost:2005](http://localhost:2005).
 ## Architecture
 
 ```
-index.html          Datastar attributes (signals, events, effects)
-src/main.ts         Exposes data & functions on window
-src/data/           240 CSS property definitions across 19 categories
-src/constants.ts    Category colors, interop labels/colors
-src/utils.ts        Browser support helper
-src/types.ts        TypeScript interfaces
-src/styles/         CSS modules
+src/
+├── main.ts              # Entry point, exposes data & functions on window
+├── lib/
+│   ├── search.ts        # Fuzzysort integration for typo-tolerant search
+│   ├── filters.ts       # Filter/sort logic (pure functions)
+│   └── utils.ts         # Browser icons, DOM helpers
+├── render/
+│   ├── detail.ts        # Detail view rendering
+│   ├── collection.ts    # Collection page rendering
+│   ├── grid.ts          # Grid card rendering
+│   └── table.ts         # Table rendering + infinite scroll
+├── data/                # 240 CSS property definitions across 19 categories
+├── constants.ts         # Category colors, interop labels/colors
+├── types.ts             # TypeScript interfaces
+└── styles/              # CSS modules
 ```
+
+## Testing
+
+### Unit Tests (Vitest)
+
+```bash
+bun test:run
+```
+
+- 150+ tests covering filter logic, search, utilities, and helpers
+- Tests for fuzzy matching, typo tolerance, and edge cases
+
+### E2E Tests (Playwright)
+
+```bash
+bun test:e2e --project=chromium
+```
+
+- 75+ tests covering search, filtering, view switching, and detail views
+- Mobile command palette tests
+- Fuzzy search and typo-tolerance tests
 
 ## Why Hybrid Datastar?
 

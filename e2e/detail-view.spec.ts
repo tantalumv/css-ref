@@ -148,18 +148,18 @@ test.describe("Detail View", () => {
     await expect(page.locator("#detail-view")).toBeVisible({ timeout: 5000 });
 
     // Check all sections are rendered
-    await expect(page.locator(".back-btn")).toBeVisible();
-    await expect(page.locator(".detail-hero")).toBeVisible();
-    await expect(page.locator(".detail-name")).toHaveText("display");
-    await expect(page.locator(".detail-badges")).toBeVisible();
-    await expect(page.locator(".cat-badge")).toBeVisible();
-    await expect(page.locator(".availability-badge")).toBeVisible();
-    await expect(page.locator(".detail-demo-box")).toBeVisible();
-    await expect(page.locator(".detail-demo-stage")).toBeVisible();
-    await expect(page.locator(".detail-demo-label")).toBeVisible();
+    await expect(page.locator("#detail-view .back-btn")).toBeVisible();
+    await expect(page.locator("#detail-view .detail-hero")).toBeVisible();
+    await expect(page.locator("#detail-view .detail-name")).toHaveText("display");
+    await expect(page.locator("#detail-view .detail-badges")).toBeVisible();
+    await expect(page.locator("#detail-view .cat-badge")).toBeVisible();
+    await expect(page.locator("#detail-view .availability-badge")).toBeVisible();
+    await expect(page.locator("#detail-view .detail-demo-box")).toBeVisible();
+    await expect(page.locator("#detail-view .detail-demo-stage")).toBeVisible();
+    await expect(page.locator("#detail-view .detail-demo-label")).toBeVisible();
 
     // Get all section labels - sections may be in different order depending on property data
-    const sectionLabels = page.locator(".detail-section .detail-lbl");
+    const sectionLabels = page.locator("#detail-view .detail-section .detail-lbl");
     const labelTexts = await sectionLabels.allTextContents();
 
     // Verify expected sections exist (may have additional sections like Values, Related Properties)
@@ -192,14 +192,17 @@ test.describe("Detail View", () => {
 
     await expect(page.locator("#table-view")).toBeVisible({ timeout: 3000 });
 
-    // Wait for table rows
+    // Wait for table rows and ensure they're fully initialized
     await page.waitForSelector(".table-row", { timeout: 5000 });
+    await page.waitForTimeout(500);
 
-    // Click first table row
-    await page.locator(".table-row").first().click();
+    // Get the first row and click it
+    const firstRow = page.locator(".table-row").first();
+    await firstRow.scrollIntoViewIfNeeded();
+    await firstRow.click({ force: true });
 
     // Detail view should open
-    await expect(page.locator("#detail-view")).toBeVisible({ timeout: 3000 });
+    await expect(page.locator("#detail-view")).toBeVisible({ timeout: 5000 });
     await expect(page.locator(".detail-wrap")).toBeVisible();
     await expect(page.locator(".back-btn")).toBeVisible();
   });

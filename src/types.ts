@@ -1,3 +1,6 @@
+import type { CategoryMeta } from "./data/categories";
+import type { CollectionMeta } from "./data/collections";
+
 export interface BrowserSupport {
   ch: number;
   ff: number;
@@ -28,3 +31,58 @@ export interface CSSProperty {
 
 export type InteropStatus = "wide" | "b2024" | "b2023" | "b2022" | "ltd" | "exp";
 export type ViewMode = "grid" | "list";
+
+export interface CollectionExample {
+  title: string;
+  description: string;
+  code: string;
+  result?: string;
+}
+
+declare global {
+  interface Window {
+    // Data exports
+    P: CSSProperty[];
+    CATS: string[];
+    INTEROPS: InteropStatus[];
+    CC: Record<string, string>;
+    IL: Record<string, string>;
+    IC: Record<string, string>;
+
+    // Utilities
+    bIcon: (val: number, lbl: string) => string;
+    toggleInArray: (arr: readonly string[], item: string) => string[];
+    renderBrowserSupport: (s: BrowserSupport) => string;
+
+    // Data access
+    CATEGORIES: Record<string, CategoryMeta>;
+    COLLECTIONS: Record<string, CollectionMeta>;
+    COLLECTIONS_LIST: CollectionMeta[];
+    filtered: (
+      q: string,
+      activeCats: string[],
+      activeInterops: string[],
+      activeBrowsers?: string[],
+    ) => CSSProperty[];
+    getProp: (name: string) => CSSProperty | undefined;
+
+    // Rendering
+    renderDetail: (selectedProp: string) => void;
+    renderCollectionPage: (collectionSlug: string) => void;
+    renderGrid: (items: CSSProperty[], selectedProp: string) => void;
+
+    // List table
+    initListTable: (data: CSSProperty[]) => void;
+    loadMoreTableRows: () => void;
+    tableRowCount: () => number;
+    tableTotalCount: () => number;
+
+    // Utilities
+    findRelatedProps: (currentProp: CSSProperty, count?: number) => CSSProperty[];
+    getCategoryProps: (categoryId: string) => CSSProperty[];
+
+    // Framework
+    Datastar?: { connect: () => void };
+    List?: new (container: string, options: any) => any;
+  }
+}

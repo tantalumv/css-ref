@@ -9,14 +9,16 @@
 
 /* ── Detail View Container ── */
 #detail-view {
-  display: block;
+  display: none;
   min-height: 100svh;
   background: color-mix(in oklch, var(--background) 85%, transparent);
   backdrop-filter: blur(12px) saturate(1.5);
 }
 
-#detail-view[data-show="false"] {
-  display: none;
+#detail-view[data-show="true"],
+#detail-view.open,
+#detail-view.open[data-show="false"] {
+  display: block !important;
 }
 
 /* ── Detail Page ── */

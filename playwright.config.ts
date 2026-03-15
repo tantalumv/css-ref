@@ -27,5 +27,8 @@ export default defineConfig({
     url: "http://localhost:2005",
     reuseExistingServer: !process.env.CI,
     timeout: 120000,
+    env: {
+      PATH: "/home/AQ/.bun/bin:" + process.env.PATH,
+    },
   },
 });
