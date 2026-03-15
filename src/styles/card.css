@@ -10,6 +10,26 @@ main {
 }
 
 /* ── Grid View ── */
+#grid-view {
+  width: 100%;
+  max-width: 100%;
+}
+
+#grid-view[data-show="false"] {
+  display: none !important;
+}
+
+#grid-view > main {
+  max-width: 100% !important;
+  width: 100%;
+  margin-inline: 0;
+  padding-inline: 1rem;
+}
+
+#grid {
+  width: 100%;
+}
+
 #grid.is-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

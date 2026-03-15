@@ -8,6 +8,10 @@
   padding-top: var(--space-m);
 }
 
+#table-view[data-show="false"] {
+  display: none !important;
+}
+
 #table-container {
   background: color-mix(in oklch, var(--background) 85%, transparent);
   backdrop-filter: blur(12px) saturate(1.5);

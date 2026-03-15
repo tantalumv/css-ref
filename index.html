@@ -39,7 +39,7 @@
       .brand-logo{height:2rem;width:auto}
       .search-shell{flex:1;min-width:200px;position:relative}
       .view-mode-toggles{display:flex;gap:4px}
-      #grid-view{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;padding:1rem}
+      #grid-view{width:100%;padding:1rem}
       .property-card{background:var(--border);border-radius:var(--radius-lg);padding:1rem;min-height:200px}
       .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
     </style>
@@ -699,7 +699,7 @@
           <input
             class="cb"
             type="checkbox"
-            data-bind="$viewMode"
+            data-bind="$viewMode === 'table'"
             data-on:change="$viewMode = $viewMode === 'grid' ? 'table' : 'grid'"
             data-attr:checked="$viewMode === 'table'"
           />
@@ -754,7 +754,7 @@
             <input
               class="cb"
               type="checkbox"
-              data-bind="$viewMode"
+              data-bind="$viewMode === 'table'"
               data-on:change="$viewMode = $viewMode === 'grid' ? 'table' : 'grid'"
               data-attr:checked="$viewMode === 'table'"
             />
@@ -1163,7 +1163,7 @@
       // Register service worker for offline caching
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js')
+          navigator.serviceWorker.register('/dist/sw.js')
             .then(reg => console.log('SW registered:', reg.scope))
             .catch(err => console.log('SW registration failed:', err));
         });
