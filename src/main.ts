@@ -20,49 +20,13 @@ const propMap = createPropertyMap(CSS_PROPERTIES);
 
 // ── Detail View Visibility Management ──
 function handleHashChange(): void {
+  // Note: View visibility is now handled purely by Datastar signals via data-show attributes in index.html
+  // This function is kept for any non-Datastar logic that needs to run on hash changes
+  
   const hash = location.hash.slice(1);
-  const detailView = document.getElementById("detail-view");
-  const collectionView = document.getElementById("collection-view");
-  const tableView = document.getElementById("table-view");
-  const gridView = document.getElementById("grid-view");
-
-  // Handle collection view
-  if (collectionView) {
-    if (hash.startsWith("!")) {
-      // Collection page
-      const collectionSlug = decodeURIComponent(hash.slice(1));
-      showCollectionView(collectionSlug, CSS_PROPERTIES, COLLECTIONS as Record<string, CollectionMeta>);
-      collectionView.setAttribute("data-show", "true");
-      if (detailView) {
-        detailView.classList.remove("open");
-        detailView.setAttribute("data-show", "false");
-      }
-      if (tableView) tableView.setAttribute("data-show", "false");
-      if (gridView) gridView.setAttribute("data-show", "false");
-    } else {
-      collectionView.setAttribute("data-show", "false");
-    }
-  }
-
-  // Handle detail view
-  if (detailView) {
-    if (hash && !hash.startsWith("!")) {
-      // Show detail view
-      const propName = decodeURIComponent(hash);
-      showDetailView(propName, propMap, CSS_PROPERTIES);
-      // Hide other views
-      if (tableView) tableView.setAttribute("data-show", "false");
-      if (gridView) gridView.setAttribute("data-show", "false");
-      if (collectionView) collectionView.setAttribute("data-show", "false");
-    } else if (!hash) {
-      // Hide detail view and show grid view
-      hideDetailView();
-      // Show grid view by setting data-show directly
-      if (gridView) gridView.setAttribute("data-show", "true");
-      if (tableView) tableView.setAttribute("data-show", "false");
-      if (collectionView) collectionView.setAttribute("data-show", "false");
-    }
-  }
+  
+  // Dispatch custom event for any additional logic that needs hash info
+  window.dispatchEvent(new CustomEvent("app:hashchange", { detail: { hash } }));
 }
 
 // Listen for hashchange events
@@ -131,8 +95,8 @@ const COLLECTIONS_TYPED = COLLECTIONS as Record<string, CollectionMeta>;
 };
 
 // ── Detail Rendering ──
-(window as any).renderDetail = function (selectedProp: string): string {
-  return showDetailView(selectedProp, propMap, P) || "";
+(window as any).renderDetail = function (selectedProp: string): void {
+  showDetailView(selectedProp, propMap, CSS_PROPERTIES);
 };
 
 // ── Collection Page Rendering ──

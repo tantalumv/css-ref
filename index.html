@@ -1054,7 +1054,7 @@
         <div
           id="grid"
           class="is-grid"
-          data-effect="$viewMode; renderGrid(filtered($query, $activeCats, $activeInterops, $activeBrowsers), $selectedProp)"
+          data-effect="$viewMode; $selectedProp; $activeCollection; renderGrid(filtered($query, $activeCats, $activeInterops, $activeBrowsers), $selectedProp)"
         ></div>
       </main>
     </div>
@@ -1072,7 +1072,7 @@
     <div
       id="table-view"
       data-show="$viewMode === 'table' && $selectedProp === ''"
-      data-effect="$viewMode; initListTable(filtered($query, $activeCats, $activeInterops, $activeBrowsers))"
+      data-effect="$viewMode; $selectedProp; $activeCollection; initListTable(filtered($query, $activeCats, $activeInterops, $activeBrowsers))"
     >
       <div id="table-container">
         <table class="list-table">
