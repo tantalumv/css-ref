@@ -28,7 +28,23 @@
     <link rel="preload" href="dist/bundle.css" as="style" />
     <link rel="preload" href="dist/bundle.js" as="script" />
 
-    <!-- Stylesheets -->
+    <!-- Critical CSS (inlined for faster FCP/LCP) -->
+    <style>
+      :root{--background:#0f172a;--foreground:#f8fafc;--border:#1e293b;--radius-lg:.5rem}
+      *{box-sizing:border-box;margin:0;padding:0}
+      html{font-family:'Varela Round',system-ui,-apple-system,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+      body{background:var(--background);color:var(--foreground);min-height:100vh;overflow-x:hidden}
+      header{position:sticky;top:0;z-index:100;background:rgba(15,23,42,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:4px 8px;display:flex;align-items:center;gap:8px}
+      .brand{display:flex;align-items:center;flex-shrink:0;cursor:pointer}
+      .brand-logo{height:2rem;width:auto}
+      .search-shell{flex:1;min-width:200px;position:relative}
+      .view-mode-toggles{display:flex;gap:4px}
+      #grid-view{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;padding:1rem}
+      .property-card{background:var(--border);border-radius:var(--radius-lg);padding:1rem;min-height:200px}
+      .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+    </style>
+
+    <!-- Stylesheets (loaded asynchronously) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- Load Google Fonts asynchronously -->
@@ -37,8 +53,11 @@
     <noscript>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%20.,!?;:'&quot;()-_@#$%&amp;*+=&lt;&gt;[]{}|\/^~`" />
     </noscript>
-    <!-- Open Props is bundled in dist/bundle.css -->
-    <link rel="stylesheet" href="dist/bundle.css" />
+    <!-- Open Props is bundled in dist/bundle.css - loaded async -->
+    <link rel="stylesheet" href="dist/bundle.css" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="dist/bundle.css" />
+    </noscript>
   </head>
   <body
     data-signals="{
@@ -1143,6 +1162,15 @@
     ></script>
     <script>
       document.documentElement.classList.add("dark");
+      
+      // Register service worker for offline caching
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('SW registered:', reg.scope))
+            .catch(err => console.log('SW registration failed:', err));
+        });
+      }
     </script>
   </body>
 </html>

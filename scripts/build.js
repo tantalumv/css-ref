@@ -16,8 +16,15 @@ try {
   );
 
   console.log('Building bundle.css with esbuild...');
+  // First bundle with esbuild
   execSync(
     `npx esbuild src/styles/index.css --bundle --outfile=dist/bundle.css --minify`,
+    { stdio: 'inherit', cwd: rootDir }
+  );
+
+  console.log('Copying service worker...');
+  execSync(
+    `cp public/sw.js dist/`,
     { stdio: 'inherit', cwd: rootDir }
   );
 

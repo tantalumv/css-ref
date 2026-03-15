@@ -47,6 +47,7 @@
     "remixicon": "^4.9.1"
   },
   "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^8.0.0",
     "@playwright/test": "^1.58.2",
     "concurrently": "^9.0.0",
     "esbuild": "^0.27.3",
