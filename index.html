@@ -20,15 +20,24 @@
     <meta name="twitter:description" content="A comprehensive reference for CSS properties, selectors, and values with browser support information." />
 
     <!-- Security & Resources -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com https://unpkg.com; img-src 'self' data:;" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:;" />
     <link rel="icon" type="image/svg+xml" href="/cssref-favicon.svg?v=2" />
     <title>CSS Ref</title>
+
+    <!-- Preload Critical Assets -->
+    <link rel="preload" href="dist/bundle.css" as="style" />
+    <link rel="preload" href="dist/bundle.js" as="script" />
 
     <!-- Stylesheets -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%20.,!?;:'&quot;()-_@#$%&amp;*+=&lt;&gt;[]{}|\/^~`" rel="stylesheet" />
-    <link rel="stylesheet" href="https://unpkg.com/open-props" />
+    <!-- Load Google Fonts asynchronously -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%20.,!?;:'&quot;()-_@#$%&amp;*+=&lt;&gt;[]{}|\/^~`" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%20.,!?;:'&quot;()-_@#$%&amp;*+=&lt;&gt;[]{}|\/^~`" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%20.,!?;:'&quot;()-_@#$%&amp;*+=&lt;&gt;[]{}|\/^~`" />
+    </noscript>
+    <!-- Open Props is bundled in dist/bundle.css -->
     <link rel="stylesheet" href="dist/bundle.css" />
   </head>
   <body
@@ -1125,11 +1134,12 @@
     <!-- ==============================
          SCRIPTS
          ============================== -->
-    <script type="module" src="dist/bundle.js"></script>
+    <script type="module" defer src="dist/bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js" defer></script>
     <script
       type="module"
       src="https://cdn.jsdelivr.net/gh/starfederation/datastar@1.0.0-RC.8/bundles/datastar.js"
+      defer
     ></script>
     <script>
       document.documentElement.classList.add("dark");
