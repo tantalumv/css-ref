@@ -1,8 +1,8 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect } from "vitest";
 import { CC, IL, IC } from "./constants";
 import { P, CATS, INTEROPS } from "./data";
 import { filterProperties, hasActiveFilters } from "./lib/filters";
-import { bIcon } from "./utils";
+import { bIcon } from "./lib/browser-icons";
 
 describe("CSS Ref App", () => {
   describe("Constants", () => {

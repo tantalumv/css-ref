@@ -1,6 +1,5 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect } from "vitest";
 import { P, COLLECTIONS, COLLECTIONS_LIST, CATEGORIES } from "./data";
-import { CC, IL } from "./constants";
 import type { CSSProperty } from "./types";
 
 describe("Collections", () => {
@@ -117,7 +116,7 @@ describe("Collections", () => {
       COLLECTIONS_LIST.forEach((collection) => {
         expect(collection.interactiveDemo).toBeDefined();
         expect(typeof collection.interactiveDemo).toBe("string");
-        expect(collection.interactiveDemo.length).toBeGreaterThan(50);
+        expect((collection.interactiveDemo as string).length).toBeGreaterThan(50);
       });
     });
 
@@ -333,7 +332,7 @@ describe("CSSProperty Default Values", () => {
     const propsWithDefaults = P.filter((p) => p.default);
     propsWithDefaults.forEach((prop) => {
       expect(typeof prop.default).toBe("string");
-      expect(prop.default.length).toBeGreaterThan(0);
+      expect((prop.default as string).length).toBeGreaterThan(0);
     });
   });
 });
@@ -356,13 +355,13 @@ describe("New CollectionMeta Fields", () => {
       COLLECTIONS_LIST.forEach((collection) => {
         expect(collection.learningObjectives).toBeDefined();
         expect(Array.isArray(collection.learningObjectives)).toBe(true);
-        expect(collection.learningObjectives.length).toBeGreaterThan(0);
+        expect((collection.learningObjectives as string[]).length).toBeGreaterThan(0);
       });
     });
 
     it("learning objectives should have meaningful content", () => {
       COLLECTIONS_LIST.forEach((collection) => {
-        collection.learningObjectives.forEach((obj) => {
+        (collection.learningObjectives as string[]).forEach((obj) => {
           expect(typeof obj).toBe("string");
           expect(obj.length).toBeGreaterThan(10);
         });
@@ -371,7 +370,7 @@ describe("New CollectionMeta Fields", () => {
 
     it("each collection should have 4 learning objectives", () => {
       COLLECTIONS_LIST.forEach((collection) => {
-        expect(collection.learningObjectives.length).toBe(4);
+        expect((collection.learningObjectives as string[]).length).toBe(4);
       });
     });
   });
@@ -381,13 +380,13 @@ describe("New CollectionMeta Fields", () => {
       COLLECTIONS_LIST.forEach((collection) => {
         expect(collection.commonMistakes).toBeDefined();
         expect(Array.isArray(collection.commonMistakes)).toBe(true);
-        expect(collection.commonMistakes.length).toBeGreaterThan(0);
+        expect((collection.commonMistakes as string[]).length).toBeGreaterThan(0);
       });
     });
 
     it("common mistakes should have meaningful content", () => {
       COLLECTIONS_LIST.forEach((collection) => {
-        collection.commonMistakes.forEach((mistake) => {
+        (collection.commonMistakes as string[]).forEach((mistake) => {
           expect(typeof mistake).toBe("string");
           expect(mistake.length).toBeGreaterThan(10);
         });
@@ -396,7 +395,7 @@ describe("New CollectionMeta Fields", () => {
 
     it("each collection should have 4 common mistakes", () => {
       COLLECTIONS_LIST.forEach((collection) => {
-        expect(collection.commonMistakes.length).toBe(4);
+        expect((collection.commonMistakes as string[]).length).toBe(4);
       });
     });
   });
@@ -406,13 +405,13 @@ describe("New CollectionMeta Fields", () => {
       COLLECTIONS_LIST.forEach((collection) => {
         expect(collection.whenToUse).toBeDefined();
         expect(Array.isArray(collection.whenToUse)).toBe(true);
-        expect(collection.whenToUse.length).toBeGreaterThan(0);
+        expect((collection.whenToUse as string[]).length).toBeGreaterThan(0);
       });
     });
 
     it("when to use scenarios should have meaningful content", () => {
       COLLECTIONS_LIST.forEach((collection) => {
-        collection.whenToUse!.forEach((scenario) => {
+        (collection.whenToUse as string[]).forEach((scenario) => {
           expect(typeof scenario).toBe("string");
           expect(scenario.length).toBeGreaterThan(10);
         });
@@ -421,7 +420,7 @@ describe("New CollectionMeta Fields", () => {
 
     it("each collection should have 4 when to use scenarios", () => {
       COLLECTIONS_LIST.forEach((collection) => {
-        expect(collection.whenToUse!.length).toBe(4);
+        expect((collection.whenToUse as string[]).length).toBe(4);
       });
     });
   });
@@ -460,14 +459,15 @@ describe("New CollectionMeta Fields", () => {
       COLLECTIONS_LIST.forEach((collection) => {
         expect(collection.estimatedTime).toBeDefined();
         expect(typeof collection.estimatedTime).toBe("string");
-        expect(collection.estimatedTime.length).toBeGreaterThan(0);
+        expect((collection.estimatedTime as string).length).toBeGreaterThan(0);
       });
     });
 
     it("estimated time should contain hours or hour", () => {
       COLLECTIONS_LIST.forEach((collection) => {
+        const time = collection.estimatedTime as string;
         expect(
-          collection.estimatedTime.includes("hour") || collection.estimatedTime.includes("hours"),
+          time.includes("hour") || time.includes("hours"),
         ).toBe(true);
       });
     });
@@ -478,13 +478,13 @@ describe("New CollectionMeta Fields", () => {
       COLLECTIONS_LIST.forEach((collection) => {
         expect(collection.prerequisites).toBeDefined();
         expect(Array.isArray(collection.prerequisites)).toBe(true);
-        expect(collection.prerequisites.length).toBeGreaterThan(0);
+        expect((collection.prerequisites as string[]).length).toBeGreaterThan(0);
       });
     });
 
     it("prerequisites should have meaningful content", () => {
       COLLECTIONS_LIST.forEach((collection) => {
-        collection.prerequisites.forEach((prereq) => {
+        (collection.prerequisites as string[]).forEach((prereq) => {
           expect(typeof prereq).toBe("string");
           expect(prereq.length).toBeGreaterThan(5);
         });

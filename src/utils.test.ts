@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { bIcon } from "./utils";
+import { bIcon } from "./lib/browser-icons";
 import { buildStyle, styledBox, flexContainer, comparisonDemo, gridContainer, labeledDemo } from "./demo-helpers";
 
 describe("bIcon", () => {

@@ -1,6 +1,4 @@
-// Filter and sort logic for CSS Ref
-
-import type { CSSProperty, BrowserSupport, InteropStatus } from "../types";
+import type { CSSProperty, BrowserSupport } from "../types";
 import { INTEROP_SORT_RANK, IL } from "../constants";
 import { fuzzyMatch } from "./search";
 
@@ -73,13 +71,9 @@ export function filtered(): CSSProperty[] {
  * Toggle item in array (immutable)
  */
 export function toggleInArray<T>(arr: readonly T[], item: T): T[] {
-  const idx = arr.indexOf(item);
-  if (idx > -1) {
-    const copy = [...arr];
-    copy.splice(idx, 1);
-    return copy;
-  }
-  return [...arr, item];
+  return arr.includes(item)
+    ? arr.filter(i => i !== item)
+    : [...arr, item];
 }
 
 /**

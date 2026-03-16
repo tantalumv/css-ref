@@ -20,13 +20,13 @@
     <meta name="twitter:description" content="A comprehensive reference for CSS properties, selectors, and values with browser support information." />
 
     <!-- Security & Resources -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:;" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net;" />
     <link rel="icon" type="image/svg+xml" href="/cssref-favicon.svg?v=2" />
     <title>CSS Ref</title>
 
     <!-- Preload Critical Assets -->
-    <link rel="preload" href="dist/bundle.css" as="style" />
-    <link rel="preload" href="dist/bundle.js" as="script" />
+    <link rel="preload" href="dist/bundle.css" as="style" crossorigin />
+    <link rel="preload" href="dist/bundle.js" as="script" crossorigin />
 
     <!-- Critical CSS (inlined for faster FCP/LCP) -->
     <style>

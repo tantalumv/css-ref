@@ -1,12 +1,9 @@
-// Fuzzy search for CSS Ref using fuzzysort
-
 import fuzzysort from 'fuzzysort';
 import type { CSSProperty } from '../types';
 
-// Fuzzy search options - tuned for CSS property search
 const FUZZY_OPTIONS = {
-  threshold: -10000, // Return all results, let caller filter
-  limit: 1000, // High limit to get all matches
+  threshold: -10000,
+  limit: 1000,
 } as const;
 
 /**
@@ -23,7 +20,6 @@ export function fuzzySearchProperties(
 
   const trimmedQuery = query.trim();
 
-  // Search across name, description, and category fields
   const results = fuzzysort.go(trimmedQuery, props, {
     keys: ['n', 'd', 'c'],
     ...FUZZY_OPTIONS,
@@ -56,9 +52,11 @@ export function fuzzyMatch(
   
   // Fall back to fuzzy search for typo tolerance
   // Note: fuzzysort is case-sensitive, so we already handled exact matches above
-  const results = fuzzysort.single(trimmedQuery, [prop.n, prop.d, prop.c]);
-  
-  return results !== null;
+  const nameResult = fuzzysort.single(trimmedQuery, prop.n);
+  const descResult = fuzzysort.single(trimmedQuery, prop.d);
+  const catResult = fuzzysort.single(trimmedQuery, prop.c);
+
+  return nameResult !== null || descResult !== null || catResult !== null;
 }
 
 /**

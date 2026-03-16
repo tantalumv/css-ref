@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { filterProperties, hasActiveFilters, hasFilters, filtered } from "./lib/filters";
+import { describe, it, expect } from "vitest";
+import { filterProperties, hasActiveFilters } from "./lib/filters";
 import type { CSSProperty } from "./types";
 
 const mockData: CSSProperty[] = [

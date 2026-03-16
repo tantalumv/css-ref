@@ -1,25 +1,8 @@
-// Detail view rendering for CSS Ref
 
 import { CC, IL } from "../constants";
-import { bIcon } from "../lib/utils";
+import { renderBrowserSupport } from "../lib/browser-icons";
 import { findRelatedProps } from "../lib/filters";
-import type { CSSProperty, BrowserSupport } from "../types";
-
-/**
- * Render browser support icons
- */
-export function renderBrowserSupport(s: BrowserSupport): string {
-  const bN: Record<string, string> = { ch: "Chrome", ff: "Firefox", sf: "Safari", ed: "Edge" };
-  const bS: Record<number | string, string> = { 1: "Supported", 0: "Not supported", p: "Partial" };
-
-  return (["ch", "ff", "sf", "ed"] as const)
-    .map((b) => {
-      const v = s[b];
-      const cls = v === 1 ? "y" : v === 0 ? "n" : "p";
-      return `<div class="detail-b"><div class="detail-b-icon ${cls}">${bIcon(v, b)}</div><div class="detail-b-name">${bN[b]}</div><div class="detail-b-status ${cls}">${bS[v]}</div></div>`;
-    })
-    .join("");
-}
+import type { CSSProperty } from "../types";
 
 /**
  * Create property map for fast lookup
@@ -47,10 +30,10 @@ export function renderDetail(
 
   const color = CC[p.c] || "#6366f1";
 
-  const valueExplanations = (p as any).v
-    ? (p as any).v
+  const valueExplanations = p.v
+    ? p.v
         .map(
-          (v: any) => `
+          (v) => `
   <div class="value-explanation">
     <code class="value-code">${v.value}</code>
     <span class="value-label">${v.label}</span>

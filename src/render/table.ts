@@ -1,8 +1,6 @@
-// Table view rendering with infinite scroll for CSS Ref
-
 import { IL, INTEROP_SORT_RANK, TABLE_CONFIG, TIMEOUTS } from "../constants";
-import { bIcon } from "../lib/utils";
-import { compareBySortField, sortProperties } from "../lib/filters";
+import { bIcon } from "../lib/browser-icons";
+import { sortProperties } from "../lib/filters";
 import type { CSSProperty } from "../types";
 import type { SortField, SortOrder } from "../lib/filters";
 
@@ -142,7 +140,6 @@ function attachRowClickListeners(
       if (onRowClick) {
         onRowClick(data[idx]);
       } else {
-        // Default behavior
         const propName = data[idx].n;
         const propHash = encodeURIComponent(propName);
         location.hash = propHash;
@@ -150,7 +147,6 @@ function attachRowClickListeners(
     }
   });
 
-  // Set cursor style for all rows
   tbody.querySelectorAll(".table-row").forEach((row: Element) => {
     (row as HTMLElement).style.cursor = "pointer";
   });
@@ -177,26 +173,21 @@ export function initListTable(
   const table = document.querySelector("#table-container");
   if (!table) return;
 
-  // Always update tracking variables
   tableFullData = [...data];
   tableDisplayedCount = 0;
 
-  // Clear any pending initialization timeout
   if (tableInitTimeout) {
     clearTimeout(tableInitTimeout);
     tableInitTimeout = null;
   }
 
-  // Reset loading lock
   isLoadingMore = false;
 
-  // Destroy existing List.js instance
   if (listInstance) {
     listInstance.destroy?.();
     listInstance = null;
   }
 
-  // Get tbody and render initial batch
   const tbody = table.querySelector(".list");
   if (!tbody) return;
 
@@ -225,14 +216,12 @@ export function initListTable(
     attachSortHandlers(table);
     applyCurrentSort(table, onRowClick);
 
-    // Add click listeners - attach after List.js initializes
     const listElement = table.querySelector(".list");
     if (listElement) {
       attachRowClickListeners(listElement, tableFullData, onRowClick);
     }
   }
 
-  // Update sentinel visibility after initialization
   updateSentinelVisibility();
 
   // Trigger initial load if sentinel is already visible (for large viewports)
@@ -271,7 +260,6 @@ export function loadMoreTableRows(): void {
   // Count actual rows in DOM to sync state (in case of race conditions)
   const actualRowCount = tbody.querySelectorAll(".table-row").length;
   if (actualRowCount !== tableDisplayedCount) {
-    // Sync state with actual DOM
     tableDisplayedCount = actualRowCount;
   }
 
@@ -292,7 +280,6 @@ export function loadMoreTableRows(): void {
   let startIdx = tableDisplayedCount;
   tableDisplayedCount += nextBatch.length;
 
-  // Add new rows to the table
   nextBatch.forEach((p) => {
     const rowHTML = renderRowHTML(p, startIdx++);
     tbody.insertAdjacentHTML("beforeend", rowHTML);

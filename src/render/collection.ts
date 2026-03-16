@@ -1,9 +1,6 @@
-// Collection page rendering for CSS Ref
-
-import { CC } from "../constants";
 import { escapeHTML } from "../lib/utils";
 import type { CSSProperty } from "../types";
-import type { CollectionMeta } from "../data";
+import type { CollectionMeta } from "../data/collections";
 
 interface CollectionExample {
   title: string;
@@ -15,8 +12,7 @@ interface CollectionExample {
 /**
  * Render a single property section for collection page
  */
-export function renderPropertySection(p: CSSProperty, categoryColor: string): string {
-  const color = CC[p.c] || categoryColor;
+export function renderPropertySection(p: CSSProperty): string {
   const anchorId = p.n.replace(/\./g, "-");
 
   const valuesHTML = p.v
@@ -85,7 +81,6 @@ export function renderPropertySection(p: CSSProperty, categoryColor: string): st
  * Render collection page HTML
  */
 export function renderCollectionPageHTML(collection: CollectionMeta, allProps: CSSProperty[]): string {
-  // Get all CSS properties that belong to this collection's category
   const relatedProps = allProps.filter((p: CSSProperty) => p.c === collection.id);
 
   return `
@@ -255,7 +250,7 @@ export function renderCollectionPageHTML(collection: CollectionMeta, allProps: C
         <div class="collection-properties">
           <h3>Properties in ${collection.name}</h3>
           <div class="properties-list">
-            ${relatedProps.map((p: CSSProperty) => renderPropertySection(p, collection.color)).join("")}
+            ${relatedProps.map((p: CSSProperty) => renderPropertySection(p)).join("")}
           </div>
         </div>
 
@@ -298,7 +293,6 @@ export function showCollectionView(collectionSlug: string, allProps: CSSProperty
   );
 
   if (collection) {
-    // Render Collection page with pedagogical content
     view.innerHTML = renderCollectionPageHTML(collection, allProps);
 
     // Initialize Datastar on the newly injected interactive demo content

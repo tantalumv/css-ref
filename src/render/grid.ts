@@ -1,7 +1,5 @@
-// Grid view rendering for CSS Ref
-
 import { CC, IL } from "../constants";
-import { bIcon } from "../lib/utils";
+import { bIcon } from "../lib/browser-icons";
 import type { CSSProperty } from "../types";
 
 /**

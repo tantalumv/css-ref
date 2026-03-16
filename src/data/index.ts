@@ -1,4 +1,4 @@
-import type { CSSProperty, CSSPropertyFull, InteropStatus, BrowserSupport, CSSValue } from "../types";
+import type { CSSProperty, CSSPropertyFull, InteropStatus } from "../types";
 import type { CategoryMeta } from "./categories";
 import type { CollectionMeta } from "./collections";
 import { layout } from "./layout";

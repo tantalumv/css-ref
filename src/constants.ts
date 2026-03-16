@@ -1,26 +1,3 @@
-// Browser information
-export const BROWSER_KEYS = ["ch", "ff", "sf", "ed"] as const;
-export type BrowserKey = typeof BROWSER_KEYS[number];
-
-export const BROWSER_INFO: Record<BrowserKey, { name: string; class: string }> = {
-  ch: { name: "Chrome", class: "chrome" },
-  ff: { name: "Firefox", class: "firefox" },
-  sf: { name: "Safari", class: "safari" },
-  ed: { name: "Edge", class: "edge" },
-};
-
-export const BROWSER_SUPPORT_STATUS: Record<number | string, string> = {
-  1: "Supported",
-  0: "Not supported",
-  p: "Partial",
-};
-
-export const SUPPORT_CLASS: Record<number | string, string> = {
-  1: "y",
-  0: "n",
-  p: "p",
-};
-
 // Configuration
 export const TABLE_CONFIG = {
   BATCH_SIZE: 30,
