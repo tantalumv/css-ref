@@ -85,7 +85,7 @@ export function renderDetail(
   return `
     <div class="detail-wrap">
       <button class="back-btn" onclick="location.hash=''">
-        <svg class="icon" aria-hidden="true"><use href="#icon-arrow-left"/></svg>
+        <svg class="icon" aria-hidden="true"><use href="#ri-arrow-left-line"/></svg>
         All properties
       </button>
       <div class="detail-hero">
@@ -115,7 +115,9 @@ export function renderDetail(
       }
       <div class="detail-section">
         <div class="detail-lbl">Syntax</div>
-        <pre class="syntax-block">${p.x}<button class="copy-btn" onclick="navigator.clipboard.writeText('${p.x.replace(/'/g, "\\'")}').then(()=>{const btn=this;btn.innerHTML='<svg class="icon" aria-hidden="true"><use href="#ri-check-line"/></svg>';;setTimeout(()=>btn.innerHTML='<svg class="icon" aria-hidden="true"><use href="#ri-clipboard-line"/></svg>',1500)})" style="position:absolute;top:8px;right:8px;padding:6px 10px;font-size:14px;background:${color};color:#fff;border:none;border-radius:4px;cursor:pointer"><svg class="icon" aria-hidden="true"><use href="#ri-clipboard-line"/></svg></button></pre>
+        <div class="syntax-wrapper">
+          <pre class="syntax-block">${p.x}<button class="copy-btn" onclick="navigator.clipboard.writeText(&#39;${p.x.replace(/'/g, "\\'")}&#39;).then(()=>{const btn=this;btn.innerHTML='<svg class=&quot;icon&quot; aria-hidden=&quot;true&quot;><use href=&quot;#ri-check-line&quot;/></svg>';setTimeout(()=>btn.innerHTML='<svg class=&quot;icon&quot; aria-hidden=&quot;true&quot;><use href=&quot;#ri-clipboard-line&quot;/></svg>',1500)})"><svg class="icon" aria-hidden="true"><use href="#ri-clipboard-line"/></svg></button></pre>
+        </div>
       </div>
       <div class="detail-section">
         <div class="detail-lbl">Browser Support</div>

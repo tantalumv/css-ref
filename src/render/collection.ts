@@ -91,7 +91,7 @@ export function renderCollectionPageHTML(collection: CollectionMeta, allProps: C
   return `
     <div class="collection-page">
       <button class="back-btn" onclick="location.hash=''">
-        <svg class="icon" aria-hidden="true"><use href="#icon-arrow-left"/></svg>
+        <svg class="icon" aria-hidden="true"><use href="#ri-arrow-left-line"/></svg>
         All properties
       </button>
 
@@ -117,7 +117,7 @@ export function renderCollectionPageHTML(collection: CollectionMeta, allProps: C
               ? `
           <div class="collection-meta">
             ${collection.difficulty ? `<span class="difficulty-badge difficulty-${collection.difficulty}">${collection.difficulty}</span>` : ""}
-            ${collection.estimatedTime ? `<span class="estimated-time"><svg class="icon" aria-hidden="true"><use href="#icon-clock"/></svg> ${collection.estimatedTime}</span>` : ""}
+            ${collection.estimatedTime ? `<span class="estimated-time"><svg class="icon" aria-hidden="true"><use href="#ri-time-line"/></svg> ${collection.estimatedTime}</span>` : ""}
           </div>
           ${
             collection.prerequisites && collection.prerequisites.length > 0
