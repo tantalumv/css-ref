@@ -53,7 +53,7 @@ export const queries: CSSPropertyFull[] = [
     interop: "b2023",
     example: "form:has(:invalid) { border-color: red; }\nli:has(+ li) { margin-bottom: 1rem; }",
     mdnPath: ":has",
-    demo: `<style>.q-has{border:2px solid #94a3b8;border-radius:5px;padding:6px;background:#f8fafc}.q-has:has(input:checked){border-color:#16a34a;background:#f0fdf4}.q-has:has(input:not(:checked)){border-color:#dc2626;background:#fff0f0}</style><div style="padding:10px;display:flex;flex-direction:column;gap:6px"><label class="q-has" style="display:flex;align-items:center;gap:6px"><input type="checkbox" checked><span style="font-size:10px;font-weight:700">checked parent</span></label><label class="q-has" style="display:flex;align-items:center;gap:6px"><input type="checkbox"><span style="font-size:10px;font-weight:700">unchecked parent</span></label></div>`,
+    demo: `<style>.q-has{border:2px solid #94a3b8;border-radius:5px;padding:6px;background:#f8fafc}.q-has:has(input:checked){border-color:#16a34a;background:#f0fdf4}.q-has:has(input:not(:checked)){border-color:#dc2626;background:#fff0f0}</style><div style="padding:10px;display:flex;flex-direction:column;gap:6px"><label class="q-has" style="display:flex;align-items:center;gap:6px"><input type="checkbox" aria-label="Checked checkbox" checked><span style="font-size:10px;font-weight:700">checked parent</span></label><label class="q-has" style="display:flex;align-items:center;gap:6px"><input type="checkbox" aria-label="Unchecked checkbox"><span style="font-size:10px;font-weight:700">unchecked parent</span></label></div>`,
   },
 
   {

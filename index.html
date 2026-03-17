@@ -25,7 +25,7 @@
     <title>CSS Ref</title>
 
     <!-- Preload Critical Assets -->
-    <link rel="preload" href="dist/bundle.css" as="style" crossorigin />
+    <link rel="preload" href="dist/bundle.css" as="fetch" crossorigin />
     <link rel="preload" href="dist/bundle.js" as="script" crossorigin />
 
     <!-- Critical CSS (inlined for faster FCP/LCP) -->
@@ -54,7 +54,8 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%20.,!?;:'&quot;()-_@#$%&amp;*+=&lt;&gt;[]{}|\/^~`" />
     </noscript>
     <!-- Open Props is bundled in dist/bundle.css -->
-    <link rel="stylesheet" href="dist/bundle.css" />
+    <link rel="stylesheet" href="dist/bundle.css" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="dist/bundle.css" /></noscript>
   </head>
   <body
     data-signals="{
@@ -192,6 +193,7 @@
       <button
         type="button"
         class="hamburger"
+        aria-label="Toggle menu"
         data-class:is-open="$sidebarOpen === true"
         data-on:click="$searchOpen = false; $sidebarOpen = !$sidebarOpen"
       >

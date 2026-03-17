@@ -20,7 +20,7 @@ export const selectors: CSSPropertyFull[] = [
     interop: "wide",
     example: "input:focus { outline: 2px solid blue }",
     mdnPath: ":focus",
-    demo: `<style>.sel-focus{padding:6px 10px;border:2px solid #cbd5e1;border-radius:4px;font-size:11px;outline:none}.sel-focus:focus{border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.2)}</style><div style="padding:10px"><input class="sel-focus" type="text" placeholder="Click or tab here"></div>`,
+    demo: `<style>.sel-focus{padding:6px 10px;border:2px solid #cbd5e1;border-radius:4px;font-size:11px;outline:none}.sel-focus:focus{border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.2)}</style><div style="padding:10px"><input aria-label="Focus demo input" class="sel-focus" type="text" placeholder="Click or tab here"></div>`,
   },
 
   {
@@ -42,7 +42,7 @@ export const selectors: CSSPropertyFull[] = [
     interop: "wide",
     example: "form:focus-within { box-shadow: 0 0 0 3px blue }",
     mdnPath: ":focus-within",
-    demo: `<style>.sel-fw{padding:12px;border:2px solid #e2e8f0;border-radius:6px;transition:all .2s}.sel-fw:focus-within{border-color:#8b5cf6;background:#f5f3ff}</style><div style="padding:10px"><div class="sel-fw"><p style="font-size:10px;font-weight:700;color:#64748b;margin:0 0 6px">Container</p><input type="text" placeholder="Focus me" style="padding:5px 8px;border:1px solid #cbd5e1;border-radius:3px;font-size:10px;width:120px"></div></div>`,
+    demo: `<style>.sel-fw{padding:12px;border:2px solid #e2e8f0;border-radius:6px;transition:all .2s}.sel-fw:focus-within{border-color:#8b5cf6;background:#f5f3ff}</style><div style="padding:10px"><div class="sel-fw"><p style="font-size:10px;font-weight:700;color:#64748b;margin:0 0 6px">Container</p><input aria-label="Focus within demo input" type="text" placeholder="Focus me" style="padding:5px 8px;border:1px solid #cbd5e1;border-radius:3px;font-size:10px;width:120px"></div></div>`,
   },
 
   {
@@ -64,7 +64,7 @@ export const selectors: CSSPropertyFull[] = [
     interop: "wide",
     example: "input:disabled { opacity: 0.5 }",
     mdnPath: ":disabled",
-    demo: `<div style="padding:10px;display:flex;gap:8px;flex-direction:column"><button disabled style="padding:6px 12px;background:#e2e8f0;color:#94a3b8;border:none;border-radius:4px;font-size:10px;font-weight:700;cursor:not-allowed">Disabled button</button><input disabled value="Disabled input" style="padding:5px 8px;background:#f1f5f9;color:#94a3b8;border:1px solid #e2e8f0;border-radius:3px;font-size:10px;width:130px"></div>`,
+    demo: `<div style="padding:10px;display:flex;gap:8px;flex-direction:column"><button disabled style="padding:6px 12px;background:#e2e8f0;color:#94a3b8;border:none;border-radius:4px;font-size:10px;font-weight:700;cursor:not-allowed">Disabled button</button><input aria-label="Disabled input" disabled value="Disabled input" style="padding:5px 8px;background:#f1f5f9;color:#94a3b8;border:1px solid #e2e8f0;border-radius:3px;font-size:10px;width:130px"></div>`,
   },
 
   {
@@ -75,7 +75,7 @@ export const selectors: CSSPropertyFull[] = [
     interop: "wide",
     example: "input:checked { accent-color: green }",
     mdnPath: ":checked",
-    demo: `<style>.sel-check input:checked + span{color:#065f46;font-weight:800}</style><div style="padding:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap"><label class="sel-check" style="display:flex;align-items:center;gap:6px;font-size:11px;color:#374151"><input type="checkbox" checked style="accent-color:#10b981;width:16px;height:16px"><span>Checked</span></label><label class="sel-check" style="display:flex;align-items:center;gap:6px;font-size:11px;color:#374151"><input type="radio" checked name="sel-radio" style="accent-color:#6366f1;width:16px;height:16px"><span>Selected</span></label></div>`,
+    demo: `<style>.sel-check input:checked + span{color:#065f46;font-weight:800}</style><div style="padding:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap"><label class="sel-check" style="display:flex;align-items:center;gap:6px;font-size:11px;color:#374151"><input aria-label="Checked checkbox" type="checkbox" checked style="accent-color:#10b981;width:16px;height:16px"><span>Checked</span></label><label class="sel-check" style="display:flex;align-items:center;gap:6px;font-size:11px;color:#374151"><input aria-label="Selected radio" type="radio" checked name="sel-radio" style="accent-color:#6366f1;width:16px;height:16px"><span>Selected</span></label></div>`,
   },
 
   {
@@ -86,7 +86,7 @@ export const selectors: CSSPropertyFull[] = [
     interop: "wide",
     example: "input:valid { border-color: green } input:invalid { border-color: red }",
     mdnPath: ":valid",
-    demo: `<style>.sel-valid{padding:6px 10px;border:2px solid #cbd5e1;border-radius:4px;font-size:10px;width:150px}.sel-valid:valid{border-color:#22c55e;color:#15803d}.sel-valid:invalid{border-color:#ef4444;color:#b91c1c}</style><div style="padding:10px;display:flex;flex-direction:column;gap:6px"><input class="sel-valid" type="email" value="valid@email.com" required><input class="sel-valid" type="email" value="invalid-email" required></div>`,
+    demo: `<style>.sel-valid{padding:6px 10px;border:2px solid #cbd5e1;border-radius:4px;font-size:10px;width:150px}.sel-valid:valid{border-color:#22c55e;color:#15803d}.sel-valid:invalid{border-color:#ef4444;color:#b91c1c}</style><div style="padding:10px;display:flex;flex-direction:column;gap:6px"><input aria-label="Valid email" class="sel-valid" type="email" value="valid@email.com" required><input aria-label="Invalid email" class="sel-valid" type="email" value="invalid-email" required></div>`,
   },
 
   {
@@ -97,7 +97,7 @@ export const selectors: CSSPropertyFull[] = [
     interop: "wide",
     example: "input:required { border-left: 3px solid red }",
     mdnPath: ":required",
-    demo: `<style>.sel-req input{padding:5px 8px;border:1px solid #cbd5e1;border-radius:3px;font-size:10px;width:120px}.sel-req input:required{border-left:3px solid #3b82f6}</style><div class="sel-req" style="padding:10px;display:flex;flex-direction:column;gap:6px"><label style="font-size:10px;font-weight:700;color:#374151">Name (required) <input required></label><label style="font-size:10px;font-weight:700;color:#374151">Bio (optional) <input></label></div>`,
+    demo: `<style>.sel-req input{padding:5px 8px;border:1px solid #cbd5e1;border-radius:3px;font-size:10px;width:120px}.sel-req input:required{border-left:3px solid #3b82f6}</style><div class="sel-req" style="padding:10px;display:flex;flex-direction:column;gap:6px"><label style="font-size:10px;font-weight:700;color:#374151">Name (required) <input aria-label="Required name input" required></label><label style="font-size:10px;font-weight:700;color:#374151">Bio (optional) <input aria-label="Optional bio input"></label></div>`,
   },
 
   {
@@ -108,7 +108,7 @@ export const selectors: CSSPropertyFull[] = [
     interop: "wide",
     example: "input:placeholder-shown { font-style: italic }",
     mdnPath: ":placeholder-shown",
-    demo: `<style>.sel-ph{padding:6px 10px;border:2px solid #10b981;border-radius:4px;font-size:10px;width:150px}.sel-ph:placeholder-shown{font-style:italic;color:#8b5cf6;border-color:#8b5cf6}</style><div style="padding:10px;display:flex;flex-direction:column;gap:6px"><input class="sel-ph" placeholder="Type something..."><input class="sel-ph" value="Has value"></div>`,
+    demo: `<style>.sel-ph{padding:6px 10px;border:2px solid #10b981;border-radius:4px;font-size:10px;width:150px}.sel-ph:placeholder-shown{font-style:italic;color:#8b5cf6;border-color:#8b5cf6}</style><div style="padding:10px;display:flex;flex-direction:column;gap:6px"><input aria-label="Placeholder shown input" class="sel-ph" placeholder="Type something..."><input aria-label="Value present input" class="sel-ph" value="Has value"></div>`,
   },
 
   {
@@ -119,7 +119,7 @@ export const selectors: CSSPropertyFull[] = [
     interop: "wide",
     example: "input:read-only { background: #f3f4f6 }\ninput:read-write { background: #ecfeff }",
     mdnPath: ":read-only",
-    demo: `<style>.sel-rw{padding:6px 10px;border:2px solid #cbd5e1;border-radius:4px;font-size:10px;width:150px}.sel-rw:read-only{background:#f3f4f6;border-color:#94a3b8;color:#475569}.sel-rw:read-write{background:#ecfeff;border-color:#06b6d4;color:#0e7490}</style><div style="padding:10px;display:flex;flex-direction:column;gap:6px"><input class="sel-rw" value="read-only" readonly><input class="sel-rw" value="read-write"></div>`,
+    demo: `<style>.sel-rw{padding:6px 10px;border:2px solid #cbd5e1;border-radius:4px;font-size:10px;width:150px}.sel-rw:read-only{background:#f3f4f6;border-color:#94a3b8;color:#475569}.sel-rw:read-write{background:#ecfeff;border-color:#06b6d4;color:#0e7490}</style><div style="padding:10px;display:flex;flex-direction:column;gap:6px"><input aria-label="Read-only input" class="sel-rw" value="read-only" readonly><input aria-label="Read-write input" class="sel-rw" value="read-write"></div>`,
   },
 
   {

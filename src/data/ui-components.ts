@@ -53,6 +53,6 @@ export const uiComponents: CSSPropertyFull[] = [
     interop: "wide",
     example: "appearance: auto | none",
     mdnPath: "appearance",
-    demo: `<div style="padding:10px;display:flex;gap:10px;align-items:center"><input type="checkbox" style="appearance:none;width:24px;height:24px;border:2px solid #6366f1;border-radius:4px;background:#fff;position:relative"><input type="checkbox" checked style="appearance:none;width:24px;height:24px;border:2px solid #6366f1;border-radius:4px;background:#6366f1;position:relative"><span style="font-size:9px;font-weight:700;color:#4338ca">appearance: none</span></div>`,
+    demo: `<div style="padding:10px;display:flex;gap:10px;align-items:center"><input type="checkbox" aria-label="Unchecked checkbox" style="appearance:none;width:24px;height:24px;border:2px solid #6366f1;border-radius:4px;background:#fff;position:relative"><input type="checkbox" checked aria-label="Checked checkbox" style="appearance:none;width:24px;height:24px;border:2px solid #6366f1;border-radius:4px;background:#6366f1;position:relative"><span style="font-size:9px;font-weight:700;color:#4338ca">appearance: none</span></div>`,
   },
 ];

@@ -663,11 +663,11 @@ h1, h2, h3 {
   <h4 style="color: #fde68a; margin-bottom: var(--space-s); font-size: 14px; font-weight: 800;">Theme Builder</h4>
   <div class="demo-controls-row" style="align-items: center;">
     <label style="color: #fef3c7; font-size: 11px; font-weight: 800;">BG:</label>
-    <input type="color" data-bind:themebg style="width: 28px; height: 24px; border: none; border-radius: 4px; cursor: pointer; padding: 0;">
+    <input type="color" aria-label="Background color picker" data-bind:themebg style="width: 28px; height: 24px; border: none; border-radius: 4px; cursor: pointer; padding: 0;">
     <label style="color: #fef3c7; font-size: 11px; font-weight: 800;">TXT:</label>
-    <input type="color" data-bind:themetext style="width: 28px; height: 24px; border: none; border-radius: 4px; cursor: pointer; padding: 0;">
+    <input type="color" aria-label="Text color picker" data-bind:themetext style="width: 28px; height: 24px; border: none; border-radius: 4px; cursor: pointer; padding: 0;">
     <label style="color: #fef3c7; font-size: 11px; font-weight: 800;">BD:</label>
-    <input type="color" data-bind:themeborder style="width: 28px; height: 24px; border: none; border-radius: 4px; cursor: pointer; padding: 0;">
+    <input type="color" aria-label="Border color picker" data-bind:themeborder style="width: 28px; height: 24px; border: none; border-radius: 4px; cursor: pointer; padding: 0;">
     <button class="demo-control-btn" data-on:click="$themebg = '#ffffff'; $themetext = '#1f2937'; $themeborder = '#d1d5db'" style="background: #92400e; margin-left: auto;">Reset</button>
   </div>
   <div class="demo-canvas-area" style="padding: 24px; border: none; display: flex; align-items: center; justify-content: center;">

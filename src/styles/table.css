@@ -51,6 +51,13 @@
   vertical-align: middle;
 }
 
+#table-container .prop-name,
+#table-container .prop-category,
+#table-container .prop-preview,
+#table-container .prop-support {
+  text-align: center;
+}
+
 #table-container .gridjs-tr {
   cursor: pointer;
   transition: background 0.15s ease;

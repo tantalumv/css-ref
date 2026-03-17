@@ -140,7 +140,7 @@ export const color: CSSPropertyFull[] = [
     interop: "b2022",
     example: "color-scheme: normal | light | dark | light dark | only light",
     mdnPath: "color-scheme",
-    demo: `<div style="display:flex;gap:8px;padding:10px"><div style="color-scheme:light;background:#fff;border:2px solid #e5e7eb;border-radius:6px;padding:8px;width:90px"><input type="checkbox" checked style="accent-color:#f97316;width:14px;height:14px"><p style="font-size:9px;font-weight:700;color:#111;margin-top:4px">light scheme</p></div><div style="color-scheme:dark;background:#1e1e2e;border:2px solid #444;border-radius:6px;padding:8px;width:90px"><input type="checkbox" checked style="accent-color:#f97316;width:14px;height:14px"><p style="font-size:9px;font-weight:700;color:#cdd6f4;margin-top:4px">dark scheme</p></div></div>`,
+    demo: `<div style="display:flex;gap:8px;padding:10px"><div style="color-scheme:light;background:#fff;border:2px solid #e5e7eb;border-radius:6px;padding:8px;width:90px"><input type="checkbox" aria-label="Light scheme checkbox" checked style="accent-color:#f97316;width:14px;height:14px"><p style="font-size:9px;font-weight:700;color:#111;margin-top:4px">light scheme</p></div><div style="color-scheme:dark;background:#1e1e2e;border:2px solid #444;border-radius:6px;padding:8px;width:90px"><input type="checkbox" aria-label="Light scheme checkbox" checked style="accent-color:#f97316;width:14px;height:14px"><p style="font-size:9px;font-weight:700;color:#cdd6f4;margin-top:4px">dark scheme</p></div></div>`,
     values: [
       {
         value: "normal",
@@ -176,7 +176,7 @@ export const color: CSSPropertyFull[] = [
     interop: "b2022",
     example: "accent-color: auto | #6366f1",
     mdnPath: "accent-color",
-    demo: `<div style="padding:10px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;gap:8px;accent-color:#6366f1"><input type="checkbox" checked><input type="range" value="60" style="width:80px"><span style="font-size:10px;font-weight:700;color:#6366f1">#6366f1</span></div><div style="display:flex;align-items:center;gap:8px;accent-color:#f97316"><input type="checkbox" checked><input type="range" value="40" style="width:80px"><span style="font-size:10px;font-weight:700;color:#f97316">#f97316</span></div></div>`,
+    demo: `<div style="padding:10px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;gap:8px;accent-color:#6366f1"><input type="checkbox" aria-label="Accent color checkbox" checked><input type="range" aria-label="Accent color slider" value="60" style="width:80px"><span style="font-size:10px;font-weight:700;color:#6366f1">#6366f1</span></div><div style="display:flex;align-items:center;gap:8px;accent-color:#f97316"><input type="checkbox" aria-label="Accent color checkbox" checked><input type="range" aria-label="Accent color slider" value="40" style="width:80px"><span style="font-size:10px;font-weight:700;color:#f97316">#f97316</span></div></div>`,
   },
 
   {

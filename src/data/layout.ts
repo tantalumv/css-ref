@@ -129,7 +129,7 @@ export const layout: CSSPropertyFull[] = [
     interop: "wide",
     example: "object-fit: cover | contain | fill | none | scale-down",
     mdnPath: "object-fit",
-    demo: `<div style="display:flex;gap:8px"><div style="width:70px;height:70px;background:#e0e7ff;border:2px solid #6366f1;border-radius:6px;overflow:hidden"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='50'%3E%3Crect fill='%236366f1' width='100' height='50'/%3E%3C/svg%3E" style="width:100%;height:100%;object-fit:cover"></div><div style="width:70px;height:70px;background:#f5f3ff;border:2px solid #8b5cf6;border-radius:6px;overflow:hidden"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='50'%3E%3Crect fill='%238b5cf6' width='100' height='50'/%3E%3C/svg%3E" style="width:100%;height:100%;object-fit:contain"></div></div>`,
+    demo: `<div style="display:flex;gap:8px"><div style="width:70px;height:70px;background:#e0e7ff;border:2px solid #6366f1;border-radius:6px;overflow:hidden"><img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='50'%3E%3Crect fill='%236366f1' width='100' height='50'/%3E%3C/svg%3E" style="width:100%;height:100%;object-fit:cover"></div><div style="width:70px;height:70px;background:#f5f3ff;border:2px solid #8b5cf6;border-radius:6px;overflow:hidden"><img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='50'%3E%3Crect fill='%238b5cf6' width='100' height='50'/%3E%3C/svg%3E" style="width:100%;height:100%;object-fit:contain"></div></div>`,
   },
 
   {
@@ -140,7 +140,7 @@ export const layout: CSSPropertyFull[] = [
     interop: "wide",
     example: "object-position: center | top left | 50% 100% | 20px 80%",
     mdnPath: "object-position",
-    demo: `<div style="display:flex;gap:8px"><div style="width:80px;height:60px;background:#e0e7ff;border:2px solid #6366f1;border-radius:6px;overflow:hidden"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%236366f1'/%3E%3C/svg%3E" style="width:100%;height:100%;object-fit:none;object-position:center"></div><div style="width:80px;height:60px;background:#f5f3ff;border:2px solid #8b5cf6;border-radius:6px;overflow:hidden"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%238b5cf6'/%3E%3C/svg%3E" style="width:100%;height:100%;object-fit:none;object-position:top right"></div></div>`,
+    demo: `<div style="display:flex;gap:8px"><div style="width:80px;height:60px;background:#e0e7ff;border:2px solid #6366f1;border-radius:6px;overflow:hidden"><img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%236366f1'/%3E%3C/svg%3E" style="width:100%;height:100%;object-fit:none;object-position:center"></div><div style="width:80px;height:60px;background:#f5f3ff;border:2px solid #8b5cf6;border-radius:6px;overflow:hidden"><img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%238b5cf6'/%3E%3C/svg%3E" style="width:100%;height:100%;object-fit:none;object-position:top right"></div></div>`,
   },
 
   {
