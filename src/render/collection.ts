@@ -81,7 +81,14 @@ export function renderPropertySection(p: CSSProperty): string {
  * Render collection page HTML
  */
 export function renderCollectionPageHTML(collection: CollectionMeta, allProps: CSSProperty[]): string {
-  const relatedProps = allProps.filter((p: CSSProperty) => p.c === collection.id);
+  const collectionCategoryMap: Record<string, string[]> = {
+  "Backgrounds": ["Visual"],
+  "BoxModel": ["Layout", "Spacing", "Sizing", "Visual"],
+  "Transitions": ["Animation"],
+};
+
+const targetCategories = collectionCategoryMap[collection.id] || [collection.id];
+const relatedProps = allProps.filter((p: CSSProperty) => targetCategories.includes(p.c));
 
   const annotationsHTML = collection.annotations
     ? `
@@ -148,105 +155,16 @@ export function renderCollectionPageHTML(collection: CollectionMeta, allProps: C
   `
     : "";
 
-  const isTypography = collection.slug === "typography";
-  const isGrid = collection.slug === "grid";
-  const isBoxModel = collection.slug === "box-model";
-  const isAnimation = collection.slug === "animation" || collection.slug === "transitions";
-  const isColor = collection.slug === "color" || collection.slug === "backgrounds";
-  const isInteractivity = collection.slug === "interactivity" || collection.slug === "layout";
+  // Collection slug detection removed for visual uniformity
 
-  // Mouse tracking script for Interactivity meta-theme
-  const interactivityScript = isInteractivity ? `
-    <script>
-      (function() {
-        const page = document.querySelector('.layout-${collection.slug}');
-        if (!page) return;
-        page.addEventListener('mousemove', (e) => {
-          const rect = page.getBoundingClientRect();
-          const x = ((e.clientX - rect.left) / rect.width) * 100;
-          const y = ((e.clientY - rect.top) / rect.height) * 100;
-          page.style.setProperty('--mouse-x', x + '%');
-          page.style.setProperty('--mouse-y', y + '%');
-        });
-      })();
-    </script>
-  ` : "";
+  // Intro text - always use regular class for uniformity
+  const introText = `<p class="intro-text">${collection.intro}</p>`;
 
-  const introText = isTypography
-    ? `<p class="intro-text drop-cap">${collection.intro}</p>`
-    : `<p class="intro-text">${collection.intro}</p>`;
+  const gridToggleHTML = "";
+  const playPauseToggleHTML = "";
 
-  const gridToggleHTML = isGrid
-    ? `
-    <button class="grid-visualizer-toggle" disabled>
-      <svg class="icon"><use href="#ri-layout-grid-line"/></svg>
-      <span>Blueprint (Disabled)</span>
-    </button>
-  `
-    : "";
-
-  const playPauseToggleHTML = isAnimation
-    ? `
-    <button class="animation-play-pause-toggle" 
-            data-on:click="$isPaused = !$isPaused"
-            data-class:active="$isPaused">
-      <svg class="icon"><use href="#ri-movie-line"/></svg>
-      <span data-text="$isPaused ? 'Resume Animations' : 'Pause All Animations'"></span>
-    </button>
-  `
-    : "";
-
-  let sectionCount = 0;
   const renderSection = (content: string, className: string = "") => {
-    sectionCount++;
-    let wrappedContent = content;
-
-    if (isBoxModel && className.startsWith("section-")) {
-      wrappedContent = `
-        <div class="box-model-visualizer-wrap">
-          <div class="box-margin-label">margin</div>
-          <div class="box-border-visual">
-            <div class="box-border-label">border</div>
-            <div class="box-padding-visual">
-              <div class="box-padding-label">padding</div>
-              <div class="box-content-visual">
-                ${content}
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    if (isColor && className.startsWith("section-")) {
-      wrappedContent = `
-        <div class="color-section-wrap">
-          <div class="contrast-badge">
-            <span class="badge-label">WCAG AAA</span>
-            <span class="badge-ratio">21:1</span>
-          </div>
-          ${content}
-        </div>
-      `;
-    }
-
-    if (isInteractivity && className.startsWith("section-")) {
-      wrappedContent = `
-        <div class="interactivity-layer" style="--layer-index: ${sectionCount}">
-          ${content}
-        </div>
-      `;
-    }
-
-    if (isAnimation && className.startsWith("section-")) {
-      wrappedContent = `
-        <div class="animated-section" style="--anim-delay: ${sectionCount * 0.1}s">
-          ${content}
-        </div>
-      `;
-    }
-
-    return wrappedContent;
+    return content;
   };
 
   return `

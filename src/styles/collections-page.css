@@ -254,14 +254,14 @@
 }
 
 .layout-typography .properties-list {
-  display: block;
-  column-count: 2;
-  column-gap: var(--space-xl);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-l);
 }
 
 @media (max-width: 800px) {
   .layout-typography .properties-list {
-    column-count: 1;
+    grid-template-columns: 1fr;
   }
 }
 
@@ -327,9 +327,11 @@
 
 /* ── Collection Page Base ── */
 .collection-page {
+  position: relative;
+  z-index: 1;
   max-width: var(--grid-max-width);
   margin-inline: auto;
-  padding: 0 var(--space-l) var(--space-xl-2xl);
+  padding: var(--space-m) var(--space-l) var(--space-xl-2xl);
 }
 
 .section-divider {
@@ -676,14 +678,14 @@
 }
 
 .properties-list {
-  display: block;
-  column-count: 2;
-  column-gap: var(--space-xl);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-l);
 }
 
 @media (max-width: 700px) {
   .properties-list {
-    column-count: 1;
+    grid-template-columns: 1fr;
   }
 }
 
@@ -732,17 +734,22 @@
 }
 
 .property-values-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: var(--space-s);
   margin-top: var(--space-s);
+  width: 100%;
 }
 
 .property-value-item {
+  flex: 1 1 calc(50% - var(--space-s));
+  min-width: 250px;
+  max-width: 100%;
   background: var(--background);
   border: 1px solid var(--border);
   padding: var(--space-s);
   border-radius: var(--radius-md);
+  box-sizing: border-box;
 }
 
 .property-value-code {
@@ -944,4 +951,359 @@
 .demo-canvas-area {
   flex: 1;
   min-height: 300px;
+}
+
+/* ── Non-interactive Demo Overrides ── */
+.layout-grid .collection-content-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.layout-typography .drop-cap::first-letter {
+  font-size: inherit;
+  float: none;
+  margin-right: 0;
+  color: inherit;
+  font-weight: inherit;
+  text-transform: none;
+}
+
+.layout-typography .category-title {
+  font-family: inherit;
+  font-weight: 900;
+  font-style: normal;
+  font-size: var(--step-4);
+}
+
+.layout-typography .intro-text {
+  font-family: inherit;
+  font-size: var(--r-step-1);
+  column-count: 1;
+  max-width: none;
+}
+
+.layout-typography .section-divider {
+  height: 1px;
+  background: var(--border);
+}
+
+.layout-typography .properties-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-l);
+}
+
+.layout-typography .property-section {
+  border-top-color: var(--border);
+}
+
+/* ── Uniform Collection Layout - Override All Collection-Specific Styles ── */
+
+/* Neutralize animation/transitions - remove fade-in and morphing */
+.layout-animation .animated-section,
+.layout-transitions .animated-section {
+  animation: none;
+  animation-delay: 0;
+}
+
+.layout-transitions .property-section {
+  transition: none;
+}
+
+.layout-transitions .property-section:hover {
+  border-radius: 0;
+  transform: none;
+  background: transparent;
+}
+
+/* Neutralize color/backgrounds - remove special wrappers */
+.layout-color .color-section-wrap,
+.layout-backgrounds .color-section-wrap {
+  position: static;
+  border-radius: 0;
+  overflow: visible;
+  margin-bottom: 0;
+  background-image: none;
+}
+
+.layout-backgrounds .color-section-wrap:nth-child(odd),
+.layout-backgrounds .color-section-wrap:nth-child(even) {
+  background-image: none;
+  background-size: auto;
+}
+
+/* Hide contrast badge */
+.layout-color .contrast-badge,
+.layout-backgrounds .contrast-badge {
+  display: none;
+}
+
+/* Neutralize layout/interactivity - remove special layers */
+.layout-interactivity .collection-page {
+  perspective: none;
+}
+
+.layout-interactivity .interactivity-layer,
+.layout-layout .interactivity-layer {
+  position: static;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  margin-bottom: 0;
+  box-shadow: none;
+  transform: none;
+}
+
+.layout-interactivity .property-section {
+  cursor: auto;
+}
+
+.layout-interactivity .property-section::after {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .layout-interactivity .interactivity-layer,
+  .layout-layout .interactivity-layer {
+    margin-bottom: 0;
+  }
+}
+
+/* Neutralize typography - remove serif styling */
+.layout-typography {
+  --font-serif: inherit;
+}
+
+.layout-typography .drop-cap::first-letter {
+  font-size: inherit;
+  float: none;
+  line-height: inherit;
+  margin-right: 0;
+  margin-top: 0;
+  color: inherit;
+  font-weight: inherit;
+  text-transform: none;
+}
+
+.layout-typography .properties-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-l);
+}
+
+.layout-typography .property-section {
+  border-top: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-l);
+  background: var(--card);
+  box-shadow: none;
+  margin-bottom: var(--space-l);
+}
+
+.layout-typography .category-title {
+  font-family: inherit;
+  font-weight: 900;
+  font-style: normal;
+  font-size: var(--step-4);
+}
+
+.layout-typography .intro-text {
+  font-family: inherit;
+  font-size: var(--r-step-1);
+  line-height: 1.6;
+  column-count: 1;
+  max-width: none;
+}
+
+.layout-typography .section-divider {
+  height: 1px;
+  background: var(--border);
+}
+
+.layout-typography .related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-m);
+}
+
+.layout-typography .related-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-m);
+  background: var(--card);
+}
+
+.layout-typography .related-prop-name {
+  font-family: inherit;
+  font-size: var(--r-step--1);
+}
+
+/* Neutralize grid - remove 2-column layout */
+.layout-grid .collection-content-grid {
+  display: flex;
+  flex-direction: column;
+  grid-template-areas: none;
+}
+
+@media (min-width: 901px) {
+  .layout-grid .collection-content-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl-2xl);
+  }
+}
+
+/* Neutralize flexbox demo canvas (keep demo intact but remove visual noise) */
+.layout-flexbox .demo-canvas-area {
+  background: transparent;
+}
+
+.layout-flexbox .demo-item-box::after {
+  display: none;
+}
+
+/* Hide injected buttons that shouldn't be there */
+.grid-visualizer-toggle,
+.animation-play-pause-toggle {
+  display: none !important;
+}
+
+/* Hide box-model visualizer wrappers */
+.box-model-visualizer-wrap {
+  display: none !important;
+}
+
+/* Hide color section wrappers */
+.color-section-wrap {
+  display: none !important;
+}
+
+/* Hide contrast badges */
+.contrast-badge {
+  display: none !important;
+}
+
+/* Ensure intro text never has drop-cap */
+.intro-text.drop-cap::first-letter {
+  font-size: inherit !important;
+  float: none !important;
+  margin: 0 !important;
+  color: inherit !important;
+  font-weight: inherit !important;
+  text-transform: none !important;
+}
+
+/* Force uniform property-section styling for ALL collections */
+.layout-flexbox .property-section,
+.layout-grid .property-section,
+.layout-typography .property-section,
+.layout-animation .property-section,
+.layout-color .property-section,
+.layout-layout .property-section,
+.layout-backgrounds .property-section,
+.layout-box-model .property-section,
+.layout-transitions .property-section {
+  break-inside: avoid;
+  margin-bottom: var(--space-l);
+  border: 0;
+  border-top: 2px solid var(--border);
+  border-radius: 0;
+  padding: var(--space-m) 0;
+  background: transparent;
+  box-shadow: none;
+  transition: none;
+}
+
+.layout-flexbox .property-section:hover,
+.layout-grid .property-section:hover,
+.layout-typography .property-section:hover,
+.layout-animation .property-section:hover,
+.layout-color .property-section:hover,
+.layout-layout .property-section:hover,
+.layout-backgrounds .property-section:hover,
+.layout-transitions .property-section:hover {
+  border-radius: 0;
+  transform: none;
+  background: transparent;
+}
+
+/* Also neutralize properties-list for all */
+.layout-flexbox .properties-list,
+.layout-grid .properties-list,
+.layout-typography .properties-list,
+.layout-animation .properties-list,
+.layout-color .properties-list,
+.layout-layout .properties-list,
+.layout-backgrounds .properties-list,
+.layout-box-model .properties-list,
+.layout-transitions .properties-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-l);
+}
+
+@media (max-width: 700px) {
+  .layout-flexbox .properties-list,
+  .layout-grid .properties-list,
+  .layout-typography .properties-list,
+  .layout-animation .properties-list,
+  .layout-color .properties-list,
+  .layout-layout .properties-list,
+  .layout-backgrounds .properties-list,
+  .layout-box-model .properties-list,
+  .layout-transitions .properties-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Uniform Hero Demo Area - Center and Full Width */
+.interactive-demo-hero {
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.interactive-demo-container {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure layout collection has no grid issues */
+.layout-layout {
+  display: block;
+}
+
+.interactive-demo-hero .demo-playground-card {
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.property-values-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s);
+  margin-top: var(--space-s);
+  width: 100%;
+}
+
+.property-value-item {
+  flex: 1 1 calc(50% - var(--space-s));
+  min-width: 250px;
+  max-width: 100%;
+  background: var(--background);
+  border: 1px solid var(--border);
+  padding: var(--space-s);
+  border-radius: var(--radius-md);
+  box-sizing: border-box;
 }

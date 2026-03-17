@@ -6,6 +6,7 @@
 header {
   --header-control-h: clamp(2.35rem, 3.9vw, 2.6rem);
   --header-control-h-desktop: 2.5rem;
+  --header-height: clamp(2.75rem, 4.4vw, 3rem);
   --switch-height: var(--header-control-h);
   position: sticky;
   top: 0;
