@@ -68,11 +68,13 @@ export function renderGrid(
   });
 
   requestAnimationFrame(() => {
-    grid.querySelectorAll(".card-name").forEach((nameEl) => {
-      const textEl = nameEl.querySelector(".name-text");
-      if (textEl && textEl.scrollWidth > (nameEl as HTMLElement).clientWidth) {
-        nameEl.classList.add("overflows");
-      }
+    requestAnimationFrame(() => {
+      grid.querySelectorAll(".card-name").forEach((nameEl) => {
+        const textEl = nameEl.querySelector(".name-text");
+        if (textEl && textEl.scrollWidth > (nameEl as HTMLElement).clientWidth) {
+          nameEl.classList.add("overflows");
+        }
+      });
     });
   });
 }

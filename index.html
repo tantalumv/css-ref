@@ -25,8 +25,8 @@
     <title>CSS Ref</title>
 
     <!-- Preload Critical Assets -->
-    <link rel="preload" href="dist/bundle.css" as="fetch" crossorigin />
-    <link rel="preload" href="dist/bundle.js" as="script" crossorigin />
+    <link rel="preload" id="preload-css" href="dist/bundle.17ef3366.css" as="style" crossorigin />
+    <link rel="preload" id="preload-js" href="dist/bundle.455ae565.js" as="script" crossorigin />
 
     <!-- Critical CSS (inlined for faster FCP/LCP) -->
     <style>
@@ -39,7 +39,7 @@
       .brand-logo{height:2rem;width:auto}
       .search-shell{flex:1;min-width:200px;position:relative}
       .view-mode-toggles{display:flex;gap:4px}
-      #grid-view{width:100%;padding:1rem}
+      #grid-view{width:100%;padding:1rem;min-height:400px}
       .property-card{background:var(--border);border-radius:var(--radius-lg);padding:1rem;min-height:200px}
       .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
     </style>
@@ -53,9 +53,9 @@
     <noscript>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%20.,!?;:'&quot;()-_@#$%&amp;*+=&lt;&gt;[]{}|\/^~`" />
     </noscript>
-    <!-- Open Props is bundled in dist/bundle.css -->
-    <link rel="stylesheet" href="dist/bundle.css" media="print" onload="this.media='all'" />
-    <noscript><link rel="stylesheet" href="dist/bundle.css" /></noscript>
+    <!-- Open Props is bundled in dist/bundle.17ef3366.css -->
+    <link rel="stylesheet" id="bundle-css" href="dist/bundle.17ef3366.css" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="dist/bundle.17ef3366.css" /></noscript>
   </head>
   <body
     data-signals="{
@@ -1217,7 +1217,7 @@
     <!-- ==============================
          SCRIPTS
          ============================== -->
-    <script type="module" defer src="dist/bundle.js"></script>
+    <script type="module" defer id="main-bundle" src="dist/bundle.455ae565.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js" defer></script>
     <script
       type="module"
