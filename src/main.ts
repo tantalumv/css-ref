@@ -77,6 +77,7 @@ if (typeof window !== "undefined") {
 };
 
 (window as any).renderCollectionPage = function (collectionSlug: string): void {
+  console.log('Rendering collection:', collectionSlug);
   showCollectionView(collectionSlug, CSS_PROPERTIES, COLLECTIONS as Record<string, CollectionMeta>);
 };
 
@@ -120,6 +121,19 @@ if (typeof window !== "undefined") {
 
 // Re-export types
 export type { CSSProperty, InteropStatus, BrowserSupport } from "./types";
+
+// Global mousemove listener for Interactivity meta-theme
+if (typeof window !== "undefined") {
+  window.addEventListener("mousemove", (e) => {
+    const page = document.querySelector(".layout-interactivity, .layout-layout");
+    if (!page) return;
+    const rect = page.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    (page as HTMLElement).style.setProperty("--mouse-x", x + "%");
+    (page as HTMLElement).style.setProperty("--mouse-y", y + "%");
+  });
+}
 
 // Handle initial hash on module load (after all functions are defined)
 if (typeof window !== "undefined" && location.hash && location.hash !== "#") {

@@ -9,7 +9,7 @@ header {
   --switch-height: var(--header-control-h);
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
   background: color-mix(in oklch, var(--background) 90%, transparent);
   backdrop-filter: blur(12px) saturate(1.5);
   border-bottom: 1px solid var(--border);
@@ -378,6 +378,7 @@ header {
   border: 1px solid var(--search-select-border);
   background: var(--muted);
   color: var(--search-select-text);
+  font-family: var(--font-sans);
   font-size: clamp(10px, 0.9vw, 12px);
   font-weight: 700;
   text-transform: lowercase;

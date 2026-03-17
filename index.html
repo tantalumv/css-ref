@@ -79,10 +79,31 @@
       tableTotalCount: 0,
       tableLoading: false,
       filteredCount: 0,
-      totalCount: 0
+      totalCount: 0,
+      showGridOverlay: false,
+      isPaused: false,
+      justifycontent: 'flex-start',
+      alignitems: 'flex-start',
+      flexwrap: 'nowrap',
+      layoutType: 'classic',
+      fontsize: '24px',
+      lineheight: '1.6',
+      letterspacing: '0px',
+      themebg: '#ffffff',
+      themetext: '#1f2937',
+      themeborder: '#d1d5db',
+      position: 'static',
+      hasOffset: false,
+      heroindex: 0,
+      boxmargin: '20px',
+      boxpadding: '30px',
+      boxborder: '8px',
+      timing: 'ease',
+      animKey: 0
     }"
     data-on:keydown__window="evt.key === 'Escape' && (($catOpen = false), ($interopOpen = false), ($browserOpen = false), ($collectionNavOpen = false), ($searchOpen = false))"
     data-on:close-all-popovers__window="$catOpen = false; $interopOpen = false; $browserOpen = false; $collectionNavOpen = false; $searchOpen = false"
+    data-on:app:hashchange__window="const h = evt.detail.hash; if (h.startsWith('!')) { $activeCollection = h.slice(1); $selectedProp = ''; } else if (h === '') { $activeCollection = ''; $selectedProp = ''; } else { $selectedProp = decodeURIComponent(h); $activeCollection = ''; }"
   >
     <!-- ==============================
          ANIMATED BACKGROUND
@@ -145,6 +166,8 @@
         <symbol id="ri-loader-line" viewBox="0 0 24 24"><path fill="currentColor" d="M11.9995 2C12.5518 2 12.9995 2.44772 12.9995 3V6C12.9995 6.55228 12.5518 7 11.9995 7C11.4472 7 10.9995 6.55228 10.9995 6V3C10.9995 2.44772 11.4472 2 11.9995 2ZM11.9995 17C12.5518 17 12.9995 17.4477 12.9995 18V21C12.9995 21.5523 12.5518 22 11.9995 22C11.4472 22 10.9995 21.5523 10.9995 21V18C10.9995 17.4477 11.4472 17 11.9995 17ZM20.6597 7C20.9359 7.47829 20.772 8.08988 20.2937 8.36602L17.6956 9.86602C17.2173 10.1422 16.6057 9.97829 16.3296 9.5C16.0535 9.02171 16.2173 8.41012 16.6956 8.13398L19.2937 6.63397C19.772 6.35783 20.3836 6.52171 20.6597 7ZM7.66935 14.5C7.94549 14.9783 7.78161 15.5899 7.30332 15.866L4.70525 17.366C4.22695 17.6422 3.61536 17.4783 3.33922 17C3.06308 16.5217 3.22695 15.9101 3.70525 15.634L6.30332 14.134C6.78161 13.8578 7.3932 14.0217 7.66935 14.5ZM20.6597 17C20.3836 17.4783 19.772 17.6422 19.2937 17.366L16.6956 15.866C16.2173 15.5899 16.0535 14.9783 16.3296 14.5C16.6057 14.0217 17.2173 13.8578 17.6956 14.134L20.2937 15.634C20.772 15.9101 20.9359 16.5217 20.6597 17ZM7.66935 9.5C7.3932 9.97829 6.78161 10.1422 6.30332 9.86602L3.70525 8.36602C3.22695 8.08988 3.06308 7.47829 3.33922 7C3.61536 6.52171 4.22695 6.35783 4.70525 6.63397L7.30332 8.13398C7.78161 8.41012 7.94549 9.02171 7.66935 9.5Z"/></symbol>
         <symbol id="ri-check-line" viewBox="0 0 24 24"><path fill="currentColor" d="M9.9997 15.1709L19.1921 5.97852L20.6063 7.39273L9.9997 17.9993L3.63574 11.6354L5.04996 10.2212L9.9997 15.1709Z"/></symbol>
         <symbol id="ri-clipboard-line" viewBox="0 0 24 24"><path fill="currentColor" d="M7 4V2H17V4H20.0066C20.5552 4 21 4.44495 21 4.9934V21.0066C21 21.5552 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5551 3 21.0066V4.9934C3 4.44476 3.44495 4 3.9934 4H7ZM7 6H5V20H19V6H17V8H7V6ZM9 4V6H15V4H9Z"/></symbol>
+        <symbol id="ri-checkbox-circle-line" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4C16.4183 4 20 7.58172 20 12C20 16.4183 16.4183 20 12 20ZM16.4645 8.53553L17.8787 9.94975L11.5147 16.3137L6.56497 11.364L7.97918 9.94975L11.5147 13.4853L16.4645 8.53553Z"/></symbol>
+        <symbol id="ri-error-warning-line" viewBox="0 0 24 24"><path fill="currentColor" d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM11 15H13V17H11V15ZM11 7H13V13H11V7Z"/></symbol>
       </defs>
     </svg>
     <!-- End Inline SVG Icons -->
@@ -256,6 +279,33 @@
                   onclick="location.hash='!layout';$collectionNavOpen=false"
                 >
                   <i class="ri-layout-grid-line"></i> Layout
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  class="search-option"
+                  onclick="location.hash='!backgrounds';$collectionNavOpen=false"
+                >
+                  <i class="ri-paint-brush-line"></i> Backgrounds
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  class="search-option"
+                  onclick="location.hash='!box-model';$collectionNavOpen=false"
+                >
+                  <i class="ri-layout-box-line"></i> Box Model
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  class="search-option"
+                  onclick="location.hash='!transitions';$collectionNavOpen=false"
+                >
+                  <i class="ri-loader-line"></i> Transitions
                 </button>
               </li>
             </ul>
@@ -822,6 +872,21 @@
                   <i class="ri-layout-grid-line"></i> Layout
                 </button>
               </li>
+              <li>
+                <button type="button" class="search-option" onclick="location.hash='!backgrounds'; this.closest('.search-dropdown-menu').style.display = 'none'; this.closest('.search-dropdown-menu').previousElementSibling.setAttribute('aria-expanded', 'false');">
+                  <i class="ri-paint-brush-line"></i> Backgrounds
+                </button>
+              </li>
+              <li>
+                <button type="button" class="search-option" onclick="location.hash='!box-model'; this.closest('.search-dropdown-menu').style.display = 'none'; this.closest('.search-dropdown-menu').previousElementSibling.setAttribute('aria-expanded', 'false');">
+                  <i class="ri-layout-box-line"></i> Box Model
+                </button>
+              </li>
+              <li>
+                <button type="button" class="search-option" onclick="location.hash='!transitions'; this.closest('.search-dropdown-menu').style.display = 'none'; this.closest('.search-dropdown-menu').previousElementSibling.setAttribute('aria-expanded', 'false');">
+                  <i class="ri-loader-line"></i> Transitions
+                </button>
+              </li>
             </ul>
           </div>
         </div>
@@ -1064,6 +1129,7 @@
       id="collection-view"
       data-show="$activeCollection !== ''"
       data-effect="renderCollectionPage($activeCollection)"
+      data-signal="{ showGridOverlay: false, isPaused: false, justifycontent: 'flex-start', alignitems: 'stretch', flexwrap: 'nowrap', flexdirection: 'row', flexgrow: '0', flexshrink: '1', flexbasis: 'auto', gridtemplatecolumns: '1fr 1fr 1fr', gridtemplaterows: 'auto', gap: '16px', gridcolumn: 'auto', gridrow: 'auto', fontsize: '16px', lineheight: '1.6', letterspacing: '0px', animationname: 'none', animationduration: '1s', animationtimingfunction: 'ease', animationdirection: 'normal', animationfillmode: 'none', position: 'static', top: 'auto', right: 'auto', bottom: 'auto', left: 'auto', zindex: 'auto', transitionproperty: 'all', transitionduration: '0.3s', transitiontimingfunction: 'ease', transitiondelay: '0s', backgroundimage: 'none', backgroundsize: 'auto', backgroundposition: '0% 0%', backgroundrepeat: 'repeat' }"
     ></div>
     <!-- End Collection View -->
 

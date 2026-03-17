@@ -1,3 +1,16 @@
+export interface CollectionAnnotation {
+  x: number; // percentage from left
+  y: number; // percentage from top
+  text: string;
+  type: "strength" | "weakness" | "info";
+}
+
+export interface AntiExample {
+  badCode: string;
+  goodCode: string;
+  explanation: string;
+}
+
 export interface CollectionMeta {
   id: string;
   name: string;
@@ -17,6 +30,10 @@ export interface CollectionMeta {
   difficulty?: "beginner" | "intermediate" | "advanced";
   estimatedTime?: string;
   prerequisites?: string[];
+  strengths?: string[];
+  weaknesses?: string[];
+  annotations?: CollectionAnnotation[];
+  antiExamples?: AntiExample[];
 }
 
 export interface CollectionExample {
@@ -105,22 +122,22 @@ export const COLLECTIONS: Record<string, CollectionMeta> = {
       },
     ],
     related: ["Grid", "Layout", "Spacing"],
-    interactiveDemo: `<div data-signals:justifycontent="'center'" data-signals:alignitems="'center'" data-signals:flexwrap="'nowrap'" style="font-family: system-ui, sans-serif; padding: 20px; background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); border-radius: 12px; min-height: 280px;">
-  <h4 style="color: #c4b5fd; margin: 0 0 16px 0; font-size: 14px; font-weight: 600;">Flex Playground</h4>
-  <div style="display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;">
-    <button data-on:click="$justifycontent = 'flex-start'" data-class:active="$justifycontent === 'flex-start'" style="padding: 6px 12px; background: #4f46e5; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">flex-start</button>
-    <button data-on:click="$justifycontent = 'center'" data-class:active="$justifycontent === 'center'" style="padding: 6px 12px; background: #4f46e5; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">center</button>
-    <button data-on:click="$justifycontent = 'space-between'" data-class:active="$justifycontent === 'space-between'" style="padding: 6px 12px; background: #4f46e5; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">space-between</button>
-    <button data-on:click="$justifycontent = 'space-around'" data-class:active="$justifycontent === 'space-around'" style="padding: 6px 12px; background: #4f46e5; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">space-around</button>
-    <button data-on:click="$alignitems = 'flex-start'" data-class:active="$alignitems === 'flex-start'" style="padding: 6px 12px; background: #7c3aed; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">align-start</button>
-    <button data-on:click="$alignitems = 'center'" data-class:active="$alignitems === 'center'" style="padding: 6px 12px; background: #7c3aed; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">align-center</button>
-    <button data-on:click="$flexwrap = 'wrap'" data-class:active="$flexwrap === 'wrap'" style="padding: 6px 12px; background: #9333ea; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">wrap</button>
-    <button data-on:click="$flexwrap = 'nowrap'" data-class:active="$flexwrap === 'nowrap'" style="padding: 6px 12px; background: #9333ea; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">nowrap</button>
+    interactiveDemo: `<div class="demo-playground-card" style="background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);">
+  <h4 style="color: #c4b5fd; margin-bottom: var(--space-s); font-size: 14px; font-weight: 800;">Flexbox Playground</h4>
+  <div class="demo-controls-row">
+    <button class="demo-control-btn" data-on:click="$justifycontent = 'flex-start'" data-class:active="$justifycontent === 'flex-start'">flex-start</button>
+    <button class="demo-control-btn" data-on:click="$justifycontent = 'center'" data-class:active="$justifycontent === 'center'">center</button>
+    <button class="demo-control-btn" data-on:click="$justifycontent = 'space-between'" data-class:active="$justifycontent === 'space-between'">space-between</button>
+    <button class="demo-control-btn" data-on:click="$justifycontent = 'space-around'" data-class:active="$justifycontent === 'space-around'">space-around</button>
+    <button class="demo-control-btn" data-on:click="$alignitems = 'flex-start'" data-class:active="$alignitems === 'flex-start'" style="background: #7c3aed33">align-start</button>
+    <button class="demo-control-btn" data-on:click="$alignitems = 'center'" data-class:active="$alignitems === 'center'" style="background: #7c3aed33">align-center</button>
+    <button class="demo-control-btn" data-on:click="$flexwrap = 'wrap'" data-class:active="$flexwrap === 'wrap'" style="background: #9333ea33">wrap</button>
+    <button class="demo-control-btn" data-on:click="$flexwrap = 'nowrap'" data-class:active="$flexwrap === 'nowrap'" style="background: #9333ea33">nowrap</button>
   </div>
-  <div id="flexDemo" style="display: flex; height: 140px; background: rgba(255,255,255,0.1); border-radius: 8px; border: 2px dashed #6366f1;" data-style:justify-content="$justifycontent)" data-style:align-items="$alignitems)" data-style:flex-wrap="$flexwrap)">
-    <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #818cf8, #6366f1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px; box-shadow: 0 4px 12px rgba(99,102,241,0.4);">1</div>
-    <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #a78bfa, #8b5cf6); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px; box-shadow: 0 4px 12px rgba(139,92,246,0.4);">2</div>
-    <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #c4b5fd, #a78bfa); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px; box-shadow: 0 4px 12px rgba(167,139,250,0.4);">3</div>
+  <div class="demo-canvas-area" style="display: flex; height: 140px; border-color: #6366f1;" data-style:justify-content="$justifycontent" data-style:align-items="$alignitems" data-style:flex-wrap="$flexwrap">
+    <div class="demo-item-box" style="background: linear-gradient(135deg, #818cf8, #6366f1);">1</div>
+    <div class="demo-item-box" style="background: linear-gradient(135deg, #a78bfa, #8b5cf6);">2</div>
+    <div class="demo-item-box" style="background: linear-gradient(135deg, #c4b5fd, #a78bfa);">3</div>
   </div>
 </div>`,
     learningObjectives: [
@@ -142,8 +159,26 @@ export const COLLECTIONS: Record<string, CollectionMeta> = {
       "Creating responsive layouts that adapt to different screen sizes",
     ],
     difficulty: "intermediate",
-    estimatedTime: "2-3 hours",
+    estimatedTime: "1.5 hours",
     prerequisites: ["Basic CSS", "Understanding of block vs inline elements"],
+    strengths: [
+      "Intuitive 1D alignment (horizontal or vertical)",
+      "Dynamic space distribution",
+      "Perfect centering with minimal code",
+      "Source order independence (with order property)",
+    ],
+    weaknesses: [
+      "Limited 2D layout capabilities",
+      "Can lead to nested 'div-soup' for complex layouts",
+      "Items don't align across multiple rows easily",
+    ],
+    antiExamples: [
+      {
+        badCode: ".container { display: flex; }\n.item { margin-left: 50%; }",
+        goodCode: ".container { display: flex; justify-content: center; }",
+        explanation: "Use alignment properties instead of manual margins for layout.",
+      },
+    ],
   },
   Grid: {
     id: "Grid",
@@ -228,33 +263,28 @@ export const COLLECTIONS: Record<string, CollectionMeta> = {
       },
     ],
     related: ["Flexbox", "Layout", "Spacing"],
-    interactiveDemo: `<div data-signals:_layoutType="'classic'" data-signals:_highlightedArea="''" style="font-family: system-ui, sans-serif; padding: 20px; background: linear-gradient(135deg, #831843 0%, #be185d 100%); border-radius: 12px; min-height: 280px;">
-  <h4 style="color: #f9a8d4; margin: 0 0 16px 0; font-size: 14px; font-weight: 600;">Landing Page Builder</h4>
-  <div style="display: flex; gap: 8px; margin-bottom: 16px;">
-    <button data-on:click="$_layoutType = 'classic'" data-class:active="$_layoutType === 'classic'" style="padding: 6px 12px; background: #ec4899; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">Classic</button>
-    <button data-on:click="$_layoutType = 'hero'" data-class:active="$_layoutType === 'hero'" style="padding: 6px 12px; background: #db2777; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">Hero Focus</button>
-    <button data-on:click="$_layoutType = 'dashboard'" data-class:active="$_layoutType === 'dashboard'" style="padding: 6px 12px; background: #be185d; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">Dashboard</button>
+    interactiveDemo: `<div class="demo-playground-card" style="background: linear-gradient(135deg, #831843 0%, #be185d 100%);">
+  <h4 style="color: #f9a8d4; margin-bottom: var(--space-s); font-size: 14px; font-weight: 800;">Grid Layout Builder</h4>
+  <div class="demo-controls-row">
+    <button class="demo-control-btn" data-on:click="$layoutType = 'classic'" data-class:active="$layoutType === 'classic'">Classic</button>
+    <button class="demo-control-btn" data-on:click="$layoutType = 'hero'" data-class:active="$layoutType === 'hero'">Hero Focus</button>
+    <button class="demo-control-btn" data-on:click="$layoutType = 'dashboard'" data-class:active="$layoutType === 'dashboard'">Dashboard</button>
   </div>
-  <div class="grid-demo" data-class:layout-class="$_layoutType)">
-    <div data-on:click="$ _highlightedArea = 'header'; setTimeout(() => $ _highlightedArea = '', 200)" data-class:highlighted="$ _highlightedArea === 'header'" class="grid-item item-header">Header</div>
-    <div data-on:click="$ _highlightedArea = 'sidebar'; setTimeout(() => $ _highlightedArea = '', 200)" data-class:highlighted="$ _highlightedArea === 'sidebar'" class="grid-item item-sidebar">Sidebar</div>
-    <div data-on:click="$ _highlightedArea = 'main'; setTimeout(() => $ _highlightedArea = '', 200)" data-class:highlighted="$ _highlightedArea === 'main'" class="grid-item item-main">Main Content</div>
-    <div data-on:click="$ _highlightedArea = 'footer'; setTimeout(() => $ _highlightedArea = '', 200)" data-class:highlighted="$ _highlightedArea === 'footer'" class="grid-item item-footer">Footer</div>
+  <div class="grid-demo demo-canvas-area" style="border-color: #ec4899;" data-attr:class="'grid-demo demo-canvas-area layout-class-' + $layoutType">
+    <div class="grid-item item-header">Header</div>
+    <div class="grid-item item-sidebar">Sidebar</div>
+    <div class="grid-item item-main">Main Content</div>
+    <div class="grid-item item-footer">Footer</div>
   </div>
   <style>
-    .grid-demo { display: grid; height: 160px; gap: 8px; border-radius: 8px; overflow: hidden; }
+    .grid-demo { display: grid; height: 160px; gap: 8px; border-radius: 8px; overflow: hidden; border: none; }
     .grid-demo.layout-class-classic { grid-template-columns: 200px 1fr; grid-template-rows: 50px 1fr 50px; }
     .grid-demo.layout-class-hero { grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; }
     .grid-demo.layout-class-dashboard { grid-template-columns: repeat(3, 1fr); grid-template-rows: 1fr 1fr; }
-    .item-header { grid-area: header; }
-    .item-sidebar { grid-area: sidebar; }
-    .item-main { grid-area: main; }
-    .item-footer { grid-area: footer; }
-    .layout-class-classic .item-header { grid-area: 1 / 1 / 2 / 3; }
-    .layout-class-classic .item-sidebar { grid-area: 2 / 1 / 3 / 2; }
-    .layout-class-classic .item-main { grid-area: 2 / 2 / 3 / 3; }
-    .layout-class-classic .item-footer { grid-area: 3 / 1 / 4 / 3; }
-    .layout-class-hero .item-header { grid-area: 1 / 1 / 2 / 2; }
+    .item-header { grid-area: 1 / 1 / 2 / 3; }
+    .item-sidebar { grid-area: 2 / 1 / 3 / 2; }
+    .item-main { grid-area: 2 / 2 / 3 / 3; }
+    .item-footer { grid-area: 3 / 1 / 4 / 3; }
     .layout-class-hero .item-sidebar { display: none; }
     .layout-class-hero .item-main { grid-area: 2 / 1 / 3 / 2; }
     .layout-class-hero .item-footer { grid-area: 3 / 1 / 4 / 2; }
@@ -262,12 +292,11 @@ export const COLLECTIONS: Record<string, CollectionMeta> = {
     .layout-class-dashboard .item-sidebar { grid-area: 1 / 1 / 3 / 2; }
     .layout-class-dashboard .item-main { grid-area: 2 / 2 / 3 / 4; }
     .layout-class-dashboard .item-footer { display: none; }
-    .grid-item { display: flex; align-items: center; padding: 0 16px; cursor: pointer; transition: transform 0.2s; }
-    .item-header { background: linear-gradient(135deg, #f472b6, #ec4899); color: white; font-weight: 600; font-size: 14px; }
-    .item-sidebar { background: linear-gradient(135deg, #fbcfe8, #f9a8d4); color: #831843; font-weight: 500; font-size: 13px; }
-    .item-main { background: linear-gradient(135deg, #fdf2f8, #fbcfe8); color: #be185d; font-weight: 500; font-size: 13px; justify-content: center; }
-    .item-footer { background: linear-gradient(135deg, #f9a8d4, #f472b6); color: white; font-weight: 500; font-size: 13px; }
-    .highlighted { transform: scale(1.02); }
+    .grid-item { display: flex; align-items: center; padding: 0 16px; font-weight: 800; font-size: 12px; text-transform: uppercase; }
+    .item-header { background: #f472b6; color: white; }
+    .item-sidebar { background: #fbcfe8; color: #831843; }
+    .item-main { background: #fdf2f8; color: #be185d; justify-content: center; }
+    .item-footer { background: #f9a8d4; color: white; }
   </style>
 </div>`,
     learningObjectives: [
@@ -289,8 +318,19 @@ export const COLLECTIONS: Record<string, CollectionMeta> = {
       "When you need precise control over both rows and columns",
     ],
     difficulty: "intermediate",
-    estimatedTime: "2-3 hours",
+    estimatedTime: "2 hours",
     prerequisites: ["Basic CSS", "Understanding of the box model"],
+    strengths: [
+      "Full 2D control (rows and columns simultaneously)",
+      "Area-based layouts are extremely readable",
+      "Eliminates need for nested wrapper divs",
+      "Precise alignment across multiple elements",
+    ],
+    weaknesses: [
+      "Higher learning curve than Flexbox",
+      "Overkill for simple 1D alignment",
+      "Older browser support required polyfills (historically)",
+    ],
   },
   Typography: {
     id: "Typography",
@@ -367,19 +407,19 @@ h1, h2, h3 {
       },
     ],
     related: ["Color", "Visual", "Spacing"],
-    interactiveDemo: `<div data-signals:fontsize="'24px'" data-signals:lineheight="'1.6'" data-signals:letterspacing="'0px'" style="font-family: system-ui, sans-serif; padding: 20px; background: linear-gradient(135deg, #134e4a 0%, #0f766e 100%); border-radius: 12px; min-height: 280px;">
-  <h4 style="color: #5eead4; margin: 0 0 16px 0; font-size: 14px; font-weight: 600;">Text Lab</h4>
-  <div style="display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;">
-    <button data-on:click="$fontsize = '16px'" data-class:active="$fontsize === '16px'" style="padding: 6px 10px; background: #0d9488; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 11px;">Small</button>
-    <button data-on:click="$fontsize = '24px'" data-class:active="$fontsize === '24px'" style="padding: 6px 10px; background: #0d9488; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 11px;">Medium</button>
-    <button data-on:click="$fontsize = '36px'" data-class:active="$fontsize === '36px'" style="padding: 6px 10px; background: #0d9488; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 11px;">Large</button>
-    <button data-on:click="$lineheight = '1.2'" data-class:active="$lineheight === '1.2'" style="padding: 6px 10px; background: #14b8a6; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 11px;">Tight</button>
-    <button data-on:click="$lineheight = '1.8'" data-class:active="$lineheight === '1.8'" style="padding: 6px 10px; background: #14b8a6; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 11px;">Loose</button>
-    <button data-on:click="$letterspacing = '0px'" data-class:active="$letterspacing === '0px'" style="padding: 6px 10px; background: #2dd4bf; color: #134e4a; border: none; border-radius: 6px; cursor: pointer; font-size: 11px;">Normal</button>
-    <button data-on:click="$letterspacing = '4px'" data-class:active="$letterspacing === '4px'" style="padding: 6px 10px; background: #2dd4bf; color: #134e4a; border: none; border-radius: 6px; cursor: pointer; font-size: 11px;">Wide</button>
+    interactiveDemo: `<div class="demo-playground-card" style="background: linear-gradient(135deg, #134e4a 0%, #0f766e 100%);">
+  <h4 style="color: #5eead4; margin-bottom: var(--space-s); font-size: 14px; font-weight: 800;">Type Lab</h4>
+  <div class="demo-controls-row">
+    <button class="demo-control-btn" data-on:click="$fontsize = '16px'" data-class:active="$fontsize === '16px'">Small</button>
+    <button class="demo-control-btn" data-on:click="$fontsize = '24px'" data-class:active="$fontsize === '24px'">Medium</button>
+    <button class="demo-control-btn" data-on:click="$fontsize = '36px'" data-class:active="$fontsize === '36px'">Large</button>
+    <button class="demo-control-btn" data-on:click="$lineheight = '1.2'" data-class:active="$lineheight === '1.2'" style="background: #14b8a633">Tight</button>
+    <button class="demo-control-btn" data-on:click="$lineheight = '1.8'" data-class:active="$lineheight === '1.8'" style="background: #14b8a633">Loose</button>
+    <button class="demo-control-btn" data-on:click="$letterspacing = '0px'" data-class:active="$letterspacing === '0px'" style="background: #2dd4bf33; color: #134e4a">Normal</button>
+    <button class="demo-control-btn" data-on:click="$letterspacing = '4px'" data-class:active="$letterspacing === '4px'" style="background: #2dd4bf33; color: #134e4a">Wide</button>
   </div>
-  <div contenteditable="true" id="textSample" style="background: rgba(255,255,255,0.95); padding: 20px; border-radius: 8px; color: #134e4a; outline: none; min-height: 80px; font-family: Georgia, serif;" data-style:font-size="$fontsize)" data-style:line-height="$lineheight)" data-style:letter-spacing="$letterspacing)">
-    Click to edit this text
+  <div contenteditable="true" class="demo-canvas-area" style="background: rgba(255,255,255,0.95); padding: 20px; color: #134e4a; outline: none; font-family: Georgia, serif; border-color: #5eead4;" data-style:font-size="$fontsize" data-style:line-height="$lineheight" data-style:letter-spacing="$letterspacing">
+    Good typography is invisible. You only notice it when it's bad.
   </div>
 </div>`,
     learningObjectives: [
@@ -401,8 +441,17 @@ h1, h2, h3 {
       "Styling headings and body text for visual hierarchy",
     ],
     difficulty: "beginner",
-    estimatedTime: "1-2 hours",
+    estimatedTime: "1.5 hours",
     prerequisites: ["Basic HTML", "Basic CSS selectors"],
+    strengths: [
+      "Crucial for readability and accessibility",
+      "Establishes brand identity and visual tone",
+      "Responsive type scales improve UX across devices",
+    ],
+    weaknesses: [
+      "Poor font choices can break layout consistency",
+      "FOUT/FOIT (Flash of Unstyled Text) during loading",
+    ],
   },
   Animation: {
     id: "Animation",
@@ -488,13 +537,13 @@ h1, h2, h3 {
       },
     ],
     related: ["Transform", "Visual", "Interactivity"],
-    interactiveDemo: `<div data-signals:_animKey="0" style="font-family: system-ui, sans-serif; padding: 20px; background: linear-gradient(135deg, #881337 0%, #e11d48 100%); border-radius: 12px; min-height: 280px;">
-  <h4 style="color: #fda4af; margin: 0 0 16px 0; font-size: 14px; font-weight: 600;">Animation Playground</h4>
-  <div style="display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;">
-    <button data-on:click="$_animKey = $_animKey + 1; setTimeout(() => { const el = document.getElementById('animBox'); el.style.animation = 'bounce 0.6s ease'; }, 10)" style="padding: 6px 12px; background: #fb7185; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">Bounce</button>
-    <button data-on:click="$_animKey = $_animKey + 1; setTimeout(() => { const el = document.getElementById('animBox'); el.style.animation = 'pulse 0.8s ease'; }, 10)" style="padding: 6px 12px; background: #f43f5e; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">Pulse</button>
-    <button data-on:click="$_animKey = $_animKey + 1; setTimeout(() => { const el = document.getElementById('animBox'); el.style.animation = 'shake 0.5s ease'; }, 10)" style="padding: 6px 12px; background: #e11d48; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">Shake</button>
-    <button data-on:click="$_animKey = $_animKey + 1; setTimeout(() => { const el = document.getElementById('animBox'); el.style.animation = 'spin 1s linear'; }, 10)" style="padding: 6px 12px; background: #be123c; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">Spin</button>
+    interactiveDemo: `<div class="demo-playground-card" style="background: linear-gradient(135deg, #881337 0%, #e11d48 100%);">
+  <h4 style="color: #fda4af; margin-bottom: var(--space-s); font-size: 14px; font-weight: 800;">Animation Playground</h4>
+  <div class="demo-controls-row">
+    <button class="demo-control-btn" data-on:click="$animKey = $animKey + 1; setTimeout(() => { const el = document.getElementById('animBox'); el.style.animation = 'bounce 0.6s ease'; }, 10)">Bounce</button>
+    <button class="demo-control-btn" data-on:click="$animKey = $animKey + 1; setTimeout(() => { const el = document.getElementById('animBox'); el.style.animation = 'pulse 0.8s ease'; }, 10)">Pulse</button>
+    <button class="demo-control-btn" data-on:click="$animKey = $animKey + 1; setTimeout(() => { const el = document.getElementById('animBox'); el.style.animation = 'shake 0.5s ease'; }, 10)">Shake</button>
+    <button class="demo-control-btn" data-on:click="$animKey = $animKey + 1; setTimeout(() => { const el = document.getElementById('animBox'); el.style.animation = 'spin 1s linear'; }, 10)">Spin</button>
   </div>
   <style>
     @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
@@ -502,9 +551,9 @@ h1, h2, h3 {
     @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
     @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
   </style>
-  <div style="display: flex; justify-content: center; align-items: center; gap: 20px; height: 140px; background: rgba(255,255,255,0.1); border-radius: 8px;">
-    <div id="animBox" data-key="$_animKey" style="width: 60px; height: 60px; background: linear-gradient(135deg, #fb7185, #f43f5e); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 12px; cursor: pointer; box-shadow: 0 4px 15px rgba(244,63,94,0.5);">PLAY</div>
-    <div style="color: white; font-size: 12px; opacity: 0.8;">Click buttons to trigger animations</div>
+  <div class="demo-canvas-area" style="display: flex; justify-content: center; align-items: center; gap: 20px; height: 140px; border-color: #fb7185;">
+    <div id="animBox" class="demo-item-box" data-key="$animKey" style="width: 60px; height: 60px; background: linear-gradient(135deg, #fb7185, #f43f5e);">PLAY</div>
+    <div style="color: white; font-size: 12px; font-weight: 600; opacity: 0.9;">Click to trigger</div>
   </div>
 </div>`,
     learningObjectives: [
@@ -528,6 +577,15 @@ h1, h2, h3 {
     difficulty: "intermediate",
     estimatedTime: "2 hours",
     prerequisites: ["Basic CSS", "Understanding of CSS selectors"],
+    strengths: [
+      "Smooth state changes without JavaScript",
+      "GPU-accelerated performance for transforms/opacity",
+      "Enhances user feedback and perceived speed",
+    ],
+    weaknesses: [
+      "Hard to coordinate complex multi-step sequences",
+      "Can't animate all properties (e.g., display)",
+    ],
   },
   Color: {
     id: "Color",
@@ -601,21 +659,22 @@ h1, h2, h3 {
       },
     ],
     related: ["Typography", "Visual", "CSS Variables"],
-    interactiveDemo: `<div data-signals:themebg="'#ffffff'" data-signals:themetext="'#1f2937'" data-signals:themeborder="'#d1d5db'" style="font-family: system-ui, sans-serif; padding: 20px; background: linear-gradient(135deg, #78350f 0%, #d97706 100%); border-radius: 12px; min-height: 280px;">
-  <h4 style="color: #fde68a; margin: 0 0 16px 0; font-size: 14px; font-weight: 600;">Theme Builder</h4>
-  <div style="display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; align-items: center;">
-    <label style="color: #fef3c7; font-size: 11px;">BG:</label>
-    <input type="color" data-bind:themebg style="width: 32px; height: 28px; border: none; border-radius: 4px; cursor: pointer;">
-    <label style="color: #fef3c7; font-size: 11px;">Text:</label>
-    <input type="color" data-bind:themetext style="width: 32px; height: 28px; border: none; border-radius: 4px; cursor: pointer;">
-    <label style="color: #fef3c7; font-size: 11px;">Border:</label>
-    <input type="color" data-bind:themeborder style="width: 32px; height: 28px; border: none; border-radius: 4px; cursor: pointer;">
-    <button data-on:click="$themebg = '#ffffff'; $themetext = '#1f2937'; $themeborder = '#d1d5db'" style="padding: 6px 12px; background: #92400e; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 11px;">Reset</button>
+    interactiveDemo: `<div class="demo-playground-card" style="background: linear-gradient(135deg, #78350f 0%, #d97706 100%);">
+  <h4 style="color: #fde68a; margin-bottom: var(--space-s); font-size: 14px; font-weight: 800;">Theme Builder</h4>
+  <div class="demo-controls-row" style="align-items: center;">
+    <label style="color: #fef3c7; font-size: 11px; font-weight: 800;">BG:</label>
+    <input type="color" data-bind:themebg style="width: 28px; height: 24px; border: none; border-radius: 4px; cursor: pointer; padding: 0;">
+    <label style="color: #fef3c7; font-size: 11px; font-weight: 800;">TXT:</label>
+    <input type="color" data-bind:themetext style="width: 28px; height: 24px; border: none; border-radius: 4px; cursor: pointer; padding: 0;">
+    <label style="color: #fef3c7; font-size: 11px; font-weight: 800;">BD:</label>
+    <input type="color" data-bind:themeborder style="width: 28px; height: 24px; border: none; border-radius: 4px; cursor: pointer; padding: 0;">
+    <button class="demo-control-btn" data-on:click="$themebg = '#ffffff'; $themetext = '#1f2937'; $themeborder = '#d1d5db'" style="background: #92400e; margin-left: auto;">Reset</button>
   </div>
-  <div id="themeCard" style="padding: 24px; border-radius: 12px; border: 2px solid; transition: all 0.3s ease;" data-style:background="$themebg)" data-style:color="$themetext)" data-style:border-color="$themeborder)">
-    <h5 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 600;">Card Title</h5>
-    <p style="margin: 0; font-size: 13px; opacity: 0.8; line-height: 1.5;">This card adapts to your color choices. Click the color pickers above to customize!</p>
-    <button style="margin-top: 12px; padding: 8px 16px; background: #f59e0b; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 500;">Action</button>
+  <div class="demo-canvas-area" style="padding: 24px; border: none; display: flex; align-items: center; justify-content: center;">
+    <div style="padding: 24px; border-radius: 12px; border: 3px solid; transition: all 0.3s ease; width: 100%; max-width: 300px;" data-style:background="$themebg" data-style:color="$themetext" data-style:border-color="$themeborder">
+      <h5 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 800;">Live Preview</h5>
+      <p style="margin: 0; font-size: 13px; opacity: 0.8; line-height: 1.5; font-weight: 500;">Colors define the mood and accessibility of your interface.</p>
+    </div>
   </div>
 </div>`,
     learningObjectives: [
@@ -639,6 +698,15 @@ h1, h2, h3 {
     difficulty: "beginner",
     estimatedTime: "1 hour",
     prerequisites: ["Basic CSS"],
+    strengths: [
+      "Vast selection of color spaces (sRGB, P3, OKLCH)",
+      "Dynamic theming with CSS variables",
+      "Consistent semantic mapping for UI states",
+    ],
+    weaknesses: [
+      "Color shifts across different screen technologies",
+      "Contrast compliance requires manual verification",
+    ],
   },
   Layout: {
     id: "Layout",
@@ -721,21 +789,20 @@ h1, h2, h3 {
       },
     ],
     related: ["Flexbox", "Grid", "Spacing"],
-    interactiveDemo: `<div data-signals:position="'absolute'" data-signals:hasOffset="false" data-effect="$position === 'static' ? $hasOffset = false : null" style="font-family: system-ui, sans-serif; padding: 20px; background: linear-gradient(135deg, #3730a3 0%, #6366f1 100%); border-radius: 12px; min-height: 280px;">
-  <h4 style="color: #c7d2fe; margin: 0 0 16px 0; font-size: 14px; font-weight: 600;">Position Demo</h4>
-  <div style="display: flex; gap: 8px; margin-bottom: 16px;">
-    <button data-on:click="$position = 'static'; $hasOffset = false" data-class:active="$position === 'static'" style="padding: 6px 12px; background: #4f46e5; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">Static</button>
-    <button data-on:click="$position = 'relative'" data-class:active="$position === 'relative'" style="padding: 6px 12px; background: #4338ca; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">Relative</button>
-    <button data-on:click="$position = 'absolute'" data-class:active="$position === 'absolute'" style="padding: 6px 12px; background: #3730a3; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">Absolute</button>
-    <button data-on:click="$position = 'fixed'" data-class:active="$position === 'fixed'" style="padding: 6px 12px; background: #312e81; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">Fixed</button>
+    interactiveDemo: `<div class="demo-playground-card" style="background: linear-gradient(135deg, #3730a3 0%, #6366f1 100%);">
+  <h4 style="color: #c7d2fe; margin-bottom: var(--space-s); font-size: 14px; font-weight: 800;">Position Lab</h4>
+  <div class="demo-controls-row">
+    <button class="demo-control-btn" data-on:click="$position = 'static'; $hasOffset = false" data-class:active="$position === 'static'">Static</button>
+    <button class="demo-control-btn" data-on:click="$position = 'relative'" data-class:active="$position === 'relative'">Relative</button>
+    <button class="demo-control-btn" data-on:click="$position = 'absolute'" data-class:active="$position === 'absolute'">Absolute</button>
+    <button class="demo-control-btn" data-on:click="$position = 'fixed'" data-class:active="$position === 'fixed'">Fixed</button>
   </div>
-  <div style="position: relative; height: 140px; background: rgba(255,255,255,0.15); border-radius: 8px; overflow: hidden;">
-    <div style="position: absolute; top: 10px; left: 10px; color: rgba(255,255,255,0.4); font-size: 11px;">Container</div>
-    <div data-on:click="($position === 'relative' || $position === 'absolute') && ($hasOffset = !$hasOffset)" style="position: absolute; top: 40px; left: 40px; width: 80px; height: 60px; background: linear-gradient(135deg, #818cf8, #6366f1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 12px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(99,102,241,0.4);" data-style:position="$position)" data-style:top="($hasOffset && ($position === 'relative' || $position === 'absolute') ? '10px' : '40px'), $hasOffset && ($position === 'relative' || $position === 'absolute') ? '10px' : '40px')" data-style:left="($hasOffset && ($position === 'relative' || $position === 'absolute') ? '100px' : '40px'), $hasOffset && ($position === 'relative' || $position === 'absolute') ? '100px' : '40px')">
-      Click me
+  <div class="demo-canvas-area" style="border-color: #818cf8;">
+    <div style="position: absolute; top: 10px; left: 10px; color: rgba(255,255,255,0.4); font-size: 10px; font-weight: 800; text-transform: uppercase;">Container Boundary</div>
+    <div data-on:click="($position === 'relative' || $position === 'absolute') && ($hasOffset = !$hasOffset)" class="demo-item-box" style="position: absolute; top: 40px; left: 40px; width: 80px; height: 60px; background: linear-gradient(135deg, #818cf8, #6366f1); cursor: pointer; transition: all 0.4s var(--ease-spring-2);" data-style:position="$position" data-style:top="$hasOffset && ($position === 'relative' || $position === 'absolute') ? '10px' : '40px'" data-style:left="$hasOffset && ($position === 'relative' || $position === 'absolute') ? '100px' : '40px'">
+      MOVE ME
     </div>
   </div>
-  <div style="margin-top: 12px; color: #c7d2fe; font-size: 12px; text-align: center;" data-text="'position: ' + $position + (($position === 'relative' || $position === 'absolute') ? ' (click box to offset)' : '')"></div>
 </div>`,
     learningObjectives: [
       "Understand the position property values (static, relative, absolute, fixed, sticky)",
@@ -758,6 +825,15 @@ h1, h2, h3 {
     difficulty: "intermediate",
     estimatedTime: "2 hours",
     prerequisites: ["Basic CSS", "Understanding of the box model"],
+    strengths: [
+      "Granular control over element placement",
+      "Enables layered UI (modals, dropdowns, tooltips)",
+      "Sticky positioning improves navigation UX",
+    ],
+    weaknesses: [
+      "Easy to lose elements outside the viewport",
+      "Complex stacking contexts can be hard to debug",
+    ],
   },
   Backgrounds: {
     id: "Backgrounds",
@@ -828,17 +904,19 @@ h1, h2, h3 {
       },
     ],
     related: ["Color", "Visual", "Typography"],
-    interactiveDemo: `<div data-signals:heroindex="0" style="font-family: system-ui, sans-serif; padding: 20px; background: linear-gradient(135deg, #14532d 0%, #22c55e 100%); border-radius: 12px; min-height: 280px;">
-  <h4 style="color: #86efac; margin: 0 0 16px 0; font-size: 14px; font-weight: 600;">Hero Gallery</h4>
-  <div style="display: flex; gap: 8px; margin-bottom: 16px;">
-    <button data-on:click="$heroindex = 0" data-class:active="$heroindex === 0" style="padding: 6px 12px; background: #16a34a; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">Gradient</button>
-    <button data-on:click="$heroindex = 1" data-class:active="$heroindex === 1" style="padding: 6px 12px; background: #15803d; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">Solid</button>
-    <button data-on:click="$heroindex = 2" data-class:active="$heroindex === 2" style="padding: 6px 12px; background: #166534; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">Image</button>
-    <button data-on:click="$heroindex = 3" data-class:active="$heroindex === 3" style="padding: 6px 12px; background: #14532d; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">Pattern</button>
+    interactiveDemo: `<div class="demo-playground-card" style="background: linear-gradient(135deg, #14532d 0%, #22c55e 100%);">
+  <h4 style="color: #86efac; margin-bottom: var(--space-s); font-size: 14px; font-weight: 800;">Gallery Explorer</h4>
+  <div class="demo-controls-row">
+    <button class="demo-control-btn" data-on:click="$heroindex = 0" data-class:active="$heroindex === 0">Gradient</button>
+    <button class="demo-control-btn" data-on:click="$heroindex = 1" data-class:active="$heroindex === 1">Solid</button>
+    <button class="demo-control-btn" data-on:click="$heroindex = 2" data-class:active="$heroindex === 2">Image</button>
+    <button class="demo-control-btn" data-on:click="$heroindex = 3" data-class:active="$heroindex === 3">Pattern</button>
   </div>
-  <div data-on:click="$heroindex = ($heroindex + 1) % 4" style="height: 140px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; transition: all 0.5s ease; cursor: pointer;" data-style:background="($heroindex === 0 ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : $heroindex === 1 ? '#1e3a5f' : $heroindex === 2 ? 'linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url(https://picsum.photos/400/200?random=1)' : 'repeating-linear-gradient(45deg, #22c55e 0px, #22c55e 10px, #16a34a 10px, #16a34a 20px)'), $heroindex === 0 ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : $heroindex === 1 ? '#1e3a5f' : $heroindex === 2 ? 'linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url(https://picsum.photos/400/200?random=1)' : 'repeating-linear-gradient(45deg, #22c55e 0px, #22c55e 10px, #16a34a 10px, #16a34a 20px)')">
-    <h3 style="margin: 0 0 8px 0; font-size: 22px; font-weight: 700; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">Welcome Home</h3>
-    <p style="margin: 0; font-size: 14px; color: rgba(255,255,255,0.9);">Click to cycle backgrounds</p>
+  <div class="demo-canvas-area" style="border-color: #4ade80;" data-on:click="$heroindex = ($heroindex + 1) % 4">
+    <div style="height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; transition: all 0.6s var(--ease-out-3); cursor: pointer;" data-style:background="$heroindex === 0 ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : $heroindex === 1 ? '#1e3a5f' : $heroindex === 2 ? 'linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url(https://picsum.photos/400/200?random=1)' : 'repeating-linear-gradient(45deg, #22c55e 0px, #22c55e 10px, #16a34a 10px, #16a34a 20px)'">
+      <h3 style="margin: 0 0 8px 0; font-size: 24px; font-weight: 900; color: white; text-shadow: 0 4px 12px rgba(0,0,0,0.3);">Visual Impact</h3>
+      <p style="margin: 0; font-size: 14px; color: rgba(255,255,255,0.9); font-weight: 600;">Click to cycle layers</p>
+    </div>
   </div>
 </div>`,
     learningObjectives: [
@@ -860,8 +938,17 @@ h1, h2, h3 {
       "Implementing parallax scrolling effects",
     ],
     difficulty: "beginner",
-    estimatedTime: "1-2 hours",
+    estimatedTime: "1 hour",
     prerequisites: ["Basic CSS"],
+    strengths: [
+      "Supports multiple layers of images and gradients",
+      "Powerful sizing control with 'cover' and 'contain'",
+      "Enable visual depth with gradients and patterns",
+    ],
+    weaknesses: [
+      "Large background images impact page load performance",
+      "Fixed attachments can cause jittery scrolling on mobile",
+    ],
   },
   BoxModel: {
     id: "BoxModel",
@@ -934,26 +1021,20 @@ h1, h2, h3 {
       },
     ],
     related: ["Layout", "Spacing", "Sizing"],
-    interactiveDemo: `<div data-signals:boxmargin="'20px'" data-signals:boxpadding="'30px'" data-signals:boxborder="'8px'" style="font-family: system-ui, sans-serif; padding: 20px; background: linear-gradient(135deg, #7c2d12 0%, #ea580c 100%); border-radius: 12px; min-height: 280px;">
-  <h4 style="color: #fed7aa; margin: 0 0 16px 0; font-size: 14px; font-weight: 600;">Box Visualizer</h4>
-  <div style="display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;">
-    <button data-on:click="$boxmargin = '0px'" data-class:active="$boxmargin === '0px'" style="padding: 5px 10px; background: #c2410c; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 11px;">0px</button>
-    <button data-on:click="$boxmargin = '20px'" data-class:active="$boxmargin === '20px'" style="padding: 5px 10px; background: #c2410c; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 11px;">20px</button>
-    <button data-on:click="$boxmargin = '40px'" data-class:active="$boxmargin === '40px'" style="padding: 5px 10px; background: #c2410c; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 11px;">40px</button>
-    <button data-on:click="$boxpadding = '10px'" data-class:active="$boxpadding === '10px'" style="padding: 5px 10px; background: #ea580c; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 11px;">10px</button>
-    <button data-on:click="$boxpadding = '30px'" data-class:active="$boxpadding === '30px'" style="padding: 5px 10px; background: #ea580c; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 11px;">30px</button>
-    <button data-on:click="$boxpadding = '50px'" data-class:active="$boxpadding === '50px'" style="padding: 5px 10px; background: #ea580c; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 11px;">50px</button>
-    <button data-on:click="$boxborder = '0px'" data-class:active="$boxborder === '0px'" style="padding: 5px 10px; background: #f97316; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 11px;">0px</button>
-    <button data-on:click="$boxborder = '8px'" data-class:active="$boxborder === '8px'" style="padding: 5px 10px; background: #f97316; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 11px;">8px</button>
-    <button data-on:click="$boxborder = '16px'" data-class:active="$boxborder === '16px'" style="padding: 5px 10px; background: #f97316; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 11px;">16px</button>
+    interactiveDemo: `<div class="demo-playground-card" style="background: linear-gradient(135deg, #7c2d12 0%, #ea580c 100%);">
+  <h4 style="color: #fed7aa; margin-bottom: var(--space-s); font-size: 14px; font-weight: 800;">Box Visualizer</h4>
+  <div class="demo-controls-row">
+    <button class="demo-control-btn" data-on:click="$boxmargin = '20px'" data-class:active="$boxmargin === '20px'">M: 20px</button>
+    <button class="demo-control-btn" data-on:click="$boxmargin = '40px'" data-class:active="$boxmargin === '40px'">M: 40px</button>
+    <button class="demo-control-btn" data-on:click="$boxpadding = '10px'" data-class:active="$boxpadding === '10px'" style="background: #ea580c33">P: 10px</button>
+    <button class="demo-control-btn" data-on:click="$boxpadding = '30px'" data-class:active="$boxpadding === '30px'" style="background: #ea580c33">P: 30px</button>
+    <button class="demo-control-btn" data-on:click="$boxborder = '8px'" data-class:active="$boxborder === '8px'" style="background: #f9731633">B: 8px</button>
+    <button class="demo-control-btn" data-on:click="$boxborder = '16px'" data-class:active="$boxborder === '16px'" style="background: #f9731633">B: 16px</button>
   </div>
-  <div style="display: flex; justify-content: center; align-items: center; height: 140px; background: rgba(255,255,255,0.1); border-radius: 8px; position: relative;">
-    <div style="position: absolute; top: 8px; left: 8px; color: rgba(255,255,255,0.5); font-size: 10px;">margin</div>
-    <div style="background: rgba(252, 211, 77, 0.3); padding: 20px; border-radius: 4px; transition: all 0.3s ease;" data-style:padding="$boxmargin)">
-      <div style="position: absolute; top: 50px; left: 8px; color: rgba(255,255,255,0.5); font-size: 10px;">border</div>
-      <div style="background: rgba(251, 146, 60, 0.5); padding: 8px; border-radius: 4px; transition: all 0.3s ease;" data-style:padding="$boxborder)">
-        <div style="position: absolute; top: 90px; left: 8px; color: rgba(255,255,255,0.5); font-size: 10px;">padding</div>
-        <div style="background: white; padding: 30px; border-radius: 4px; color: #7c2d12; font-weight: 600; font-size: 14px; text-align: center; transition: all 0.3s ease;" data-style:padding="$boxpadding)">
+  <div class="demo-canvas-area" style="display: flex; justify-content: center; align-items: center; height: 140px; border: none;">
+    <div style="background: rgba(252, 211, 77, 0.4); border-radius: 4px; transition: all 0.3s var(--ease-spring-2); border: 1px dashed rgba(255,255,255,0.4);" data-style:padding="$boxmargin">
+      <div style="background: rgba(251, 146, 60, 0.6); border-radius: 4px; transition: all 0.3s var(--ease-spring-2); border: 2px solid #b45309;" data-style:padding="$boxborder">
+        <div style="background: rgba(255,255,255,0.9); padding: 20px; border-radius: 2px; color: #7c2d12; font-weight: 800; font-size: 12px; text-transform: uppercase; text-align: center; transition: all 0.3s var(--ease-spring-2);" data-style:padding="$boxpadding">
           Content
         </div>
       </div>
@@ -979,8 +1060,17 @@ h1, h2, h3 {
       "Debugging layout issues by understanding element dimensions",
     ],
     difficulty: "beginner",
-    estimatedTime: "1-2 hours",
+    estimatedTime: "1 hour",
     prerequisites: ["Basic HTML", "Basic CSS"],
+    strengths: [
+      "Fundamental to all web layout and spacing",
+      "Border-box makes sizing predictable",
+      "Clear separation of internal and external space",
+    ],
+    weaknesses: [
+      "Margin collapsing can be confusing for beginners",
+      "Default content-box sizing often leads to overflow",
+    ],
   },
   Transitions: {
     id: "Transitions",
@@ -1062,20 +1152,16 @@ h1, h2, h3 {
       },
     ],
     related: ["Animation", "Transform", "Visual"],
-    interactiveDemo: `<div data-signals:timing="'ease'" data-signals:_hover1="false" data-signals:_hover2="false" data-signals:_clicked="false" data-signals:_focused="false" style="font-family: system-ui, sans-serif; padding: 20px; background: linear-gradient(135deg, #581c87 0%, #a855f7 100%); border-radius: 12px; min-height: 280px;">
-  <h4 style="color: #e9d5ff; margin: 0 0 16px 0; font-size: 14px; font-weight: 600;">Micro-interaction Lab</h4>
-  <div style="display: flex; gap: 8px; margin-bottom: 16px;">
-    <button data-on:click="$timing = 'ease'" data-class:active="$timing === 'ease'" style="padding: 6px 10px; background: #7c3aed; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 11px;">Ease</button>
-    <button data-on:click="$timing = 'linear'" data-class:active="$timing === 'linear'" style="padding: 6px 10px; background: #6d28d9; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 11px;">Linear</button>
-    <button data-on:click="$timing = 'ease-in'" data-class:active="$timing === 'ease-in'" style="padding: 6px 10px; background: #5b21b6; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 11px;">Ease-in</button>
-    <button data-on:click="$timing = 'ease-out'" data-class:active="$timing === 'ease-out'" style="padding: 6px 10px; background: #4c1d95; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 11px;">Ease-out</button>
-    <button data-on:click="$timing = 'ease-in-out'" data-class:active="$timing === 'ease-in-out'" style="padding: 6px 10px; background: #3b0764; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 11px;">Ease-in-out</button>
+    interactiveDemo: `<div class="demo-playground-card" style="background: linear-gradient(135deg, #581c87 0%, #a855f7 100%);">
+  <h4 style="color: #e9d5ff; margin-bottom: var(--space-s); font-size: 14px; font-weight: 800;">Micro-interaction Lab</h4>
+  <div class="demo-controls-row">
+    <button class="demo-control-btn" data-on:click="$timing = 'ease'" data-class:active="$timing === 'ease'">Ease</button>
+    <button class="demo-control-btn" data-on:click="$timing = 'linear'" data-class:active="$timing === 'linear'">Linear</button>
+    <button class="demo-control-btn" data-on:click="$timing = 'cubic-bezier(0.68, -0.55, 0.265, 1.55)'" data-class:active="$timing.includes('cubic')">Bounce</button>
   </div>
-  <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; height: 140px; background: rgba(255,255,255,0.1); border-radius: 8px; padding: 20px; align-items: center;">
-    <div data-on:mouseenter="$_hover1 = true" data-on:mouseleave="$_hover1 = false" data-style:transform="($_hover1 ? 'scale(1.1) rotate(5deg)' : 'scale(1) rotate(0deg)'), $_hover1 ? 'scale(1.1) rotate(5deg)' : 'scale(1) rotate(0deg)')" data-style:background="$_hover1 ? '#7c3aed' : '#c084fc')" data-style:transition="$timing === 'ease' ? 'all 0.5s ease' : 'all 0.5s ' + $timing)" style="padding: 12px 20px; background: #c084fc; color: white; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 500; border: none;">Hover Me</div>
-    <div data-on:mouseenter="$_hover2 = true" data-on:mouseleave="$_hover2 = false" data-style:transform="($_hover2 ? 'scale(1.2)' : 'scale(1)'), $_hover2 ? 'scale(1.2)' : 'scale(1)')" data-style:transition="$timing === 'ease' ? 'all 0.5s ease' : 'all 0.5s ' + $timing)" style="width: 50px; height: 50px; background: #a855f7; border-radius: 12px; cursor: pointer;"></div>
-    <div data-on:click="$_clicked = !$_clicked" data-style:transform="($_clicked ? 'scale(0.95)' : 'scale(1)'), $_clicked ? 'scale(0.95)' : 'scale(1)')" data-style:background="$_clicked ? '#ec4899' : '#9333ea')" data-style:transition="$timing === 'ease' ? 'all 0.5s ease' : 'all 0.5s ' + $timing)" style="padding: 10px 16px; background: #9333ea; color: white; border-radius: 6px; cursor: pointer; font-size: 12px;">Click Toggle</div>
-    <input type="text" placeholder="Focus me" data-on:focus="$_focused = true" data-on:blur="$_focused = false" data-style:border-color="$_focused ? '#a855f7' : 'transparent')" data-style:width="$_focused ? '140px' : '100px')" data-style:transition="$timing === 'ease' ? 'all 0.5s ease' : 'all 0.5s ' + $timing)" style="padding: 10px 14px; border-radius: 6px; border: 2px solid transparent; outline: none; font-size: 12px; width: 100px;">
+  <div class="demo-canvas-area" style="display: flex; justify-content: center; gap: 24px; padding: 20px; align-items: center; border-color: #c084fc;">
+    <div data-on:mouseenter="$_hover1 = true" data-on:mouseleave="$_hover1 = false" class="demo-item-box" data-style:transform="$_hover1 ? 'scale(1.15) rotate(8deg)' : 'scale(1) rotate(0deg)'" data-style:background="$_hover1 ? '#9333ea' : '#c084fc'" data-style:transition="'all 0.6s ' + $timing" style="padding: 12px 20px; width: auto; height: auto; cursor: pointer; font-size: 14px;">HOVER</div>
+    <div data-on:click="$_clicked = !$_clicked" class="demo-item-box" data-style:transform="$_clicked ? 'translateX(20px)' : 'translateX(0)'" data-style:background="$_clicked ? '#ec4899' : '#a855f7'" data-style:transition="'all 0.6s ' + $timing" style="width: 50px; height: 50px; cursor: pointer; border-radius: 50%;"></div>
   </div>
 </div>`,
     learningObjectives: [
@@ -1097,8 +1183,17 @@ h1, h2, h3 {
       "Building modal fade in/out transitions",
     ],
     difficulty: "beginner",
-    estimatedTime: "1-2 hours",
+    estimatedTime: "1 hour",
     prerequisites: ["Basic CSS selectors"],
+    strengths: [
+      "Declarative animation of property values",
+      "Minimal code for polished interactions",
+      "Built-in easing functions for natural motion",
+    ],
+    weaknesses: [
+      "Requires a trigger (hover, focus, class change)",
+      "Can't animate auto dimensions easily",
+    ],
   },
 };
 
