@@ -49,32 +49,7 @@ main {
   display: grid;
 }
 
-/* ── Simple Spinner for FCP ── */
-.grid-spinner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 50vh;
-  gap: var(--space-m);
-  color: var(--muted-foreground);
-}
-
-.spinner-icon {
-  width: 40px;
-  height: 40px;
-  color: var(--primary);
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* Hide spinner when cards exist */
-.is-grid:has(.card) .grid-spinner {
-  display: none !important;
-}
+/* ── Spinner CSS moved to index.html for FCP ── */
 
 /* Responsive breakpoints for grid columns */
 @media (max-width: 900px) {
