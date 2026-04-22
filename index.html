@@ -48,7 +48,7 @@
     <title>CSS Ref</title>
 
     <!-- Preload Critical Assets -->
-    <link rel="preload" id="preload-css" href="dist/bundle.e3fffefb.css" as="style" crossorigin />
+    <link rel="preload" id="preload-css" href="dist/bundle.76196769.css" as="style" crossorigin />
     <link rel="preload" id="preload-js" href="dist/bundle.40ef2de0.js" as="script" crossorigin />
 
     <!-- Critical CSS (inlined for faster FCP/LCP) -->
@@ -65,9 +65,9 @@
     <noscript>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%20.,!?;:'&quot;()-_@#$%&amp;*+=&lt;&gt;[]{}|\/^~`" />
     </noscript>
-    <!-- Open Props is bundled in dist/bundle.e3fffefb.css -->
-    <link rel="stylesheet" id="bundle-css" href="dist/bundle.e3fffefb.css" media="print" onload="this.media='all'" />
-    <noscript><link rel="stylesheet" href="dist/bundle.e3fffefb.css" /></noscript>
+    <!-- Open Props is bundled in dist/bundle.76196769.css -->
+    <link rel="stylesheet" id="bundle-css" href="dist/bundle.76196769.css" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="dist/bundle.76196769.css" /></noscript>
   </head>
   <body
     data-signals="{
@@ -1134,16 +1134,12 @@
           class="is-grid"
           data-effect="$viewMode; $selectedProp; $activeCollection; renderGrid(filtered($query, $activeCats, $activeInterops, $activeBrowsers), $selectedProp)"
         >
-          <!-- Skeleton placeholder for FCP -->
-          <div class="grid-skeleton" aria-label="Loading properties...">
-            <div class="skeleton-card"></div>
-            <div class="skeleton-card"></div>
-            <div class="skeleton-card"></div>
-            <div class="skeleton-card"></div>
-            <div class="skeleton-card"></div>
-            <div class="skeleton-card"></div>
-            <div class="skeleton-card"></div>
-            <div class="skeleton-card"></div>
+          <!-- Simple spinner for FCP -->
+          <div class="grid-spinner">
+            <svg class="spinner-icon" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" fill="none" stroke-dasharray="60" stroke-dashoffset="20" />
+            </svg>
+            <span>Loading...</span>
           </div>
         </div>
       </main>

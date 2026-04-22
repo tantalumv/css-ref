@@ -49,49 +49,36 @@ main {
   display: grid;
 }
 
-/* ── Skeleton Loading State ── */
-.grid-skeleton {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-2xs);
+/* ── Simple Spinner for FCP ── */
+.grid-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  gap: var(--space-m);
+  color: var(--muted-foreground);
 }
 
-@media (max-width: 900px) {
-  .grid-skeleton {
-    grid-template-columns: repeat(3, 1fr);
-  }
+.spinner-icon {
+  width: 40px;
+  height: 40px;
+  color: var(--primary);
+  animation: spin 1s linear infinite;
 }
 
-@media (max-width: 640px) {
-  .grid-skeleton {
-    grid-template-columns: repeat(2, 1fr);
-  }
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
-.skeleton-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-m);
-  min-height: 120px;
-  position: relative;
-  overflow: hidden;
-  animation: skeleton-pulse 1.5s ease-in-out infinite;
-}
-
-@keyframes skeleton-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-
-/* Hide skeleton when grid has real content (cards) */
-.is-grid:has(.card) .grid-skeleton {
+/* Hide spinner when cards render */
+.is-grid:has(.card) .grid-spinner {
   display: none;
 }
 
-/* Show skeleton when no cards exist yet */
-.is-grid:not(:has(.card)) .grid-skeleton {
-  display: grid;
+/* Show spinner when no cards */
+.is-grid:not(:has(.card)) .grid-spinner {
+  display: flex;
 }
 
 /* Responsive breakpoints for grid columns */

@@ -26,6 +26,7 @@
   max-width: var(--grid-max-width);
   margin-inline: auto;
   padding: var(--space-l);
+  padding-top: clamp(3.25rem, 5vw, 3.5rem);
 }
 
 .back-btn {
