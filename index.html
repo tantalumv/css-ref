@@ -48,7 +48,7 @@
     <title>CSS Ref</title>
 
     <!-- Preload Critical Assets -->
-    <link rel="preload" id="preload-css" href="dist/bundle.0f8ba566.css" as="style" crossorigin />
+    <link rel="preload" id="preload-css" href="dist/bundle.e3fffefb.css" as="style" crossorigin />
     <link rel="preload" id="preload-js" href="dist/bundle.40ef2de0.js" as="script" crossorigin />
 
     <!-- Critical CSS (inlined for faster FCP/LCP) -->
@@ -65,9 +65,9 @@
     <noscript>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%20.,!?;:'&quot;()-_@#$%&amp;*+=&lt;&gt;[]{}|\/^~`" />
     </noscript>
-    <!-- Open Props is bundled in dist/bundle.0f8ba566.css -->
-    <link rel="stylesheet" id="bundle-css" href="dist/bundle.0f8ba566.css" media="print" onload="this.media='all'" />
-    <noscript><link rel="stylesheet" href="dist/bundle.0f8ba566.css" /></noscript>
+    <!-- Open Props is bundled in dist/bundle.e3fffefb.css -->
+    <link rel="stylesheet" id="bundle-css" href="dist/bundle.e3fffefb.css" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="dist/bundle.e3fffefb.css" /></noscript>
   </head>
   <body
     data-signals="{
@@ -1133,7 +1133,19 @@
           id="grid"
           class="is-grid"
           data-effect="$viewMode; $selectedProp; $activeCollection; renderGrid(filtered($query, $activeCats, $activeInterops, $activeBrowsers), $selectedProp)"
-        ></div>
+        >
+          <!-- Skeleton placeholder for FCP -->
+          <div class="grid-skeleton" aria-label="Loading properties...">
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+          </div>
+        </div>
       </main>
     </div>
     <!-- End Grid View -->
