@@ -71,14 +71,9 @@ main {
   to { transform: rotate(360deg); }
 }
 
-/* Hide spinner when cards render */
+/* Hide spinner when cards exist */
 .is-grid:has(.card) .grid-spinner {
-  display: none;
-}
-
-/* Show spinner when no cards */
-.is-grid:not(:has(.card)) .grid-spinner {
-  display: flex;
+  display: none !important;
 }
 
 /* Responsive breakpoints for grid columns */
