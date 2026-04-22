@@ -13,10 +13,24 @@ main {
 #grid-view {
   width: 100%;
   max-width: 100%;
-  min-height: 400px;
+  min-height: 85vh;
+  contain: layout style;
+  content-visibility: auto;
 }
 
 #grid-view[data-show="false"] {
+  display: none !important;
+}
+
+/* ── Collection View ── */
+#collection-view {
+  width: 100%;
+  max-width: 100%;
+  min-height: 85vh;
+  contain: layout style;
+}
+
+#collection-view[data-show="false"] {
   display: none !important;
 }
 

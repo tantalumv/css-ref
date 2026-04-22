@@ -123,7 +123,14 @@ export const COLLECTIONS: Record<string, CollectionMeta> = {
     ],
     related: ["Grid", "Layout", "Spacing"],
     interactiveDemo: `<div class="demo-playground-card" style="background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);">
-  <h4 style="color: #c4b5fd; margin-bottom: var(--space-s); font-size: 14px; font-weight: 800;">Flexbox Playground</h4>
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-s);">
+    <h4 style="color: #c4b5fd; margin: 0; font-size: 14px; font-weight: 800;">Flexbox Playground</h4>
+    <div style="display: flex; gap: 4px; align-items: center;">
+      <button class="demo-control-btn demo-item-btn" data-on:click="$itemcount = Math.max(1, $itemcount - 1)" style="width: 28px; height: 28px; padding: 0; font-size: 16px;">−</button>
+      <span style="color: #a78bfa; font-size: 12px; font-weight: 700; min-width: 50px; text-align: center;">$itemcount items</span>
+      <button class="demo-control-btn demo-item-btn" data-on:click="$itemcount = Math.min(8, $itemcount + 1)" style="width: 28px; height: 28px; padding: 0; font-size: 16px;">+</button>
+    </div>
+  </div>
   <div class="demo-controls-row">
     <button class="demo-control-btn" data-on:click="$justifycontent = 'flex-start'" data-class:active="$justifycontent === 'flex-start'">flex-start</button>
     <button class="demo-control-btn" data-on:click="$justifycontent = 'center'" data-class:active="$justifycontent === 'center'">center</button>
@@ -134,10 +141,15 @@ export const COLLECTIONS: Record<string, CollectionMeta> = {
     <button class="demo-control-btn" data-on:click="$flexwrap = 'wrap'" data-class:active="$flexwrap === 'wrap'" style="background: #9333ea33">wrap</button>
     <button class="demo-control-btn" data-on:click="$flexwrap = 'nowrap'" data-class:active="$flexwrap === 'nowrap'" style="background: #9333ea33">nowrap</button>
   </div>
-  <div class="demo-canvas-area" style="display: flex; height: 140px; border-color: #6366f1;" data-style:justify-content="$justifycontent" data-style:align-items="$alignitems" data-style:flex-wrap="$flexwrap">
-    <div class="demo-item-box" style="background: linear-gradient(135deg, #818cf8, #6366f1);">1</div>
-    <div class="demo-item-box" style="background: linear-gradient(135deg, #a78bfa, #8b5cf6);">2</div>
-    <div class="demo-item-box" style="background: linear-gradient(135deg, #c4b5fd, #a78bfa);">3</div>
+  <div class="demo-canvas-area" style="display: flex; height: 160px; border-color: #6366f1; border-width: 2px; border-style: dashed; border-radius: 12px;" data-style:justify-content="$justifycontent" data-style:align-items="$alignitems" data-style:flex-wrap="$flexwrap" data-style:gap="$itemcount > 4 ? '8px' : '12px'">
+    <div class="demo-item-box" data-class:hidden="$itemcount < 1" style="background: linear-gradient(135deg, #818cf8, #6366f1); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">1</div>
+    <div class="demo-item-box" data-class:hidden="$itemcount < 2" style="background: linear-gradient(135deg, #a78bfa, #8b5cf6); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">2</div>
+    <div class="demo-item-box" data-class:hidden="$itemcount < 3" style="background: linear-gradient(135deg, #c4b5fd, #a78bfa); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">3</div>
+    <div class="demo-item-box" data-class:hidden="$itemcount < 4" style="background: linear-gradient(135deg, #e9d5ff, #c4b5fd); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">4</div>
+    <div class="demo-item-box" data-class:hidden="$itemcount < 5" style="background: linear-gradient(135deg, #f472b6, #e879f9); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">5</div>
+    <div class="demo-item-box" data-class:hidden="$itemcount < 6" style="background: linear-gradient(135deg, #fb7185, #f43f5e); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">6</div>
+    <div class="demo-item-box" data-class:hidden="$itemcount < 7" style="background: linear-gradient(135deg, #67e8f9, #06b6d4); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">7</div>
+    <div class="demo-item-box" data-class:hidden="$itemcount < 8" style="background: linear-gradient(135deg, #34d399, #10b981); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">8</div>
   </div>
 </div>`,
     learningObjectives: [
@@ -264,23 +276,44 @@ export const COLLECTIONS: Record<string, CollectionMeta> = {
     ],
     related: ["Flexbox", "Layout", "Spacing"],
     interactiveDemo: `<div class="demo-playground-card" style="background: linear-gradient(135deg, #831843 0%, #be185d 100%);">
-  <h4 style="color: #f9a8d4; margin-bottom: var(--space-s); font-size: 14px; font-weight: 800;">Grid Layout Builder</h4>
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-s);">
+    <h4 style="color: #f9a8d4; margin: 0; font-size: 14px; font-weight: 800;">Grid Layout Builder</h4>
+    <div style="display: flex; gap: 4px; align-items: center;">
+      <button class="demo-control-btn demo-item-btn" data-on:click="$griditemcount = Math.max(2, $griditemcount - 1)" style="width: 28px; height: 28px; padding: 0; font-size: 16px;">−</button>
+      <span style="color: #f9a8d4; font-size: 12px; font-weight: 700; min-width: 50px; text-align: center;">$griditemcount × $griditemcount</span>
+      <button class="demo-control-btn demo-item-btn" data-on:click="$griditemcount = Math.min(6, $griditemcount + 1)" style="width: 28px; height: 28px; padding: 0; font-size: 16px;">+</button>
+    </div>
+  </div>
   <div class="demo-controls-row">
     <button class="demo-control-btn" data-on:click="$layoutType = 'classic'" data-class:active="$layoutType === 'classic'">Classic</button>
     <button class="demo-control-btn" data-on:click="$layoutType = 'hero'" data-class:active="$layoutType === 'hero'">Hero Focus</button>
     <button class="demo-control-btn" data-on:click="$layoutType = 'dashboard'" data-class:active="$layoutType === 'dashboard'">Dashboard</button>
+    <button class="demo-control-btn" data-on:click="$layoutType = 'gallery'" data-class:active="$layoutType === 'gallery'">Gallery</button>
   </div>
-  <div class="grid-demo demo-canvas-area" style="border-color: #ec4899;" data-attr:class="'grid-demo demo-canvas-area layout-class-' + $layoutType">
-    <div class="grid-item item-header">Header</div>
-    <div class="grid-item item-sidebar">Sidebar</div>
-    <div class="grid-item item-main">Main Content</div>
-    <div class="grid-item item-footer">Footer</div>
+  <div class="grid-demo demo-canvas-area" style="border-color: #ec4899; padding: 12px; border-radius: 12px; border-width: 2px; border-style: dashed;" data-attr:class="'grid-demo demo-canvas-area layout-class-' + $layoutType">
+    <div class="grid-item item-header" data-class:hidden="$layoutType === 'gallery'">Header</div>
+    <div class="grid-item item-sidebar" data-class:hidden="$layoutType === 'gallery' || $layoutType === 'hero'">Sidebar</div>
+    <div class="grid-item item-main" data-class:hidden="$layoutType === 'gallery'">Main Content</div>
+    <div class="grid-item item-footer" data-class:hidden="$layoutType === 'gallery'">Footer</div>
+    <div class="grid-gallery-item" data-class:hidden="$griditemcount < 1 || $layoutType !== 'gallery'" style="--i: 1;">1</div>
+    <div class="grid-gallery-item" data-class:hidden="$griditemcount < 2 || $layoutType !== 'gallery'" style="--i: 2;">2</div>
+    <div class="grid-gallery-item" data-class:hidden="$griditemcount < 3 || $layoutType !== 'gallery'" style="--i: 3;">3</div>
+    <div class="grid-gallery-item" data-class:hidden="$griditemcount < 4 || $layoutType !== 'gallery'" style="--i: 4;">4</div>
+    <div class="grid-gallery-item" data-class:hidden="$griditemcount < 5 || $layoutType !== 'gallery'" style="--i: 5;">5</div>
+    <div class="grid-gallery-item" data-class:hidden="$griditemcount < 6 || $layoutType !== 'gallery'" style="--i: 6;">6</div>
+    <div class="grid-gallery-item" data-class:hidden="$griditemcount < 7 || $layoutType !== 'gallery'" style="--i: 7;">7</div>
+    <div class="grid-gallery-item" data-class:hidden="$griditemcount < 8 || $layoutType !== 'gallery'" style="--i: 8;">8</div>
+    <div class="grid-gallery-item" data-class:hidden="$griditemcount < 9 || $layoutType !== 'gallery'" style="--i: 9;">9</div>
+    <div class="grid-gallery-item" data-class:hidden="$griditemcount < 10 || $layoutType !== 'gallery'" style="--i: 10;">10</div>
+    <div class="grid-gallery-item" data-class:hidden="$griditemcount < 11 || $layoutType !== 'gallery'" style="--i: 11;">11</div>
+    <div class="grid-gallery-item" data-class:hidden="$griditemcount < 12 || $layoutType !== 'gallery'" style="--i: 12;">12</div>
   </div>
   <style>
     .grid-demo { display: grid; height: 160px; gap: 8px; border-radius: 8px; overflow: hidden; border: none; }
     .grid-demo.layout-class-classic { grid-template-columns: 200px 1fr; grid-template-rows: 50px 1fr 50px; }
     .grid-demo.layout-class-hero { grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; }
     .grid-demo.layout-class-dashboard { grid-template-columns: repeat(3, 1fr); grid-template-rows: 1fr 1fr; }
+    .grid-demo.layout-class-gallery { grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); grid-auto-rows: 50px; }
     .item-header { grid-area: 1 / 1 / 2 / 3; }
     .item-sidebar { grid-area: 2 / 1 / 3 / 2; }
     .item-main { grid-area: 2 / 2 / 3 / 3; }
@@ -292,11 +325,13 @@ export const COLLECTIONS: Record<string, CollectionMeta> = {
     .layout-class-dashboard .item-sidebar { grid-area: 1 / 1 / 3 / 2; }
     .layout-class-dashboard .item-main { grid-area: 2 / 2 / 3 / 4; }
     .layout-class-dashboard .item-footer { display: none; }
-    .grid-item { display: flex; align-items: center; padding: 0 16px; font-weight: 800; font-size: 12px; text-transform: uppercase; }
-    .item-header { background: #f472b6; color: white; }
-    .item-sidebar { background: #fbcfe8; color: #831843; }
-    .item-main { background: #fdf2f8; color: #be185d; justify-content: center; }
-    .item-footer { background: #f9a8d4; color: white; }
+    .grid-item { display: flex; align-items: center; padding: 0 16px; font-weight: 800; font-size: 12px; text-transform: uppercase; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    .item-header { background: linear-gradient(135deg, #f472b6, #ec4899); color: white; border-radius: 6px; }
+    .item-sidebar { background: linear-gradient(135deg, #fbcfe8, #f9a8d4); color: #831843; border-radius: 6px; }
+    .item-main { background: linear-gradient(135deg, #fdf2f8, #fce7f3); color: #be185d; justify-content: center; border-radius: 6px; }
+    .item-footer { background: linear-gradient(135deg, #f9a8d4, #f472b6); color: white; border-radius: 6px; }
+    .grid-gallery-item { display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; color: white; background: linear-gradient(135deg, hsl(calc(360 / 12 * var(--i)), hsl(calc(360 / 12 * var(--i) - 30deg))); border-radius: 8px; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    .grid-gallery-item:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(0,0,0,0.25); }
   </style>
 </div>`,
     learningObjectives: [
@@ -408,17 +443,24 @@ h1, h2, h3 {
     ],
     related: ["Color", "Visual", "Spacing"],
     interactiveDemo: `<div class="demo-playground-card" style="background: linear-gradient(135deg, #134e4a 0%, #0f766e 100%);">
-  <h4 style="color: #5eead4; margin-bottom: var(--space-s); font-size: 14px; font-weight: 800;">Type Lab</h4>
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-s);">
+    <h4 style="color: #5eead4; margin: 0; font-size: 14px; font-weight: 800;">Type Lab</h4>
+    <div style="display: flex; gap: 4px; align-items: center;">
+      <button class="demo-control-btn" data-on:click="$fontfamily = 'Georgia, serif'" data-class:active="$fontfamily === 'Georgia, serif'">Serif</button>
+      <button class="demo-control-btn" data-on:click="$fontfamily = 'Inter, sans-serif'" data-class:active="$fontfamily === 'Inter, sans-serif'">Sans</button>
+      <button class="demo-control-btn" data-on:click="$fontfamily = 'monospace'" data-class:active="$fontfamily === 'monospace'">Mono</button>
+    </div>
+  </div>
   <div class="demo-controls-row">
     <button class="demo-control-btn" data-on:click="$fontsize = '16px'" data-class:active="$fontsize === '16px'">Small</button>
     <button class="demo-control-btn" data-on:click="$fontsize = '24px'" data-class:active="$fontsize === '24px'">Medium</button>
     <button class="demo-control-btn" data-on:click="$fontsize = '36px'" data-class:active="$fontsize === '36px'">Large</button>
     <button class="demo-control-btn" data-on:click="$lineheight = '1.2'" data-class:active="$lineheight === '1.2'" style="background: #14b8a633">Tight</button>
     <button class="demo-control-btn" data-on:click="$lineheight = '1.8'" data-class:active="$lineheight === '1.8'" style="background: #14b8a633">Loose</button>
-    <button class="demo-control-btn" data-on:click="$letterspacing = '0px'" data-class:active="$letterspacing === '0px'" style="background: #2dd4bf33; color: #134e4a">Normal</button>
-    <button class="demo-control-btn" data-on:click="$letterspacing = '4px'" data-class:active="$letterspacing === '4px'" style="background: #2dd4bf33; color: #134e4a">Wide</button>
+    <button class="demo-control-btn" data-on:click="$fontweight = '400'" data-class:active="$fontweight === '400'" style="background: #2dd4bf33; color: #134e4a">Light</button>
+    <button class="demo-control-btn" data-on:click="$fontweight = '900'" data-class:active="$fontweight === '900'" style="background: #2dd4bf33; color: #134e4a">Bold</button>
   </div>
-  <div contenteditable="true" class="demo-canvas-area" style="background: rgba(255,255,255,0.95); padding: 20px; color: #134e4a; outline: none; font-family: Georgia, serif; border-color: #5eead4;" data-style:font-size="$fontsize" data-style:line-height="$lineheight" data-style:letter-spacing="$letterspacing">
+  <div contenteditable="true" class="demo-canvas-area" style="background: rgba(255,255,255,0.95); padding: 20px; color: #134e4a; outline: none; border-color: #5eead4; border-width: 2px; border-style: dashed; border-radius: 12px; transition: all 0.3s ease;" data-style:font-size="$fontsize" data-style:line-height="$lineheight" data-style:font-family="$fontfamily" data-style:font-weight="$fontweight">
     Good typography is invisible. You only notice it when it's bad.
   </div>
 </div>`,
@@ -538,22 +580,26 @@ h1, h2, h3 {
     ],
     related: ["Transform", "Visual", "Interactivity"],
     interactiveDemo: `<div class="demo-playground-card" style="background: linear-gradient(135deg, #881337 0%, #e11d48 100%);">
-  <h4 style="color: #fda4af; margin-bottom: var(--space-s); font-size: 14px; font-weight: 800;">Animation Playground</h4>
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-s);">
+    <h4 style="color: #fda4af; margin: 0; font-size: 14px; font-weight: 800;">Animation Playground</h4>
+    <button class="demo-control-btn" data-on:click="$animKey = $animKey + 1" style="background: #fda4af; color: #881337;">↻ Replay</button>
+  </div>
   <div class="demo-controls-row">
-    <button class="demo-control-btn" data-on:click="$animKey = $animKey + 1; setTimeout(() => { const el = document.getElementById('animBox'); el.style.animation = 'bounce 0.6s ease'; }, 10)">Bounce</button>
-    <button class="demo-control-btn" data-on:click="$animKey = $animKey + 1; setTimeout(() => { const el = document.getElementById('animBox'); el.style.animation = 'pulse 0.8s ease'; }, 10)">Pulse</button>
-    <button class="demo-control-btn" data-on:click="$animKey = $animKey + 1; setTimeout(() => { const el = document.getElementById('animBox'); el.style.animation = 'shake 0.5s ease'; }, 10)">Shake</button>
-    <button class="demo-control-btn" data-on:click="$animKey = $animKey + 1; setTimeout(() => { const el = document.getElementById('animBox'); el.style.animation = 'spin 1s linear'; }, 10)">Spin</button>
+    <button class="demo-control-btn" data-on:click="$animKey = $animKey + 1; setTimeout(() => { const el = document.getElementById('animBox'); el.style.animation = 'bounce 0.6s ease'; }, 10)" data-class:active="$animKey % 4 === 0 && $animKey > 0">Bounce</button>
+    <button class="demo-control-btn" data-on:click="$animKey = $animKey + 1; setTimeout(() => { const el = document.getElementById('animBox'); el.style.animation = 'pulse 0.8s ease'; }, 10)" data-class:active="$animKey % 4 === 1 && $animKey > 0">Pulse</button>
+    <button class="demo-control-btn" data-on:click="$animKey = $animKey + 1; setTimeout(() => { const el = document.getElementById('animBox'); el.style.animation = 'shake 0.5s ease'; }, 10)" data-class:active="$animKey % 4 === 2 && $animKey > 0">Shake</button>
+    <button class="demo-control-btn" data-on:click="$animKey = $animKey + 1; setTimeout(() => { const el = document.getElementById('animBox'); el.style.animation = 'spin 1s linear'; }, 10)" data-class:active="$animKey % 4 === 3 && $animKey > 0">Spin</button>
   </div>
   <style>
     @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
     @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
     @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
     @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    #animBox { animation: bounce 0.6s ease; }
   </style>
-  <div class="demo-canvas-area" style="display: flex; justify-content: center; align-items: center; gap: 20px; height: 140px; border-color: #fb7185;">
-    <div id="animBox" class="demo-item-box" data-key="$animKey" style="width: 60px; height: 60px; background: linear-gradient(135deg, #fb7185, #f43f5e);">PLAY</div>
-    <div style="color: white; font-size: 12px; font-weight: 600; opacity: 0.9;">Click to trigger</div>
+  <div class="demo-canvas-area" style="display: flex; justify-content: center; align-items: center; gap: 20px; height: 140px; border-color: #fb7185; border-width: 2px; border-style: dashed; border-radius: 12px;">
+    <div id="animBox" class="demo-item-box" data-key="$animKey" style="width: 60px; height: 60px; background: linear-gradient(135deg, #fb7185, #f43f5e); border-radius: 12px;">PLAY</div>
+    <div style="color: white; font-size: 12px; font-weight: 600; opacity: 0.9;">Click buttons to trigger</div>
   </div>
 </div>`,
     learningObjectives: [
@@ -660,17 +706,19 @@ h1, h2, h3 {
     ],
     related: ["Typography", "Visual", "CSS Variables"],
     interactiveDemo: `<div class="demo-playground-card" style="background: linear-gradient(135deg, #78350f 0%, #d97706 100%);">
-  <h4 style="color: #fde68a; margin-bottom: var(--space-s); font-size: 14px; font-weight: 800;">Theme Builder</h4>
-  <div class="demo-controls-row" style="align-items: center;">
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-s);">
+    <h4 style="color: #fde68a; margin: 0; font-size: 14px; font-weight: 800;">Theme Builder</h4>
+    <button class="demo-control-btn" data-on:click="$themebg = '#ffffff'; $themetext = '#1f2937'; $themeborder = '#d1d5db'" style="background: #92400e;">Reset</button>
+  </div>
+  <div class="demo-controls-row" style="align-items: center; gap: 8px;">
     <label style="color: #fef3c7; font-size: 11px; font-weight: 800;">BG:</label>
     <input type="color" aria-label="Background color picker" data-bind:themebg style="width: 28px; height: 24px; border: none; border-radius: 4px; cursor: pointer; padding: 0;">
     <label style="color: #fef3c7; font-size: 11px; font-weight: 800;">TXT:</label>
     <input type="color" aria-label="Text color picker" data-bind:themetext style="width: 28px; height: 24px; border: none; border-radius: 4px; cursor: pointer; padding: 0;">
     <label style="color: #fef3c7; font-size: 11px; font-weight: 800;">BD:</label>
     <input type="color" aria-label="Border color picker" data-bind:themeborder style="width: 28px; height: 24px; border: none; border-radius: 4px; cursor: pointer; padding: 0;">
-    <button class="demo-control-btn" data-on:click="$themebg = '#ffffff'; $themetext = '#1f2937'; $themeborder = '#d1d5db'" style="background: #92400e; margin-left: auto;">Reset</button>
   </div>
-  <div class="demo-canvas-area" style="padding: 24px; border: none; display: flex; align-items: center; justify-content: center;">
+  <div class="demo-canvas-area" style="padding: 24px; border: none; display: flex; align-items: center; justify-content: center; border-radius: 12px; border: 2px dashed #fbbf24;">
     <div style="padding: 24px; border-radius: 12px; border: 3px solid; transition: all 0.3s ease; width: 100%; max-width: 300px;" data-style:background="$themebg" data-style:color="$themetext" data-style:border-color="$themeborder">
       <h5 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 800;">Live Preview</h5>
       <p style="margin: 0; font-size: 13px; opacity: 0.8; line-height: 1.5; font-weight: 500;">Colors define the mood and accessibility of your interface.</p>
@@ -790,16 +838,19 @@ h1, h2, h3 {
     ],
     related: ["Flexbox", "Grid", "Spacing"],
     interactiveDemo: `<div class="demo-playground-card" style="background: linear-gradient(135deg, #3730a3 0%, #6366f1 100%);">
-  <h4 style="color: #c7d2fe; margin-bottom: var(--space-s); font-size: 14px; font-weight: 800;">Position Lab</h4>
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-s);">
+    <h4 style="color: #c7d2fe; margin: 0; font-size: 14px; font-weight: 800;">Position Lab</h4>
+    <span style="color: #a5b4fc; font-size: 11px; font-weight: 600;">$position</span>
+  </div>
   <div class="demo-controls-row">
     <button class="demo-control-btn" data-on:click="$position = 'static'; $hasOffset = false" data-class:active="$position === 'static'">Static</button>
     <button class="demo-control-btn" data-on:click="$position = 'relative'" data-class:active="$position === 'relative'">Relative</button>
     <button class="demo-control-btn" data-on:click="$position = 'absolute'" data-class:active="$position === 'absolute'">Absolute</button>
     <button class="demo-control-btn" data-on:click="$position = 'fixed'" data-class:active="$position === 'fixed'">Fixed</button>
   </div>
-  <div class="demo-canvas-area" style="border-color: #818cf8;">
+  <div class="demo-canvas-area" style="border-color: #818cf8; border-width: 2px; border-style: dashed; border-radius: 12px; position: relative; min-height: 160px;">
     <div style="position: absolute; top: 10px; left: 10px; color: rgba(255,255,255,0.4); font-size: 10px; font-weight: 800; text-transform: uppercase;">Container Boundary</div>
-    <div data-on:click="($position === 'relative' || $position === 'absolute') && ($hasOffset = !$hasOffset)" class="demo-item-box" style="position: absolute; top: 40px; left: 40px; width: 80px; height: 60px; background: linear-gradient(135deg, #818cf8, #6366f1); cursor: pointer; transition: all 0.4s var(--ease-spring-2);" data-style:position="$position" data-style:top="$hasOffset && ($position === 'relative' || $position === 'absolute') ? '10px' : '40px'" data-style:left="$hasOffset && ($position === 'relative' || $position === 'absolute') ? '100px' : '40px'">
+    <div data-on:click="($position === 'relative' || $position === 'absolute') && ($hasOffset = !$hasOffset)" class="demo-item-box" style="position: absolute; top: 40px; left: 40px; width: 80px; height: 60px; background: linear-gradient(135deg, #818cf8, #6366f1); cursor: pointer; transition: all 0.4s var(--ease-spring-2); border-radius: 12px;" data-style:position="$position" data-style:top="$hasOffset && ($position === 'relative' || $position === 'absolute') ? '10px' : '40px'" data-style:left="$hasOffset && ($position === 'relative' || $position === 'absolute') ? '100px' : '40px'">
       MOVE ME
     </div>
   </div>
@@ -905,15 +956,18 @@ h1, h2, h3 {
     ],
     related: ["Color", "Visual", "Typography"],
     interactiveDemo: `<div class="demo-playground-card" style="background: linear-gradient(135deg, #14532d 0%, #22c55e 100%);">
-  <h4 style="color: #86efac; margin-bottom: var(--space-s); font-size: 14px; font-weight: 800;">Gallery Explorer</h4>
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-s);">
+    <h4 style="color: #86efac; margin: 0; font-size: 14px; font-weight: 800;">Gallery Explorer</h4>
+    <span style="color: #86efac; font-size: 11px; font-weight: 600;">$heroindex === 0 ? 'Gradient' : $heroindex === 1 ? 'Solid' : $heroindex === 2 ? 'Image' : 'Pattern'</span>
+  </div>
   <div class="demo-controls-row">
     <button class="demo-control-btn" data-on:click="$heroindex = 0" data-class:active="$heroindex === 0">Gradient</button>
     <button class="demo-control-btn" data-on:click="$heroindex = 1" data-class:active="$heroindex === 1">Solid</button>
     <button class="demo-control-btn" data-on:click="$heroindex = 2" data-class:active="$heroindex === 2">Image</button>
     <button class="demo-control-btn" data-on:click="$heroindex = 3" data-class:active="$heroindex === 3">Pattern</button>
   </div>
-  <div class="demo-canvas-area" style="border-color: #4ade80;" data-on:click="$heroindex = ($heroindex + 1) % 4">
-    <div style="height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; transition: all 0.6s var(--ease-out-3); cursor: pointer;" data-style:background="$heroindex === 0 ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : $heroindex === 1 ? '#1e3a5f' : $heroindex === 2 ? 'linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url(https://picsum.photos/400/200?random=1)' : 'repeating-linear-gradient(45deg, #22c55e 0px, #22c55e 10px, #16a34a 10px, #16a34a 20px)'">
+  <div class="demo-canvas-area" style="border-color: #4ade80; border-width: 2px; border-style: dashed; border-radius: 12px;" data-on:click="$heroindex = ($heroindex + 1) % 4">
+    <div style="height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; transition: all 0.6s var(--ease-out-3); cursor: pointer; border-radius: 8px;" data-style:background="$heroindex === 0 ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : $heroindex === 1 ? '#1e3a5f' : $heroindex === 2 ? 'linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url(https://picsum.photos/400/200?random=1)' : 'repeating-linear-gradient(45deg, #22c55e 0px, #22c55e 10px, #16a34a 10px, #16a34a 20px)'">
       <h3 style="margin: 0 0 8px 0; font-size: 24px; font-weight: 900; color: white; text-shadow: 0 4px 12px rgba(0,0,0,0.3);">Visual Impact</h3>
       <p style="margin: 0; font-size: 14px; color: rgba(255,255,255,0.9); font-weight: 600;">Click to cycle layers</p>
     </div>
@@ -1022,16 +1076,19 @@ h1, h2, h3 {
     ],
     related: ["Layout", "Spacing", "Sizing"],
     interactiveDemo: `<div class="demo-playground-card" style="background: linear-gradient(135deg, #7c2d12 0%, #ea580c 100%);">
-  <h4 style="color: #fed7aa; margin-bottom: var(--space-s); font-size: 14px; font-weight: 800;">Box Visualizer</h4>
-  <div class="demo-controls-row">
-    <button class="demo-control-btn" data-on:click="$boxmargin = '20px'" data-class:active="$boxmargin === '20px'">M: 20px</button>
-    <button class="demo-control-btn" data-on:click="$boxmargin = '40px'" data-class:active="$boxmargin === '40px'">M: 40px</button>
-    <button class="demo-control-btn" data-on:click="$boxpadding = '10px'" data-class:active="$boxpadding === '10px'" style="background: #ea580c33">P: 10px</button>
-    <button class="demo-control-btn" data-on:click="$boxpadding = '30px'" data-class:active="$boxpadding === '30px'" style="background: #ea580c33">P: 30px</button>
-    <button class="demo-control-btn" data-on:click="$boxborder = '8px'" data-class:active="$boxborder === '8px'" style="background: #f9731633">B: 8px</button>
-    <button class="demo-control-btn" data-on:click="$boxborder = '16px'" data-class:active="$boxborder === '16px'" style="background: #f9731633">B: 16px</button>
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-s);">
+    <h4 style="color: #fed7aa; margin: 0; font-size: 14px; font-weight: 800;">Box Visualizer</h4>
+    <button class="demo-control-btn" data-on:click="$boxmargin = '10px'; $boxpadding = '8px'; $boxborder = '4px'" style="background: #92400e;">Reset</button>
   </div>
-  <div class="demo-canvas-area" style="display: flex; justify-content: center; align-items: center; height: 140px; border: none;">
+  <div class="demo-controls-row">
+    <button class="demo-control-btn" data-on:click="$boxmargin = '10px'" data-class:active="$boxmargin === '10px'">M: 10</button>
+    <button class="demo-control-btn" data-on:click="$boxmargin = '30px'" data-class:active="$boxmargin === '30px'">M: 30</button>
+    <button class="demo-control-btn" data-on:click="$boxpadding = '8px'" data-class:active="$boxpadding === '8px'" style="background: #ea580c33">P: 8</button>
+    <button class="demo-control-btn" data-on:click="$boxpadding = '24px'" data-class:active="$boxpadding === '24px'" style="background: #ea580c33">P: 24</button>
+    <button class="demo-control-btn" data-on:click="$boxborder = '4px'" data-class:active="$boxborder === '4px'" style="background: #f9731633">B: 4</button>
+    <button class="demo-control-btn" data-on:click="$boxborder = '12px'" data-class:active="$boxborder === '12px'" style="background: #f9731633">B: 12</button>
+  </div>
+  <div class="demo-canvas-area" style="display: flex; justify-content: center; align-items: center; height: 140px; border: none; border-radius: 12px;">
     <div style="background: rgba(252, 211, 77, 0.4); border-radius: 4px; transition: all 0.3s var(--ease-spring-2); border: 1px dashed rgba(255,255,255,0.4);" data-style:padding="$boxmargin">
       <div style="background: rgba(251, 146, 60, 0.6); border-radius: 4px; transition: all 0.3s var(--ease-spring-2); border: 2px solid #b45309;" data-style:padding="$boxborder">
         <div style="background: rgba(255,255,255,0.9); padding: 20px; border-radius: 2px; color: #7c2d12; font-weight: 800; font-size: 12px; text-transform: uppercase; text-align: center; transition: all 0.3s var(--ease-spring-2);" data-style:padding="$boxpadding">
@@ -1153,14 +1210,19 @@ h1, h2, h3 {
     ],
     related: ["Animation", "Transform", "Visual"],
     interactiveDemo: `<div class="demo-playground-card" style="background: linear-gradient(135deg, #581c87 0%, #a855f7 100%);">
-  <h4 style="color: #e9d5ff; margin-bottom: var(--space-s); font-size: 14px; font-weight: 800;">Micro-interaction Lab</h4>
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-s);">
+    <h4 style="color: #e9d5ff; margin: 0; font-size: 14px; font-weight: 800;">Micro-interaction Lab</h4>
+    <span style="color: #e9d5ff; font-size: 11px; font-weight: 600; text-transform: uppercase;">$timing</span>
+  </div>
   <div class="demo-controls-row">
     <button class="demo-control-btn" data-on:click="$timing = 'ease'" data-class:active="$timing === 'ease'">Ease</button>
+    <button class="demo-control-btn" data-on:click="$timing = 'ease-in'" data-class:active="$timing === 'ease-in'">Ease In</button>
+    <button class="demo-control-btn" data-on:click="$timing = 'ease-out'" data-class:active="$timing === 'ease-out'">Ease Out</button>
     <button class="demo-control-btn" data-on:click="$timing = 'linear'" data-class:active="$timing === 'linear'">Linear</button>
-    <button class="demo-control-btn" data-on:click="$timing = 'cubic-bezier(0.68, -0.55, 0.265, 1.55)'" data-class:active="$timing.includes('cubic')">Bounce</button>
+    <button class="demo-control-btn" data-on:click="$timing = 'cubic-bezier(0.68, -0.55, 0.265, 1.55)'" data-class:active="$timing.includes('cubic')" style="background: #c084fc;">Bounce</button>
   </div>
-  <div class="demo-canvas-area" style="display: flex; justify-content: center; gap: 24px; padding: 20px; align-items: center; border-color: #c084fc;">
-    <div data-on:mouseenter="$_hover1 = true" data-on:mouseleave="$_hover1 = false" class="demo-item-box" data-style:transform="$_hover1 ? 'scale(1.15) rotate(8deg)' : 'scale(1) rotate(0deg)'" data-style:background="$_hover1 ? '#9333ea' : '#c084fc'" data-style:transition="'all 0.6s ' + $timing" style="padding: 12px 20px; width: auto; height: auto; cursor: pointer; font-size: 14px;">HOVER</div>
+  <div class="demo-canvas-area" style="display: flex; justify-content: center; gap: 24px; padding: 20px; align-items: center; border-color: #c084fc; border-width: 2px; border-style: dashed; border-radius: 12px;">
+    <div data-on:mouseenter="$_hover1 = true" data-on:mouseleave="$_hover1 = false" class="demo-item-box" data-style:transform="$_hover1 ? 'scale(1.15) rotate(8deg)' : 'scale(1) rotate(0deg)'" data-style:background="$_hover1 ? '#9333ea' : '#c084fc'" data-style:transition="'all 0.6s ' + $timing" style="padding: 12px 20px; width: auto; height: auto; cursor: pointer; font-size: 14px; border-radius: 8px;">HOVER</div>
     <div data-on:click="$_clicked = !$_clicked" class="demo-item-box" data-style:transform="$_clicked ? 'translateX(20px)' : 'translateX(0)'" data-style:background="$_clicked ? '#ec4899' : '#a855f7'" data-style:transition="'all 0.6s ' + $timing" style="width: 50px; height: 50px; cursor: pointer; border-radius: 50%;"></div>
   </div>
 </div>`,

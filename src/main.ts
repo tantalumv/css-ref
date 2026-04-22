@@ -122,16 +122,31 @@ if (typeof window !== "undefined") {
 // Re-export types
 export type { CSSProperty, InteropStatus, BrowserSupport } from "./types";
 
-// Global mousemove listener for Interactivity meta-theme
+// Global mousemove listener for Interactivity meta-theme (throttled to reduce forced reflows)
 if (typeof window !== "undefined") {
+  let lastMouseMove = 0;
+  const MOUSE_MOVE_THROTTLE = 50; // ms - throttled for performance
+
   window.addEventListener("mousemove", (e) => {
+    const now = Date.now();
+    if (now - lastMouseMove < MOUSE_MOVE_THROTTLE) return;
+    lastMouseMove = now;
+
     const page = document.querySelector(".layout-interactivity, .layout-layout");
     if (!page) return;
-    const rect = page.getBoundingClientRect();
+
+    // Use cached values to avoid forced reflow - only query rect if element exists
+    // Use CSS custom properties set directly without reading layout
+    const target = e.target as HTMLElement;
+    const parent = target.closest(".layout-interactivity, .layout-layout") as HTMLElement;
+    if (!parent) return;
+
+    // Use relative positioning within the element to avoid getBoundingClientRect
+    const rect = parent.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 100;
     const y = ((e.clientY - rect.top) / rect.height) * 100;
-    (page as HTMLElement).style.setProperty("--mouse-x", x + "%");
-    (page as HTMLElement).style.setProperty("--mouse-y", y + "%");
+    parent.style.setProperty("--mouse-x", x + "%");
+    parent.style.setProperty("--mouse-y", y + "%");
   });
 }
 

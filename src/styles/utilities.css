@@ -92,6 +92,21 @@
   box-shadow: var(--shadow-md);
 }
 
+.demo-control-btn.demo-item-btn {
+  background: color-mix(in oklch, white 25%, transparent);
+  border: 1px solid color-mix(in oklch, white 30%, transparent);
+  border-radius: var(--radius-md);
+  min-width: 32px;
+  min-height: 32px;
+}
+
+.demo-control-btn.demo-item-btn:hover {
+  background: white;
+  color: var(--primary);
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
 .demo-canvas-area {
   flex: 1;
   background: color-mix(in oklch, white 10%, transparent);
