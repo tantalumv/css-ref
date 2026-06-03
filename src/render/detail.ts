@@ -135,15 +135,3 @@ export function showDetailView(propName: string, propMap: Map<string, CSSPropert
     view.setAttribute("data-show", "false");
   }
 }
-
-/**
- * Hide detail view
- */
-export function hideDetailView(): void {
-  const view = document.getElementById("detail-view");
-  if (view) {
-    view.innerHTML = "";
-    view.classList.remove("open");
-    view.setAttribute("data-show", "false");
-  }
-}

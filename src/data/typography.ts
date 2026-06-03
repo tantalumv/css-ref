@@ -1,5 +1,147 @@
 import type { CSSPropertyFull } from "../types";
 
+const fontSizeWeights = [100, 300, 400, 700, 900];
+const fontSizeSizes = {
+  sm: "10px",
+  md: "16px",
+  lg: "24px",
+  xl: "34px",
+};
+const fontSizeLabels = {
+  sm: "sm",
+  md: "md",
+  lg: "lg",
+  xl: "xl",
+};
+
+function createFontSizeDemo() {
+  return `<div style="display:flex;align-items:baseline;gap:10px;padding:8px">` +
+    Object.entries(fontSizeSizes)
+      .map(
+        ([size, fontSize]) =>
+          `<span style="font-size:${fontSize};font-weight:700;color:#ec4899">${fontSizeLabels[size as keyof typeof fontSizeLabels]}</span>`
+      )
+      .join("") +
+    `</div>`;
+}
+
+function createFontFamilyDemo() {
+  return (
+    `<div style="display:flex;flex-direction:column;gap:5px;padding:8px">` +
+    `<p style="font-family:system-ui;font-size:16px;font-weight:700;color:#ec4899">Aa — system-ui sans-serif</p>` +
+    `<p style="font-family:Georgia,serif;font-size:16px;font-weight:700;color:#db2777">Aa — Georgia, serif</p>` +
+    `<p style="font-family:ui-monospace,monospace;font-size:14px;font-weight:700;color:#be185d">Aa — monospace</p>` +
+    `</div>`
+  );
+}
+
+function createFontWeightDemo() {
+  return (
+    `<div style="display:flex;align-items:baseline;gap:8px;padding:8px">` +
+    fontSizeWeights
+      .map(
+        (w) =>
+          `<span style="font-weight:${w};font-size:${10 + w / 110}px;color:#ec4899">${w}</span>`
+      )
+      .join("") +
+    `</div>`
+  );
+}
+
+function createLineHeightDemo() {
+  return (
+    `<div style="display:flex;gap:12px;padding:6px">` +
+    `<div style="width:90px"><p style="line-height:1;font-size:10px;font-weight:700;color:#ec4899;background:#fdf2f8;padding:4px;border-radius:3px">Tight line height 1.0 makes text very compact</p></div>` +
+    `<div style="width:90px"><p style="line-height:1.8;font-size:10px;font-weight:700;color:#db2777;background:#fdf2f8;padding:4px;border-radius:3px">Loose 1.8 gives breathing room</p></div>` +
+    `</div>`
+  );
+}
+
+function createLetterSpacingDemo() {
+  return (
+    `<div style="display:flex;flex-direction:column;gap:5px;padding:10px">` +
+    `<p style="letter-spacing:-.04em;font-size:15px;font-weight:800;color:#ec4899">Tight tracking</p>` +
+    `<p style="letter-spacing:.08em;font-size:13px;font-weight:700;color:#db2777;text-transform:uppercase">Wide spacing</p>` +
+    `</div>`
+  );
+}
+
+function createTextWrapDemo() {
+  return (
+    `<div style="display:flex;gap:10px;padding:8px;align-items:start">` +
+    `<div style="width:90px"><p style="text-wrap:balance;font-size:10px;line-height:1.4;color:#ec4899;font-weight:700;background:#fdf2f8;padding:4px;border-radius:3px">text-wrap: balance keeps lines even</p></div>` +
+    `<div style="width:90px"><p style="font-size:10px;line-height:1.4;color:#888;background:#f5f5f5;padding:4px;border-radius:3px">Normal wrap can leave short orphans at the end</p></div>` +
+    `</div>`
+  );
+}
+
+function createTextDecorationDemo() {
+  return (
+    `<div style="display:flex;flex-direction:column;gap:6px;padding:10px">` +
+    `<p style="text-decoration:underline;text-decoration-color:#6366f1;text-decoration-thickness:2px;font-size:13px;font-weight:700;color:#111">Underline</p>` +
+    `<p style="text-decoration:line-through;text-decoration-color:#ec4899;font-size:13px;font-weight:700;color:#111">Line-through</p>` +
+    `<p style="text-decoration:overline wavy #f97316;font-size:13px;font-weight:700;color:#111">Wavy overline</p>` +
+    `</div>`
+  );
+}
+
+function createClampDemo() {
+  return (
+    `<div style="padding:10px;text-align:center">` +
+    `<p style="font-size:clamp(12px,3vw,28px);font-weight:900;color:#ec4899;line-height:1.2">Fluid<br>Typography</p>` +
+    `<p style="font-size:10px;color:#888;margin-top:4px;font-weight:700">clamp(12px, 3vw, 28px)</p>` +
+    `</div>`
+  );
+}
+
+function createFontOpticalSizingDemo() {
+  return (
+    `<div style="display:flex;align-items:baseline;gap:12px;padding:10px">` +
+    `<span style="font-optical-sizing:auto;font-size:32px;font-weight:900;color:#ec4899">Aa</span>` +
+    `<span style="font-optical-sizing:none;font-size:32px;font-weight:900;color:#db2777">Aa</span>` +
+    `<div style="font-size:9px;color:#888;font-weight:700">auto · none</div>` +
+    `</div>`
+  );
+}
+
+function createTextAlignDemo() {
+  return (
+    `<div style="display:flex;flex-direction:column;gap:4px;padding:8px;width:180px">` +
+    `<p style="text-align:left;font-size:10px;font-weight:700;color:#ec4899;background:#fdf2f8;padding:4px;border-radius:3px;margin:0">← Left aligned text</p>` +
+    `<p style="text-align:center;font-size:10px;font-weight:700;color:#db2777;background:#fdf2f8;padding:4px;border-radius:3px;margin:0">Center →</p>` +
+    `<p style="text-align:right;font-size:10px;font-weight:700;color:#be185d;background:#fdf2f8;padding:4px;border-radius:3px;margin:0">Right aligned →</p>` +
+    `</div>`
+  );
+}
+
+function createWhiteSpaceDemo() {
+  return (
+    `<div style="display:flex;flex-direction:column;gap:4px;padding:8px">` +
+    `<div style="width:140px;background:#e0e7ff;border:2px solid #6366f1;border-radius:4px;padding:6px"><p style="white-space:nowrap;font-size:9px;font-weight:700;color:#6366f1;margin:0;overflow:hidden">nowrap: text won't wrap</p></div>` +
+    `<div style="width:140px;background:#f5f3ff;border:2px solid #8b5cf6;border-radius:4px;padding:6px"><p style="white-space:pre-wrap;font-size:9px;font-weight:700;color:#8b5cf6;margin:0">pre-wrap:  respects   spaces</p></div>` +
+    `</div>`
+  );
+}
+
+function createTextOverflowDemo() {
+  return (
+    `<div style="display:flex;flex-direction:column;gap:6px;padding:8px">` +
+    `<div style="width:140px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;background:#e0e7ff;border:2px solid #6366f1;border-radius:4px;padding:6px"><span style="font-size:10px;font-weight:700;color:#6366f1">Long text with ellipsis truncation...</span></div>` +
+    `<div style="width:140px;overflow:hidden;white-space:nowrap;text-overflow:clip;background:#f5f3ff;border:2px solid #8b5cf6;border-radius:4px;padding:6px"><span style="font-size:10px;font-weight:700;color:#8b5cf6">Long text with clip truncat</span></div>` +
+    `</div>`
+  );
+}
+
+function createTextShadowDemo() {
+  return (
+    `<div style="display:flex;flex-direction:column;gap:6px;padding:10px">` +
+    `<p style="font-size:18px;font-weight:900;color:#fff;text-shadow:2px 2px 4px rgba(0,0,0,0.5);margin:0">Soft Shadow</p>` +
+    `<p style="font-size:18px;font-weight:900;color:#ec4899;text-shadow:3px 3px 0 #be185d;margin:0">Hard Shadow</p>` +
+    `<p style="font-size:16px;font-weight:900;color:#fff;text-shadow:0 0 8px #ec4899;margin:0">Glow Effect</p>` +
+    `</div>`
+  );
+}
+
 export const typography: CSSPropertyFull[] = [
   {
     name: "font-size",
@@ -9,7 +151,7 @@ export const typography: CSSPropertyFull[] = [
     interop: "wide",
     example: "font-size: 1rem | clamp(1rem, 0.5rem + 2vw, 2rem)",
     mdnPath: "font-size",
-    demo: `<div style="display:flex;align-items:baseline;gap:10px;padding:8px"><span style="font-size:10px;font-weight:700;color:#ec4899">sm</span><span style="font-size:16px;font-weight:700;color:#ec4899">md</span><span style="font-size:24px;font-weight:700;color:#ec4899">lg</span><span style="font-size:34px;font-weight:900;color:#ec4899">xl</span></div>`,
+    demo: createFontSizeDemo(),
     values: [
       {
         value: "px",
@@ -46,7 +188,7 @@ export const typography: CSSPropertyFull[] = [
     interop: "wide",
     example: 'font-family: "Inter", system-ui, sans-serif',
     mdnPath: "font-family",
-    demo: `<div style="display:flex;flex-direction:column;gap:5px;padding:8px"><p style="font-family:system-ui;font-size:16px;font-weight:700;color:#ec4899">Aa — system-ui sans-serif</p><p style="font-family:Georgia,serif;font-size:16px;font-weight:700;color:#db2777">Aa — Georgia, serif</p><p style="font-family:ui-monospace,monospace;font-size:14px;font-weight:700;color:#be185d">Aa — monospace</p></div>`,
+    demo: createFontFamilyDemo(),
   },
 
   {
@@ -57,7 +199,7 @@ export const typography: CSSPropertyFull[] = [
     interop: "wide",
     example: "font-weight: normal | bold | 400 | 700",
     mdnPath: "font-weight",
-    demo: `<div style="display:flex;align-items:baseline;gap:8px;padding:8px">${[100, 300, 400, 700, 900].map((w) => `<span style="font-weight:${w};font-size:${10 + w / 110}px;color:#ec4899">${w}</span>`).join("")}</div>`,
+    demo: createFontWeightDemo(),
     values: [
       {
         value: "100",
@@ -96,7 +238,7 @@ export const typography: CSSPropertyFull[] = [
     interop: "wide",
     example: "line-height: normal | 1.5 | 1.6 | 24px",
     mdnPath: "line-height",
-    demo: `<div style="display:flex;gap:12px;padding:6px"><div style="width:90px"><p style="line-height:1;font-size:10px;font-weight:700;color:#ec4899;background:#fdf2f8;padding:4px;border-radius:3px">Tight line height 1.0 makes text very compact</p></div><div style="width:90px"><p style="line-height:1.8;font-size:10px;font-weight:700;color:#db2777;background:#fdf2f8;padding:4px;border-radius:3px">Loose 1.8 gives breathing room</p></div></div>`,
+    demo: createLineHeightDemo(),
     values: [
       {
         value: "normal",
@@ -130,7 +272,7 @@ export const typography: CSSPropertyFull[] = [
     interop: "wide",
     example: "letter-spacing: normal | 0.05em | -0.02em",
     mdnPath: "letter-spacing",
-    demo: `<div style="display:flex;flex-direction:column;gap:5px;padding:10px"><p style="letter-spacing:-.04em;font-size:15px;font-weight:800;color:#ec4899">Tight tracking</p><p style="letter-spacing:.08em;font-size:13px;font-weight:700;color:#db2777;text-transform:uppercase">Wide spacing</p></div>`,
+    demo: createLetterSpacingDemo(),
   },
 
   {
@@ -141,7 +283,7 @@ export const typography: CSSPropertyFull[] = [
     interop: "b2024",
     example: "text-wrap: wrap | nowrap | balance | pretty | stable",
     mdnPath: "text-wrap",
-    demo: `<div style="display:flex;gap:10px;padding:8px;align-items:start"><div style="width:90px"><p style="text-wrap:balance;font-size:10px;line-height:1.4;color:#ec4899;font-weight:700;background:#fdf2f8;padding:4px;border-radius:3px">text-wrap: balance keeps lines even</p></div><div style="width:90px"><p style="font-size:10px;line-height:1.4;color:#888;background:#f5f5f5;padding:4px;border-radius:3px">Normal wrap can leave short orphans at the end</p></div></div>`,
+    demo: createTextWrapDemo(),
     values: [
       {
         value: "wrap",
@@ -177,7 +319,7 @@ export const typography: CSSPropertyFull[] = [
     interop: "wide",
     example: "text-decoration: underline | overline dashed red | line-through",
     mdnPath: "text-decoration",
-    demo: `<div style="display:flex;flex-direction:column;gap:6px;padding:10px"><p style="text-decoration:underline;text-decoration-color:#6366f1;text-decoration-thickness:2px;font-size:13px;font-weight:700;color:#111">Underline</p><p style="text-decoration:line-through;text-decoration-color:#ec4899;font-size:13px;font-weight:700;color:#111">Line-through</p><p style="text-decoration:overline wavy #f97316;font-size:13px;font-weight:700;color:#111">Wavy overline</p></div>`,
+    demo: createTextDecorationDemo(),
     values: [
       {
         value: "underline",
@@ -215,7 +357,7 @@ export const typography: CSSPropertyFull[] = [
     interop: "wide",
     example: "font-size: clamp(1rem, 0.5rem + 2vw, 1.5rem)",
     mdnPath: "clamp",
-    demo: `<div style="padding:10px;text-align:center"><p style="font-size:clamp(12px,3vw,28px);font-weight:900;color:#ec4899;line-height:1.2">Fluid<br>Typography</p><p style="font-size:10px;color:#888;margin-top:4px;font-weight:700">clamp(12px, 3vw, 28px)</p></div>`,
+    demo: createClampDemo(),
   },
 
   {
@@ -226,7 +368,7 @@ export const typography: CSSPropertyFull[] = [
     interop: "wide",
     example: "font-optical-sizing: auto | none",
     mdnPath: "font-optical-sizing",
-    demo: `<div style="display:flex;align-items:baseline;gap:12px;padding:10px"><span style="font-optical-sizing:auto;font-size:32px;font-weight:900;color:#ec4899">Aa</span><span style="font-optical-sizing:none;font-size:32px;font-weight:900;color:#db2777">Aa</span><div style="font-size:9px;color:#888;font-weight:700">auto · none</div></div>`,
+    demo: createFontOpticalSizingDemo(),
   },
 
   {
@@ -237,7 +379,7 @@ export const typography: CSSPropertyFull[] = [
     interop: "wide",
     example: "text-align: left | right | center | justify | start | end",
     mdnPath: "text-align",
-    demo: `<div style="display:flex;flex-direction:column;gap:4px;padding:8px;width:180px"><p style="text-align:left;font-size:10px;font-weight:700;color:#ec4899;background:#fdf2f8;padding:4px;border-radius:3px;margin:0">← Left aligned text</p><p style="text-align:center;font-size:10px;font-weight:700;color:#db2777;background:#fdf2f8;padding:4px;border-radius:3px;margin:0">Center →</p><p style="text-align:right;font-size:10px;font-weight:700;color:#be185d;background:#fdf2f8;padding:4px;border-radius:3px;margin:0">Right aligned →</p></div>`,
+    demo: createTextAlignDemo(),
     values: [
       {
         value: "left",
@@ -281,7 +423,7 @@ export const typography: CSSPropertyFull[] = [
     interop: "wide",
     example: "white-space: normal | nowrap | pre | pre-wrap | pre-line",
     mdnPath: "white-space",
-    demo: `<div style="display:flex;flex-direction:column;gap:4px;padding:8px"><div style="width:140px;background:#e0e7ff;border:2px solid #6366f1;border-radius:4px;padding:6px"><p style="white-space:nowrap;font-size:9px;font-weight:700;color:#6366f1;margin:0;overflow:hidden">nowrap: text won't wrap</p></div><div style="width:140px;background:#f5f3ff;border:2px solid #8b5cf6;border-radius:4px;padding:6px"><p style="white-space:pre-wrap;font-size:9px;font-weight:700;color:#8b5cf6;margin:0">pre-wrap:  respects   spaces</p></div></div>`,
+    demo: createWhiteSpaceDemo(),
     values: [
       {
         value: "normal",
@@ -320,7 +462,7 @@ export const typography: CSSPropertyFull[] = [
     interop: "wide",
     example: 'text-overflow: clip | ellipsis | "…"',
     mdnPath: "text-overflow",
-    demo: `<div style="display:flex;flex-direction:column;gap:6px;padding:8px"><div style="width:140px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;background:#e0e7ff;border:2px solid #6366f1;border-radius:4px;padding:6px"><span style="font-size:10px;font-weight:700;color:#6366f1">Long text with ellipsis truncation...</span></div><div style="width:140px;overflow:hidden;white-space:nowrap;text-overflow:clip;background:#f5f3ff;border:2px solid #8b5cf6;border-radius:4px;padding:6px"><span style="font-size:10px;font-weight:700;color:#8b5cf6">Long text with clip truncat</span></div></div>`,
+    demo: createTextOverflowDemo(),
   },
 
   {
@@ -331,6 +473,6 @@ export const typography: CSSPropertyFull[] = [
     interop: "wide",
     example: "text-shadow: 2px 2px 4px rgba(0,0,0,0.5)",
     mdnPath: "text-shadow",
-    demo: `<div style="display:flex;flex-direction:column;gap:6px;padding:10px"><p style="font-size:18px;font-weight:900;color:#fff;text-shadow:2px 2px 4px rgba(0,0,0,0.5);margin:0">Soft Shadow</p><p style="font-size:18px;font-weight:900;color:#ec4899;text-shadow:3px 3px 0 #be185d;margin:0">Hard Shadow</p><p style="font-size:16px;font-weight:900;color:#fff;text-shadow:0 0 8px #ec4899;margin:0">Glow Effect</p></div>`,
+    demo: createTextShadowDemo(),
   },
 ];

@@ -43,8 +43,7 @@
     "validate:demos": "npm run validate:demos:bun"
   },
   "dependencies": {
-    "fuzzysort": "^3.1.0",
-    "remixicon": "^4.9.1"
+    "fuzzysort": "^3.1.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.58.2",

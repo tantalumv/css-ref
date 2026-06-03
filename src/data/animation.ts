@@ -1,5 +1,143 @@
 import type { CSSPropertyFull } from "../types";
 
+function createTransitionDemo() {
+  return `<style>.t-demo{transition:transform .4s cubic-bezier(.5,1.25,.75,1.25),background .4s;animation:demo-pulse 2s ease-in-out infinite}</style>
+  <div style="padding:10px;text-align:center">
+    <div class="t-demo" style="display:inline-block;background:#f59e0b;color:#fff;padding:10px 20px;border-radius:8px;font-size:11px;font-weight:700">Animating…</div>
+    <p style="font-size:9px;color:#888;font-weight:700;margin-top:6px">transition: transform .4s ease</p>
+  </div>`;
+}
+
+function createAnimationDemo() {
+  return `<div style="display:flex;gap:16px;align-items:center;padding:10px">
+    <div style="width:36px;height:36px;background:linear-gradient(135deg,#f59e0b,#ec4899);border-radius:6px;animation:demo-spin 2s linear infinite"></div>
+    <div style="width:36px;height:36px;background:#f59e0b;border-radius:50%;animation:demo-bounce 1s ease-in-out infinite"></div>
+    <div style="width:36px;height:36px;background:linear-gradient(135deg,#6366f1,#f97316);border-radius:6px;animation:demo-color 3s linear infinite"></div>
+  </div>`;
+}
+
+function createAnimationTimelineDemo() {
+  return `<div style="padding:10px;width:100%">
+    <div style="background:#fef3c7;border-radius:5px;height:18px;width:100%;overflow:hidden;border:2px solid #f59e0b">
+      <div style="height:100%;width:70%;background:linear-gradient(90deg,#f59e0b,#ec4899);border-radius:3px;animation:demo-width 3s ease-in-out infinite"></div>
+    </div>
+    <p style="font-size:9px;color:#888;font-weight:700;margin-top:6px">Scroll-driven progress bar</p>
+  </div>`;
+}
+
+function createViewTransitionNameDemo() {
+  return `<div style="display:flex;align-items:center;gap:12px;padding:10px">
+    <div style="width:40px;height:40px;background:linear-gradient(135deg,#f59e0b,#ec4899);border-radius:6px;animation:demo-pulse 2s ease infinite"></div>
+    <div style="font-size:18px">→</div>
+    <div style="width:60px;height:60px;background:linear-gradient(135deg,#f59e0b,#ec4899);border-radius:12px;animation:demo-pulse 2s ease infinite;animation-delay:.1s"></div>
+    <p style="font-size:9px;color:#888;font-weight:700">Morphing between pages</p>
+  </div>`;
+}
+
+function createOffsetPathDemo() {
+  return `<style>.op-dot{width:14px;height:14px;background:#f59e0b;border-radius:50%;offset-path:path("M 10,40 C 40,5 100,5 130,40 S 220,75 150,40");animation:demo-path 2s linear infinite}</style>
+  <svg style="position:absolute;opacity:.2" width="200" height="72" viewBox="0 0 200 72">
+    <path d="M 10,40 C 40,5 100,5 130,40 S 220,75 150,40" stroke="#f59e0b" fill="none" stroke-width="2" stroke-dasharray="4"/>
+  </svg>
+  <div class="op-dot"></div>`;
+}
+
+function createWillChangeDemo() {
+  return `<div style="display:flex;gap:10px;padding:10px;align-items:center">
+    <div style="will-change:transform;background:#f59e0b;color:#fff;padding:10px 14px;border-radius:6px;font-size:10px;font-weight:700;animation:demo-bounce 1.5s ease-in-out infinite">promoted</div>
+    <div style="font-size:9px;color:#888;font-weight:700">GPU layer hint<br>via will-change</div>
+  </div>`;
+}
+
+function createTransitionDurationDemo() {
+  return `<style>.td-wrap{display:flex;gap:8px}.td-chip{padding:8px 10px;border-radius:6px;color:#fff;font-size:10px;font-weight:700;cursor:pointer}.td-fast{background:#6366f1;transition-property:transform;transition-duration:120ms}.td-slow{background:#ec4899;transition-property:transform;transition-duration:900ms}.td-chip:hover{transform:translateY(-4px)}</style>
+  <div class="td-wrap" style="padding:10px">
+    <div class="td-chip td-fast">120ms</div>
+    <div class="td-chip td-slow">900ms</div>
+  </div>`;
+}
+
+function createAnimationDurationDemo() {
+  return `<style>@keyframes ad-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}.ad{width:32px;height:32px;border-radius:6px;background:#f59e0b;animation-name:ad-pulse;animation-iteration-count:infinite}.ad-fast{animation-duration:.6s}.ad-slow{animation-duration:2s;background:#6366f1}</style>
+  <div style="display:flex;gap:14px;align-items:center;padding:10px">
+    <div class="ad ad-fast"></div>
+    <div class="ad ad-slow"></div>
+    <p style="font-size:9px;color:#888;font-weight:700">fast vs slow duration</p>
+  </div>`;
+}
+
+function createAnimationCompositionDemo() {
+  return `<div style="padding:10px">
+    <div style="animation-name:demo-scale,demo-rotate;animation-duration:2s;animation-iteration-count:infinite;animation-composition:add;background:#6366f1;width:40px;height:40px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff">add</div>
+  </div>`;
+}
+
+function createAnimationDelayDemo() {
+  return `<div style="padding:10px">
+    <div style="animation-name:demo-pulse;animation-duration:1.4s;animation-iteration-count:infinite;animation-delay:.5s;background:#eef2ff;border:2px solid #6366f1;border-radius:5px;padding:8px;font-size:9px;font-weight:700;color:#4338ca">animation-delay</div>
+  </div>`;
+}
+
+function createAnimationDirectionDemo() {
+  return `<div style="padding:10px">
+    <div style="animation-name:demo-path;animation-duration:2s;animation-iteration-count:infinite;animation-direction:alternate;background:#eef2ff;border:2px solid #6366f1;border-radius:5px;padding:8px;font-size:9px;font-weight:700;color:#4338ca">animation-direction</div>
+  </div>`;
+}
+
+function createAnimationFillModeDemo() {
+  return `<div style="padding:10px">
+    <div style="animation-name:demo-width;animation-duration:1.2s;animation-fill-mode:forwards;background:#eef2ff;border:2px solid #6366f1;border-radius:5px;padding:8px;font-size:9px;font-weight:700;color:#4338ca">animation-fill-mode</div>
+  </div>`;
+}
+
+function createAnimationIterationCountDemo() {
+  return `<div style="padding:10px">
+    <div style="animation-name:demo-spin;animation-duration:1.2s;animation-iteration-count:3;background:#eef2ff;border:2px solid #6366f1;border-radius:5px;padding:8px;font-size:9px;font-weight:700;color:#4338ca">animation-iteration-count</div>
+  </div>`;
+}
+
+function createAnimationNameDemo() {
+  return `<div style="padding:10px">
+    <div style="animation-name: demo-spin;animation-duration:1.5s;animation-iteration-count:infinite;display:inline-block;background:#eef2ff;border:2px solid #6366f1;border-radius:5px;padding:8px;font-size:9px;font-weight:700;color:#4338ca">animation-name</div>
+  </div>`;
+}
+
+function createAnimationPlayStateDemo() {
+  return `<div style="padding:10px">
+    <div style="animation-name:demo-bounce;animation-duration:1.2s;animation-iteration-count:infinite;animation-play-state:paused;background:#eef2ff;border:2px solid #6366f1;border-radius:5px;padding:8px;font-size:9px;font-weight:700;color:#4338ca">animation-play-state</div>
+  </div>`;
+}
+
+function createAnimationTimingFunctionDemo() {
+  return `<div style="padding:10px">
+    <div style="animation-name:demo-bounce;animation-duration:1.4s;animation-iteration-count:infinite;animation-timing-function:linear;background:#eef2ff;border:2px solid #6366f1;border-radius:5px;padding:8px;font-size:9px;font-weight:700;color:#4338ca">animation-timing-function</div>
+  </div>`;
+}
+
+function createTransitionBehaviorDemo() {
+  return `<style>.tb-demo{transition:display .3s,height .3s;transition-behavior:allow-discrete;overflow:hidden;height:40px}.tb-demo.hidden{display:none;height:0}</style>
+  <div style="padding:10px">
+    <div class="tb-demo" id="tbBox" style="background:#6366f1;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff"><span>display transition</span></div>
+    <button onclick="document.getElementById('tbBox').classList.toggle('hidden')" style="margin-top:6px;font-size:9px;padding:2px 8px;border-radius:3px;border:1px solid #6366f1;background:#fff;color:#6366f1;cursor:pointer">Toggle</button>
+  </div>`;
+}
+
+function createTransitionPropertyDemo() {
+  return `<style>.tp-demo{transition-duration:.4s;padding:8px;background:#6366f1;color:#fff;border-radius:5px;font-size:9px;font-weight:700}.tp-demo:hover{transform:scale(1.1);opacity:.7}</style>
+  <div style="padding:10px">
+    <div class="tp-demo" style="transition-property:transform">transform only</div>
+    <div class="tp-demo" style="transition-property:opacity;margin-top:6px">opacity only</div>
+  </div>`;
+}
+
+function createTransitionTimingFunctionDemo() {
+  return `<style>.ttf-box{transition:transform .6s;padding:6px 10px;background:#6366f1;color:#fff;border-radius:4px;font-size:9px;font-weight:700;margin-bottom:6px}.ttf-linear{transition-timing-function:linear}.ttf-ease{transition-timing-function:ease-in-out}</style>
+  <div style="padding:10px" onmouseenter="this.querySelectorAll('.ttf-box').forEach(b=>b.style.transform='translateX(80px)')" onmouseleave="this.querySelectorAll('.ttf-box').forEach(b=>b.style.transform='translateX(0)')">
+    <div class="ttf-box ttf-linear">linear</div>
+    <div class="ttf-box ttf-ease">ease-in-out</div>
+  </div>`;
+}
+
 export const animation: CSSPropertyFull[] = [
   {
     name: "transition",
@@ -11,7 +149,7 @@ export const animation: CSSPropertyFull[] = [
     mdnPath: "transition",
     caniuse: "css-transitions",
     default: "all 0s ease 0s",
-    demo: `<style>.t-demo{transition:transform .4s cubic-bezier(.5,1.25,.75,1.25),background .4s;animation:demo-pulse 2s ease-in-out infinite}</style><div style="padding:10px;text-align:center"><div class="t-demo" style="display:inline-block;background:#f59e0b;color:#fff;padding:10px 20px;border-radius:8px;font-size:11px;font-weight:700">Animating…</div><p style="font-size:9px;color:#888;font-weight:700;margin-top:6px">transition: transform .4s ease</p></div>`,
+    demo: createTransitionDemo(),
   },
 
   {
@@ -24,7 +162,7 @@ export const animation: CSSPropertyFull[] = [
     mdnPath: "animation",
     caniuse: "css-animation",
     default: "none 0s ease 0s 1 normal none running",
-    demo: `<div style="display:flex;gap:16px;align-items:center;padding:10px"><div style="width:36px;height:36px;background:linear-gradient(135deg,#f59e0b,#ec4899);border-radius:6px;animation:demo-spin 2s linear infinite"></div><div style="width:36px;height:36px;background:#f59e0b;border-radius:50%;animation:demo-bounce 1s ease-in-out infinite"></div><div style="width:36px;height:36px;background:linear-gradient(135deg,#6366f1,#f97316);border-radius:6px;animation:demo-color 3s linear infinite"></div></div>`,
+    demo: createAnimationDemo(),
   },
 
   {
@@ -36,7 +174,7 @@ export const animation: CSSPropertyFull[] = [
     example: "animation-timeline: scroll() | view() | --my-timeline",
     mdnPath: "animation-timeline",
     caniuse: "css-animation",
-    demo: `<div style="padding:10px;width:100%"><div style="background:#fef3c7;border-radius:5px;height:18px;width:100%;overflow:hidden;border:2px solid #f59e0b"><div style="height:100%;width:70%;background:linear-gradient(90deg,#f59e0b,#ec4899);border-radius:3px;animation:demo-width 3s ease-in-out infinite"></div></div><p style="font-size:9px;color:#888;font-weight:700;margin-top:6px">Scroll-driven progress bar</p></div>`,
+    demo: createAnimationTimelineDemo(),
   },
 
   {
@@ -48,7 +186,7 @@ export const animation: CSSPropertyFull[] = [
     example: "view-transition-name: hero-image | none",
     mdnPath: "view-transition-name",
     caniuse: "view-transitions",
-    demo: `<div style="display:flex;align-items:center;gap:12px;padding:10px"><div style="width:40px;height:40px;background:linear-gradient(135deg,#f59e0b,#ec4899);border-radius:6px;animation:demo-pulse 2s ease infinite"></div><div style="font-size:18px">→</div><div style="width:60px;height:60px;background:linear-gradient(135deg,#f59e0b,#ec4899);border-radius:12px;animation:demo-pulse 2s ease infinite;animation-delay:.1s"></div><p style="font-size:9px;color:#888;font-weight:700">Morphing between pages</p></div>`,
+    demo: createViewTransitionNameDemo(),
   },
 
   {
@@ -60,7 +198,7 @@ export const animation: CSSPropertyFull[] = [
     example: 'offset-path: path("M 0,0 C 50,100 150,100 200,0")',
     mdnPath: "offset-path",
     caniuse: "css-motion-paths",
-    demo: `<style>.op-dot{width:14px;height:14px;background:#f59e0b;border-radius:50%;offset-path:path("M 10,40 C 40,5 100,5 130,40 S 220,75 150,40");animation:demo-path 2s linear infinite}</style><svg style="position:absolute;opacity:.2" width="200" height="72" viewBox="0 0 200 72"><path d="M 10,40 C 40,5 100,5 130,40 S 220,75 150,40" stroke="#f59e0b" fill="none" stroke-width="2" stroke-dasharray="4"/></svg><div class="op-dot"></div>`,
+    demo: createOffsetPathDemo(),
   },
 
   {
@@ -72,7 +210,7 @@ export const animation: CSSPropertyFull[] = [
     example: "will-change: transform | opacity | auto",
     mdnPath: "will-change",
     caniuse: "will-change",
-    demo: `<div style="display:flex;gap:10px;padding:10px;align-items:center"><div style="will-change:transform;background:#f59e0b;color:#fff;padding:10px 14px;border-radius:6px;font-size:10px;font-weight:700;animation:demo-bounce 1.5s ease-in-out infinite">promoted</div><div style="font-size:9px;color:#888;font-weight:700">GPU layer hint<br>via will-change</div></div>`,
+    demo: createWillChangeDemo(),
   },
 
   {
@@ -84,7 +222,7 @@ export const animation: CSSPropertyFull[] = [
     example: "transition-duration: 150ms | 0.6s",
     mdnPath: "transition-duration",
     caniuse: "css-transitions",
-    demo: `<style>.td-wrap{display:flex;gap:8px}.td-chip{padding:8px 10px;border-radius:6px;color:#fff;font-size:10px;font-weight:700;cursor:pointer}.td-fast{background:#6366f1;transition-property:transform;transition-duration:120ms}.td-slow{background:#ec4899;transition-property:transform;transition-duration:900ms}.td-chip:hover{transform:translateY(-4px)}</style><div class="td-wrap" style="padding:10px"><div class="td-chip td-fast">120ms</div><div class="td-chip td-slow">900ms</div></div>`,
+    demo: createTransitionDurationDemo(),
     values: [
       {
         value: "0s",
@@ -115,7 +253,7 @@ export const animation: CSSPropertyFull[] = [
     example: "animation-duration: 500ms | 2s",
     mdnPath: "animation-duration",
     caniuse: "css-animation",
-    demo: `<style>@keyframes ad-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}.ad{width:32px;height:32px;border-radius:6px;background:#f59e0b;animation-name:ad-pulse;animation-iteration-count:infinite}.ad-fast{animation-duration:.6s}.ad-slow{animation-duration:2s;background:#6366f1}</style><div style="display:flex;gap:14px;align-items:center;padding:10px"><div class="ad ad-fast"></div><div class="ad ad-slow"></div><p style="font-size:9px;color:#888;font-weight:700">fast vs slow duration</p></div>`,
+    demo: createAnimationDurationDemo(),
     values: [
       {
         value: "0s",
@@ -145,7 +283,7 @@ export const animation: CSSPropertyFull[] = [
     interop: "ltd",
     example: "animation-composition: replace | add | accumulate",
     mdnPath: "animation-composition",
-    demo: `<div style="padding:10px"><div style="animation-name:demo-scale,demo-rotate;animation-duration:2s;animation-iteration-count:infinite;animation-composition:add;background:#6366f1;width:40px;height:40px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff">add</div></div>`,
+    demo: createAnimationCompositionDemo(),
   },
 
   {
@@ -156,7 +294,7 @@ export const animation: CSSPropertyFull[] = [
     interop: "wide",
     example: "animation-delay: 200ms | 1s",
     mdnPath: "animation-delay",
-    demo: `<div style="padding:10px"><div style="animation-name:demo-pulse;animation-duration:1.4s;animation-iteration-count:infinite;animation-delay:.5s;background:#eef2ff;border:2px solid #6366f1;border-radius:5px;padding:8px;font-size:9px;font-weight:700;color:#4338ca">animation-delay</div></div>`,
+    demo: createAnimationDelayDemo(),
     values: [
       {
         value: "0s",
@@ -186,7 +324,7 @@ export const animation: CSSPropertyFull[] = [
     interop: "wide",
     example: "animation-direction: normal | reverse | alternate",
     mdnPath: "animation-direction",
-    demo: `<div style="padding:10px"><div style="animation-name:demo-path;animation-duration:2s;animation-iteration-count:infinite;animation-direction:alternate;background:#eef2ff;border:2px solid #6366f1;border-radius:5px;padding:8px;font-size:9px;font-weight:700;color:#4338ca">animation-direction</div></div>`,
+    demo: createAnimationDirectionDemo(),
     values: [
       {
         value: "normal",
@@ -223,7 +361,7 @@ export const animation: CSSPropertyFull[] = [
     interop: "wide",
     example: "animation-fill-mode: none | forwards | both",
     mdnPath: "animation-fill-mode",
-    demo: `<div style="padding:10px"><div style="animation-name:demo-width;animation-duration:1.2s;animation-fill-mode:forwards;background:#eef2ff;border:2px solid #6366f1;border-radius:5px;padding:8px;font-size:9px;font-weight:700;color:#4338ca">animation-fill-mode</div></div>`,
+    demo: createAnimationFillModeDemo(),
     values: [
       {
         value: "none",
@@ -260,7 +398,7 @@ export const animation: CSSPropertyFull[] = [
     interop: "wide",
     example: "animation-iteration-count: 1 | 2 | infinite",
     mdnPath: "animation-iteration-count",
-    demo: `<div style="padding:10px"><div style="animation-name:demo-spin;animation-duration:1.2s;animation-iteration-count:3;background:#eef2ff;border:2px solid #6366f1;border-radius:5px;padding:8px;font-size:9px;font-weight:700;color:#4338ca">animation-iteration-count</div></div>`,
+    demo: createAnimationIterationCountDemo(),
     values: [
       {
         value: "1",
@@ -290,7 +428,7 @@ export const animation: CSSPropertyFull[] = [
     interop: "wide",
     example: "animation-name: fade-in | slide-up",
     mdnPath: "animation-name",
-    demo: `<div style="padding:10px"><div style="animation-name: demo-spin;animation-duration:1.5s;animation-iteration-count:infinite;display:inline-block;background:#eef2ff;border:2px solid #6366f1;border-radius:5px;padding:8px;font-size:9px;font-weight:700;color:#4338ca">animation-name</div></div>`,
+    demo: createAnimationNameDemo(),
     values: [
       {
         value: "none",
@@ -314,7 +452,7 @@ export const animation: CSSPropertyFull[] = [
     interop: "wide",
     example: "animation-play-state: running | paused",
     mdnPath: "animation-play-state",
-    demo: `<div style="padding:10px"><div style="animation-name:demo-bounce;animation-duration:1.2s;animation-iteration-count:infinite;animation-play-state:paused;background:#eef2ff;border:2px solid #6366f1;border-radius:5px;padding:8px;font-size:9px;font-weight:700;color:#4338ca">animation-play-state</div></div>`,
+    demo: createAnimationPlayStateDemo(),
     values: [
       {
         value: "running",
@@ -339,7 +477,7 @@ export const animation: CSSPropertyFull[] = [
     interop: "wide",
     example: "animation-timing-function: ease | linear | cubic-bezier(0.4,0,0.2,1)",
     mdnPath: "animation-timing-function",
-    demo: `<div style="padding:10px"><div style="animation-name:demo-bounce;animation-duration:1.4s;animation-iteration-count:infinite;animation-timing-function:linear;background:#eef2ff;border:2px solid #6366f1;border-radius:5px;padding:8px;font-size:9px;font-weight:700;color:#4338ca">animation-timing-function</div></div>`,
+    demo: createAnimationTimingFunctionDemo(),
     values: [
       {
         value: "ease",
@@ -400,7 +538,7 @@ export const animation: CSSPropertyFull[] = [
     interop: "b2024",
     example: "transition-behavior: normal | allow-discrete",
     mdnPath: "transition-behavior",
-    demo: `<style>.tb-demo{transition:display .3s,height .3s;transition-behavior:allow-discrete;overflow:hidden;height:40px}.tb-demo.hidden{display:none;height:0}</style><div style="padding:10px"><div class="tb-demo" id="tbBox" style="background:#6366f1;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff"><span>display transition</span></div><button onclick="document.getElementById('tbBox').classList.toggle('hidden')" style="margin-top:6px;font-size:9px;padding:2px 8px;border-radius:3px;border:1px solid #6366f1;background:#fff;color:#6366f1;cursor:pointer">Toggle</button></div>`,
+    demo: createTransitionBehaviorDemo(),
   },
 
   {
@@ -411,7 +549,7 @@ export const animation: CSSPropertyFull[] = [
     interop: "wide",
     example: "transition-property: opacity | transform | all",
     mdnPath: "transition-property",
-    demo: `<style>.tp-demo{transition-duration:.4s;padding:8px;background:#6366f1;color:#fff;border-radius:5px;font-size:9px;font-weight:700}.tp-demo:hover{transform:scale(1.1);opacity:.7}</style><div style="padding:10px"><div class="tp-demo" style="transition-property:transform">transform only</div><div class="tp-demo" style="transition-property:opacity;margin-top:6px">opacity only</div></div>`,
+    demo: createTransitionPropertyDemo(),
     values: [
       {
         value: "all",
@@ -441,7 +579,7 @@ export const animation: CSSPropertyFull[] = [
     interop: "wide",
     example: "transition-timing-function: ease-in-out | linear",
     mdnPath: "transition-timing-function",
-    demo: `<style>.ttf-box{transition:transform .6s;padding:6px 10px;background:#6366f1;color:#fff;border-radius:4px;font-size:9px;font-weight:700;margin-bottom:6px}.ttf-linear{transition-timing-function:linear}.ttf-ease{transition-timing-function:ease-in-out}</style><div style="padding:10px" onmouseenter="this.querySelectorAll('.ttf-box').forEach(b=>b.style.transform='translateX(80px)')" onmouseleave="this.querySelectorAll('.ttf-box').forEach(b=>b.style.transform='translateX(0)')"><div class="ttf-box ttf-linear">linear</div><div class="ttf-box ttf-ease">ease-in-out</div></div>`,
+    demo: createTransitionTimingFunctionDemo(),
     values: [
       {
         value: "ease",

@@ -953,6 +953,11 @@
   min-height: 300px;
 }
 
+.demo-canvas-area * {
+  font-size: inherit !important;
+  font-family: inherit !important;
+}
+
 /* ── Non-interactive Demo Overrides ── */
 .layout-grid .collection-content-grid {
   display: flex;

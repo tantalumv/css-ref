@@ -122,34 +122,100 @@ export const COLLECTIONS: Record<string, CollectionMeta> = {
       },
     ],
     related: ["Grid", "Layout", "Spacing"],
-    interactiveDemo: `<div class="demo-playground-card" style="background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);">
+    interactiveDemo: `<div class="demo-playground-card" data-signals="{ justifyContent: 'flex-start', alignItems: 'flex-start', flexWrap: 'nowrap', flexDirection: 'row', flexGap: 10, itemCount: 3, showCode: false }" style="background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);">
   <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-s);">
     <h4 style="color: #c4b5fd; margin: 0; font-size: 14px; font-weight: 800;">Flexbox Playground</h4>
     <div style="display: flex; gap: 4px; align-items: center;">
-      <button class="demo-control-btn demo-item-btn" data-on:click="$itemcount = Math.max(1, $itemcount - 1)" style="width: 28px; height: 28px; padding: 0; font-size: 16px;">−</button>
-      <span style="color: #a78bfa; font-size: 12px; font-weight: 700; min-width: 50px; text-align: center;">$itemcount items</span>
-      <button class="demo-control-btn demo-item-btn" data-on:click="$itemcount = Math.min(8, $itemcount + 1)" style="width: 28px; height: 28px; padding: 0; font-size: 16px;">+</button>
+      <button class="demo-control-btn demo-item-btn" data-on:click="$itemCount = Math.max(1, $itemCount - 1)" style="width: 28px; height: 28px; padding: 0; font-size: 16px;">−</button>
+      <span style="color: #a78bfa; font-size: 12px; font-weight: 700; min-width: 50px; text-align: center;">$itemCount items</span>
+      <button class="demo-control-btn demo-item-btn" data-on:click="$itemCount = Math.min(8, $itemCount + 1)" style="width: 28px; height: 28px; padding: 0; font-size: 16px;">+</button>
     </div>
   </div>
   <div class="demo-controls-row">
-    <button class="demo-control-btn" data-on:click="$justifycontent = 'flex-start'" data-class:active="$justifycontent === 'flex-start'">flex-start</button>
-    <button class="demo-control-btn" data-on:click="$justifycontent = 'center'" data-class:active="$justifycontent === 'center'">center</button>
-    <button class="demo-control-btn" data-on:click="$justifycontent = 'space-between'" data-class:active="$justifycontent === 'space-between'">space-between</button>
-    <button class="demo-control-btn" data-on:click="$justifycontent = 'space-around'" data-class:active="$justifycontent === 'space-around'">space-around</button>
-    <button class="demo-control-btn" data-on:click="$alignitems = 'flex-start'" data-class:active="$alignitems === 'flex-start'" style="background: #7c3aed33">align-start</button>
-    <button class="demo-control-btn" data-on:click="$alignitems = 'center'" data-class:active="$alignitems === 'center'" style="background: #7c3aed33">align-center</button>
-    <button class="demo-control-btn" data-on:click="$flexwrap = 'wrap'" data-class:active="$flexwrap === 'wrap'" style="background: #9333ea33">wrap</button>
-    <button class="demo-control-btn" data-on:click="$flexwrap = 'nowrap'" data-class:active="$flexwrap === 'nowrap'" style="background: #9333ea33">nowrap</button>
+    <button class="demo-control-btn" data-on:click="$justifyContent = 'flex-start'" data-class:active="$justifyContent === 'flex-start'">flex-start</button>
+    <button class="demo-control-btn" data-on:click="$justifyContent = 'center'" data-class:active="$justifyContent === 'center'">center</button>
+    <button class="demo-control-btn" data-on:click="$justifyContent = 'space-between'" data-class:active="$justifyContent === 'space-between'">space-between</button>
+    <button class="demo-control-btn" data-on:click="$justifyContent = 'space-around'" data-class:active="$justifyContent === 'space-around'">space-around</button>
+    <button class="demo-control-btn" data-on:click="$alignItems = 'flex-start'" data-class:active="$alignItems === 'flex-start'" style="background: #7c3aed33">align-start</button>
+    <button class="demo-control-btn" data-on:click="$alignItems = 'center'" data-class:active="$alignItems === 'center'" style="background: #7c3aed33">align-center</button>
+    <button class="demo-control-btn" data-on:click="$flexWrap = 'wrap'" data-class:active="$flexWrap === 'wrap'" style="background: #9333ea33">wrap</button>
+    <button class="demo-control-btn" data-on:click="$flexWrap = 'nowrap'" data-class:active="$flexWrap === 'nowrap'" style="background: #9333ea33">nowrap</button>
+    <button class="demo-control-btn" data-on:click="$flexDirection = 'row'" data-class:active="$flexDirection === 'row'" style="background: #a855f733">row</button>
+    <button class="demo-control-btn" data-on:click="$flexDirection = 'column'" data-class:active="$flexDirection === 'column'" style="background: #a855f733">column</button>
+    <button class="demo-control-btn" data-on:click="$flexDirection = 'row-reverse'" data-class:active="$flexDirection === 'row-reverse'" style="background: #a855f733">row-reverse</button>
+    <button class="demo-control-btn" data-on:click="$flexDirection = 'column-reverse'" data-class:active="$flexDirection === 'column-reverse'" style="background: #a855f733">column-reverse</button>
   </div>
-  <div class="demo-canvas-area" style="display: flex; height: 160px; border-color: #6366f1; border-width: 2px; border-style: dashed; border-radius: 12px;" data-style:justify-content="$justifycontent" data-style:align-items="$alignitems" data-style:flex-wrap="$flexwrap" data-style:gap="$itemcount > 4 ? '8px' : '12px'">
-    <div class="demo-item-box" data-class:hidden="$itemcount < 1" style="background: linear-gradient(135deg, #818cf8, #6366f1); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">1</div>
-    <div class="demo-item-box" data-class:hidden="$itemcount < 2" style="background: linear-gradient(135deg, #a78bfa, #8b5cf6); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">2</div>
-    <div class="demo-item-box" data-class:hidden="$itemcount < 3" style="background: linear-gradient(135deg, #c4b5fd, #a78bfa); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">3</div>
-    <div class="demo-item-box" data-class:hidden="$itemcount < 4" style="background: linear-gradient(135deg, #e9d5ff, #c4b5fd); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">4</div>
-    <div class="demo-item-box" data-class:hidden="$itemcount < 5" style="background: linear-gradient(135deg, #f472b6, #e879f9); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">5</div>
-    <div class="demo-item-box" data-class:hidden="$itemcount < 6" style="background: linear-gradient(135deg, #fb7185, #f43f5e); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">6</div>
-    <div class="demo-item-box" data-class:hidden="$itemcount < 7" style="background: linear-gradient(135deg, #67e8f9, #06b6d4); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">7</div>
-    <div class="demo-item-box" data-class:hidden="$itemcount < 8" style="background: linear-gradient(135deg, #34d399, #10b981); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">8</div>
+  <div class="demo-controls-row" style="align-items: center; gap: 8px;">
+    <label style="color: #c4b5fd; font-size: 12px; font-weight: 700;">Gap:</label>
+    <input type="range" min="0" max="30" step="1" data-bind:flexGap style="width: 80px;">
+  </div>
+  <div class="demo-canvas-area" style="display: flex; height: 160px; border-color: #6366f1; border-width: 2px; border-style: dashed; border-radius: 12px;" data-style:justify-content="$justifyContent" data-style:align-items="$alignItems" data-style:flex-wrap="$flexWrap" data-style:flex-direction="$flexDirection" data-style:gap="$flexGap + 'px'">
+    <div class="demo-item-box" data-class:hidden="$itemCount < 1" style="background: linear-gradient(135deg, #818cf8, #6366f1); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">1</div>
+    <div class="demo-item-box" data-class:hidden="$itemCount < 2" style="background: linear-gradient(135deg, #a78bfa, #8b5cf6); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">2</div>
+    <div class="demo-item-box" data-class:hidden="$itemCount < 3" style="background: linear-gradient(135deg, #c4b5fd, #a78bfa); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">3</div>
+    <div class="demo-item-box" data-class:hidden="$itemCount < 4" style="background: linear-gradient(135deg, #e9d5ff, #c4b5fd); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">4</div>
+    <div class="demo-item-box" data-class:hidden="$itemCount < 5" style="background: linear-gradient(135deg, #f472b6, #e879f9); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">5</div>
+    <div class="demo-item-box" data-class:hidden="$itemCount < 6" style="background: linear-gradient(135deg, #fb7185, #f43f5e); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">6</div>
+    <div class="demo-item-box" data-class:hidden="$itemCount < 7" style="background: linear-gradient(135deg, #67e8f9, #06b6d4); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">7</div>
+    <div class="demo-item-box" data-class:hidden="$itemCount < 8" style="background: linear-gradient(135deg, #34d399, #10b981); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">8</div>
+  </div>
+  <div class="demo-controls-row" style="align-items: center; gap: 8px;">
+    <label style="color: #c4b5fd; font-size: 12px; font-weight: 700;">Gap:</label>
+    <input type="range" min="0" max="30" step="1" data-bind:flexGap style="width: 80px;">
+  </div>
+  <div class="demo-canvas-area" style="display: flex; height: 160px; border-color: #6366f1; border-width: 2px; border-style: dashed; border-radius: 12px;" data-style:justify-content="$justifyContent" data-style:align-items="$alignItems" data-style:flex-wrap="$flexWrap" data-style:flex-direction="$flexDirection" data-style:gap="$flexGap + 'px'">
+    <div class="demo-item-box" data-class:hidden="$itemCount < 1" style="background: linear-gradient(135deg, #818cf8, #6366f1); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">1</div>
+    <div class="demo-item-box" data-class:hidden="$itemCount < 2" style="background: linear-gradient(135deg, #a78bfa, #8b5cf6); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">2</div>
+    <div class="demo-item-box" data-class:hidden="$itemCount < 3" style="background: linear-gradient(135deg, #c4b5fd, #a78bfa); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">3</div>
+    <div class="demo-item-box" data-class:hidden="$itemCount < 4" style="background: linear-gradient(135deg, #e9d5ff, #c4b5fd); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">4</div>
+    <div class="demo-item-box" data-class:hidden="$itemCount < 5" style="background: linear-gradient(135deg, #f472b6, #e879f9); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">5</div>
+    <div class="demo-item-box" data-class:hidden="$itemCount < 6" style="background: linear-gradient(135deg, #fb7185, #f43f5e); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">6</div>
+    <div class="demo-item-box" data-class:hidden="$itemCount < 7" style="background: linear-gradient(135deg, #67e8f9, #06b6d4); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">7</div>
+    <div class="demo-item-box" data-class:hidden="$itemCount < 8" style="background: linear-gradient(135deg, #34d399, #10b981); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">8</div>
+  </div>
+  <div class="demo-controls-row" style="align-items: center; gap: 8px;">
+    <label style="color: #c4b5fd; font-size: 12px; font-weight: 700;">Gap:</label>
+    <input type="range" min="0" max="30" step="1" data-bind:flexGap style="width: 80px;">
+    <span data-text="$flexGap + 'px'" style="color: #c4b5fd; font-size: 12px; font-weight: 700;"></span>
+  </div>
+  <div class="demo-canvas-area" style="display: flex; height: 160px; border-color: #6366f1; border-width: 2px; border-style: dashed; border-radius: 12px;" data-style:justify-content="$justifyContent" data-style:align-items="$alignItems" data-style:flex-wrap="$flexWrap" data-style:flex-direction="$flexDirection" data-style:gap="$flexGap + 'px'">
+    <div class="demo-item-box" data-class:hidden="$itemCount < 1" style="background: linear-gradient(135deg, #818cf8, #6366f1); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">1</div>
+    <div class="demo-item-box" data-class:hidden="$itemCount < 2" style="background: linear-gradient(135deg, #a78bfa, #8b5cf6); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">2</div>
+    <div class="demo-item-box" data-class:hidden="$itemCount < 3" style="background: linear-gradient(135deg, #c4b5fd, #a78bfa); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">3</div>
+    <div class="demo-item-box" data-class:hidden="$itemCount < 4" style="background: linear-gradient(135deg, #e9d5ff, #c4b5fd); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">4</div>
+    <div class="demo-item-box" data-class:hidden="$itemCount < 5" style="background: linear-gradient(135deg, #f472b6, #e879f9); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">5</div>
+    <div class="demo-item-box" data-class:hidden="$itemCount < 6" style="background: linear-gradient(135deg, #fb7185, #f43f5e); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">6</div>
+    <div class="demo-item-box" data-class:hidden="$itemCount < 7" style="background: linear-gradient(135deg, #67e8f9, #06b6d4); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">7</div>
+    <div class="demo-item-box" data-class:hidden="$itemCount < 8" style="background: linear-gradient(135deg, #34d399, #10b981); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">8</div>
+  </div>
+  <div class="demo-controls-row" style="align-items: center; gap: 8px;">
+    <label style="color: #c4b5fd; font-size: 12px; font-weight: 700;">Gap:</label>
+    <input type="range" min="0" max="30" step="1" data-bind:flexGap style="width: 80px;">
+    <span data-text="$flexGap + 'px'" style="color: #c4b5fd; font-size: 12px; font-weight: 700; min-width: 50px; text-align: center;"></span>
+  </div>
+  <div class="demo-canvas-area" style="display: flex; height: 160px; border-color: #6366f1; border-width: 2px; border-style: dashed; border-radius: 12px;" data-style:justify-content="$justifyContent" data-style:align-items="$alignItems" data-style:flex-wrap="$flexWrap" data-style:flex-direction="$flexDirection" data-style:gap="$flexGap + 'px'">
+    <div class="demo-item-box" data-class:hidden="$itemCount < 1" style="background: linear-gradient(135deg, #818cf8, #6366f1); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">1</div>
+    <div class="demo-item-box" data-class:hidden="$itemCount < 2" style="background: linear-gradient(135deg, #a78bfa, #8b5cf6); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">2</div>
+    <div class="demo-item-box" data-class:hidden="$itemCount < 3" style="background: linear-gradient(135deg, #c4b5fd, #a78bfa); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">3</div>
+    <div class="demo-item-box" data-class:hidden="$itemCount < 4" style="background: linear-gradient(135deg, #e9d5ff, #c4b5fd); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">4</div>
+    <div class="demo-item-box" data-class:hidden="$itemCount < 5" style="background: linear-gradient(135deg, #f472b6, #e879f9); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">5</div>
+    <div class="demo-item-box" data-class:hidden="$itemCount < 6" style="background: linear-gradient(135deg, #fb7185, #f43f5e); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">6</div>
+    <div class="demo-item-box" data-class:hidden="$itemCount < 7" style="background: linear-gradient(135deg, #67e8f9, #06b6d4); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">7</div>
+    <div class="demo-item-box" data-class:hidden="$itemCount < 8" style="background: linear-gradient(135deg, #34d399, #10b981); min-width: 60px; min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">8</div>
+  </div>
+  <div class="demo-controls-row" style="align-items: center; gap: 8px;">
+    <label style="color: #c4b5fd; font-size: 12px; font-weight: 700;">Gap:</label>
+    <input type="range" min="0" max="30" step="1" data-bind:flexGap style="width: 80px;">
+    <span data-text="$flexGap + 'px'" style="color: #c4b5fd; font-size: 12px; font-weight: 700; min-width: 50px; text-align: center;"></span>
+    </div>
+    <div class="demo-code-panel" data-show="$showCode">
+      <button class="demo-control-btn demo-code-toggle" data-on:click="$showCode = !$showCode" data-class:active="$showCode">⟨/⟩ Code</button>
+      <div>
+        <pre><code data-text="window.flexboxCSS($flexDirection, $flexGap, $justifyContent, $alignItems, $flexWrap)"></code></pre>
+        <button class="demo-copy-btn" data-on:click="window.copyDemoCSS(window.flexboxCSS($flexDirection, $flexGap, $justifyContent, $alignItems, $flexWrap))">Copy</button>
+      </div>
+    </div>
+  </div>
   </div>
 </div>`,
     learningObjectives: [
@@ -184,8 +250,9 @@ export const COLLECTIONS: Record<string, CollectionMeta> = {
       "Can lead to nested 'div-soup' for complex layouts",
       "Items don't align across multiple rows easily",
     ],
+    annotations: [],
     antiExamples: [
-      {
+        {
         badCode: ".container { display: flex; }\n.item { margin-left: 50%; }",
         goodCode: ".container { display: flex; justify-content: center; }",
         explanation: "Use alignment properties instead of manual margins for layout.",
@@ -275,41 +342,49 @@ export const COLLECTIONS: Record<string, CollectionMeta> = {
       },
     ],
     related: ["Flexbox", "Layout", "Spacing"],
-    interactiveDemo: `<div class="demo-playground-card" style="background: linear-gradient(135deg, #831843 0%, #be185d 100%);">
+    interactiveDemo: `<div class="demo-playground-card" data-signals='{"gridItemCount":2,"layoutType":"classic","gridGap":8,"showCode":false}' style="background: linear-gradient(135deg, #831843 0%, #be185d 100%);">
   <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-s);">
     <h4 style="color: #f9a8d4; margin: 0; font-size: 14px; font-weight: 800;">Grid Layout Builder</h4>
     <div style="display: flex; gap: 4px; align-items: center;">
-      <button class="demo-control-btn demo-item-btn" data-on:click="$griditemcount = Math.max(2, $griditemcount - 1)" style="width: 28px; height: 28px; padding: 0; font-size: 16px;">−</button>
-      <span style="color: #f9a8d4; font-size: 12px; font-weight: 700; min-width: 50px; text-align: center;">$griditemcount × $griditemcount</span>
-      <button class="demo-control-btn demo-item-btn" data-on:click="$griditemcount = Math.min(6, $griditemcount + 1)" style="width: 28px; height: 28px; padding: 0; font-size: 16px;">+</button>
+      <button class="demo-control-btn demo-item-btn" data-on:click="$gridItemCount = Math.max(2, $gridItemCount - 1)" style="width: 28px; height: 28px; padding: 0; font-size: 16px;">−</button>
+      <span style="color: #f9a8d4; font-size: 12px; font-weight: 700; min-width: 50px; text-align: center;">$gridItemCount × $gridItemCount</span>
+      <button class="demo-control-btn demo-item-btn" data-on:click="$gridItemCount = Math.min(6, $gridItemCount + 1)" style="width: 28px; height: 28px; padding: 0; font-size: 16px;">+</button>
     </div>
   </div>
   <div class="demo-controls-row">
     <button class="demo-control-btn" data-on:click="$layoutType = 'classic'" data-class:active="$layoutType === 'classic'">Classic</button>
-    <button class="demo-control-btn" data-on:click="$layoutType = 'hero'" data-class:active="$layoutType === 'hero'">Hero Focus</button>
+    <button class="demo-control-btn" data-on:click="$layoutType = 'hero'" data-class:active="$layoutType === 'hero'">Hero</button>
     <button class="demo-control-btn" data-on:click="$layoutType = 'dashboard'" data-class:active="$layoutType === 'dashboard'">Dashboard</button>
     <button class="demo-control-btn" data-on:click="$layoutType = 'gallery'" data-class:active="$layoutType === 'gallery'">Gallery</button>
+    <button class="demo-control-btn demo-code-toggle" data-on:click="$showCode = !$showCode" data-class:active="$showCode">⟨/⟩ Code</button>
   </div>
-  <div class="grid-demo demo-canvas-area" style="border-color: #ec4899; padding: 12px; border-radius: 12px; border-width: 2px; border-style: dashed;" data-attr:class="'grid-demo demo-canvas-area layout-class-' + $layoutType">
+  <div class="demo-controls-row">
+    <label style="color: #f9a8d4; font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 8px;">Gap: <input type="range" min="0" max="24" step="2" data-bind:gridGap style="accent-color: #ec4899; width: 120px;"> <span data-text="$gridGap + 'px'"></span></label>
+  </div>
+  <div class="grid-demo demo-canvas-area" style="border-color: #ec4899; padding: 12px; border-radius: 12px; border-width: 2px; border-style: dashed;" data-attr:class="'grid-demo demo-canvas-area layout-class-' + $layoutType" data-style:gap="$gridGap + 'px'">
     <div class="grid-item item-header" data-class:hidden="$layoutType === 'gallery'">Header</div>
     <div class="grid-item item-sidebar" data-class:hidden="$layoutType === 'gallery' || $layoutType === 'hero'">Sidebar</div>
     <div class="grid-item item-main" data-class:hidden="$layoutType === 'gallery'">Main Content</div>
     <div class="grid-item item-footer" data-class:hidden="$layoutType === 'gallery'">Footer</div>
-    <div class="grid-gallery-item" data-class:hidden="$griditemcount < 1 || $layoutType !== 'gallery'" style="--i: 1;">1</div>
-    <div class="grid-gallery-item" data-class:hidden="$griditemcount < 2 || $layoutType !== 'gallery'" style="--i: 2;">2</div>
-    <div class="grid-gallery-item" data-class:hidden="$griditemcount < 3 || $layoutType !== 'gallery'" style="--i: 3;">3</div>
-    <div class="grid-gallery-item" data-class:hidden="$griditemcount < 4 || $layoutType !== 'gallery'" style="--i: 4;">4</div>
-    <div class="grid-gallery-item" data-class:hidden="$griditemcount < 5 || $layoutType !== 'gallery'" style="--i: 5;">5</div>
-    <div class="grid-gallery-item" data-class:hidden="$griditemcount < 6 || $layoutType !== 'gallery'" style="--i: 6;">6</div>
-    <div class="grid-gallery-item" data-class:hidden="$griditemcount < 7 || $layoutType !== 'gallery'" style="--i: 7;">7</div>
-    <div class="grid-gallery-item" data-class:hidden="$griditemcount < 8 || $layoutType !== 'gallery'" style="--i: 8;">8</div>
-    <div class="grid-gallery-item" data-class:hidden="$griditemcount < 9 || $layoutType !== 'gallery'" style="--i: 9;">9</div>
-    <div class="grid-gallery-item" data-class:hidden="$griditemcount < 10 || $layoutType !== 'gallery'" style="--i: 10;">10</div>
-    <div class="grid-gallery-item" data-class:hidden="$griditemcount < 11 || $layoutType !== 'gallery'" style="--i: 11;">11</div>
-    <div class="grid-gallery-item" data-class:hidden="$griditemcount < 12 || $layoutType !== 'gallery'" style="--i: 12;">12</div>
+    <div class="grid-gallery-item" data-class:hidden="$gridItemCount < 1 || $layoutType !== 'gallery'" style="--i: 1;">1</div>
+    <div class="grid-gallery-item" data-class:hidden="$gridItemCount < 2 || $layoutType !== 'gallery'" style="--i: 2;">2</div>
+    <div class="grid-gallery-item" data-class:hidden="$gridItemCount < 3 || $layoutType !== 'gallery'" style="--i: 3;">3</div>
+    <div class="grid-gallery-item" data-class:hidden="$gridItemCount < 4 || $layoutType !== 'gallery'" style="--i: 4;">4</div>
+    <div class="grid-gallery-item" data-class:hidden="$gridItemCount < 5 || $layoutType !== 'gallery'" style="--i: 5;">5</div>
+    <div class="grid-gallery-item" data-class:hidden="$gridItemCount < 6 || $layoutType !== 'gallery'" style="--i: 6;">6</div>
+    <div class="grid-gallery-item" data-class:hidden="$gridItemCount < 7 || $layoutType !== 'gallery'" style="--i: 7;">7</div>
+    <div class="grid-gallery-item" data-class:hidden="$gridItemCount < 8 || $layoutType !== 'gallery'" style="--i: 8;">8</div>
+    <div class="grid-gallery-item" data-class:hidden="$gridItemCount < 9 || $layoutType !== 'gallery'" style="--i: 9;">9</div>
+    <div class="grid-gallery-item" data-class:hidden="$gridItemCount < 10 || $layoutType !== 'gallery'" style="--i: 10;">10</div>
+    <div class="grid-gallery-item" data-class:hidden="$gridItemCount < 11 || $layoutType !== 'gallery'" style="--i: 11;">11</div>
+    <div class="grid-gallery-item" data-class:hidden="$gridItemCount < 12 || $layoutType !== 'gallery'" style="--i: 12;">12</div>
+  </div>
+  <div class="demo-code-panel" data-show="$showCode">
+    <pre><code data-text="window.gridCSS($layoutType, $gridGap)"></code></pre>
+    <button class="demo-copy-btn" data-on:click="window.copyDemoCSS(window.gridCSS($layoutType, $gridGap))">Copy</button>
   </div>
   <style>
-    .grid-demo { display: grid; height: 160px; gap: 8px; border-radius: 8px; overflow: hidden; border: none; }
+    .grid-demo { display: grid; height: 160px; border-radius: 8px; overflow: hidden; border: none; }
     .grid-demo.layout-class-classic { grid-template-columns: 200px 1fr; grid-template-rows: 50px 1fr 50px; }
     .grid-demo.layout-class-hero { grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; }
     .grid-demo.layout-class-dashboard { grid-template-columns: repeat(3, 1fr); grid-template-rows: 1fr 1fr; }
@@ -366,6 +441,7 @@ export const COLLECTIONS: Record<string, CollectionMeta> = {
       "Overkill for simple 1D alignment",
       "Older browser support required polyfills (historically)",
     ],
+    annotations: [],
   },
   Typography: {
     id: "Typography",
@@ -442,26 +518,40 @@ h1, h2, h3 {
       },
     ],
     related: ["Color", "Visual", "Spacing"],
-    interactiveDemo: `<div class="demo-playground-card" style="background: linear-gradient(135deg, #134e4a 0%, #0f766e 100%);">
+    interactiveDemo: `<div class="demo-playground-card" data-signals="{ fontFamily: "'Georgia', serif", fontSize: '24px', lineHeight: '1.6', letterSpacing: '0px', fontWeight: '400', textAlign: 'left', showCode: false }" style="background: linear-gradient(135deg, #134e4a 0%, #0f766e 100%);">
   <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-s);">
     <h4 style="color: #5eead4; margin: 0; font-size: 14px; font-weight: 800;">Type Lab</h4>
     <div style="display: flex; gap: 4px; align-items: center;">
-      <button class="demo-control-btn" data-on:click="$fontfamily = 'Georgia, serif'" data-class:active="$fontfamily === 'Georgia, serif'">Serif</button>
-      <button class="demo-control-btn" data-on:click="$fontfamily = 'Inter, sans-serif'" data-class:active="$fontfamily === 'Inter, sans-serif'">Sans</button>
-      <button class="demo-control-btn" data-on:click="$fontfamily = 'monospace'" data-class:active="$fontfamily === 'monospace'">Mono</button>
+      <button class="demo-control-btn" data-on:click="$fontFamily = 'Georgia, serif'" data-class:active="$fontFamily === 'Georgia, serif'">Serif</button>
+      <button class="demo-control-btn" data-on:click="$fontFamily = 'Inter, sans-serif'" data-class:active="$fontFamily === 'Inter, sans-serif'">Sans</button>
+      <button class="demo-control-btn" data-on:click="$fontFamily = 'monospace'" data-class:active="$fontFamily === 'monospace'">Mono</button>
     </div>
   </div>
   <div class="demo-controls-row">
-    <button class="demo-control-btn" data-on:click="$fontsize = '16px'" data-class:active="$fontsize === '16px'">Small</button>
-    <button class="demo-control-btn" data-on:click="$fontsize = '24px'" data-class:active="$fontsize === '24px'">Medium</button>
-    <button class="demo-control-btn" data-on:click="$fontsize = '36px'" data-class:active="$fontsize === '36px'">Large</button>
-    <button class="demo-control-btn" data-on:click="$lineheight = '1.2'" data-class:active="$lineheight === '1.2'" style="background: #14b8a633">Tight</button>
-    <button class="demo-control-btn" data-on:click="$lineheight = '1.8'" data-class:active="$lineheight === '1.8'" style="background: #14b8a633">Loose</button>
-    <button class="demo-control-btn" data-on:click="$fontweight = '400'" data-class:active="$fontweight === '400'" style="background: #2dd4bf33; color: #134e4a">Light</button>
-    <button class="demo-control-btn" data-on:click="$fontweight = '900'" data-class:active="$fontweight === '900'" style="background: #2dd4bf33; color: #134e4a">Bold</button>
+    <button class="demo-control-btn" data-on:click="$fontSize = '16px'" data-class:active="$fontSize === '16px'">Small</button>
+    <button class="demo-control-btn" data-on:click="$fontSize = '24px'" data-class:active="$fontSize === '24px'">Medium</button>
+    <button class="demo-control-btn" data-on:click="$fontSize = '36px'" data-class:active="$fontSize === '36px'">Large</button>
+    <button class="demo-control-btn" data-on:click="$lineHeight = '1.2'" data-class:active="$lineHeight === '1.2'" style="background: #14b8a633">Tight</button>
+    <button class="demo-control-btn" data-on:click="$lineHeight = '1.8'" data-class:active="$lineHeight === '1.8'" style="background: #14b8a633">Loose</button>
+    <button class="demo-control-btn" data-on:click="$fontWeight = '400'" data-class:active="$fontWeight === '400'" style="background: #2dd4bf33; color: #134e4a">Regular</button>
+    <button class="demo-control-btn" data-on:click="$fontWeight = '700'" data-class:active="$fontWeight === '700'" style="background: #2dd4bf33; color: #134e4a">Bold</button>
+    <button class="demo-control-btn" data-on:click="$textAlign = 'left'" data-class:active="$textAlign === 'left'" style="background: #5eead433">Left</button>
+    <button class="demo-control-btn" data-on:click="$textAlign = 'center'" data-class:active="$textAlign === 'center'" style="background: #5eead433">Center</button>
+    <button class="demo-control-btn" data-on:click="$textAlign = 'right'" data-class:active="$textAlign === 'right'" style="background: #5eead433">Right</button>
   </div>
-  <div contenteditable="true" class="demo-canvas-area" style="background: rgba(255,255,255,0.95); padding: 20px; color: #134e4a; outline: none; border-color: #5eead4; border-width: 2px; border-style: dashed; border-radius: 12px; transition: all 0.3s ease;" data-style:font-size="$fontsize" data-style:line-height="$lineheight" data-style:font-family="$fontfamily" data-style:font-weight="$fontweight">
+  <div class="demo-controls-row" style="align-items: center; gap: 8px;">
+    <label style="color: #5eead4; font-size: 12px; font-weight: 700;">Letter Spacing:</label>
+    <input type="range" min="-2" max="10" step="0.5" data-bind:letterSpacing style="width: 80px;">
+  </div>
+  <div contenteditable="true" class="demo-canvas-area" style="background: rgba(255,255,255,0.95); padding: 20px; color: #134e4a; outline: none; border-color: #5eead4; border-width: 2px; border-style: dashed; border-radius: 12px; transition: all 0.3s ease;" data-style:font-size="$fontSize" data-style:line-height="$lineHeight" data-style:font-family="$fontFamily" data-style:font-weight="$fontWeight" data-style:text-align="$textAlign" data-style:letter-spacing="$letterSpacing + 'px'">
     Good typography is invisible. You only notice it when it's bad.
+  </div>
+  <div class="demo-code-panel" data-show="$showCode">
+    <button class="demo-control-btn demo-code-toggle" data-on:click="$showCode = !$showCode" data-class:active="$showCode">⟨/⟩ Code</button>
+    <div>
+      <pre><code data-text="window.typographyCSS($fontFamily, $fontSize, $lineHeight, $letterSpacing, $fontWeight, $textAlign)"></code></pre>
+      <button class="demo-copy-btn" data-on:click="window.copyDemoCSS(window.typographyCSS($fontFamily, $fontSize, $lineHeight, $letterSpacing, $fontWeight, $textAlign))">Copy</button>
+    </div>
   </div>
 </div>`,
     learningObjectives: [
@@ -494,6 +584,7 @@ h1, h2, h3 {
       "Poor font choices can break layout consistency",
       "FOUT/FOIT (Flash of Unstyled Text) during loading",
     ],
+    annotations: [],
   },
   Animation: {
     id: "Animation",
@@ -579,27 +670,41 @@ h1, h2, h3 {
       },
     ],
     related: ["Transform", "Visual", "Interactivity"],
-    interactiveDemo: `<div class="demo-playground-card" style="background: linear-gradient(135deg, #881337 0%, #e11d48 100%);">
+    interactiveDemo: `<div class="demo-playground-card" data-signals="{ animName: 'bounce', animDuration: 0.6, animTiming: 'ease', animIterations: '1', animKey: 0, showCode: false }" style="background: linear-gradient(135deg, #881337 0%, #e11d48 100%);">
   <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-s);">
     <h4 style="color: #fda4af; margin: 0; font-size: 14px; font-weight: 800;">Animation Playground</h4>
-    <button class="demo-control-btn" data-on:click="$animKey = $animKey + 1" style="background: #fda4af; color: #881337;">↻ Replay</button>
+    <span style="color: #fda4af; font-size: 11px; font-weight: 600; text-transform: uppercase;">$animName</span>
   </div>
   <div class="demo-controls-row">
-    <button class="demo-control-btn" data-on:click="$animKey = $animKey + 1; setTimeout(() => { const el = document.getElementById('animBox'); el.style.animation = 'bounce 0.6s ease'; }, 10)" data-class:active="$animKey % 4 === 0 && $animKey > 0">Bounce</button>
-    <button class="demo-control-btn" data-on:click="$animKey = $animKey + 1; setTimeout(() => { const el = document.getElementById('animBox'); el.style.animation = 'pulse 0.8s ease'; }, 10)" data-class:active="$animKey % 4 === 1 && $animKey > 0">Pulse</button>
-    <button class="demo-control-btn" data-on:click="$animKey = $animKey + 1; setTimeout(() => { const el = document.getElementById('animBox'); el.style.animation = 'shake 0.5s ease'; }, 10)" data-class:active="$animKey % 4 === 2 && $animKey > 0">Shake</button>
-    <button class="demo-control-btn" data-on:click="$animKey = $animKey + 1; setTimeout(() => { const el = document.getElementById('animBox'); el.style.animation = 'spin 1s linear'; }, 10)" data-class:active="$animKey % 4 === 3 && $animKey > 0">Spin</button>
+    <button class="demo-control-btn" data-on:click="$animName = 'bounce'; $animKey = $animKey + 1" data-class:active="$animName === 'bounce'">Bounce</button>
+    <button class="demo-control-btn" data-on:click="$animName = 'pulse'; $animKey = $animKey + 1" data-class:active="$animName === 'pulse'">Pulse</button>
+    <button class="demo-control-btn" data-on:click="$animName = 'shake'; $animKey = $animKey + 1" data-class:active="$animName === 'shake'">Shake</button>
+    <button class="demo-control-btn" data-on:click="$animName = 'spin'; $animKey = $animKey + 1" data-class:active="$animName === 'spin'">Spin</button>
+    <button class="demo-control-btn demo-code-toggle" data-on:click="$showCode = !$showCode" data-class:active="$showCode">⟨/⟩ Code</button>
   </div>
-  <style>
-    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
-    @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
-    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-    #animBox { animation: bounce 0.6s ease; }
-  </style>
-  <div class="demo-canvas-area" style="display: flex; justify-content: center; align-items: center; gap: 20px; height: 140px; border-color: #fb7185; border-width: 2px; border-style: dashed; border-radius: 12px;">
-    <div id="animBox" class="demo-item-box" data-key="$animKey" style="width: 60px; height: 60px; background: linear-gradient(135deg, #fb7185, #f43f5e); border-radius: 12px;">PLAY</div>
-    <div style="color: white; font-size: 12px; font-weight: 600; opacity: 0.9;">Click buttons to trigger</div>
+  <div class="demo-controls-row" style="align-items: center; gap: 8px;">
+    <label style="color: #fda4af; font-size: 12px; font-weight: 700;">Duration:</label>
+    <input type="range" min="0.1" max="3" step="0.1" data-bind:animDuration style="width: 80px;">
+    <span data-text="$animDuration + 's'" style="color: #fda4af; font-size: 12px; font-weight: 700;"></span>
+  </div>
+  <div class="demo-controls-row">
+    <button class="demo-control-btn" data-on:click="$animTiming = 'ease'" data-class:active="$animTiming === 'ease'">Ease</button>
+    <button class="demo-control-btn" data-on:click="$animTiming = 'linear'" data-class:active="$animTiming === 'linear'">Linear</button>
+    <button class="demo-control-btn" data-on:click="$animTiming = 'ease-in'" data-class:active="$animTiming === 'ease-in'">Ease In</button>
+    <button class="demo-control-btn" data-on:click="$animTiming = 'ease-out'" data-class:active="$animTiming === 'ease-out'">Ease Out</button>
+    <button class="demo-control-btn" data-on:click="$animTiming = 'ease-in-out'" data-class:active="$animTiming === 'ease-in-out'">Ease In Out</button>
+  </div>
+  <div class="demo-controls-row">
+    <button class="demo-control-btn" data-on:click="$animIterations = '1'" data-class:active="$animIterations === '1'">1x</button>
+    <button class="demo-control-btn" data-on:click="$animIterations = '3'" data-class:active="$animIterations === '3'">3x</button>
+    <button class="demo-control-btn" data-on:click="$animIterations = 'infinite'" data-class:active="$animIterations === 'infinite'">Infinite</button>
+  </div>
+  <div class="demo-canvas-area" style="display: flex; justify-content: center; align-items: center; height: 160px; border-color: #fb7185; border-width: 2px; border-style: dashed; border-radius: 12px;">
+    <div class="demo-item-box" data-key="$animKey" data-style:animation="$animName + ' ' + $animDuration + 's ' + $animTiming + ' ' + $animIterations" style="width: 60px; height: 60px; background: linear-gradient(135deg, #fb7185, #f43f5e); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: white;">ANIMATE</div>
+  </div>
+  <div class="demo-code-panel" data-show="$showCode">
+    <pre><code data-text="window.animationCSS($animName, $animDuration + 's', $animTiming, $animIterations)"></code></pre>
+    <button class="demo-copy-btn" data-on:click="window.copyDemoCSS(window.animationCSS($animName, $animDuration + 's', $animTiming, $animIterations))">Copy</button>
   </div>
 </div>`,
     learningObjectives: [
@@ -632,6 +737,7 @@ h1, h2, h3 {
       "Hard to coordinate complex multi-step sequences",
       "Can't animate all properties (e.g., display)",
     ],
+    annotations: [],
   },
   Color: {
     id: "Color",
@@ -705,24 +811,36 @@ h1, h2, h3 {
       },
     ],
     related: ["Typography", "Visual", "CSS Variables"],
-    interactiveDemo: `<div class="demo-playground-card" style="background: linear-gradient(135deg, #78350f 0%, #d97706 100%);">
+    interactiveDemo: `<div class="demo-playground-card" data-signals="{ themeBg: '#ffffff', themeText: '#1f2937', themeBorder: '#d1d5db', themeOpacity: 1, showCode: false }" style="background: linear-gradient(135deg, #78350f 0%, #d97706 100%);">
   <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-s);">
     <h4 style="color: #fde68a; margin: 0; font-size: 14px; font-weight: 800;">Theme Builder</h4>
-    <button class="demo-control-btn" data-on:click="$themebg = '#ffffff'; $themetext = '#1f2937'; $themeborder = '#d1d5db'" style="background: #92400e;">Reset</button>
+    <button class="demo-control-btn demo-code-toggle" data-on:click="$showCode = !$showCode" data-class:active="$showCode" style="background: #92400e;">⟨/⟩ Code</button>
+  </div>
+  <div class="demo-controls-row" style="align-items: center; gap: 8px;">
+    <button class="demo-control-btn" data-on:click="$themeBg = '#ffffff'; $themeText = '#1f2937'; $themeBorder = '#d1d5db'; $themeOpacity = 1">Light</button>
+    <button class="demo-control-btn" data-on:click="$themeBg = '#1f2937'; $themeText = '#f9fafb'; $themeBorder = '#4b5563'; $themeOpacity = 1">Dark</button>
+    <button class="demo-control-btn" data-on:click="$themeBg = '#eef2ff'; $themeText = '#3730a3'; $themeBorder = '#6366f1'; $themeOpacity = 1">Brand</button>
+    <label style="color: #fef3c7; font-size: 11px; font-weight: 800;">Opacity:</label>
+    <input type="range" min="0" max="1" step="0.05" data-bind:themeOpacity style="width: 60px;">
+    <span data-text="$themeOpacity" style="color: #fef3c7; font-size: 11px; font-weight: 800;"></span>
   </div>
   <div class="demo-controls-row" style="align-items: center; gap: 8px;">
     <label style="color: #fef3c7; font-size: 11px; font-weight: 800;">BG:</label>
-    <input type="color" aria-label="Background color picker" data-bind:themebg style="width: 28px; height: 24px; border: none; border-radius: 4px; cursor: pointer; padding: 0;">
+    <input type="color" aria-label="Background color picker" data-bind:themeBg style="width: 28px; height: 24px; border: none; border-radius: 4px; cursor: pointer; padding: 0;">
     <label style="color: #fef3c7; font-size: 11px; font-weight: 800;">TXT:</label>
-    <input type="color" aria-label="Text color picker" data-bind:themetext style="width: 28px; height: 24px; border: none; border-radius: 4px; cursor: pointer; padding: 0;">
+    <input type="color" aria-label="Text color picker" data-bind:themeText style="width: 28px; height: 24px; border: none; border-radius: 4px; cursor: pointer; padding: 0;">
     <label style="color: #fef3c7; font-size: 11px; font-weight: 800;">BD:</label>
-    <input type="color" aria-label="Border color picker" data-bind:themeborder style="width: 28px; height: 24px; border: none; border-radius: 4px; cursor: pointer; padding: 0;">
+    <input type="color" aria-label="Border color picker" data-bind:themeBorder style="width: 28px; height: 24px; border: none; border-radius: 4px; cursor: pointer; padding: 0;">
   </div>
   <div class="demo-canvas-area" style="padding: 24px; border: none; display: flex; align-items: center; justify-content: center; border-radius: 12px; border: 2px dashed #fbbf24;">
-    <div style="padding: 24px; border-radius: 12px; border: 3px solid; transition: all 0.3s ease; width: 100%; max-width: 300px;" data-style:background="$themebg" data-style:color="$themetext" data-style:border-color="$themeborder">
+    <div style="padding: 24px; border-radius: 12px; border: 3px solid; transition: all 0.3s ease; width: 100%; max-width: 300px;" data-style:background="$themeBg" data-style:color="$themeText" data-style:border-color="$themeBorder" data-style:opacity="$themeOpacity">
       <h5 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 800;">Live Preview</h5>
       <p style="margin: 0; font-size: 13px; opacity: 0.8; line-height: 1.5; font-weight: 500;">Colors define the mood and accessibility of your interface.</p>
     </div>
+  </div>
+  <div class="demo-code-panel" data-show="$showCode">
+    <pre><code data-text="window.colorCSS($themeBg, $themeText, $themeBorder, $themeOpacity)"></code></pre>
+    <button class="demo-copy-btn" data-on:click="window.copyDemoCSS(window.colorCSS($themeBg, $themeText, $themeBorder, $themeOpacity))">Copy</button>
   </div>
 </div>`,
     learningObjectives: [
@@ -755,6 +873,7 @@ h1, h2, h3 {
       "Color shifts across different screen technologies",
       "Contrast compliance requires manual verification",
     ],
+    annotations: [],
   },
   Layout: {
     id: "Layout",
@@ -837,22 +956,37 @@ h1, h2, h3 {
       },
     ],
     related: ["Flexbox", "Grid", "Spacing"],
-    interactiveDemo: `<div class="demo-playground-card" style="background: linear-gradient(135deg, #3730a3 0%, #6366f1 100%);">
+    interactiveDemo: `<div class="demo-playground-card" data-signals="{ position: 'static', posTop: 40, posLeft: 40, showCode: false }" style="background: linear-gradient(135deg, #3730a3 0%, #6366f1 100%);">
   <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-s);">
     <h4 style="color: #c7d2fe; margin: 0; font-size: 14px; font-weight: 800;">Position Lab</h4>
     <span style="color: #a5b4fc; font-size: 11px; font-weight: 600;">$position</span>
   </div>
   <div class="demo-controls-row">
-    <button class="demo-control-btn" data-on:click="$position = 'static'; $hasOffset = false" data-class:active="$position === 'static'">Static</button>
+    <button class="demo-control-btn" data-on:click="$position = 'static'" data-class:active="$position === 'static'">Static</button>
     <button class="demo-control-btn" data-on:click="$position = 'relative'" data-class:active="$position === 'relative'">Relative</button>
     <button class="demo-control-btn" data-on:click="$position = 'absolute'" data-class:active="$position === 'absolute'">Absolute</button>
     <button class="demo-control-btn" data-on:click="$position = 'fixed'" data-class:active="$position === 'fixed'">Fixed</button>
+    <button class="demo-control-btn demo-code-toggle" data-on:click="$showCode = !$showCode" data-class:active="$showCode">⟨/⟩ Code</button>
+  </div>
+  <div class="demo-controls-row" data-show="$position !== 'static'">
+    <label style="color: #a5b4fc; margin-right: var(--space-xs);">Top:</label>
+    <input type="range" min="0" max="100" step="5" data-bind:posTop>
+    <span style="color: #a5b4fc; margin-left: var(--space-xs);" data-text="$posTop + 'px'"></span>
+  </div>
+  <div class="demo-controls-row" data-show="$position !== 'static'">
+    <label style="color: #a5b4fc; margin-right: var(--space-xs);">Left:</label>
+    <input type="range" min="0" max="150" step="5" data-bind:posLeft>
+    <span style="color: #a5b4fc; margin-left: var(--space-xs);" data-text="$posLeft + 'px'"></span>
   </div>
   <div class="demo-canvas-area" style="border-color: #818cf8; border-width: 2px; border-style: dashed; border-radius: 12px; position: relative; min-height: 160px;">
     <div style="position: absolute; top: 10px; left: 10px; color: rgba(255,255,255,0.4); font-size: 10px; font-weight: 800; text-transform: uppercase;">Container Boundary</div>
-    <div data-on:click="($position === 'relative' || $position === 'absolute') && ($hasOffset = !$hasOffset)" class="demo-item-box" style="position: absolute; top: 40px; left: 40px; width: 80px; height: 60px; background: linear-gradient(135deg, #818cf8, #6366f1); cursor: pointer; transition: all 0.4s var(--ease-spring-2); border-radius: 12px;" data-style:position="$position" data-style:top="$hasOffset && ($position === 'relative' || $position === 'absolute') ? '10px' : '40px'" data-style:left="$hasOffset && ($position === 'relative' || $position === 'absolute') ? '100px' : '40px'">
+    <div class="demo-item-box" style="position: absolute; top: 40px; left: 40px; width: 80px; height: 60px; background: linear-gradient(135deg, #818cf8, #6366f1); transition: all 0.4s var(--ease-spring-2); border-radius: 12px;" data-style:position="$position" data-style:top="$posTop + 'px'" data-style:left="$posLeft + 'px'">
       MOVE ME
     </div>
+  </div>
+  <div class="demo-code-panel" data-show="$showCode">
+    <pre><code data-text="window.layoutCSS($position, $posTop, $posLeft)"></code></pre>
+    <button class="demo-copy-btn" data-on:click="window.copyDemoCSS(window.layoutCSS($position, $posTop, $posLeft))">Copy</button>
   </div>
 </div>`,
     learningObjectives: [
@@ -885,6 +1019,7 @@ h1, h2, h3 {
       "Easy to lose elements outside the viewport",
       "Complex stacking contexts can be hard to debug",
     ],
+    annotations: [],
   },
   Backgrounds: {
     id: "Backgrounds",
@@ -955,22 +1090,46 @@ h1, h2, h3 {
       },
     ],
     related: ["Color", "Visual", "Typography"],
-    interactiveDemo: `<div class="demo-playground-card" style="background: linear-gradient(135deg, #14532d 0%, #22c55e 100%);">
+    interactiveDemo: `<div class="demo-playground-card" data-signals="{ bgMode: 'gradient', bgSize: 'cover', bgPosition: 'center', bgRepeat: 'no-repeat', showCode: false }" style="background: linear-gradient(135deg, #14532d 0%, #22c55e 100%);">
   <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-s);">
-    <h4 style="color: #86efac; margin: 0; font-size: 14px; font-weight: 800;">Gallery Explorer</h4>
-    <span style="color: #86efac; font-size: 11px; font-weight: 600;">$heroindex === 0 ? 'Gradient' : $heroindex === 1 ? 'Solid' : $heroindex === 2 ? 'Image' : 'Pattern'</span>
+    <h4 style="color: #86efac; margin: 0; font-size: 14px; font-weight: 800;">Backgrounds Explorer</h4>
+    <span style="color: #86efac; font-size: 11px; font-weight: 600; text-transform: uppercase;">$bgMode</span>
   </div>
   <div class="demo-controls-row">
-    <button class="demo-control-btn" data-on:click="$heroindex = 0" data-class:active="$heroindex === 0">Gradient</button>
-    <button class="demo-control-btn" data-on:click="$heroindex = 1" data-class:active="$heroindex === 1">Solid</button>
-    <button class="demo-control-btn" data-on:click="$heroindex = 2" data-class:active="$heroindex === 2">Image</button>
-    <button class="demo-control-btn" data-on:click="$heroindex = 3" data-class:active="$heroindex === 3">Pattern</button>
+    <button class="demo-control-btn" data-on:click="$bgMode = 'gradient'" data-class:active="$bgMode === 'gradient'">Gradient</button>
+    <button class="demo-control-btn" data-on:click="$bgMode = 'solid'" data-class:active="$bgMode === 'solid'">Solid</button>
+    <button class="demo-control-btn" data-on:click="$bgMode = 'image'" data-class:active="$bgMode === 'image'">Image</button>
+    <button class="demo-control-btn" data-on:click="$bgMode = 'pattern'" data-class:active="$bgMode === 'pattern'">Pattern</button>
+    <button class="demo-control-btn demo-code-toggle" data-on:click="$showCode = !$showCode" data-class:active="$showCode">⟨/⟩ Code</button>
   </div>
-  <div class="demo-canvas-area" style="border-color: #4ade80; border-width: 2px; border-style: dashed; border-radius: 12px;" data-on:click="$heroindex = ($heroindex + 1) % 4">
-    <div style="height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; transition: all 0.6s var(--ease-out-3); cursor: pointer; border-radius: 8px;" data-style:background="$heroindex === 0 ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : $heroindex === 1 ? '#1e3a5f' : $heroindex === 2 ? 'linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url(https://picsum.photos/400/200?random=1)' : 'repeating-linear-gradient(45deg, #22c55e 0px, #22c55e 10px, #16a34a 10px, #16a34a 20px)'">
-      <h3 style="margin: 0 0 8px 0; font-size: 24px; font-weight: 900; color: white; text-shadow: 0 4px 12px rgba(0,0,0,0.3);">Visual Impact</h3>
-      <p style="margin: 0; font-size: 14px; color: rgba(255,255,255,0.9); font-weight: 600;">Click to cycle layers</p>
+  <div class="demo-controls-row">
+    <button class="demo-control-btn" data-on:click="$bgSize = 'cover'" data-class:active="$bgSize === 'cover'">Cover</button>
+    <button class="demo-control-btn" data-on:click="$bgSize = 'contain'" data-class:active="$bgSize === 'contain'">Contain</button>
+    <button class="demo-control-btn" data-on:click="$bgSize = 'auto'" data-class:active="$bgSize === 'auto'">Auto</button>
+    <button class="demo-control-btn" data-on:click="$bgSize = '50%'" data-class:active="$bgSize === '50%'">50%</button>
+  </div>
+  <div class="demo-controls-row">
+    <button class="demo-control-btn" data-on:click="$bgPosition = 'center'" data-class:active="$bgPosition === 'center'">Center</button>
+    <button class="demo-control-btn" data-on:click="$bgPosition = 'top'" data-class:active="$bgPosition === 'top'">Top</button>
+    <button class="demo-control-btn" data-on:click="$bgPosition = 'bottom'" data-class:active="$bgPosition === 'bottom'">Bottom</button>
+    <button class="demo-control-btn" data-on:click="$bgPosition = 'left'" data-class:active="$bgPosition === 'left'">Left</button>
+    <button class="demo-control-btn" data-on:click="$bgPosition = 'right'" data-class:active="$bgPosition === 'right'">Right</button>
+  </div>
+  <div class="demo-controls-row">
+    <button class="demo-control-btn" data-on:click="$bgRepeat = 'no-repeat'" data-class:active="$bgRepeat === 'no-repeat'">No-repeat</button>
+    <button class="demo-control-btn" data-on:click="$bgRepeat = 'repeat'" data-class:active="$bgRepeat === 'repeat'">Repeat</button>
+    <button class="demo-control-btn" data-on:click="$bgRepeat = 'repeat-x'" data-class:active="$bgRepeat === 'repeat-x'">Repeat-X</button>
+    <button class="demo-control-btn" data-on:click="$bgRepeat = 'repeat-y'" data-class:active="$bgRepeat === 'repeat-y'">Repeat-Y</button>
+  </div>
+  <div class="demo-canvas-area" style="display: flex; justify-content: center; align-items: center; height: 200px; border-radius: 12px; border: 2px dashed #4ade80; overflow: hidden;" data-style:background="window.bgValue($bgMode)" data-style:background-size="$bgSize" data-style:background-position="$bgPosition" data-style:background-repeat="$bgRepeat" data-on:click="$bgMode = ['gradient','solid','image','pattern'][(['gradient','solid','image','pattern'].indexOf($bgMode) + 1) % 4]">
+    <div style="text-align: center; color: white; font-weight: 800; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">
+      <div style="font-size: 24px; margin-bottom: 8px;">Visual Impact</div>
+      <div style="font-size: 12px; opacity: 0.8;">Click to cycle modes</div>
     </div>
+  </div>
+  <div class="demo-code-panel" data-show="$showCode">
+    <pre><code data-text="window.backgroundsCSS($bgMode, $bgSize, $bgPosition, $bgRepeat)"></code></pre>
+    <button class="demo-copy-btn" data-on:click="window.copyDemoCSS(window.backgroundsCSS($bgMode, $bgSize, $bgPosition, $bgRepeat))">Copy</button>
   </div>
 </div>`,
     learningObjectives: [
@@ -1003,6 +1162,7 @@ h1, h2, h3 {
       "Large background images impact page load performance",
       "Fixed attachments can cause jittery scrolling on mobile",
     ],
+    annotations: [],
   },
   BoxModel: {
     id: "BoxModel",
@@ -1075,27 +1235,44 @@ h1, h2, h3 {
       },
     ],
     related: ["Layout", "Spacing", "Sizing"],
-    interactiveDemo: `<div class="demo-playground-card" style="background: linear-gradient(135deg, #7c2d12 0%, #ea580c 100%);">
+    interactiveDemo: `<div class="demo-playground-card" data-signals='{"boxMargin":20,"boxPadding":30,"boxBorder":8,"showCode":false}' style="background: linear-gradient(135deg, #7c2d12 0%, #ea580c 100%);">
   <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-s);">
     <h4 style="color: #fed7aa; margin: 0; font-size: 14px; font-weight: 800;">Box Visualizer</h4>
-    <button class="demo-control-btn" data-on:click="$boxmargin = '10px'; $boxpadding = '8px'; $boxborder = '4px'" style="background: #92400e;">Reset</button>
+    <div style="display: flex; gap: 8px;">
+      <button class="demo-control-btn" data-on:click="$boxMargin = 20; $boxPadding = 30; $boxBorder = 8" style="background: #92400e;">Reset</button>
+      <button class="demo-control-btn demo-code-toggle" data-on:click="$showCode = !$showCode" data-class:active="$showCode">⟨/⟩ Code</button>
+    </div>
   </div>
-  <div class="demo-controls-row">
-    <button class="demo-control-btn" data-on:click="$boxmargin = '10px'" data-class:active="$boxmargin === '10px'">M: 10</button>
-    <button class="demo-control-btn" data-on:click="$boxmargin = '30px'" data-class:active="$boxmargin === '30px'">M: 30</button>
-    <button class="demo-control-btn" data-on:click="$boxpadding = '8px'" data-class:active="$boxpadding === '8px'" style="background: #ea580c33">P: 8</button>
-    <button class="demo-control-btn" data-on:click="$boxpadding = '24px'" data-class:active="$boxpadding === '24px'" style="background: #ea580c33">P: 24</button>
-    <button class="demo-control-btn" data-on:click="$boxborder = '4px'" data-class:active="$boxborder === '4px'" style="background: #f9731633">B: 4</button>
-    <button class="demo-control-btn" data-on:click="$boxborder = '12px'" data-class:active="$boxborder === '12px'" style="background: #f9731633">B: 12</button>
+  <div class="demo-controls-row" style="display: flex; flex-direction: column; gap: 12px; padding: 12px; background: rgba(0,0,0,0.2); border-radius: 8px;">
+      <div style="display: flex; align-items: center; gap: 12px; color: #fed7aa; font-size: 13px;">
+        <label style="min-width: 70px;">Margin:</label>
+        <input type="range" min="0" max="50" step="5" data-bind:boxMargin style="flex: 1; accent-color: #fbbf24;">
+        <span data-text="$boxMargin + 'px'" style="min-width: 45px; text-align: right; font-weight: 800;">20px</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px; color: #fed7aa; font-size: 13px;">
+        <label style="min-width: 70px;">Padding:</label>
+        <input type="range" min="0" max="40" step="5" data-bind:boxPadding style="flex: 1; accent-color: #fb923c;">
+        <span data-text="$boxPadding + 'px'" style="min-width: 45px; text-align: right; font-weight: 800;">30px</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px; color: #fed7aa; font-size: 13px;">
+        <label style="min-width: 70px;">Border:</label>
+        <input type="range" min="0" max="20" step="2" data-bind:boxBorder style="flex: 1; accent-color: #f97316;">
+        <span data-text="$boxBorder + 'px'" style="min-width: 45px; text-align: right; font-weight: 800;">8px</span>
+      </div>
   </div>
-  <div class="demo-canvas-area" style="display: flex; justify-content: center; align-items: center; height: 140px; border: none; border-radius: 12px;">
-    <div style="background: rgba(252, 211, 77, 0.4); border-radius: 4px; transition: all 0.3s var(--ease-spring-2); border: 1px dashed rgba(255,255,255,0.4);" data-style:padding="$boxmargin">
-      <div style="background: rgba(251, 146, 60, 0.6); border-radius: 4px; transition: all 0.3s var(--ease-spring-2); border: 2px solid #b45309;" data-style:padding="$boxborder">
-        <div style="background: rgba(255,255,255,0.9); padding: 20px; border-radius: 2px; color: #7c2d12; font-weight: 800; font-size: 12px; text-transform: uppercase; text-align: center; transition: all 0.3s var(--ease-spring-2);" data-style:padding="$boxpadding">
+  <div class="demo-canvas-area" style="display: flex; justify-content: center; align-items: center; height: 140px; border: none; border-radius: 12px; margin-top: 12px;">
+    <div style="background: rgba(252, 211, 77, 0.4); border-radius: 4px; transition: all 0.3s var(--ease-spring-2); border: 1px dashed rgba(255,255,255,0.4);" data-style:padding="$boxMargin + 'px'">
+      <div style="background: rgba(251, 146, 60, 0.6); border-radius: 4px; transition: all 0.3s var(--ease-spring-2); border: 2px solid #b45309;" data-style:padding="$boxBorder + 'px'">
+        <div style="background: rgba(255,255,255,0.9); padding: 20px; border-radius: 2px; color: #7c2d12; font-weight: 800; font-size: 12px; text-transform: uppercase; text-align: center; transition: all 0.3s var(--ease-spring-2);" data-style:padding="$boxPadding + 'px'">
           Content
         </div>
       </div>
     </div>
+  </div>
+  <div class="demo-code-panel" data-show="$showCode" style="background: #1e1e1e; border-radius: 8px; padding: 12px; margin-top: 12px;">
+    <pre style="margin: 0;"><code data-text="window.boxModelCSS($boxMargin, $boxPadding, $boxBorder)"></code></pre>
+    <button class="demo-copy-btn" data-on:click="window.copyDemoCSS(window.boxModelCSS($boxMargin, $boxPadding, $boxBorder))" style="margin-top: 8px; padding: 6px 12px; background: #3b82f6; color: white; border: none; border-radius: 4px; font-size: 12px; cursor: pointer;">Copy</button>
+    <p style="font-size:10px;opacity:0.7;margin-top:8px;margin-bottom:0;">Note: This visualizer uses nested layers to illustrate the box model concept. The CSS shown is the standard way to apply these properties.</p>
   </div>
 </div>`,
     learningObjectives: [
@@ -1128,6 +1305,7 @@ h1, h2, h3 {
       "Margin collapsing can be confusing for beginners",
       "Default content-box sizing often leads to overflow",
     ],
+    annotations: [],
   },
   Transitions: {
     id: "Transitions",
@@ -1209,21 +1387,34 @@ h1, h2, h3 {
       },
     ],
     related: ["Animation", "Transform", "Visual"],
-    interactiveDemo: `<div class="demo-playground-card" style="background: linear-gradient(135deg, #581c87 0%, #a855f7 100%);">
+    interactiveDemo: `<div class="demo-playground-card" data-signals="{ timing: 'ease', duration: '0.6', transitionProp: 'all', showCode: false }" style="background: linear-gradient(135deg, #581c87 0%, #a855f7 100%);">
   <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-s);">
     <h4 style="color: #e9d5ff; margin: 0; font-size: 14px; font-weight: 800;">Micro-interaction Lab</h4>
     <span style="color: #e9d5ff; font-size: 11px; font-weight: 600; text-transform: uppercase;">$timing</span>
   </div>
   <div class="demo-controls-row">
+    <button class="demo-control-btn" data-on:click="$transitionProp = 'all'" data-class:active="$transitionProp === 'all'">all</button>
+    <button class="demo-control-btn" data-on:click="$transitionProp = 'transform'" data-class:active="$transitionProp === 'transform'">transform</button>
+    <button class="demo-control-btn" data-on:click="$transitionProp = 'background'" data-class:active="$transitionProp === 'background'">background</button>
     <button class="demo-control-btn" data-on:click="$timing = 'ease'" data-class:active="$timing === 'ease'">Ease</button>
     <button class="demo-control-btn" data-on:click="$timing = 'ease-in'" data-class:active="$timing === 'ease-in'">Ease In</button>
     <button class="demo-control-btn" data-on:click="$timing = 'ease-out'" data-class:active="$timing === 'ease-out'">Ease Out</button>
     <button class="demo-control-btn" data-on:click="$timing = 'linear'" data-class:active="$timing === 'linear'">Linear</button>
     <button class="demo-control-btn" data-on:click="$timing = 'cubic-bezier(0.68, -0.55, 0.265, 1.55)'" data-class:active="$timing.includes('cubic')" style="background: #c084fc;">Bounce</button>
+    <button class="demo-control-btn demo-code-toggle" data-on:click="$showCode = !$showCode" data-class:active="$showCode">⟨/⟩ Code</button>
+  </div>
+  <div class="demo-controls-row" style="align-items: center; gap: 8px;">
+    <label style="color: #e9d5ff; font-size: 12px; font-weight: 700;">Duration:</label>
+    <input type="range" min="0.1" max="2.0" step="0.1" data-bind:duration style="width: 80px;">
+    <span data-text="$duration + 's'" style="color: #e9d5ff; font-size: 12px; font-weight: 700; font-weight: 700;"></span>
   </div>
   <div class="demo-canvas-area" style="display: flex; justify-content: center; gap: 24px; padding: 20px; align-items: center; border-color: #c084fc; border-width: 2px; border-style: dashed; border-radius: 12px;">
-    <div data-on:mouseenter="$_hover1 = true" data-on:mouseleave="$_hover1 = false" class="demo-item-box" data-style:transform="$_hover1 ? 'scale(1.15) rotate(8deg)' : 'scale(1) rotate(0deg)'" data-style:background="$_hover1 ? '#9333ea' : '#c084fc'" data-style:transition="'all 0.6s ' + $timing" style="padding: 12px 20px; width: auto; height: auto; cursor: pointer; font-size: 14px; border-radius: 8px;">HOVER</div>
-    <div data-on:click="$_clicked = !$_clicked" class="demo-item-box" data-style:transform="$_clicked ? 'translateX(20px)' : 'translateX(0)'" data-style:background="$_clicked ? '#ec4899' : '#a855f7'" data-style:transition="'all 0.6s ' + $timing" style="width: 50px; height: 50px; cursor: pointer; border-radius: 50%;"></div>
+    <div data-on:mouseenter="$_hover1 = true" data-on:mouseleave="$_hover1 = false" class="demo-item-box" data-style:transform="$_hover1 ? 'scale(1.15) rotate(8deg)' : 'scale(1) rotate(0deg)'" data-style:background="$_hover1 ? '#9333ea' : '#c084fc'" data-style:transition="'$transitionProp + ' + $duration + 's ' + $timing'" style="padding: 12px 20px; width: auto; height: auto; cursor: pointer; font-size: 14px; border-radius: 8px;">HOVER</div>
+    <div data-on:click="$_clicked = !$_clicked" class="demo-item-box" data-style:transform="$_clicked ? 'translateX(20px)' : 'translateX(0)'" data-style:background="$_clicked ? '#ec4899' : '#a855f7'" data-style:transition="'$transitionProp + ' + $duration + 's ' + $timing'" style="width: 50px; height: 50px; cursor: pointer; border-radius: 50%;"></div>
+  </div>
+  <div class="demo-code-panel" data-show="$showCode">
+    <pre><code data-text="window.transitionsCSS($transitionProp, $duration, $timing)"></code></pre>
+    <button class="demo-copy-btn" data-on:click="window.copyDemoCSS(window.transitionsCSS($transitionProp, $duration, $timing))">Copy</button>
   </div>
 </div>`,
     learningObjectives: [
@@ -1256,6 +1447,7 @@ h1, h2, h3 {
       "Requires a trigger (hover, focus, class change)",
       "Can't animate auto dimensions easily",
     ],
+    annotations: [],
   },
 };
 

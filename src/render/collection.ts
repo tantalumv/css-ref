@@ -2,13 +2,6 @@ import { escapeHTML } from "../lib/utils";
 import type { CSSProperty } from "../types";
 import type { CollectionMeta } from "../data/collections";
 
-interface CollectionExample {
-  title: string;
-  description: string;
-  code: string;
-  result?: string;
-}
-
 /**
  * Render a single property section for collection page
  */
@@ -163,7 +156,7 @@ const relatedProps = allProps.filter((p: CSSProperty) => targetCategories.includ
   const gridToggleHTML = "";
   const playPauseToggleHTML = "";
 
-  const renderSection = (content: string, className: string = "") => {
+  const renderSection = (content: string, _className?: string) => {
     return content;
   };
 
@@ -338,16 +331,5 @@ export function showCollectionView(collectionSlug: string, allProps: CSSProperty
   } else {
     // No matching curated collection found - clear the view
     view.innerHTML = "";
-  }
-}
-
-/**
- * Hide collection view
- */
-export function hideCollectionView(): void {
-  const view = document.getElementById("collection-view");
-  if (view) {
-    view.innerHTML = "";
-    view.setAttribute("data-show", "false");
   }
 }

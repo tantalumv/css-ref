@@ -46,14 +46,6 @@ export interface CSSPropertyFull {
 }
 
 export type InteropStatus = "wide" | "b2024" | "b2023" | "b2022" | "ltd" | "exp";
-export type ViewMode = "grid" | "list";
-
-export interface CollectionExample {
-  title: string;
-  description: string;
-  code: string;
-  result?: string;
-}
 
 declare global {
   interface Window {

@@ -1,5 +1,166 @@
 import type { CSSPropertyFull } from "../types";
 
+function createGridTemplateColumnsDemo() {
+  const items = [1, 2, 3];
+  const colors = ["#7c3aed", "#6366f1", "#7c3aed"];
+  const labels = ["1fr", "2fr", "1fr"];
+  const gridItems = items
+    .map(
+      (_, i) => `<div style="background:${colors[i]};color:#fff;padding:8px 4px;border-radius:4px;font-size:10px;font-weight:700;text-align:center">${labels[i]}</div>`
+    )
+    .join("");
+  return `<div style="display:grid;grid-template-columns:1fr 2fr 1fr;gap:5px;padding:10px;width:100%">${gridItems}</div>`;
+}
+
+function createGridTemplateRowsDemo() {
+  const rows = [
+    { label: "24px", color: "#7c3aed" },
+    { label: "40px (tall)", color: "#6366f1" },
+    { label: "16px", color: "#a78bfa" },
+  ];
+  const cells = rows
+    .map(
+      (r) => `<div style="background:${r.color};color:#fff;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700">${r.label}</div>`
+    )
+    .join("");
+  return `<div style="display:grid;grid-template-rows:24px 40px 16px;gap:4px;padding:8px;width:100%">${cells}</div>`;
+}
+
+function createGridTemplateAreasDemo() {
+  const areas = [
+    { name: "header", area: "h", color: "#7c3aed" },
+    { name: "sidebar", area: "s", color: "#8b5cf6" },
+    { name: "main", area: "m", color: "#6366f1" },
+    { name: "footer", area: "f", color: "#a78bfa" },
+  ];
+  const cells = areas
+    .map(
+      (a) => `<div style="grid-area:${a.area};background:${a.color};color:#fff;border-radius:3px;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center">${a.name}</div>`
+    )
+    .join("");
+  return `<div style="display:grid;grid-template-columns:60px 1fr;grid-template-rows:22px 36px 18px;gap:3px;padding:8px;width:100%;grid-template-areas:'h h' 's m' 'f f'">${cells}</div>`;
+}
+
+function createGridColumnDemo() {
+  const items = [
+    {
+      style: "grid-column:1/-1",
+      label: "1 / -1 (full width)",
+      color: "#7c3aed",
+    },
+    { style: "", label: "1", color: "#a78bfa" },
+    { style: "grid-column:span 2", label: "span 2", color: "#6366f1" },
+  ];
+  const cells = items
+    .map(
+      (item) => `<div style="${item.style};background:${item.color};color:#fff;padding:6px;border-radius:3px;font-size:10px;font-weight:700;text-align:center">${item.label}</div>`
+    )
+    .join("");
+  return `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:8px;width:100%">${cells}</div>`;
+}
+
+function createGridRowDemo() {
+  const items = [
+    { style: "grid-row:span 2", label: "span 2", color: "#7c3aed" },
+    { style: "", label: "row 1", color: "#a78bfa" },
+    { style: "", label: "row 2", color: "#6366f1" },
+  ];
+  const cells = items
+    .map(
+      (item) => `<div style="${item.style};background:${item.color};color:#fff;border-radius:3px;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center">${item.label}</div>`
+    )
+    .join("");
+  return `<div style="display:grid;grid-template-columns:60px 1fr;grid-template-rows:repeat(2,30px);gap:4px;padding:8px;width:100%">${cells}</div>`;
+}
+
+function createGridAutoFlowDemo() {
+  const items = [
+    { style: "grid-column:span 2", label: "span 2", color: "#7c3aed" },
+    { style: "", label: "auto", color: "#a78bfa" },
+    { style: "", label: "auto", color: "#6366f1" },
+    { style: "", label: "auto", color: "#a78bfa" },
+  ];
+  const cells = items
+    .map(
+      (item) => `<div style="${item.style};background:${item.color};color:#fff;border-radius:3px;padding:6px;font-size:9px;font-weight:700;text-align:center">${item.label}</div>`
+    )
+    .join("");
+  return `<div style="display:grid;grid-template-columns:repeat(3,1fr);grid-auto-flow:dense;gap:4px;padding:8px;width:100%">${cells}</div>`;
+}
+
+function createSubgridDemo() {
+  const cells = [1, 2, 3]
+    .map(
+      (n) => `<div style="background:${["#7c3aed", "#6366f1", "#8b5cf6"][n - 1]};color:#fff;border-radius:3px;padding:6px;font-size:9px;font-weight:700;text-align:center">${["inherits","parent","tracks"][n - 1]}</div>`
+    )
+    .join("");
+  return `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:8px;width:100%"><div style="grid-column:1/-1;display:grid;grid-template-columns:subgrid;gap:4px;background:#f5f3ff;border:2px dashed #7c3aed;border-radius:4px;padding:4px">${cells}</div></div>`;
+}
+
+function createMinmaxDemo() {
+  const items = [
+    { label: "minmax(70px,1fr)", color: "#7c3aed" },
+    { label: "minmax(100px,2fr)", color: "#6366f1" },
+  ];
+  const cells = items
+    .map(
+      (item) => `<div style="background:${item.color};color:#fff;border-radius:3px;padding:7px;font-size:9px;font-weight:700;text-align:center">${item.label}</div>`
+    )
+    .join("");
+  return `<div style="display:grid;grid-template-columns:minmax(70px,1fr) minmax(100px,2fr);gap:4px;padding:8px;width:100%">${cells}</div>`;
+}
+
+function createRepeatDemo() {
+  const nums = [1, 2, 3, 4];
+  const cells = nums
+    .map(
+      (n) => `<div style="background:#8b5cf6;color:#fff;border-radius:3px;padding:6px;font-size:9px;font-weight:700;text-align:center">${n}</div>`
+    )
+    .join("");
+  return `<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:8px;width:100%">${cells}</div>`;
+}
+
+function createGridAreaDemo() {
+  const areas = [
+    { area: "a", label: "area a", color: "#6366f1" },
+    { area: "b", label: "area b", color: "#8b5cf6" },
+    { area: "c", label: "area c", color: "#a78bfa" },
+  ];
+  const cells = areas
+    .map(
+      (a) => `<div style="grid-area:${a.area};background:${a.color};color:#fff;padding:6px;border-radius:3px;font-size:9px;font-weight:700;text-align:center">${a.label}</div>`
+    )
+    .join("");
+  return `<div style="padding:10px"><div style="display:grid;grid-template-columns:1fr 1fr;grid-template-areas:'a b' 'c c';gap:4px;background:#eef2ff;border:2px solid #6366f1;border-radius:5px;padding:8px">${cells}</div></div>`;
+}
+
+function createGridAutoColumnsDemo() {
+  const items = [
+    { label: "1", color: "#6366f1" },
+    { label: "2", color: "#8b5cf6" },
+    { label: "3", color: "#a78bfa" },
+  ];
+  const cells = items
+    .map(
+      (item) => `<div style="background:${item.color};color:#fff;padding:6px;border-radius:3px;font-size:9px;font-weight:700;text-align:center">${item.label}</div>`
+    )
+    .join("");
+  return `<div style="padding:10px"><div style="display:grid;grid-auto-flow:column;grid-auto-columns:60px;gap:4px;background:#eef2ff;border:2px solid #6366f1;border-radius:5px;padding:8px">${cells}</div></div>`;
+}
+
+function createGridAutoRowsDemo() {
+  const items = [
+    { label: "1", color: "#6366f1" },
+    { label: "2", color: "#8b5cf6" },
+  ];
+  const cells = items
+    .map(
+      (item) => `<div style="background:${item.color};color:#fff;padding:6px;border-radius:3px;font-size:9px;font-weight:700;text-align:center">${item.label}</div>`
+    )
+    .join("");
+  return `<div style="padding:10px"><div style="display:grid;grid-auto-rows:30px;gap:4px;background:#eef2ff;border:2px solid #6366f1;border-radius:5px;padding:8px">${cells}</div></div>`;
+}
+
 export const grid: CSSPropertyFull[] = [
   {
     name: "grid-template-columns",
@@ -11,7 +172,7 @@ export const grid: CSSPropertyFull[] = [
     mdnPath: "grid-template-columns",
     caniuse: "css-grid",
     default: "none",
-    demo: `<div style="display:grid;grid-template-columns:1fr 2fr 1fr;gap:5px;padding:10px;width:100%">${[1, 2, 3].map((n, i) => `<div style="background:${["#7c3aed", "#6366f1", "#7c3aed"][i]};color:#fff;padding:8px 4px;border-radius:4px;font-size:10px;font-weight:700;text-align:center">${["1fr", "2fr", "1fr"][i]}</div>`).join("")}</div>`,
+    demo: createGridTemplateColumnsDemo(),
     values: [
       {
         value: "fr",
@@ -44,7 +205,6 @@ export const grid: CSSPropertyFull[] = [
       },
     ],
   },
-
   {
     name: "grid-template-rows",
     category: "Grid",
@@ -55,7 +215,7 @@ export const grid: CSSPropertyFull[] = [
     mdnPath: "grid-template-rows",
     caniuse: "css-grid",
     default: "none",
-    demo: `<div style="display:grid;grid-template-rows:24px 40px 16px;gap:4px;padding:8px;width:100%"><div style="background:#7c3aed;color:#fff;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700">24px</div><div style="background:#6366f1;color:#fff;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700">40px (tall)</div><div style="background:#a78bfa;color:#fff;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700">16px</div></div>`,
+    demo: createGridTemplateRowsDemo(),
     values: [
       {
         value: "auto",
@@ -84,7 +244,6 @@ export const grid: CSSPropertyFull[] = [
       },
     ],
   },
-
   {
     name: "grid-template-areas",
     category: "Grid",
@@ -94,7 +253,7 @@ export const grid: CSSPropertyFull[] = [
     example: 'grid-template-areas:\n  "header header"\n  "sidebar main"\n  "footer footer"',
     mdnPath: "grid-template-areas",
     caniuse: "css-grid",
-    demo: `<div style="display:grid;grid-template-columns:60px 1fr;grid-template-rows:22px 36px 18px;gap:3px;padding:8px;width:100%;grid-template-areas:'h h' 's m' 'f f'"><div style="grid-area:h;background:#7c3aed;color:#fff;border-radius:3px;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center">header</div><div style="grid-area:s;background:#8b5cf6;color:#fff;border-radius:3px;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center">sidebar</div><div style="grid-area:m;background:#6366f1;color:#fff;border-radius:3px;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center">main</div><div style="grid-area:f;background:#a78bfa;color:#fff;border-radius:3px;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center">footer</div></div>`,
+    demo: createGridTemplateAreasDemo(),
     values: [
       {
         value: '"name"',
@@ -113,7 +272,6 @@ export const grid: CSSPropertyFull[] = [
       },
     ],
   },
-
   {
     name: "grid-column",
     category: "Grid",
@@ -123,7 +281,7 @@ export const grid: CSSPropertyFull[] = [
     example: "grid-column: 1 / 3 | span 2 | 1 / -1",
     mdnPath: "grid-column",
     caniuse: "css-grid",
-    demo: `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:8px;width:100%"><div style="grid-column:1/-1;background:#7c3aed;color:#fff;padding:6px;border-radius:3px;font-size:10px;font-weight:700;text-align:center">1 / -1 (full width)</div><div style="background:#a78bfa;color:#fff;padding:6px;border-radius:3px;font-size:10px;font-weight:700;text-align:center">1</div><div style="grid-column:span 2;background:#6366f1;color:#fff;padding:6px;border-radius:3px;font-size:10px;font-weight:700;text-align:center">span 2</div></div>`,
+    demo: createGridColumnDemo(),
     values: [
       {
         value: "1",
@@ -148,7 +306,6 @@ export const grid: CSSPropertyFull[] = [
       },
     ],
   },
-
   {
     name: "grid-row",
     category: "Grid",
@@ -158,7 +315,7 @@ export const grid: CSSPropertyFull[] = [
     example: "grid-row: 1 / 3 | span 2",
     mdnPath: "grid-row",
     caniuse: "css-grid",
-    demo: `<div style="display:grid;grid-template-columns:60px 1fr;grid-template-rows:repeat(2,30px);gap:4px;padding:8px;width:100%"><div style="grid-row:span 2;background:#7c3aed;color:#fff;border-radius:3px;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center">span 2</div><div style="background:#a78bfa;color:#fff;border-radius:3px;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center">row 1</div><div style="background:#6366f1;color:#fff;border-radius:3px;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center">row 2</div></div>`,
+    demo: createGridRowDemo(),
     values: [
       {
         value: "1",
@@ -183,7 +340,6 @@ export const grid: CSSPropertyFull[] = [
       },
     ],
   },
-
   {
     name: "grid-auto-flow",
     category: "Grid",
@@ -193,7 +349,7 @@ export const grid: CSSPropertyFull[] = [
     example: "grid-auto-flow: row | column | dense | row dense",
     mdnPath: "grid-auto-flow",
     caniuse: "css-grid",
-    demo: `<div style="display:grid;grid-template-columns:repeat(3,1fr);grid-auto-flow:dense;gap:4px;padding:8px;width:100%"><div style="grid-column:span 2;background:#7c3aed;color:#fff;border-radius:3px;padding:6px;font-size:9px;font-weight:700;text-align:center">span 2</div><div style="background:#a78bfa;color:#fff;border-radius:3px;padding:6px;font-size:9px;font-weight:700;text-align:center">auto</div><div style="background:#6366f1;color:#fff;border-radius:3px;padding:6px;font-size:9px;font-weight:700;text-align:center">auto</div><div style="background:#a78bfa;color:#fff;border-radius:3px;padding:6px;font-size:9px;font-weight:700;text-align:center">auto</div></div>`,
+    demo: createGridAutoFlowDemo(),
     values: [
       {
         value: "row",
@@ -215,7 +371,6 @@ export const grid: CSSPropertyFull[] = [
       },
     ],
   },
-
   {
     name: "subgrid",
     category: "Grid",
@@ -225,7 +380,7 @@ export const grid: CSSPropertyFull[] = [
     example: "grid-template-columns: subgrid\ngrid-template-rows: subgrid",
     mdnPath: "CSS_grid_layout/Subgrid",
     caniuse: "css-grid",
-    demo: `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:8px;width:100%"><div style="grid-column:1/-1;display:grid;grid-template-columns:subgrid;gap:4px;background:#f5f3ff;border:2px dashed #7c3aed;border-radius:4px;padding:4px"><div style="background:#7c3aed;color:#fff;border-radius:3px;padding:6px;font-size:9px;font-weight:700;text-align:center">inherits</div><div style="background:#6366f1;color:#fff;border-radius:3px;padding:6px;font-size:9px;font-weight:700;text-align:center">parent</div><div style="background:#8b5cf6;color:#fff;border-radius:3px;padding:6px;font-size:9px;font-weight:700;text-align:center">tracks</div></div></div>`,
+    demo: createSubgridDemo(),
     values: [
       {
         value: "subgrid",
@@ -235,7 +390,6 @@ export const grid: CSSPropertyFull[] = [
       },
     ],
   },
-
   {
     name: "minmax()",
     category: "Grid",
@@ -245,9 +399,8 @@ export const grid: CSSPropertyFull[] = [
     example: "grid-template-columns: minmax(80px, 1fr) 2fr",
     mdnPath: "minmax",
     caniuse: "css-grid",
-    demo: `<div style="display:grid;grid-template-columns:minmax(70px,1fr) minmax(100px,2fr);gap:4px;padding:8px;width:100%"><div style="background:#7c3aed;color:#fff;border-radius:3px;padding:7px;font-size:9px;font-weight:700;text-align:center">minmax(70px,1fr)</div><div style="background:#6366f1;color:#fff;border-radius:3px;padding:7px;font-size:9px;font-weight:700;text-align:center">minmax(100px,2fr)</div></div>`,
+    demo: createMinmaxDemo(),
   },
-
   {
     name: "repeat()",
     category: "Grid",
@@ -257,9 +410,8 @@ export const grid: CSSPropertyFull[] = [
     example: "grid-template-columns: repeat(4, 1fr)",
     mdnPath: "repeat",
     caniuse: "css-grid",
-    demo: `<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:8px;width:100%">${[1, 2, 3, 4].map((n) => `<div style="background:#8b5cf6;color:#fff;border-radius:3px;padding:6px;font-size:9px;font-weight:700;text-align:center">${n}</div>`).join("")}</div>`,
+    demo: createRepeatDemo(),
   },
-
   {
     name: "grid-area",
     category: "Grid",
@@ -269,9 +421,8 @@ export const grid: CSSPropertyFull[] = [
     example: "grid-area: header | 1 / 2 / 3 / 4",
     mdnPath: "grid-area",
     caniuse: "css-grid",
-    demo: `<div style="padding:10px"><div style="display:grid;grid-template-columns:1fr 1fr;grid-template-areas:'a b' 'c c';gap:4px;background:#eef2ff;border:2px solid #6366f1;border-radius:5px;padding:8px"><div style="grid-area:a;background:#6366f1;color:#fff;padding:6px;border-radius:3px;font-size:9px;font-weight:700;text-align:center">area a</div><div style="grid-area:b;background:#8b5cf6;color:#fff;padding:6px;border-radius:3px;font-size:9px;font-weight:700;text-align:center">area b</div><div style="grid-area:c;background:#a78bfa;color:#fff;padding:6px;border-radius:3px;font-size:9px;font-weight:700;text-align:center">area c</div></div></div>`,
+    demo: createGridAreaDemo(),
   },
-
   {
     name: "grid-auto-columns",
     category: "Grid",
@@ -281,9 +432,8 @@ export const grid: CSSPropertyFull[] = [
     example: "grid-auto-columns: 120px | minmax(100px,1fr)",
     mdnPath: "grid-auto-columns",
     caniuse: "css-grid",
-    demo: `<div style="padding:10px"><div style="display:grid;grid-auto-flow:column;grid-auto-columns:60px;gap:4px;background:#eef2ff;border:2px solid #6366f1;border-radius:5px;padding:8px"><div style="background:#6366f1;color:#fff;padding:6px;border-radius:3px;font-size:9px;font-weight:700;text-align:center">1</div><div style="background:#8b5cf6;color:#fff;padding:6px;border-radius:3px;font-size:9px;font-weight:700;text-align:center">2</div><div style="background:#a78bfa;color:#fff;padding:6px;border-radius:3px;font-size:9px;font-weight:700;text-align:center">3</div></div></div>`,
+    demo: createGridAutoColumnsDemo(),
   },
-
   {
     name: "grid-auto-rows",
     category: "Grid",
@@ -293,6 +443,6 @@ export const grid: CSSPropertyFull[] = [
     example: "grid-auto-rows: 80px | minmax(60px,auto)",
     mdnPath: "grid-auto-rows",
     caniuse: "css-grid",
-    demo: `<div style="padding:10px"><div style="display:grid;grid-auto-rows:30px;gap:4px;background:#eef2ff;border:2px solid #6366f1;border-radius:5px;padding:8px"><div style="background:#6366f1;color:#fff;padding:6px;border-radius:3px;font-size:9px;font-weight:700;text-align:center">1</div><div style="background:#8b5cf6;color:#fff;padding:6px;border-radius:3px;font-size:9px;font-weight:700;text-align:center">2</div></div></div>`,
+    demo: createGridAutoRowsDemo(),
   },
 ];

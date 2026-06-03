@@ -34,37 +34,11 @@ export function filterProperties(
 }
 
 /**
- * Filter using options object (for tests)
- */
-export function filterPropertiesWithOptions(
-  data: CSSProperty[],
-  options: FilterOptions = {},
-): CSSProperty[] {
-  const { query = "", categories = [], interops = [], browsers = [] } = options;
-  return filterProperties(data, query, categories, interops, browsers);
-}
-
-/**
  * Check if any filters are currently active (pure function with options)
  */
 export function hasActiveFilters(options: FilterOptions = {}): boolean {
   const { query = "", categories = [], interops = [], browsers = [] } = options;
   return query.length > 0 || categories.length > 0 || interops.length > 0 || browsers.length > 0;
-}
-
-/**
- * Check if current application state has active filters (for backwards compatibility)
- */
-export function hasFilters(): boolean {
-  return false; // No global state in modular version
-}
-
-/**
- * Filter using global state (for backwards compatibility with tests)
- * This is a stub - the actual implementation uses window.filtered
- */
-export function filtered(): CSSProperty[] {
-  return [];
 }
 
 /**

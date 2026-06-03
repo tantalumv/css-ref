@@ -319,21 +319,3 @@ export function getTableDisplayedCount(): number {
 export function getTableTotalCount(): number {
   return tableFullData.length;
 }
-
-/**
- * Destroy table instance and clean up
- */
-export function destroyTable(): void {
-  if (listInstance) {
-    listInstance.destroy?.();
-    listInstance = null;
-  }
-  tableFullData = [];
-  tableDisplayedCount = 0;
-  currentSortField = null;
-  currentSortOrder = "asc";
-  if (tableInitTimeout) {
-    clearTimeout(tableInitTimeout);
-    tableInitTimeout = null;
-  }
-}

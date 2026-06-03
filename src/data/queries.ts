@@ -1,5 +1,45 @@
 import type { CSSPropertyFull } from "../types";
 
+function createMediaDemo() {
+  return `<style>.q-media{display:grid;grid-template-columns:1fr;gap:4px}.q-media .cell{background:#c084fc;height:24px;border-radius:3px}@media (min-width: 720px){.q-media{grid-template-columns:repeat(3,1fr)}.q-media .cell{background:#a855f7}}</style><div style="padding:8px"><div class="q-media"><div class="cell"></div><div class="cell"></div><div class="cell"></div></div><div style="font-size:9px;color:#888;font-weight:700;text-align:center;margin-top:4px">Resize viewport to trigger @media</div></div>`;
+}
+
+function createContainerDemo() {
+  return `<style>.q-card-wrap{container-type:inline-size;container-name:card}.q-card{display:flex;flex-direction:column;gap:4px}.q-card .piece{background:#c084fc;color:#fff;padding:5px;border-radius:3px;font-size:9px;font-weight:700;text-align:center}@container card (min-width: 180px){.q-card{flex-direction:row}.q-card .piece{background:#a855f7}}</style><div class="q-card-wrap" style="width:190px;border:2px solid #a855f7;border-radius:6px;padding:8px;background:#faf5ff"><div class="q-card"><div class="piece">responsive</div><div class="piece">container</div></div></div>`;
+}
+
+function createLayerDemo() {
+  return `<style>@layer q-base, q-theme; @layer q-base {.q-layer-tag{background:#e9d5ff;color:#6d28d9}} @layer q-theme {.q-layer-tag{background:#8b5cf6;color:#fff}}</style><div style="padding:8px"><div class="q-layer-tag" style="padding:6px 10px;border-radius:3px;font-size:10px;font-weight:700;font-family:monospace">@layer q-theme overrides q-base</div></div>`;
+}
+
+function createSupportsDemo() {
+  return `<style>.q-support-box{padding:6px;border-radius:4px;font-size:10px;font-weight:700;font-family:monospace}@supports (display:grid){.q-support-ok{background:#dcfce7;border:2px solid #16a34a;color:#15803d}}@supports not (display:grid){.q-support-ok{background:#fee2e2;border:2px solid #dc2626;color:#b91c1c}}</style><div style="padding:10px"><div class="q-support-box q-support-ok">@supports (display:grid)</div></div>`;
+}
+
+function createHasDemo() {
+  return `<style>.q-has{border:2px solid #94a3b8;border-radius:5px;padding:6px;background:#f8fafc}.q-has:has(input:checked){border-color:#16a34a;background:#f0fdf4}.q-has:has(input:not(:checked)){border-color:#dc2626;background:#fff0f0}</style><div style="padding:10px;display:flex;flex-direction:column;gap:6px"><label class="q-has" style="display:flex;align-items:center;gap:6px"><input type="checkbox" aria-label="Checked checkbox" checked><span style="font-size:10px;font-weight:700">checked parent</span></label><label class="q-has" style="display:flex;align-items:center;gap:6px"><input type="checkbox" aria-label="Unchecked checkbox"><span style="font-size:10px;font-weight:700">unchecked parent</span></label></div>`;
+}
+
+function createIsDemo() {
+  return `<style>.q-is :is(h1,h2,h3){margin:0;color:#a855f7}.q-is h1{font-size:14px}.q-is h2{font-size:12px}.q-is h3{font-size:11px}</style><div class="q-is" style="padding:10px;display:flex;flex-direction:column;gap:4px"><h1>h1 via :is()</h1><h2>h2 via :is()</h2><h3>h3 via :is()</h3></div>`;
+}
+
+function createWhereDemo() {
+  return `<style>.q-where :where(.chip){color:#6366f1;background:#eef2ff}.q-where .chip.override{color:#fff;background:#8b5cf6}</style><div class="q-where" style="padding:10px;display:flex;gap:6px"><div class="chip" style="padding:5px 8px;border-radius:4px;font-size:10px;font-weight:700">default via :where</div><div class="chip override" style="padding:5px 8px;border-radius:4px;font-size:10px;font-weight:700">easy override</div></div>`;
+}
+
+function createNotDemo() {
+  return `<style>.q-not .item{padding:5px 10px;border-radius:3px;font-size:10px;font-weight:700;background:#e9d5ff;color:#6b21a8}.q-not .item:not(:last-child){background:#a855f7;color:#fff}</style><div class="q-not" style="display:flex;flex-direction:column;gap:4px;padding:8px;width:100%"><div class="item">first</div><div class="item">second</div><div class="item">last</div></div>`;
+}
+
+function createScopeDemo() {
+  return `<style>@scope (.q-scope-card){.q-title{color:#15803d;font-weight:800}}</style><div style="padding:10px;display:flex;flex-direction:column;gap:6px"><div class="q-scope-card" style="padding:8px;border:2px solid #16a34a;border-radius:6px"><p class="q-title" style="margin:0;font-size:10px">scoped title</p></div><div style="padding:8px;border:2px solid #cbd5e1;border-radius:6px"><p class="q-title" style="margin:0;font-size:10px;color:#64748b">outside scope</p></div></div>`;
+}
+
+function createStartingStyleDemo() {
+  return `<style>.q-start{opacity:1;transform:scale(1);transition:opacity .35s ease,transform .35s ease}@starting-style{.q-start{opacity:0;transform:scale(.9)}}</style><div style="padding:10px"><div class="q-start" style="background:#fef3c7;border:2px solid #eab308;border-radius:6px;padding:8px;font-size:10px;font-weight:700;color:#a16207">Entry transition with @starting-style</div></div>`;
+}
+
 export const queries: CSSPropertyFull[] = [
   {
     name: "@media",
@@ -9,7 +49,7 @@ export const queries: CSSPropertyFull[] = [
     interop: "wide",
     example: "@media (min-width: 48rem) { .grid { columns: 2 } }\n@media (prefers-color-scheme: dark) { ... }",
     mdnPath: "@media",
-    demo: `<style>.q-media{display:grid;grid-template-columns:1fr;gap:4px}.q-media .cell{background:#c084fc;height:24px;border-radius:3px}@media (min-width: 720px){.q-media{grid-template-columns:repeat(3,1fr)}.q-media .cell{background:#a855f7}}</style><div style="padding:8px"><div class="q-media"><div class="cell"></div><div class="cell"></div><div class="cell"></div></div><div style="font-size:9px;color:#888;font-weight:700;text-align:center;margin-top:4px">Resize viewport to trigger @media</div></div>`,
+    demo: createMediaDemo(),
   },
 
   {
@@ -20,7 +60,7 @@ export const queries: CSSPropertyFull[] = [
     interop: "b2023",
     example: "@container card (min-width: 30em) { .title { font-size: 2rem } }",
     mdnPath: "@container",
-    demo: `<style>.q-card-wrap{container-type:inline-size;container-name:card}.q-card{display:flex;flex-direction:column;gap:4px}.q-card .piece{background:#c084fc;color:#fff;padding:5px;border-radius:3px;font-size:9px;font-weight:700;text-align:center}@container card (min-width: 180px){.q-card{flex-direction:row}.q-card .piece{background:#a855f7}}</style><div class="q-card-wrap" style="width:190px;border:2px solid #a855f7;border-radius:6px;padding:8px;background:#faf5ff"><div class="q-card"><div class="piece">responsive</div><div class="piece">container</div></div></div>`,
+    demo: createContainerDemo(),
   },
 
   {
@@ -31,7 +71,7 @@ export const queries: CSSPropertyFull[] = [
     interop: "b2022",
     example: "@layer utilities { .flex { display: flex } }\n@layer base, theme, utilities",
     mdnPath: "@layer",
-    demo: `<style>@layer q-base, q-theme; @layer q-base {.q-layer-tag{background:#e9d5ff;color:#6d28d9}} @layer q-theme {.q-layer-tag{background:#8b5cf6;color:#fff}}</style><div style="padding:8px"><div class="q-layer-tag" style="padding:6px 10px;border-radius:3px;font-size:10px;font-weight:700;font-family:monospace">@layer q-theme overrides q-base</div></div>`,
+    demo: createLayerDemo(),
   },
 
   {
@@ -42,7 +82,7 @@ export const queries: CSSPropertyFull[] = [
     interop: "wide",
     example: "@supports (display: grid) { .layout { display: grid } }",
     mdnPath: "@supports",
-    demo: `<style>.q-support-box{padding:6px;border-radius:4px;font-size:10px;font-weight:700;font-family:monospace}@supports (display:grid){.q-support-ok{background:#dcfce7;border:2px solid #16a34a;color:#15803d}}@supports not (display:grid){.q-support-ok{background:#fee2e2;border:2px solid #dc2626;color:#b91c1c}}</style><div style="padding:10px"><div class="q-support-box q-support-ok">@supports (display:grid)</div></div>`,
+    demo: createSupportsDemo(),
   },
 
   {
@@ -53,7 +93,7 @@ export const queries: CSSPropertyFull[] = [
     interop: "b2023",
     example: "form:has(:invalid) { border-color: red; }\nli:has(+ li) { margin-bottom: 1rem; }",
     mdnPath: ":has",
-    demo: `<style>.q-has{border:2px solid #94a3b8;border-radius:5px;padding:6px;background:#f8fafc}.q-has:has(input:checked){border-color:#16a34a;background:#f0fdf4}.q-has:has(input:not(:checked)){border-color:#dc2626;background:#fff0f0}</style><div style="padding:10px;display:flex;flex-direction:column;gap:6px"><label class="q-has" style="display:flex;align-items:center;gap:6px"><input type="checkbox" aria-label="Checked checkbox" checked><span style="font-size:10px;font-weight:700">checked parent</span></label><label class="q-has" style="display:flex;align-items:center;gap:6px"><input type="checkbox" aria-label="Unchecked checkbox"><span style="font-size:10px;font-weight:700">unchecked parent</span></label></div>`,
+    demo: createHasDemo(),
   },
 
   {
@@ -64,7 +104,7 @@ export const queries: CSSPropertyFull[] = [
     interop: "wide",
     example: ":is(h1, h2, h3) { margin-block: 1.5rem }",
     mdnPath: ":is",
-    demo: `<style>.q-is :is(h1,h2,h3){margin:0;color:#a855f7}.q-is h1{font-size:14px}.q-is h2{font-size:12px}.q-is h3{font-size:11px}</style><div class="q-is" style="padding:10px;display:flex;flex-direction:column;gap:4px"><h1>h1 via :is()</h1><h2>h2 via :is()</h2><h3>h3 via :is()</h3></div>`,
+    demo: createIsDemo(),
   },
 
   {
@@ -75,7 +115,7 @@ export const queries: CSSPropertyFull[] = [
     interop: "wide",
     example: ":where(header, footer) a { color: inherit }",
     mdnPath: ":where",
-    demo: `<style>.q-where :where(.chip){color:#6366f1;background:#eef2ff}.q-where .chip.override{color:#fff;background:#8b5cf6}</style><div class="q-where" style="padding:10px;display:flex;gap:6px"><div class="chip" style="padding:5px 8px;border-radius:4px;font-size:10px;font-weight:700">default via :where</div><div class="chip override" style="padding:5px 8px;border-radius:4px;font-size:10px;font-weight:700">easy override</div></div>`,
+    demo: createWhereDemo(),
   },
 
   {
@@ -86,7 +126,7 @@ export const queries: CSSPropertyFull[] = [
     interop: "wide",
     example: "li:not(:last-child) { margin-bottom: 0.5rem }\nbutton:not([disabled]) { ... }",
     mdnPath: ":not",
-    demo: `<style>.q-not .item{padding:5px 10px;border-radius:3px;font-size:10px;font-weight:700;background:#e9d5ff;color:#6b21a8}.q-not .item:not(:last-child){background:#a855f7;color:#fff}</style><div class="q-not" style="display:flex;flex-direction:column;gap:4px;padding:8px;width:100%"><div class="item">first</div><div class="item">second</div><div class="item">last</div></div>`,
+    demo: createNotDemo(),
   },
 
   {
@@ -97,7 +137,7 @@ export const queries: CSSPropertyFull[] = [
     interop: "ltd",
     example: "@scope (.card) { .title { color: blue } }",
     mdnPath: "@scope",
-    demo: `<style>@scope (.q-scope-card){.q-title{color:#15803d;font-weight:800}}</style><div style="padding:10px;display:flex;flex-direction:column;gap:6px"><div class="q-scope-card" style="padding:8px;border:2px solid #16a34a;border-radius:6px"><p class="q-title" style="margin:0;font-size:10px">scoped title</p></div><div style="padding:8px;border:2px solid #cbd5e1;border-radius:6px"><p class="q-title" style="margin:0;font-size:10px;color:#64748b">outside scope</p></div></div>`,
+    demo: createScopeDemo(),
   },
 
   {
@@ -108,6 +148,6 @@ export const queries: CSSPropertyFull[] = [
     interop: "b2024",
     example: "@starting-style { dialog { opacity: 0; transform: scale(0) } }",
     mdnPath: "@starting-style",
-    demo: `<style>.q-start{opacity:1;transform:scale(1);transition:opacity .35s ease,transform .35s ease}@starting-style{.q-start{opacity:0;transform:scale(.9)}}</style><div style="padding:10px"><div class="q-start" style="background:#fef3c7;border:2px solid #eab308;border-radius:6px;padding:8px;font-size:10px;font-weight:700;color:#a16207">Entry transition with @starting-style</div></div>`,
+    demo: createStartingStyleDemo(),
   },
 ];

@@ -1,5 +1,146 @@
 import type { CSSPropertyFull } from "../types";
 
+function createFlexboxItems() {
+  return `
+    <div style="flex:1;background:#8b5cf6;color:#fff;padding:10px 4px;border-radius:5px;font-size:10px;font-weight:700;text-align:center">flex: 1</div>
+    <div style="flex:2;background:#6366f1;color:#fff;padding:10px 4px;border-radius:5px;font-size:10px;font-weight:700;text-align:center">flex: 2</div>
+    <div style="flex:1;background:#8b5cf6;color:#fff;padding:10px 4px;border-radius:5px;font-size:10px;font-weight:700;text-align:center">flex: 1</div>
+  `;
+}
+
+function createFlexDirectionDemo() {
+  return `
+    <div style="display:flex;gap:12px">
+      <div style="display:flex;flex-direction:row;gap:4px;align-items:center">
+        <div style="background:#8b5cf6;color:#fff;width:30px;height:24px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700">1</div>
+        <div style="background:#8b5cf6;color:#fff;width:30px;height:24px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700">2</div>
+        <div style="background:#8b5cf6;color:#fff;width:30px;height:24px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700">3</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px">
+        <div style="background:#6366f1;color:#fff;width:30px;height:18px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700">1</div>
+        <div style="background:#6366f1;color:#fff;width:30px;height:18px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700">2</div>
+        <div style="background:#6366f1;color:#fff;width:30px;height:18px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700">3</div>
+      </div>
+    </div>
+  `;
+}
+
+function createFlexWrapItems() {
+  return [1, 2, 3, 4, 5]
+    .map((i) => `<div style="background:#8b5cf6;color:#fff;width:46px;padding:6px 0;border-radius:3px;font-size:10px;font-weight:700;text-align:center">${i}</div>`)
+    .join("");
+}
+
+function createJustifyContentDemo() {
+  const smallItems = [1, 2, 3].map(() => `<div style="background:#8b5cf6;width:28px;height:20px;border-radius:3px"></div>`).join("");
+  const smallItems2 = [1, 2, 3].map(() => `<div style="background:#6366f1;width:28px;height:20px;border-radius:3px"></div>`).join("");
+
+  return `
+    <div style="display:flex;flex-direction:column;gap:5px;padding:8px;width:100%">
+      <div style="display:flex;justify-content:space-between;background:#f5f3ff;border-radius:4px;padding:4px">${smallItems}</div>
+      <div style="display:flex;justify-content:center;gap:6px;background:#f5f3ff;border-radius:4px;padding:4px">${smallItems2}</div>
+      <div style="font-size:9px;color:#888;font-weight:700;text-align:center">space-between · center</div>
+    </div>
+  `;
+}
+
+function createAlignItemsDemo() {
+  return `
+    <div style="display:flex;gap:8px;align-items:flex-end;background:#f5f3ff;border:2px solid #8b5cf6;border-radius:6px;padding:8px;height:72px">
+      <div style="background:#8b5cf6;width:28px;height:50px;border-radius:3px"></div>
+      <div style="background:#6366f1;width:28px;height:30px;border-radius:3px"></div>
+      <div style="background:#a78bfa;width:28px;height:40px;border-radius:3px"></div>
+      <div style="font-size:9px;color:#8b5cf6;font-weight:700;align-self:flex-end">align-items:<br>flex-end</div>
+    </div>
+  `;
+}
+
+function createAlignSelfDemo() {
+  return `
+    <div style="display:flex;align-items:flex-start;gap:6px;background:#f5f3ff;border:2px solid #8b5cf6;border-radius:6px;padding:8px;height:72px">
+      <div style="background:#e0e7ff;width:28px;height:28px;border-radius:3px"></div>
+      <div style="background:#8b5cf6;width:28px;height:28px;border-radius:3px;align-self:center;outline:2px dashed #f97316;outline-offset:2px"></div>
+      <div style="background:#e0e7ff;width:28px;height:28px;border-radius:3px"></div>
+      <div style="font-size:9px;color:#f97316;font-weight:700;align-self:center">← center</div>
+    </div>
+  `;
+}
+
+function createGapDemo() {
+  const items = [1, 2, 3, 4].map(() => `<div style="background:#8b5cf6;width:28px;height:36px;border-radius:4px;position:relative"></div>`).join("");
+  const separators = [1, 2, 3].map(() => `<div style="width:1px;height:24px;background:#8b5cf6;opacity:.3;border:1px dashed #8b5cf6"></div>`).join("");
+
+  return `
+    <div style="display:flex;gap:16px;align-items:center">
+      ${items}
+      ${separators}
+    </div>
+  `;
+}
+
+function createOrderDemo() {
+  return `
+    <div style="display:flex;gap:6px">
+      <div style="background:#a78bfa;color:#fff;width:36px;height:40px;border-radius:4px;display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:9px;font-weight:700">
+        <span>3rd</span><span style="opacity:.6">ord:3</span>
+      </div>
+      <div style="background:#6366f1;color:#fff;width:36px;height:40px;border-radius:4px;display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:9px;font-weight:700;outline:2px solid #f97316;outline-offset:2px">
+        <span>1st</span><span style="opacity:.6">ord:-1</span>
+      </div>
+      <div style="background:#8b5cf6;color:#fff;width:36px;height:40px;border-radius:4px;display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:9px;font-weight:700">
+        <span>2nd</span><span style="opacity:.6">ord:0</span>
+      </div>
+    </div>
+  `;
+}
+
+function createFlexBasisDemo() {
+  return `
+    <div style="display:flex;gap:4px;padding:10px">
+      <div style="flex-basis:40px;background:#8b5cf6;color:#fff;padding:6px;border-radius:4px;font-size:9px;font-weight:700">40px</div>
+      <div style="flex-basis:80px;background:#6366f1;color:#fff;padding:6px;border-radius:4px;font-size:9px;font-weight:700">80px</div>
+    </div>
+  `;
+}
+
+function createFlexGrowDemo() {
+  return `
+    <div style="display:flex;gap:4px;padding:10px">
+      <div style="flex-grow:1;background:#8b5cf6;color:#fff;padding:6px;border-radius:4px;font-size:9px;font-weight:700">1</div>
+      <div style="flex-grow:2;background:#6366f1;color:#fff;padding:6px;border-radius:4px;font-size:9px;font-weight:700">2</div>
+    </div>
+  `;
+}
+
+function createFlexShrinkDemo() {
+  return `
+    <div style="display:flex;gap:4px;width:140px;padding:10px">
+      <div style="flex-shrink:0;width:70px;background:#8b5cf6;color:#fff;padding:6px;border-radius:4px;font-size:9px;font-weight:700">no shrink</div>
+      <div style="flex-shrink:1;width:90px;background:#6366f1;color:#fff;padding:6px;border-radius:4px;font-size:9px;font-weight:700">shrink</div>
+    </div>
+  `;
+}
+
+function createJustifyItemsDemo() {
+  return `
+    <div style="display:grid;justify-items:center;grid-template-columns:repeat(3,1fr);gap:4px;padding:10px">
+      <div style="width:24px;background:#7c3aed;height:18px;border-radius:3px"></div>
+      <div style="width:24px;background:#6366f1;height:18px;border-radius:3px"></div>
+      <div style="width:24px;background:#8b5cf6;height:18px;border-radius:3px"></div>
+    </div>
+  `;
+}
+
+function createJustifySelfDemo() {
+  return `
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:10px">
+      <div style="justify-self:start;background:#7c3aed;color:#fff;padding:6px;border-radius:3px;font-size:8px">start</div>
+      <div style="justify-self:center;background:#6366f1;color:#fff;padding:6px;border-radius:3px;font-size:8px">center</div>
+      <div style="justify-self:end;background:#8b5cf6;color:#fff;padding:6px;border-radius:3px;font-size:8px">end</div>
+    </div>
+  `;
+}
+
 export const flexbox: CSSPropertyFull[] = [
   {
     name: "flex",
@@ -11,7 +152,7 @@ export const flexbox: CSSPropertyFull[] = [
     mdnPath: "flex",
     caniuse: "flexbox",
     default: "0 1 auto",
-    demo: `<div style="display:flex;gap:6px;padding:10px;width:100%"><div style="flex:1;background:#8b5cf6;color:#fff;padding:10px 4px;border-radius:5px;font-size:10px;font-weight:700;text-align:center">flex: 1</div><div style="flex:2;background:#6366f1;color:#fff;padding:10px 4px;border-radius:5px;font-size:10px;font-weight:700;text-align:center">flex: 2</div><div style="flex:1;background:#8b5cf6;color:#fff;padding:10px 4px;border-radius:5px;font-size:10px;font-weight:700;text-align:center">flex: 1</div></div>`,
+    demo: `<div style="display:flex;gap:6px;padding:10px;width:100%">${createFlexboxItems()}</div>`,
   },
 
   {
@@ -48,7 +189,7 @@ export const flexbox: CSSPropertyFull[] = [
         description: "Items are laid out from bottom to top, forming an inverted vertical stack.",
       },
     ],
-    demo: `<div style="display:flex;gap:12px"><div style="display:flex;flex-direction:row;gap:4px;align-items:center"><div style="background:#8b5cf6;color:#fff;width:30px;height:24px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700">1</div><div style="background:#8b5cf6;color:#fff;width:30px;height:24px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700">2</div><div style="background:#8b5cf6;color:#fff;width:30px;height:24px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700">3</div></div><div style="display:flex;flex-direction:column;gap:4px"><div style="background:#6366f1;color:#fff;width:30px;height:18px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700">1</div><div style="background:#6366f1;color:#fff;width:30px;height:18px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700">2</div><div style="background:#6366f1;color:#fff;width:30px;height:18px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700">3</div></div></div>`,
+    demo: createFlexDirectionDemo(),
   },
 
   {
@@ -81,7 +222,7 @@ export const flexbox: CSSPropertyFull[] = [
           "Items wrap onto multiple lines from bottom to top, reversing the visual order of lines.",
       },
     ],
-    demo: `<div style="display:flex;flex-wrap:wrap;gap:5px;padding:8px;width:180px;background:#f5f3ff;border:2px solid #8b5cf6;border-radius:6px">${[1, 2, 3, 4, 5].map((i) => `<div style="background:#8b5cf6;color:#fff;width:46px;padding:6px 0;border-radius:3px;font-size:10px;font-weight:700;text-align:center">${i}</div>`).join("")}</div>`,
+    demo: `<div style="display:flex;flex-wrap:wrap;gap:5px;padding:8px;width:180px;background:#f5f3ff;border:2px solid #8b5cf6;border-radius:6px">${createFlexWrapItems()}</div>`,
   },
 
   {
@@ -131,7 +272,7 @@ export const flexbox: CSSPropertyFull[] = [
           "Items are distributed so that the spacing between any two adjacent items (and the edges) is exactly the same.",
       },
     ],
-    demo: `<div style="display:flex;flex-direction:column;gap:5px;padding:8px;width:100%"><div style="display:flex;justify-content:space-between;background:#f5f3ff;border-radius:4px;padding:4px">${[1, 2, 3].map(() => `<div style="background:#8b5cf6;width:28px;height:20px;border-radius:3px"></div>`).join("")}</div><div style="display:flex;justify-content:center;gap:6px;background:#f5f3ff;border-radius:4px;padding:4px">${[1, 2, 3].map(() => `<div style="background:#6366f1;width:28px;height:20px;border-radius:3px"></div>`).join("")}</div><div style="font-size:9px;color:#888;font-weight:700;text-align:center">space-between · center</div></div>`,
+    demo: createJustifyContentDemo(),
   },
 
   {
@@ -175,7 +316,7 @@ export const flexbox: CSSPropertyFull[] = [
           "Items are aligned so their baselines align. The baseline is the invisible line where text sits.",
       },
     ],
-    demo: `<div style="display:flex;gap:8px;align-items:flex-end;background:#f5f3ff;border:2px solid #8b5cf6;border-radius:6px;padding:8px;height:72px"><div style="background:#8b5cf6;width:28px;height:50px;border-radius:3px"></div><div style="background:#6366f1;width:28px;height:30px;border-radius:3px"></div><div style="background:#a78bfa;width:28px;height:40px;border-radius:3px"></div><div style="font-size:9px;color:#8b5cf6;font-weight:700;align-self:flex-end">align-items:<br>flex-end</div></div>`,
+    demo: createAlignItemsDemo(),
   },
 
   {
@@ -224,7 +365,7 @@ export const flexbox: CSSPropertyFull[] = [
           "The item is aligned to the text baseline, overriding the container's align-items.",
       },
     ],
-    demo: `<div style="display:flex;align-items:flex-start;gap:6px;background:#f5f3ff;border:2px solid #8b5cf6;border-radius:6px;padding:8px;height:72px"><div style="background:#e0e7ff;width:28px;height:28px;border-radius:3px"></div><div style="background:#8b5cf6;width:28px;height:28px;border-radius:3px;align-self:center;outline:2px dashed #f97316;outline-offset:2px"></div><div style="background:#e0e7ff;width:28px;height:28px;border-radius:3px"></div><div style="font-size:9px;color:#f97316;font-weight:700;align-self:center">← center</div></div>`,
+    demo: createAlignSelfDemo(),
   },
 
   {
@@ -236,7 +377,7 @@ export const flexbox: CSSPropertyFull[] = [
     example: "gap: 1rem | 0.5rem 1.5rem",
     mdnPath: "gap",
     caniuse: "flexbox",
-    demo: `<div style="display:flex;gap:16px;align-items:center">${[1, 2, 3, 4].map(() => `<div style="background:#8b5cf6;width:28px;height:36px;border-radius:4px;position:relative"></div>`).join('<div style="width:1px;height:24px;background:#8b5cf6;opacity:.3;border:1px dashed #8b5cf6"></div>')}</div>`,
+    demo: createGapDemo(),
   },
 
   {
@@ -268,7 +409,7 @@ export const flexbox: CSSPropertyFull[] = [
           "Items with negative order values appear before items with order: 0. More negative values appear further toward the start.",
       },
     ],
-    demo: `<div style="display:flex;gap:6px"><div style="background:#a78bfa;color:#fff;width:36px;height:40px;border-radius:4px;display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:9px;font-weight:700"><span>3rd</span><span style="opacity:.6">ord:3</span></div><div style="background:#6366f1;color:#fff;width:36px;height:40px;border-radius:4px;display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:9px;font-weight:700;outline:2px solid #f97316;outline-offset:2px"><span>1st</span><span style="opacity:.6">ord:-1</span></div><div style="background:#8b5cf6;color:#fff;width:36px;height:40px;border-radius:4px;display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:9px;font-weight:700"><span>2nd</span><span style="opacity:.6">ord:0</span></div></div>`,
+    demo: createOrderDemo(),
   },
 
   {
@@ -300,7 +441,7 @@ export const flexbox: CSSPropertyFull[] = [
           "The item starts at the specified size before growth/shrink calculations are applied.",
       },
     ],
-    demo: `<div style="display:flex;gap:4px;padding:10px"><div style="flex-basis:40px;background:#8b5cf6;color:#fff;padding:6px;border-radius:4px;font-size:9px;font-weight:700">40px</div><div style="flex-basis:80px;background:#6366f1;color:#fff;padding:6px;border-radius:4px;font-size:9px;font-weight:700">80px</div></div>`,
+    demo: createFlexBasisDemo(),
   },
 
   {
@@ -332,7 +473,7 @@ export const flexbox: CSSPropertyFull[] = [
           "The growth is relative to other items. If one item has flex-grow: 2 and another has flex-grow: 1, the first gets twice as much of the available space.",
       },
     ],
-    demo: `<div style="display:flex;gap:4px;padding:10px"><div style="flex-grow:1;background:#8b5cf6;color:#fff;padding:6px;border-radius:4px;font-size:9px;font-weight:700">1</div><div style="flex-grow:2;background:#6366f1;color:#fff;padding:6px;border-radius:4px;font-size:9px;font-weight:700">2</div></div>`,
+    demo: createFlexGrowDemo(),
   },
 
   {
@@ -364,7 +505,7 @@ export const flexbox: CSSPropertyFull[] = [
           "Higher values mean the item shrinks more relative to siblings with lower values.",
       },
     ],
-    demo: `<div style="display:flex;gap:4px;width:140px;padding:10px"><div style="flex-shrink:0;width:70px;background:#8b5cf6;color:#fff;padding:6px;border-radius:4px;font-size:9px;font-weight:700">no shrink</div><div style="flex-shrink:1;width:90px;background:#6366f1;color:#fff;padding:6px;border-radius:4px;font-size:9px;font-weight:700">shrink</div></div>`,
+    demo: createFlexShrinkDemo(),
   },
 
   {
@@ -376,7 +517,7 @@ export const flexbox: CSSPropertyFull[] = [
     example: "justify-items: start | center | end | stretch",
     mdnPath: "justify-items",
     caniuse: "flexbox",
-    demo: `<div style="display:grid;justify-items:center;grid-template-columns:repeat(3,1fr);gap:4px;padding:10px"><div style="width:24px;background:#7c3aed;height:18px;border-radius:3px"></div><div style="width:24px;background:#6366f1;height:18px;border-radius:3px"></div><div style="width:24px;background:#8b5cf6;height:18px;border-radius:3px"></div></div>`,
+    demo: createJustifyItemsDemo(),
   },
 
   {
@@ -388,6 +529,6 @@ export const flexbox: CSSPropertyFull[] = [
     example: "justify-self: auto | start | center | end",
     mdnPath: "justify-self",
     caniuse: "flexbox",
-    demo: `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:10px"><div style="justify-self:start;background:#7c3aed;color:#fff;padding:6px;border-radius:3px;font-size:8px">start</div><div style="justify-self:center;background:#6366f1;color:#fff;padding:6px;border-radius:3px;font-size:8px">center</div><div style="justify-self:end;background:#8b5cf6;color:#fff;padding:6px;border-radius:3px;font-size:8px">end</div></div>`,
+    demo: createJustifySelfDemo(),
   },
 ];

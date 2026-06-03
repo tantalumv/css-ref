@@ -1,5 +1,128 @@
 import type { CSSPropertyFull } from "../types";
 
+function createDisplayDemo() {
+  return `<div style="padding:10px 14px;display:flex;flex-direction:column;gap:7px;width:100%">
+    <div style="display:flex;gap:6px">
+      <div style="background:#6366f1;color:#fff;width:100%;padding:5px 10px;border-radius:4px;font-size:10px;font-weight:700">display: block — full width</div>
+    </div>
+    <div style="display:flex;gap:6px">
+      <span style="background:#8b5cf6;color:#fff;padding:5px 10px;border-radius:4px;font-size:10px;font-weight:700">inline</span>
+      <span style="background:#a78bfa;color:#fff;padding:5px 10px;border-radius:4px;font-size:10px;font-weight:700">inline</span>
+      <span style="background:#c4b5fd;color:#fff;padding:5px 10px;border-radius:4px;font-size:10px;font-weight:700">inline</span>
+    </div>
+  </div>`;
+}
+
+function createPositionDemo() {
+  return `<div style="position:relative;width:160px;height:70px;background:#e0e7ff;border-radius:6px;border:2px dashed #6366f1">
+    <div style="position:absolute;top:8px;left:8px;background:#6366f1;color:#fff;padding:4px 8px;border-radius:4px;font-size:10px;font-weight:700">absolute</div>
+    <div style="position:absolute;bottom:8px;right:8px;background:#8b5cf6;color:#fff;padding:4px 8px;border-radius:4px;font-size:10px;font-weight:700">absolute</div>
+  </div>`;
+}
+
+function createZIndexDemo() {
+  return `<div style="position:relative;width:160px;height:72px">
+    <div style="position:absolute;left:0;top:10px;width:80px;height:55px;background:#6366f1;border-radius:6px;display:flex;align-items:flex-start;padding:6px;z-index:1">
+      <span style="color:#fff;font-size:10px;font-weight:700">z-index: 1</span>
+    </div>
+    <div style="position:absolute;left:40px;top:4px;width:80px;height:55px;background:#ec4899;border-radius:6px;display:flex;align-items:flex-start;padding:6px;z-index:2">
+      <span style="color:#fff;font-size:10px;font-weight:700">z-index: 2</span>
+    </div>
+    <div style="position:absolute;left:80px;top:0;width:80px;height:55px;background:#f97316;border-radius:6px;display:flex;align-items:flex-start;padding:6px;z-index:3">
+      <span style="color:#fff;font-size:10px;font-weight:700">z-index: 3</span>
+    </div>
+  </div>`;
+}
+
+function createOverflowDemo() {
+  return `<div style="display:flex;gap:12px;align-items:center">
+    <div style="width:80px;height:60px;background:#e0e7ff;border:2px solid #6366f1;border-radius:6px;overflow:hidden;padding:6px">
+      <p style="font-size:9px;font-weight:700;color:#6366f1;white-space:nowrap">overflow: hidden clips text that goes beyond the boundary here</p>
+    </div>
+    <div style="width:80px;height:60px;background:#f5f3ff;border:2px solid #8b5cf6;border-radius:6px;overflow:visible;padding:6px">
+      <p style="font-size:9px;font-weight:700;color:#8b5cf6;white-space:nowrap">overflow: visible — text spills out</p>
+    </div>
+  </div>`;
+}
+
+function createInsetDemo() {
+  return `<div style="position:relative;width:150px;height:72px;background:#f0fdf4;border:2px dashed #10b981;border-radius:6px">
+    <div style="position:absolute;inset:10px;background:#10b981;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:700">inset: 10px</div>
+  </div>`;
+}
+
+function createContainDemo() {
+  return `<div style="display:flex;gap:10px">
+    <div style="width:100px;height:68px;contain:strict;background:#e0e7ff;border:2px solid #6366f1;border-radius:6px;overflow:hidden;padding:6px">
+      <p style="font-size:9px;font-weight:700;color:#6366f1">contain: strict<br>Layout isolated</p>
+    </div>
+    <div style="width:100px;height:68px;background:#f5f3ff;border:2px dashed #8b5cf6;border-radius:6px;padding:6px">
+      <p style="font-size:9px;font-weight:700;color:#8b5cf6">No contain<br>Normal flow</p>
+    </div>
+  </div>`;
+}
+
+function createContainerDemo() {
+  return `<div style="container-type:inline-size;width:200px;border:2px solid #7c3aed;border-radius:6px;padding:8px;background:#f5f3ff">
+    <p style="font-size:10px;font-weight:700;color:#7c3aed;margin-bottom:4px">container-type: inline-size</p>
+    <div style="display:flex;gap:4px">
+      <div style="flex:1;background:#7c3aed;color:#fff;border-radius:3px;padding:4px;font-size:9px;font-weight:700;text-align:center">@container</div>
+      <div style="flex:1;background:#8b5cf6;color:#fff;border-radius:3px;padding:4px;font-size:9px;font-weight:700;text-align:center">responsive</div>
+    </div>
+  </div>`;
+}
+
+function createObjectFitDemo() {
+  return `<div style="display:flex;gap:8px">
+    <div style="width:70px;height:70px;background:#e0e7ff;border:2px solid #6366f1;border-radius:6px;overflow:hidden">
+      <img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='50'%3E%3Crect fill='%236366f1' width='100' height='50'/%3E%3C/svg%3E" style="width:100%;height:100%;object-fit:cover">
+    </div>
+    <div style="width:70px;height:70px;background:#f5f3ff;border:2px solid #8b5cf6;border-radius:6px;overflow:hidden">
+      <img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='50'%3E%3Crect fill='%238b5cf6' width='100' height='50'/%3E%3C/svg%3E" style="width:100%;height:100%;object-fit:contain">
+    </div>
+  </div>`;
+}
+
+function createObjectPositionDemo() {
+  return `<div style="display:flex;gap:8px">
+    <div style="width:80px;height:60px;background:#e0e7ff;border:2px solid #6366f1;border-radius:6px;overflow:hidden">
+      <img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%236366f1'/%3E%3C/svg%3E" style="width:100%;height:100%;object-fit:none;object-position:center">
+    </div>
+    <div style="width:80px;height:60px;background:#f5f3ff;border:2px solid #8b5cf6;border-radius:6px;overflow:hidden">
+      <img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%238b5cf6'/%3E%3C/svg%3E" style="width:100%;height:100%;object-fit:none;object-position:top right">
+    </div>
+  </div>`;
+}
+
+function createAnchorNameDemo() {
+  return `<div style="padding:10px;position:relative;width:180px">
+    <div style="anchor-name:--demo-anchor;width:60px;height:40px;background:#6366f1;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px;font-weight:700">Anchor</div>
+    <div style="position:absolute;position-anchor:--demo-anchor;top:0;left:70px;background:#f0fdf4;border:2px dashed #10b981;border-radius:4px;padding:6px 10px;font-size:9px;font-weight:700;color:#15803d">anchor: --demo-anchor</div>
+    <p style="font-size:8px;color:#888;margin-top:6px;font-weight:700">anchor-name on blue box</p>
+  </div>`;
+}
+
+function createPositionAnchorDemo() {
+  return `<div style="padding:10px;position:relative;width:180px">
+    <div style="anchor-name:--target-anchor;width:60px;height:40px;background:#8b5cf6;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px;font-weight:700">Anchor</div>
+    <div style="position:absolute;position-anchor:--target-anchor;top:anchor(top);left:anchor(right);margin-left:8px;background:#fef3c7;border:2px solid #f59e0b;border-radius:4px;padding:6px 10px;font-size:9px;font-weight:700;color:#b45309">position-anchor<br>--target-anchor</div>
+  </div>`;
+}
+
+function createPositionAreaDemo() {
+  return `<div style="padding:10px;position:relative;width:180px;height:80px">
+    <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);anchor-name:--area-anchor;width:50px;height:30px;background:#6366f1;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:8px;font-weight:700">Anchor</div>
+    <div style="position:absolute;position-anchor:--area-anchor;position-area:top;background:#ec4899;color:#fff;padding:3px 8px;border-radius:3px;font-size:8px;font-weight:700">position-area: top</div>
+  </div>`;
+}
+
+function createPositionTryDemo() {
+  return `<div style="padding:10px;position:relative;width:180px;height:78px">
+    <div style="position:absolute;right:8px;top:28px;anchor-name:--try-anchor;width:60px;height:28px;background:#6366f1;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:8px;font-weight:700">Anchor</div>
+    <div style="position:absolute;position-anchor:--try-anchor;position-area:right;position-try:flip-inline flip-block;position-try-fallbacks:flip-inline,flip-block;background:#fef9c3;border:2px dashed #ca8a04;border-radius:4px;padding:4px 6px;font-size:8px;font-weight:700;color:#a16207">position-try fallback</div>
+  </div>`;
+}
+
 export const layout: CSSPropertyFull[] = [
   {
     name: "display",
@@ -10,7 +133,7 @@ export const layout: CSSPropertyFull[] = [
     example: "display: block | inline | flex | grid | none | contents | flow-root",
     mdnPath: "display",
     default: "block",
-    demo: `<div style="padding:10px 14px;display:flex;flex-direction:column;gap:7px;width:100%"><div style="display:flex;gap:6px"><div style="background:#6366f1;color:#fff;width:100%;padding:5px 10px;border-radius:4px;font-size:10px;font-weight:700">display: block — full width</div></div><div style="display:flex;gap:6px"><span style="background:#8b5cf6;color:#fff;padding:5px 10px;border-radius:4px;font-size:10px;font-weight:700">inline</span><span style="background:#a78bfa;color:#fff;padding:5px 10px;border-radius:4px;font-size:10px;font-weight:700">inline</span><span style="background:#c4b5fd;color:#fff;padding:5px 10px;border-radius:4px;font-size:10px;font-weight:700">inline</span></div></div>`,
+    demo: createDisplayDemo(),
     values: [
       { value: "block", label: "Block", description: "Elements take full width available. Stack vertically one after another. Default for <div>, <p>, <h1>." },
       { value: "inline", label: "Inline", description: "Elements flow within text. Only take as much width as their content. Cannot have width/height. Default for <span>, <a>." },
@@ -32,7 +155,7 @@ export const layout: CSSPropertyFull[] = [
     example: "position: static | relative | absolute | fixed | sticky",
     mdnPath: "position",
     default: "static",
-    demo: `<div style="position:relative;width:160px;height:70px;background:#e0e7ff;border-radius:6px;border:2px dashed #6366f1"><div style="position:absolute;top:8px;left:8px;background:#6366f1;color:#fff;padding:4px 8px;border-radius:4px;font-size:10px;font-weight:700">absolute</div><div style="position:absolute;bottom:8px;right:8px;background:#8b5cf6;color:#fff;padding:4px 8px;border-radius:4px;font-size:10px;font-weight:700">absolute</div></div>`,
+    demo: createPositionDemo(),
     values: [
       { value: "static", label: "Static", description: "Default position. Element follows normal document flow. top, bottom, left, right, z-index have no effect." },
       { value: "relative", label: "Relative", description: "Element stays in normal flow but can be offset with top, right, bottom, left. Creates a positioning context for children." },
@@ -51,7 +174,7 @@ export const layout: CSSPropertyFull[] = [
     example: "z-index: auto | 10 | -1",
     mdnPath: "z-index",
     default: "auto",
-    demo: `<div style="position:relative;width:160px;height:72px"><div style="position:absolute;left:0;top:10px;width:80px;height:55px;background:#6366f1;border-radius:6px;display:flex;align-items:flex-start;padding:6px;z-index:1"><span style="color:#fff;font-size:10px;font-weight:700">z-index: 1</span></div><div style="position:absolute;left:40px;top:4px;width:80px;height:55px;background:#ec4899;border-radius:6px;display:flex;align-items:flex-start;padding:6px;z-index:2"><span style="color:#fff;font-size:10px;font-weight:700">z-index: 2</span></div><div style="position:absolute;left:80px;top:0;width:80px;height:55px;background:#f97316;border-radius:6px;display:flex;align-items:flex-start;padding:6px;z-index:3"><span style="color:#fff;font-size:10px;font-weight:700">z-index: 3</span></div></div>`,
+    demo: createZIndexDemo(),
     values: [
       { value: "auto", label: "Auto", description: "Stack order determined by DOM order. Elements later in HTML appear on top. Default value." },
       { value: "number", label: "Number (e.g., 1, 10, 100)", description: "Higher values appear on top. Works only on positioned elements (not static). Can use negative values." },
@@ -67,7 +190,7 @@ export const layout: CSSPropertyFull[] = [
     interop: "wide",
     example: "overflow: visible | hidden | scroll | auto | clip",
     mdnPath: "overflow",
-    demo: `<div style="display:flex;gap:12px;align-items:center"><div style="width:80px;height:60px;background:#e0e7ff;border:2px solid #6366f1;border-radius:6px;overflow:hidden;padding:6px"><p style="font-size:9px;font-weight:700;color:#6366f1;white-space:nowrap">overflow: hidden clips text that goes beyond the boundary here</p></div><div style="width:80px;height:60px;background:#f5f3ff;border:2px solid #8b5cf6;border-radius:6px;overflow:visible;padding:6px"><p style="font-size:9px;font-weight:700;color:#8b5cf6;white-space:nowrap">overflow: visible — text spills out</p></div></div>`,
+    demo: createOverflowDemo(),
     values: [
       { value: "visible", label: "Visible", description: "Content that overflows is visible outside the box. May overlap other elements. Default behavior." },
       { value: "hidden", label: "Hidden", description: "Overflowing content is clipped and hidden. No scrollbar appears. Content is inaccessible." },
@@ -85,7 +208,7 @@ export const layout: CSSPropertyFull[] = [
     interop: "wide",
     example: "inset: 0 | 1rem | 0 auto | 10% 20px",
     mdnPath: "inset",
-    demo: `<div style="position:relative;width:150px;height:72px;background:#f0fdf4;border:2px dashed #10b981;border-radius:6px"><div style="position:absolute;inset:10px;background:#10b981;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:700">inset: 10px</div></div>`,
+    demo: createInsetDemo(),
   },
 
   {
@@ -96,7 +219,7 @@ export const layout: CSSPropertyFull[] = [
     interop: "b2022",
     example: "contain: none | strict | content | size | layout | style | paint",
     mdnPath: "contain",
-    demo: `<div style="display:flex;gap:10px"><div style="width:100px;height:68px;contain:strict;background:#e0e7ff;border:2px solid #6366f1;border-radius:6px;overflow:hidden;padding:6px"><p style="font-size:9px;font-weight:700;color:#6366f1">contain: strict<br>Layout isolated</p></div><div style="width:100px;height:68px;background:#f5f3ff;border:2px dashed #8b5cf6;border-radius:6px;padding:6px"><p style="font-size:9px;font-weight:700;color:#8b5cf6">No contain<br>Normal flow</p></div></div>`,
+    demo: createContainDemo(),
   },
 
   {
@@ -107,7 +230,7 @@ export const layout: CSSPropertyFull[] = [
     interop: "b2023",
     example: "container: sidebar / inline-size",
     mdnPath: "container",
-    demo: `<div style="container-type:inline-size;width:200px;border:2px solid #7c3aed;border-radius:6px;padding:8px;background:#f5f3ff"><p style="font-size:10px;font-weight:700;color:#7c3aed;margin-bottom:4px">container-type: inline-size</p><div style="display:flex;gap:4px"><div style="flex:1;background:#7c3aed;color:#fff;border-radius:3px;padding:4px;font-size:9px;font-weight:700;text-align:center">@container</div><div style="flex:1;background:#8b5cf6;color:#fff;border-radius:3px;padding:4px;font-size:9px;font-weight:700;text-align:center">responsive</div></div></div>`,
+    demo: createContainerDemo(),
   },
 
   {
@@ -118,7 +241,10 @@ export const layout: CSSPropertyFull[] = [
     interop: "ltd",
     example: "content-visibility: visible | auto | hidden",
     mdnPath: "content-visibility",
-    demo: `<div style="display:flex;flex-direction:column;gap:6px;width:200px"><div style="background:#dcfce7;border:2px solid #16a34a;border-radius:4px;padding:5px 8px;font-size:10px;font-weight:700;color:#15803d">✓ Rendered (in viewport)</div><div style="background:#fef9c3;border:2px dashed #ca8a04;border-radius:4px;padding:5px 8px;font-size:10px;font-weight:700;color:#a16207">⚡ Skipped (off-screen)</div></div>`,
+    demo: `<div style="display:flex;flex-direction:column;gap:6px;width:200px">
+      <div style="background:#dcfce7;border:2px solid #16a34a;border-radius:4px;padding:5px 8px;font-size:10px;font-weight:700;color:#15803d">✓ Rendered (in viewport)</div>
+      <div style="background:#fef9c3;border:2px dashed #ca8a04;border-radius:4px;padding:5px 8px;font-size:10px;font-weight:700;color:#a16207">⚡ Skipped (off-screen)</div>
+    </div>`,
   },
 
   {
@@ -129,7 +255,7 @@ export const layout: CSSPropertyFull[] = [
     interop: "wide",
     example: "object-fit: cover | contain | fill | none | scale-down",
     mdnPath: "object-fit",
-    demo: `<div style="display:flex;gap:8px"><div style="width:70px;height:70px;background:#e0e7ff;border:2px solid #6366f1;border-radius:6px;overflow:hidden"><img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='50'%3E%3Crect fill='%236366f1' width='100' height='50'/%3E%3C/svg%3E" style="width:100%;height:100%;object-fit:cover"></div><div style="width:70px;height:70px;background:#f5f3ff;border:2px solid #8b5cf6;border-radius:6px;overflow:hidden"><img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='50'%3E%3Crect fill='%238b5cf6' width='100' height='50'/%3E%3C/svg%3E" style="width:100%;height:100%;object-fit:contain"></div></div>`,
+    demo: createObjectFitDemo(),
   },
 
   {
@@ -140,7 +266,7 @@ export const layout: CSSPropertyFull[] = [
     interop: "wide",
     example: "object-position: center | top left | 50% 100% | 20px 80%",
     mdnPath: "object-position",
-    demo: `<div style="display:flex;gap:8px"><div style="width:80px;height:60px;background:#e0e7ff;border:2px solid #6366f1;border-radius:6px;overflow:hidden"><img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%236366f1'/%3E%3C/svg%3E" style="width:100%;height:100%;object-fit:none;object-position:center"></div><div style="width:80px;height:60px;background:#f5f3ff;border:2px solid #8b5cf6;border-radius:6px;overflow:hidden"><img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%238b5cf6'/%3E%3C/svg%3E" style="width:100%;height:100%;object-fit:none;object-position:top right"></div></div>`,
+    demo: createObjectPositionDemo(),
   },
 
   {
@@ -151,7 +277,16 @@ export const layout: CSSPropertyFull[] = [
     interop: "wide",
     example: "visibility: visible | hidden | collapse",
     mdnPath: "visibility",
-    demo: `<div style="display:flex;flex-direction:column;gap:4px;padding:6px"><div style="display:flex;align-items:center;gap:6px"><div style="width:60px;height:30px;background:#6366f1;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px;font-weight:700">visible</div><span style="font-size:10px;color:#6366f1;font-weight:700">← element visible</span></div><div style="display:flex;align-items:center;gap:6px"><div style="width:60px;height:30px;background:#e0e7ff;border:2px dashed #6366f1;border-radius:4px;visibility:hidden"></div><span style="font-size:10px;color:#8b5cf6;font-weight:700">← hidden (space reserved)</span></div></div>`,
+    demo: `<div style="display:flex;flex-direction:column;gap:4px;padding:6px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:30px;background:#6366f1;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px;font-weight:700">visible</div>
+        <span style="font-size:10px;color:#6366f1;font-weight:700">← element visible</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:30px;background:#e0e7ff;border:2px dashed #6366f1;border-radius:4px;visibility:hidden"></div>
+        <span style="font-size:10px;color:#8b5cf6;font-weight:700">← hidden (space reserved)</span>
+      </div>
+    </div>`,
   },
 
   {
@@ -162,7 +297,7 @@ export const layout: CSSPropertyFull[] = [
     interop: "ltd",
     example: "anchor-name: --my-anchor",
     mdnPath: "anchor-name",
-    demo: `<div style="padding:10px;position:relative;width:180px"><div style="anchor-name:--demo-anchor;width:60px;height:40px;background:#6366f1;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px;font-weight:700">Anchor</div><div style="position:absolute;position-anchor:--demo-anchor;top:0;left:70px;background:#f0fdf4;border:2px dashed #10b981;border-radius:4px;padding:6px 10px;font-size:9px;font-weight:700;color:#15803d">anchor: --demo-anchor</div><p style="font-size:8px;color:#888;margin-top:6px;font-weight:700">anchor-name on blue box</p></div>`,
+    demo: createAnchorNameDemo(),
   },
 
   {
@@ -173,7 +308,7 @@ export const layout: CSSPropertyFull[] = [
     interop: "ltd",
     example: "position-anchor: --my-anchor",
     mdnPath: "position-anchor",
-    demo: `<div style="padding:10px;position:relative;width:180px"><div style="anchor-name:--target-anchor;width:60px;height:40px;background:#8b5cf6;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px;font-weight:700">Anchor</div><div style="position:absolute;position-anchor:--target-anchor;top:anchor(top);left:anchor(right);margin-left:8px;background:#fef3c7;border:2px solid #f59e0b;border-radius:4px;padding:6px 10px;font-size:9px;font-weight:700;color:#b45309">position-anchor<br>--target-anchor</div></div>`,
+    demo: createPositionAnchorDemo(),
   },
 
   {
@@ -184,7 +319,7 @@ export const layout: CSSPropertyFull[] = [
     interop: "ltd",
     example: "position-area: top | bottom right | start center",
     mdnPath: "position-area",
-    demo: `<div style="padding:10px;position:relative;width:180px;height:80px"><div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);anchor-name:--area-anchor;width:50px;height:30px;background:#6366f1;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:8px;font-weight:700">Anchor</div><div style="position:absolute;position-anchor:--area-anchor;position-area:top;background:#ec4899;color:#fff;padding:3px 8px;border-radius:3px;font-size:8px;font-weight:700">position-area: top</div></div>`,
+    demo: createPositionAreaDemo(),
   },
 
   {
@@ -195,7 +330,7 @@ export const layout: CSSPropertyFull[] = [
     interop: "ltd",
     example: "position-try: flip-block | flip-inline | --custom-fallback",
     mdnPath: "position-try",
-    demo: `<div style="padding:10px;position:relative;width:180px;height:78px"><div style="position:absolute;right:8px;top:28px;anchor-name:--try-anchor;width:60px;height:28px;background:#6366f1;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:8px;font-weight:700">Anchor</div><div style="position:absolute;position-anchor:--try-anchor;position-area:right;position-try:flip-inline flip-block;position-try-fallbacks:flip-inline,flip-block;background:#fef9c3;border:2px dashed #ca8a04;border-radius:4px;padding:4px 6px;font-size:8px;font-weight:700;color:#a16207">position-try fallback</div></div>`,
+    demo: createPositionTryDemo(),
   },
 
   {
@@ -206,7 +341,9 @@ export const layout: CSSPropertyFull[] = [
     interop: "wide",
     example: "top: 0 | 1rem | auto",
     mdnPath: "top",
-    demo: `<div style="padding:10px;position:relative;width:160px;height:70px;background:#e0e7ff;border-radius:6px;border:2px dashed #6366f1"><div style="position:absolute;top:8px;left:50%;transform:translateX(-50%);background:#6366f1;color:#fff;padding:4px 8px;border-radius:4px;font-size:10px;font-weight:700">top: 8px</div></div>`,
+    demo: `<div style="padding:10px;position:relative;width:160px;height:70px;background:#e0e7ff;border-radius:6px;border:2px dashed #6366f1">
+      <div style="position:absolute;top:8px;left:50%;transform:translateX(-50%);background:#6366f1;color:#fff;padding:4px 8px;border-radius:4px;font-size:10px;font-weight:700">top: 8px</div>
+    </div>`,
   },
 
   {
@@ -217,7 +354,9 @@ export const layout: CSSPropertyFull[] = [
     interop: "wide",
     example: "right: 0 | 1rem | auto",
     mdnPath: "right",
-    demo: `<div style="padding:10px;position:relative;width:160px;height:70px;background:#e0e7ff;border-radius:6px;border:2px dashed #6366f1"><div style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:#6366f1;color:#fff;padding:4px 8px;border-radius:4px;font-size:10px;font-weight:700">right</div></div>`,
+    demo: `<div style="padding:10px;position:relative;width:160px;height:70px;background:#e0e7ff;border-radius:6px;border:2px dashed #6366f1">
+      <div style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:#6366f1;color:#fff;padding:4px 8px;border-radius:4px;font-size:10px;font-weight:700">right</div>
+    </div>`,
   },
 
   {
@@ -228,7 +367,9 @@ export const layout: CSSPropertyFull[] = [
     interop: "wide",
     example: "bottom: 0 | 1rem | auto",
     mdnPath: "bottom",
-    demo: `<div style="padding:10px;position:relative;width:160px;height:70px;background:#e0e7ff;border-radius:6px;border:2px dashed #6366f1"><div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:#6366f1;color:#fff;padding:4px 8px;border-radius:4px;font-size:10px;font-weight:700">bottom</div></div>`,
+    demo: `<div style="padding:10px;position:relative;width:160px;height:70px;background:#e0e7ff;border-radius:6px;border:2px dashed #6366f1">
+      <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:#6366f1;color:#fff;padding:4px 8px;border-radius:4px;font-size:10px;font-weight:700">bottom</div>
+    </div>`,
   },
 
   {
@@ -239,7 +380,9 @@ export const layout: CSSPropertyFull[] = [
     interop: "wide",
     example: "left: 0 | 1rem | auto",
     mdnPath: "left",
-    demo: `<div style="padding:10px;position:relative;width:160px;height:70px;background:#e0e7ff;border-radius:6px;border:2px dashed #6366f1"><div style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:#6366f1;color:#fff;padding:4px 8px;border-radius:4px;font-size:10px;font-weight:700">left</div></div>`,
+    demo: `<div style="padding:10px;position:relative;width:160px;height:70px;background:#e0e7ff;border-radius:6px;border:2px dashed #6366f1">
+      <div style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:#6366f1;color:#fff;padding:4px 8px;border-radius:4px;font-size:10px;font-weight:700">left</div>
+    </div>`,
   },
 
   {
@@ -250,7 +393,9 @@ export const layout: CSSPropertyFull[] = [
     interop: "wide",
     example: "resize: none | both | horizontal | vertical",
     mdnPath: "resize",
-    demo: `<div style="padding:10px"><div style="resize:both;overflow:auto;background:#6366f1;color:#fff;border-radius:5px;padding:8px;font-size:9px;font-weight:700;width:80px;height:40px">resize me</div></div>`,
+    demo: `<div style="padding:10px">
+      <div style="resize:both;overflow:auto;background:#6366f1;color:#fff;border-radius:5px;padding:8px;font-size:9px;font-weight:700;width:80px;height:40px">resize me</div>
+    </div>`,
   },
 
   {
@@ -261,6 +406,11 @@ export const layout: CSSPropertyFull[] = [
     interop: "wide",
     example: "vertical-align: baseline | middle | top | bottom",
     mdnPath: "vertical-align",
-    demo: `<div style="padding:10px;line-height:40px;background:#e0e7ff;border-radius:5px;font-size:20px;font-weight:700;color:#6366f1"><span style="vertical-align:baseline;font-size:14px">baseline</span> <span style="vertical-align:super;font-size:14px">super</span> <span style="vertical-align:sub;font-size:14px">sub</span> <span style="vertical-align:middle;font-size:14px">middle</span></div>`,
+    demo: `<div style="padding:10px;line-height:40px;background:#e0e7ff;border-radius:5px;font-size:20px;font-weight:700;color:#6366f1">
+      <span style="vertical-align:baseline;font-size:14px">baseline</span>
+      <span style="vertical-align:super;font-size:14px">super</span>
+      <span style="vertical-align:sub;font-size:14px">sub</span>
+      <span style="vertical-align:middle;font-size:14px">middle</span>
+    </div>`,
   },
 ];

@@ -136,6 +136,8 @@ main {
 
 .demo-stage * {
   box-sizing: border-box;
+  font-size: inherit !important;
+  font-family: inherit !important;
 }
 
 /* Bottom section that slides up on hover */

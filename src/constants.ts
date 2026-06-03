@@ -1,18 +1,12 @@
 // Configuration
 export const TABLE_CONFIG = {
   BATCH_SIZE: 30,
-  INITIAL_BATCH: 30,
-  SENTINEL_THRESHOLD: 400,
 } as const;
 
 export const TIMEOUTS = {
   TABLE_INIT: 500,
   LOAD_UNLOCK: 50,
-  DEBOUNCE: 300,
-  ANIMATION: 250,
 } as const;
-
-export const DEFAULT_CATEGORY_COLOR = "#6366f1";
 
 // Category color mapping
 export const CC: Record<string, string> = {

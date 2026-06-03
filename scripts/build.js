@@ -28,7 +28,7 @@ function cleanOldBundles() {
 
 function buildWithHash(input, outputBase, ext) {
   const tempFile = join(rootDir, 'dist', `temp-${outputBase}${ext}`);
-  
+
   let cmd;
   if (ext === '.js') {
     cmd = `npx esbuild src/main.ts --bundle --outfile=${tempFile} --target=es2020 --minify --format=esm`;

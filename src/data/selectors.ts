@@ -1,5 +1,81 @@
 import type { CSSPropertyFull } from "../types";
 
+function createHoverDemo() {
+  return `<style>.sel-hover-btn{padding:8px 16px;background:#3b82f6;color:#fff;border:none;border-radius:4px;font-size:11px;font-weight:700;transition:background .2s}.sel-hover-btn:hover{background:#1d4ed8}</style><div style="padding:10px"><button class="sel-hover-btn">:hover me</button></div>`;
+}
+
+function createFocusDemo() {
+  return `<style>.sel-focus{padding:6px 10px;border:2px solid #cbd5e1;border-radius:4px;font-size:11px;outline:none}.sel-focus:focus{border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.2)}</style><div style="padding:10px"><input aria-label="Focus demo input" class="sel-focus" type="text" placeholder="Click or tab here"></div>`;
+}
+
+function createFocusVisibleDemo() {
+  return `<style>.sel-fv{padding:8px 16px;background:#10b981;color:#fff;border:none;border-radius:4px;font-size:11px;font-weight:700}.sel-fv:focus-visible{outline:3px solid #064e3b;outline-offset:2px}</style><div style="padding:10px"><button class="sel-fv">Tab to focus</button></div>`;
+}
+
+function createFocusWithinDemo() {
+  return `<style>.sel-fw{padding:12px;border:2px solid #e2e8f0;border-radius:6px;transition:all .2s}.sel-fw:focus-within{border-color:#8b5cf6;background:#f5f3ff}</style><div style="padding:10px"><div class="sel-fw"><p style="font-size:10px;font-weight:700;color:#64748b;margin:0 0 6px">Container</p><input aria-label="Focus within demo input" type="text" placeholder="Focus me" style="padding:5px 8px;border:1px solid #cbd5e1;border-radius:3px;font-size:10px;width:120px"></div></div>`;
+}
+
+function createActiveDemo() {
+  return `<style>.sel-active{padding:8px 16px;background:#ef4444;color:#fff;border:none;border-radius:4px;font-size:11px;font-weight:700;transition:transform .1s}.sel-active:active{transform:scale(.95)}</style><div style="padding:10px"><button class="sel-active">Hold click</button></div>`;
+}
+
+function createDisabledDemo() {
+  return `<div style="padding:10px;display:flex;gap:8px;flex-direction:column"><button disabled style="padding:6px 12px;background:#e2e8f0;color:#94a3b8;border:none;border-radius:4px;font-size:10px;font-weight:700;cursor:not-allowed">Disabled button</button><input aria-label="Disabled input" disabled value="Disabled input" style="padding:5px 8px;background:#f1f5f9;color:#94a3b8;border:1px solid #e2e8f0;border-radius:3px;font-size:10px;width:130px"></div>`;
+}
+
+function createCheckedDemo() {
+  return `<style>.sel-check input:checked + span{color:#065f46;font-weight:800}</style><div style="padding:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap"><label class="sel-check" style="display:flex;align-items:center;gap:6px;font-size:11px;color:#374151"><input aria-label="Checked checkbox" type="checkbox" checked style="accent-color:#10b981;width:16px;height:16px"><span>Checked</span></label><label class="sel-check" style="display:flex;align-items:center;gap:6px;font-size:11px;color:#374151"><input aria-label="Selected radio" type="radio" checked name="sel-radio" style="accent-color:#6366f1;width:16px;height:16px"><span>Selected</span></label></div>`;
+}
+
+function createValidInvalidDemo() {
+  return `<style>.sel-valid{padding:6px 10px;border:2px solid #cbd5e1;border-radius:4px;font-size:10px;width:150px}.sel-valid:valid{border-color:#22c55e;color:#15803d}.sel-valid:invalid{border-color:#ef4444;color:#b91c1c}</style><div style="padding:10px;display:flex;flex-direction:column;gap:6px"><input aria-label="Valid email" class="sel-valid" type="email" value="valid@email.com" required><input aria-label="Invalid email" class="sel-valid" type="email" value="invalid-email" required></div>`;
+}
+
+function createRequiredDemo() {
+  return `<style>.sel-req input{padding:5px 8px;border:1px solid #cbd5e1;border-radius:3px;font-size:10px;width:120px}.sel-req input:required{border-left:3px solid #3b82f6}</style><div class="sel-req" style="padding:10px;display:flex;flex-direction:column;gap:6px"><label style="font-size:10px;font-weight:700;color:#374151">Name (required) <input aria-label="Required name input" required></label><label style="font-size:10px;font-weight:700;color:#374151">Bio (optional) <input aria-label="Optional bio input"></label></div>`;
+}
+
+function createPlaceholderShownDemo() {
+  return `<style>.sel-ph{padding:6px 10px;border:2px solid #10b981;border-radius:4px;font-size:10px;width:150px}.sel-ph:placeholder-shown{font-style:italic;color:#8b5cf6;border-color:#8b5cf6}</style><div style="padding:10px;display:flex;flex-direction:column;gap:6px"><input aria-label="Placeholder shown input" class="sel-ph" placeholder="Type something..."><input aria-label="Value present input" class="sel-ph" value="Has value"></div>`;
+}
+
+function createReadOnlyWriteDemo() {
+  return `<style>.sel-rw{padding:6px 10px;border:2px solid #cbd5e1;border-radius:4px;font-size:10px;width:150px}.sel-rw:read-only{background:#f3f4f6;border-color:#94a3b8;color:#475569}.sel-rw:read-write{background:#ecfeff;border-color:#06b6d4;color:#0e7490}</style><div style="padding:10px;display:flex;flex-direction:column;gap:6px"><input aria-label="Read-only input" class="sel-rw" value="read-only" readonly><input aria-label="Read-write input" class="sel-rw" value="read-write"></div>`;
+}
+
+function createNthChildDemo() {
+  return `<style>.sel-nc li{padding:5px 8px;border-radius:3px;font-size:10px;font-weight:700;text-align:center;border:1px solid #e2e8f0;background:#f8fafc;color:#64748b}.sel-nc li:nth-child(2n){background:#e0e7ff;color:#4338ca;border-color:#6366f1}</style><div style="padding:10px"><ul class="sel-nc" style="display:flex;flex-direction:column;gap:3px;width:140px;list-style:none;padding:0;margin:0"><li>1</li><li>2 (even)</li><li>3</li><li>4 (even)</li><li>5</li></ul></div>`;
+}
+
+function createNthOfTypeDemo() {
+  return `<style>.sel-not p{margin:0;padding:4px 8px;border-radius:3px;font-size:9px}.sel-not p:nth-of-type(2){background:#fef3c7;color:#92400e;font-weight:800}</style><div class="sel-not" style="padding:10px;display:flex;flex-direction:column;gap:3px;width:160px"><div style="padding:4px 8px;font-size:9px;background:#f1f5f9;color:#64748b;border-radius:3px">div sibling</div><p style="background:#e0e7ff;color:#4338ca">p first of type</p><div style="padding:4px 8px;font-size:9px;background:#f1f5f9;color:#64748b;border-radius:3px">div sibling</div><p>p second of type</p></div>`;
+}
+
+function createFirstChildDemo() {
+  return `<style>.sel-first div:first-child{background:#10b981;color:#fff}</style><div class="sel-first" style="padding:10px;display:flex;gap:4px"><div style="padding:6px 10px;border-radius:4px;font-size:10px;font-weight:700;background:#e2e8f0;color:#64748b">first-child</div><div style="padding:6px 10px;background:#e2e8f0;color:#64748b;border-radius:4px;font-size:10px;font-weight:700">item</div><div style="padding:6px 10px;background:#e2e8f0;color:#64748b;border-radius:4px;font-size:10px;font-weight:700">item</div></div>`;
+}
+
+function createLastChildDemo() {
+  return `<style>.sel-last div:last-child{background:#ec4899;color:#fff}</style><div class="sel-last" style="padding:10px;display:flex;gap:4px"><div style="padding:6px 10px;background:#e2e8f0;color:#64748b;border-radius:4px;font-size:10px;font-weight:700">item</div><div style="padding:6px 10px;background:#e2e8f0;color:#64748b;border-radius:4px;font-size:10px;font-weight:700">item</div><div style="padding:6px 10px;background:#e2e8f0;color:#64748b;border-radius:4px;font-size:10px;font-weight:700">last-child</div></div>`;
+}
+
+function createOnlyChildDemo() {
+  return `<style>.sel-only .single p:only-child{font-weight:800;color:#166534}.sel-only .multi p:only-child{font-weight:800;color:#166534}</style><div class="sel-only" style="padding:10px;display:flex;gap:12px"><div class="single" style="padding:10px;background:#dcfce7;border:2px solid #22c55e;border-radius:6px;width:80px"><p style="margin:0;font-size:10px;text-align:center">only child</p></div><div class="multi" style="padding:10px;background:#fee2e2;border:2px solid #ef4444;border-radius:6px;width:80px"><p style="margin:0 0 4px;font-size:9px;color:#b91c1c">has sibling</p><p style="margin:0;font-size:9px;color:#b91c1c">not only</p></div></div>`;
+}
+
+function createEmptyDemo() {
+  return `<style>.sel-empty .box{padding:8px 12px;border:2px dashed #f59e0b;border-radius:4px;width:70px;height:20px}.sel-empty .box:empty{background:#fef3c7}</style><div class="sel-empty" style="padding:10px;display:flex;gap:12px;align-items:center"><div class="box"></div><p style="font-size:10px;font-weight:700;color:#b45309">:empty matched</p></div>`;
+}
+
+function createRootDemo() {
+  return `<div style="padding:10px"><div style="padding:12px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:6px;color:#fff"><p style="margin:0 0 4px;font-size:11px;font-weight:700">:root</p><p style="margin:0;font-size:9px;opacity:.9">&lt;html&gt; element</p><p style="margin:6px 0 0;font-size:9px;font-family:monospace;background:rgba(255,255,255,.2);padding:4px;border-radius:3px">--primary: #6366f1</p></div></div>`;
+}
+
+function createTargetDemo() {
+  return `<style>#sel-target-demo:target{background:#fef3c7;border-color:#eab308}</style><div style="padding:10px"><a href="#sel-target-demo" style="font-size:10px;font-weight:700;color:#2563eb">Activate :target</a><div id="sel-target-demo" style="margin-top:6px;padding:10px;background:#f8fafc;border:2px solid #cbd5e1;border-radius:6px"><p style="margin:0;font-size:9px;color:#64748b">Target block</p></div></div>`;
+}
+
 export const selectors: CSSPropertyFull[] = [
   {
     name: ":hover",
@@ -9,7 +85,7 @@ export const selectors: CSSPropertyFull[] = [
     interop: "wide",
     example: "a:hover { color: red }",
     mdnPath: ":hover",
-    demo: `<style>.sel-hover-btn{padding:8px 16px;background:#3b82f6;color:#fff;border:none;border-radius:4px;font-size:11px;font-weight:700;transition:background .2s}.sel-hover-btn:hover{background:#1d4ed8}</style><div style="padding:10px"><button class="sel-hover-btn">:hover me</button></div>`,
+    demo: createHoverDemo(),
   },
 
   {
@@ -20,7 +96,7 @@ export const selectors: CSSPropertyFull[] = [
     interop: "wide",
     example: "input:focus { outline: 2px solid blue }",
     mdnPath: ":focus",
-    demo: `<style>.sel-focus{padding:6px 10px;border:2px solid #cbd5e1;border-radius:4px;font-size:11px;outline:none}.sel-focus:focus{border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.2)}</style><div style="padding:10px"><input aria-label="Focus demo input" class="sel-focus" type="text" placeholder="Click or tab here"></div>`,
+    demo: createFocusDemo(),
   },
 
   {
@@ -31,7 +107,7 @@ export const selectors: CSSPropertyFull[] = [
     interop: "wide",
     example: "button:focus-visible { outline: 2px solid blue }",
     mdnPath: ":focus-visible",
-    demo: `<style>.sel-fv{padding:8px 16px;background:#10b981;color:#fff;border:none;border-radius:4px;font-size:11px;font-weight:700}.sel-fv:focus-visible{outline:3px solid #064e3b;outline-offset:2px}</style><div style="padding:10px"><button class="sel-fv">Tab to focus</button></div>`,
+    demo: createFocusVisibleDemo(),
   },
 
   {
@@ -42,7 +118,7 @@ export const selectors: CSSPropertyFull[] = [
     interop: "wide",
     example: "form:focus-within { box-shadow: 0 0 0 3px blue }",
     mdnPath: ":focus-within",
-    demo: `<style>.sel-fw{padding:12px;border:2px solid #e2e8f0;border-radius:6px;transition:all .2s}.sel-fw:focus-within{border-color:#8b5cf6;background:#f5f3ff}</style><div style="padding:10px"><div class="sel-fw"><p style="font-size:10px;font-weight:700;color:#64748b;margin:0 0 6px">Container</p><input aria-label="Focus within demo input" type="text" placeholder="Focus me" style="padding:5px 8px;border:1px solid #cbd5e1;border-radius:3px;font-size:10px;width:120px"></div></div>`,
+    demo: createFocusWithinDemo(),
   },
 
   {
@@ -53,7 +129,7 @@ export const selectors: CSSPropertyFull[] = [
     interop: "wide",
     example: "button:active { transform: scale(0.98) }",
     mdnPath: ":active",
-    demo: `<style>.sel-active{padding:8px 16px;background:#ef4444;color:#fff;border:none;border-radius:4px;font-size:11px;font-weight:700;transition:transform .1s}.sel-active:active{transform:scale(.95)}</style><div style="padding:10px"><button class="sel-active">Hold click</button></div>`,
+    demo: createActiveDemo(),
   },
 
   {
@@ -64,7 +140,7 @@ export const selectors: CSSPropertyFull[] = [
     interop: "wide",
     example: "input:disabled { opacity: 0.5 }",
     mdnPath: ":disabled",
-    demo: `<div style="padding:10px;display:flex;gap:8px;flex-direction:column"><button disabled style="padding:6px 12px;background:#e2e8f0;color:#94a3b8;border:none;border-radius:4px;font-size:10px;font-weight:700;cursor:not-allowed">Disabled button</button><input aria-label="Disabled input" disabled value="Disabled input" style="padding:5px 8px;background:#f1f5f9;color:#94a3b8;border:1px solid #e2e8f0;border-radius:3px;font-size:10px;width:130px"></div>`,
+    demo: createDisabledDemo(),
   },
 
   {
@@ -75,7 +151,7 @@ export const selectors: CSSPropertyFull[] = [
     interop: "wide",
     example: "input:checked { accent-color: green }",
     mdnPath: ":checked",
-    demo: `<style>.sel-check input:checked + span{color:#065f46;font-weight:800}</style><div style="padding:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap"><label class="sel-check" style="display:flex;align-items:center;gap:6px;font-size:11px;color:#374151"><input aria-label="Checked checkbox" type="checkbox" checked style="accent-color:#10b981;width:16px;height:16px"><span>Checked</span></label><label class="sel-check" style="display:flex;align-items:center;gap:6px;font-size:11px;color:#374151"><input aria-label="Selected radio" type="radio" checked name="sel-radio" style="accent-color:#6366f1;width:16px;height:16px"><span>Selected</span></label></div>`,
+    demo: createCheckedDemo(),
   },
 
   {
@@ -86,7 +162,7 @@ export const selectors: CSSPropertyFull[] = [
     interop: "wide",
     example: "input:valid { border-color: green } input:invalid { border-color: red }",
     mdnPath: ":valid",
-    demo: `<style>.sel-valid{padding:6px 10px;border:2px solid #cbd5e1;border-radius:4px;font-size:10px;width:150px}.sel-valid:valid{border-color:#22c55e;color:#15803d}.sel-valid:invalid{border-color:#ef4444;color:#b91c1c}</style><div style="padding:10px;display:flex;flex-direction:column;gap:6px"><input aria-label="Valid email" class="sel-valid" type="email" value="valid@email.com" required><input aria-label="Invalid email" class="sel-valid" type="email" value="invalid-email" required></div>`,
+    demo: createValidInvalidDemo(),
   },
 
   {
@@ -97,7 +173,7 @@ export const selectors: CSSPropertyFull[] = [
     interop: "wide",
     example: "input:required { border-left: 3px solid red }",
     mdnPath: ":required",
-    demo: `<style>.sel-req input{padding:5px 8px;border:1px solid #cbd5e1;border-radius:3px;font-size:10px;width:120px}.sel-req input:required{border-left:3px solid #3b82f6}</style><div class="sel-req" style="padding:10px;display:flex;flex-direction:column;gap:6px"><label style="font-size:10px;font-weight:700;color:#374151">Name (required) <input aria-label="Required name input" required></label><label style="font-size:10px;font-weight:700;color:#374151">Bio (optional) <input aria-label="Optional bio input"></label></div>`,
+    demo: createRequiredDemo(),
   },
 
   {
@@ -108,7 +184,7 @@ export const selectors: CSSPropertyFull[] = [
     interop: "wide",
     example: "input:placeholder-shown { font-style: italic }",
     mdnPath: ":placeholder-shown",
-    demo: `<style>.sel-ph{padding:6px 10px;border:2px solid #10b981;border-radius:4px;font-size:10px;width:150px}.sel-ph:placeholder-shown{font-style:italic;color:#8b5cf6;border-color:#8b5cf6}</style><div style="padding:10px;display:flex;flex-direction:column;gap:6px"><input aria-label="Placeholder shown input" class="sel-ph" placeholder="Type something..."><input aria-label="Value present input" class="sel-ph" value="Has value"></div>`,
+    demo: createPlaceholderShownDemo(),
   },
 
   {
@@ -119,7 +195,7 @@ export const selectors: CSSPropertyFull[] = [
     interop: "wide",
     example: "input:read-only { background: #f3f4f6 }\ninput:read-write { background: #ecfeff }",
     mdnPath: ":read-only",
-    demo: `<style>.sel-rw{padding:6px 10px;border:2px solid #cbd5e1;border-radius:4px;font-size:10px;width:150px}.sel-rw:read-only{background:#f3f4f6;border-color:#94a3b8;color:#475569}.sel-rw:read-write{background:#ecfeff;border-color:#06b6d4;color:#0e7490}</style><div style="padding:10px;display:flex;flex-direction:column;gap:6px"><input aria-label="Read-only input" class="sel-rw" value="read-only" readonly><input aria-label="Read-write input" class="sel-rw" value="read-write"></div>`,
+    demo: createReadOnlyWriteDemo(),
   },
 
   {
@@ -130,7 +206,7 @@ export const selectors: CSSPropertyFull[] = [
     interop: "wide",
     example: "li:nth-child(2n) { background: #f0f0f0 }",
     mdnPath: ":nth-child",
-    demo: `<style>.sel-nc li{padding:5px 8px;border-radius:3px;font-size:10px;font-weight:700;text-align:center;border:1px solid #e2e8f0;background:#f8fafc;color:#64748b}.sel-nc li:nth-child(2n){background:#e0e7ff;color:#4338ca;border-color:#6366f1}</style><div style="padding:10px"><ul class="sel-nc" style="display:flex;flex-direction:column;gap:3px;width:140px;list-style:none;padding:0;margin:0"><li>1</li><li>2 (even)</li><li>3</li><li>4 (even)</li><li>5</li></ul></div>`,
+    demo: createNthChildDemo(),
   },
 
   {
@@ -141,7 +217,7 @@ export const selectors: CSSPropertyFull[] = [
     interop: "wide",
     example: "p:nth-of-type(2) { font-weight: bold }",
     mdnPath: ":nth-of-type",
-    demo: `<style>.sel-not p{margin:0;padding:4px 8px;border-radius:3px;font-size:9px}.sel-not p:nth-of-type(2){background:#fef3c7;color:#92400e;font-weight:800}</style><div class="sel-not" style="padding:10px;display:flex;flex-direction:column;gap:3px;width:160px"><div style="padding:4px 8px;font-size:9px;background:#f1f5f9;color:#64748b;border-radius:3px">div sibling</div><p style="background:#e0e7ff;color:#4338ca">p first of type</p><div style="padding:4px 8px;font-size:9px;background:#f1f5f9;color:#64748b;border-radius:3px">div sibling</div><p>p second of type</p></div>`,
+    demo: createNthOfTypeDemo(),
   },
 
   {
@@ -152,7 +228,7 @@ export const selectors: CSSPropertyFull[] = [
     interop: "wide",
     example: "li:first-child { margin-top: 0 }",
     mdnPath: ":first-child",
-    demo: `<style>.sel-first div:first-child{background:#10b981;color:#fff}</style><div class="sel-first" style="padding:10px;display:flex;gap:4px"><div style="padding:6px 10px;border-radius:4px;font-size:10px;font-weight:700;background:#e2e8f0;color:#64748b">first-child</div><div style="padding:6px 10px;background:#e2e8f0;color:#64748b;border-radius:4px;font-size:10px;font-weight:700">item</div><div style="padding:6px 10px;background:#e2e8f0;color:#64748b;border-radius:4px;font-size:10px;font-weight:700">item</div></div>`,
+    demo: createFirstChildDemo(),
   },
 
   {
@@ -163,7 +239,7 @@ export const selectors: CSSPropertyFull[] = [
     interop: "wide",
     example: "li:last-child { border-bottom: none }",
     mdnPath: ":last-child",
-    demo: `<style>.sel-last div:last-child{background:#ec4899;color:#fff}</style><div class="sel-last" style="padding:10px;display:flex;gap:4px"><div style="padding:6px 10px;background:#e2e8f0;color:#64748b;border-radius:4px;font-size:10px;font-weight:700">item</div><div style="padding:6px 10px;background:#e2e8f0;color:#64748b;border-radius:4px;font-size:10px;font-weight:700">item</div><div style="padding:6px 10px;background:#e2e8f0;color:#64748b;border-radius:4px;font-size:10px;font-weight:700">last-child</div></div>`,
+    demo: createLastChildDemo(),
   },
 
   {
@@ -174,7 +250,7 @@ export const selectors: CSSPropertyFull[] = [
     interop: "wide",
     example: "p:only-child { text-align: center }",
     mdnPath: ":only-child",
-    demo: `<style>.sel-only .single p:only-child{font-weight:800;color:#166534}.sel-only .multi p:only-child{font-weight:800;color:#166534}</style><div class="sel-only" style="padding:10px;display:flex;gap:12px"><div class="single" style="padding:10px;background:#dcfce7;border:2px solid #22c55e;border-radius:6px;width:80px"><p style="margin:0;font-size:10px;text-align:center">only child</p></div><div class="multi" style="padding:10px;background:#fee2e2;border:2px solid #ef4444;border-radius:6px;width:80px"><p style="margin:0 0 4px;font-size:9px;color:#b91c1c">has sibling</p><p style="margin:0;font-size:9px;color:#b91c1c">not only</p></div></div>`,
+    demo: createOnlyChildDemo(),
   },
 
   {
@@ -185,7 +261,7 @@ export const selectors: CSSPropertyFull[] = [
     interop: "wide",
     example: "div:empty { display: none }",
     mdnPath: ":empty",
-    demo: `<style>.sel-empty .box{padding:8px 12px;border:2px dashed #f59e0b;border-radius:4px;width:70px;height:20px}.sel-empty .box:empty{background:#fef3c7}</style><div class="sel-empty" style="padding:10px;display:flex;gap:12px;align-items:center"><div class="box"></div><p style="font-size:10px;font-weight:700;color:#b45309">:empty matched</p></div>`,
+    demo: createEmptyDemo(),
   },
 
   {
@@ -196,7 +272,7 @@ export const selectors: CSSPropertyFull[] = [
     interop: "wide",
     example: ":root { --primary: #6366f1 }",
     mdnPath: ":root",
-    demo: `<div style="padding:10px"><div style="padding:12px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:6px;color:#fff"><p style="margin:0 0 4px;font-size:11px;font-weight:700">:root</p><p style="margin:0;font-size:9px;opacity:.9">&lt;html&gt; element</p><p style="margin:6px 0 0;font-size:9px;font-family:monospace;background:rgba(255,255,255,.2);padding:4px;border-radius:3px">--primary: #6366f1</p></div></div>`,
+    demo: createRootDemo(),
   },
 
   {
@@ -207,6 +283,6 @@ export const selectors: CSSPropertyFull[] = [
     interop: "wide",
     example: "section:target { background: yellow }",
     mdnPath: ":target",
-    demo: `<style>#sel-target-demo:target{background:#fef3c7;border-color:#eab308}</style><div style="padding:10px"><a href="#sel-target-demo" style="font-size:10px;font-weight:700;color:#2563eb">Activate :target</a><div id="sel-target-demo" style="margin-top:6px;padding:10px;background:#f8fafc;border:2px solid #cbd5e1;border-radius:6px"><p style="margin:0;font-size:9px;color:#64748b">Target block</p></div></div>`,
+    demo: createTargetDemo(),
   },
 ];

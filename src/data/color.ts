@@ -1,5 +1,91 @@
 import type { CSSPropertyFull } from "../types";
 
+function createColorDemo() {
+  return `<div style="padding:10px;display:flex;flex-direction:column;gap:4px">
+    <p style="color:#6366f1;font-weight:800;font-size:13px">color: #6366f1</p>
+    <p style="color:oklch(65% .25 10);font-weight:800;font-size:13px">color: oklch(65% .25 10)</p>
+    <p style="color:hsl(200 90% 45%);font-weight:800;font-size:13px">color: hsl(200 90% 45%)</p>
+  </div>`;
+}
+
+function createBackgroundDemo() {
+  return `<div style="display:flex;gap:6px;padding:8px">
+    <div style="flex:1;height:60px;background:linear-gradient(135deg,#6366f1,#ec4899);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:700">linear</div>
+    <div style="flex:1;height:60px;background:radial-gradient(circle,#f97316,#ec4899);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:700">radial</div>
+    <div style="flex:1;height:60px;background:conic-gradient(#6366f1,#ec4899,#f97316,#6366f1);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:700">conic</div>
+  </div>`;
+}
+
+function createOpacityDemo() {
+  const opacities = [1, 0.7, 0.4, 0.15];
+  return `<div style="display:flex;gap:8px;align-items:flex-end;padding:10px">${
+    opacities
+      .map((o) => `<div style="background:#f97316;width:34px;height:${14 + o * 50}px;border-radius:4px;opacity:${o};display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px"><span style="font-size:9px;font-weight:700;color:#fff">${o}</span></div>`)
+      .join("")
+  }</div>`;
+}
+
+function createColorSchemeDemo() {
+  return `<div style="display:flex;gap:8px;padding:10px">
+    <div style="color-scheme:light;background:#fff;border:2px solid #e5e7eb;border-radius:6px;padding:8px;width:90px">
+      <input type="checkbox" aria-label="Light scheme checkbox" checked style="accent-color:#f97316;width:14px;height:14px">
+      <p style="font-size:9px;font-weight:700;color:#111;margin-top:4px">light scheme</p>
+    </div>
+    <div style="color-scheme:dark;background:#1e1e2e;border:2px solid #444;border-radius:6px;padding:8px;width:90px">
+      <input type="checkbox" aria-label="Light scheme checkbox" checked style="accent-color:#f97316;width:14px;height:14px">
+      <p style="font-size:9px;font-weight:700;color:#cdd6f4;margin-top:4px">dark scheme</p>
+    </div>
+  </div>`;
+}
+
+function createAccentColorDemo() {
+  return `<div style="padding:10px;display:flex;flex-direction:column;gap:8px">
+    <div style="display:flex;align-items:center;gap:8px;accent-color:#6366f1">
+      <input type="checkbox" aria-label="Accent color checkbox" checked>
+      <input type="range" aria-label="Accent color slider" value="60" style="width:80px">
+      <span style="font-size:10px;font-weight:700;color:#6366f1">#6366f1</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;accent-color:#f97316">
+      <input type="checkbox" aria-label="Accent color checkbox" checked>
+      <input type="range" aria-label="Accent color slider" value="40" style="width:80px">
+      <span style="font-size:10px;font-weight:700;color:#f97316">#f97316</span>
+    </div>
+  </div>`;
+}
+
+function createColorMixDemo() {
+  return `<div style="display:flex;align-items:center;gap:6px;padding:10px">
+    <div style="width:40px;height:40px;background:#6366f1;border-radius:50%"></div>
+    <div style="font-size:14px;font-weight:700;color:#888">+</div>
+    <div style="width:40px;height:40px;background:#ec4899;border-radius:50%"></div>
+    <div style="font-size:14px;font-weight:700;color:#888">=</div>
+    <div style="width:40px;height:40px;background:color-mix(in oklch,#6366f1 50%,#ec4899);border-radius:50%"></div>
+    <div style="font-size:9px;color:#888;font-weight:700">50% / 50%</div>
+  </div>`;
+}
+
+function createOklchDemo() {
+  const hues = [0, 40, 80, 120, 160, 200, 240, 280, 320, 360];
+  return `<div style="display:flex;gap:4px;padding:10px">${
+    hues
+      .map((h) => `<div style="flex:1;height:52px;background:oklch(65% .2 ${h});border-radius:3px"></div>`)
+      .join("")
+  }</div>`;
+}
+
+function createLightDarkDemo() {
+  return `<div style="display:flex;gap:8px;padding:10px">
+    <div style="background:#fff;border:2px solid #e5e7eb;border-radius:6px;padding:8px;flex:1;text-align:center">
+      <p style="font-size:10px;font-weight:700;color:light-dark(#111,#eee)">light-dark()</p>
+      <p style="font-size:9px;color:#888;font-weight:700">light mode</p>
+    </div>
+    <div style="background:#1e1e2e;border:2px solid #444;border-radius:6px;padding:8px;flex:1;text-align:center;color-scheme:dark">
+      <p style="font-size:10px;font-weight:700;color:light-dark(#111,#cdd6f4)">light-dark()</p>
+      <p style="font-size:9px;color:#888;font-weight:700">dark mode</p>
+    </div>
+  </div>`;
+}
+
 export const color: CSSPropertyFull[] = [
   {
     name: "color",
@@ -9,7 +95,7 @@ export const color: CSSPropertyFull[] = [
     interop: "wide",
     example: "color: #111 | oklch(70% 0.2 220) | transparent",
     mdnPath: "color",
-    demo: `<div style="padding:10px;display:flex;flex-direction:column;gap:4px"><p style="color:#6366f1;font-weight:800;font-size:13px">color: #6366f1</p><p style="color:oklch(65% .25 10);font-weight:800;font-size:13px">color: oklch(65% .25 10)</p><p style="color:hsl(200 90% 45%);font-weight:800;font-size:13px">color: hsl(200 90% 45%)</p></div>`,
+    demo: createColorDemo(),
     values: [
       {
         value: "named",
@@ -63,7 +149,7 @@ export const color: CSSPropertyFull[] = [
     interop: "wide",
     example: "background: #fff url(bg.png) no-repeat center/cover",
     mdnPath: "background",
-    demo: `<div style="display:flex;gap:6px;padding:8px"><div style="flex:1;height:60px;background:linear-gradient(135deg,#6366f1,#ec4899);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:700">linear</div><div style="flex:1;height:60px;background:radial-gradient(circle,#f97316,#ec4899);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:700">radial</div><div style="flex:1;height:60px;background:conic-gradient(#6366f1,#ec4899,#f97316,#6366f1);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:700">conic</div></div>`,
+    demo: createBackgroundDemo(),
     values: [
       {
         value: "color",
@@ -112,7 +198,7 @@ export const color: CSSPropertyFull[] = [
     interop: "wide",
     example: "opacity: 1 | 0.5 | 0",
     mdnPath: "opacity",
-    demo: `<div style="display:flex;gap:8px;align-items:flex-end;padding:10px">${[1, 0.7, 0.4, 0.15].map((o) => `<div style="background:#f97316;width:34px;height:${14 + o * 50}px;border-radius:4px;opacity:${o};display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px"><span style="font-size:9px;font-weight:700;color:#fff">${o}</span></div>`).join("")}</div>`,
+    demo: createOpacityDemo(),
     values: [
       {
         value: "1",
@@ -140,7 +226,7 @@ export const color: CSSPropertyFull[] = [
     interop: "b2022",
     example: "color-scheme: normal | light | dark | light dark | only light",
     mdnPath: "color-scheme",
-    demo: `<div style="display:flex;gap:8px;padding:10px"><div style="color-scheme:light;background:#fff;border:2px solid #e5e7eb;border-radius:6px;padding:8px;width:90px"><input type="checkbox" aria-label="Light scheme checkbox" checked style="accent-color:#f97316;width:14px;height:14px"><p style="font-size:9px;font-weight:700;color:#111;margin-top:4px">light scheme</p></div><div style="color-scheme:dark;background:#1e1e2e;border:2px solid #444;border-radius:6px;padding:8px;width:90px"><input type="checkbox" aria-label="Light scheme checkbox" checked style="accent-color:#f97316;width:14px;height:14px"><p style="font-size:9px;font-weight:700;color:#cdd6f4;margin-top:4px">dark scheme</p></div></div>`,
+    demo: createColorSchemeDemo(),
     values: [
       {
         value: "normal",
@@ -176,7 +262,7 @@ export const color: CSSPropertyFull[] = [
     interop: "b2022",
     example: "accent-color: auto | #6366f1",
     mdnPath: "accent-color",
-    demo: `<div style="padding:10px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;gap:8px;accent-color:#6366f1"><input type="checkbox" aria-label="Accent color checkbox" checked><input type="range" aria-label="Accent color slider" value="60" style="width:80px"><span style="font-size:10px;font-weight:700;color:#6366f1">#6366f1</span></div><div style="display:flex;align-items:center;gap:8px;accent-color:#f97316"><input type="checkbox" aria-label="Accent color checkbox" checked><input type="range" aria-label="Accent color slider" value="40" style="width:80px"><span style="font-size:10px;font-weight:700;color:#f97316">#f97316</span></div></div>`,
+    demo: createAccentColorDemo(),
   },
 
   {
@@ -187,7 +273,7 @@ export const color: CSSPropertyFull[] = [
     interop: "b2023",
     example: "color: color-mix(in oklch, hotpink 60%, white)",
     mdnPath: "color_value/color-mix",
-    demo: `<div style="display:flex;align-items:center;gap:6px;padding:10px"><div style="width:40px;height:40px;background:#6366f1;border-radius:50%"></div><div style="font-size:14px;font-weight:700;color:#888">+</div><div style="width:40px;height:40px;background:#ec4899;border-radius:50%"></div><div style="font-size:14px;font-weight:700;color:#888">=</div><div style="width:40px;height:40px;background:color-mix(in oklch,#6366f1 50%,#ec4899);border-radius:50%"></div><div style="font-size:9px;color:#888;font-weight:700">50% / 50%</div></div>`,
+    demo: createColorMixDemo(),
   },
 
   {
@@ -198,7 +284,7 @@ export const color: CSSPropertyFull[] = [
     interop: "b2023",
     example: "color: oklch(70% 0.2 220 / 0.8)",
     mdnPath: "color_value/oklch",
-    demo: `<div style="display:flex;gap:4px;padding:10px">${[0, 40, 80, 120, 160, 200, 240, 280, 320, 360].map((h) => `<div style="flex:1;height:52px;background:oklch(65% .2 ${h});border-radius:3px"></div>`).join("")}</div>`,
+    demo: createOklchDemo(),
   },
 
   {
@@ -209,7 +295,7 @@ export const color: CSSPropertyFull[] = [
     interop: "b2024",
     example: "color: light-dark(#111, #eee)",
     mdnPath: "color_value/light-dark",
-    demo: `<div style="display:flex;gap:8px;padding:10px"><div style="background:#fff;border:2px solid #e5e7eb;border-radius:6px;padding:8px;flex:1;text-align:center"><p style="font-size:10px;font-weight:700;color:light-dark(#111,#eee)">light-dark()</p><p style="font-size:9px;color:#888;font-weight:700">light mode</p></div><div style="background:#1e1e2e;border:2px solid #444;border-radius:6px;padding:8px;flex:1;text-align:center;color-scheme:dark"><p style="font-size:10px;font-weight:700;color:light-dark(#111,#cdd6f4)">light-dark()</p><p style="font-size:9px;color:#888;font-weight:700">dark mode</p></div></div>`,
+    demo: createLightDarkDemo(),
   },
 
   {
